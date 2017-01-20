@@ -12,6 +12,8 @@ public class CompetitionTest {
 	@Test
 	public void testCompetition() {
 		fail("Not yet implemented");
+		
+		
 	}
 
 	@Test
@@ -23,6 +25,7 @@ public class CompetitionTest {
 
 	@Test
 	public void testSetNom() {
+		
 		fail("Not yet implemented");
 	}
 
