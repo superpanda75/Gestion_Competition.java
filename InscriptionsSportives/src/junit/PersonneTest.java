@@ -47,7 +47,7 @@ public class PersonneTest {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		String inscri = Personne.getPrenom();
-		assertEquals("d",inscri);
+		assertEquals("b",inscri);
 		}
 
 	@Test
@@ -56,7 +56,7 @@ public class PersonneTest {
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		Personne.setPrenom("d");
 		String inscri = Personne.getPrenom();
-		assertEquals("e",inscri);
+		assertEquals("d",inscri);
 	}
 
 	@Test
@@ -64,42 +64,43 @@ public class PersonneTest {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a", "b", "c");
 		String m = Personne.getMail();
-		assertEquals("d",m);
+		assertEquals("c",m);
 	}
-
 	@Test
+	
 	public void testSetMail() {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a", "b", "c");
 		Personne.setMail("d");
 		String m = Personne.getMail();
-		assertEquals("d",inscri);
+		assertEquals("d",m);
 	}
 
 	@Test
 	public void testGetEquipes() {
 		
 		Inscriptions inscri = Inscriptions.getInscriptions();
-		Personne Personne = inscri.createPersonne("test", "testeur", "azerty");
-		Equipe Equipe = inscri.createEquipe("test");
-		Equipe Equipe1 = inscri.createEquipe("test2");
+		Personne Personne = inscri.createPersonne("a", "b", "c");
+		Equipe Equipe = inscri.createEquipe("1");
+		Equipe Equipe1 = inscri.createEquipe("2");
 		Equipe.add(Personne);
 		Equipe1.add(Personne);
-		int size = inscri.getEquipes().size();
 		assertTrue(Personne.getEquipes().contains(Equipe));
 		assertTrue(Personne.getEquipes().contains(Equipe1));
-		assertEquals(size,inscri.getEquipes().size());
 		
 
 	}
-	@Test
-	public void testAddEquipe() {
-		fail("Not yet implemented");
-	}
+		    
 
-	@Test
+
+	/*@Test
 	public void testRemoveEquipe() {
-		fail("Not yet implemented");
-	}
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne personne = inscri.createPersonne("a", "b", "c");
+		Equipe Equipe = inscri.createEquipe("1");
+		Equipe.remove(equipe);
+		assertFalse("Message", equipes.contains(personne));
+		
+	}*/
 
 }

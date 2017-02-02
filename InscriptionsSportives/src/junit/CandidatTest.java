@@ -17,7 +17,7 @@ public class CandidatTest {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b","c");
 		String inscri = Personne.getPrenom();
-		assertEquals("a",inscri);
+		assertEquals("b",inscri);
 		
 	}
 
