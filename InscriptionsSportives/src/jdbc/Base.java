@@ -20,7 +20,7 @@ public class Base {
 			ResultSet rs = s.executeQuery(req);
 			while (rs.next())
 			{
-				System.out.println(rs.getInt(1) + " : " + rs.getString(2));
+					System.out.println( rs.getString("prenom") + ", " +rs.getString("email"));
 			}
 		}
 		catch (ClassNotFoundException e)
