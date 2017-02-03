@@ -11,6 +11,7 @@ public class MainMenu
 	private static TeamMenu teamMenu;
 	private static CompMenu compMenu;
 	private static Inscriptions inscriptions;
+	
 	public MainMenu()
 	{
 		inscriptions = Inscriptions.getInscriptions();
@@ -33,13 +34,13 @@ public class MainMenu
 	//Menu principal
 	static Menu getMainMenu()
 	{
-	        Menu menuPrincipal = new Menu("Menu Principal");
-	        menuPrincipal.ajoute(persMenu.getMenuPersonne());
-	        menuPrincipal.ajoute(teamMenu.getMenuEquipe());
-	        menuPrincipal.ajoute(compMenu.getMenuCompetition());
-	        menuPrincipal.ajoute(getOptionSauvegarde());
-	        menuPrincipal.ajouteQuitter("q");
-	        return menuPrincipal;
+	        Menu mainMenu = new Menu("Menu Principal");
+	        mainMenu.ajoute(compMenu.getMenuCompetition());
+	        mainMenu.ajoute(teamMenu.getMenuEquipe());
+	        mainMenu.ajoute(persMenu.getMenuPersonne());
+	        mainMenu.ajoute(getOptionSauvegarde());
+	        mainMenu.ajouteQuitter("q");
+	        return mainMenu;
 	}
 	
 	//Sauvergarder
@@ -59,12 +60,11 @@ public class MainMenu
 						try 
 						{
 							inscriptions.sauvegarder();
-							System.out.println("Sauvegarde réussi !");
-							
+							System.out.println("Sauvegardé !");							
 						} 
 						catch (IOException e) 
 						{
-							System.out.println("Sauvegarde impossible. " + e);
+							System.out.println("Echec de la sauvegarde. " + e);
 						}
 					}
 				};

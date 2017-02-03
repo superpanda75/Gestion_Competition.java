@@ -1,7 +1,13 @@
 package userDialog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import inscriptions.Candidat;
@@ -23,7 +29,7 @@ public class CompMenu
 	
 	static Menu getMenuCompetition()
 	{
-		Menu menuCompetition = new Menu("Gestion de compétition","3");
+		Menu menuCompetition = new Menu("Gestion de compétition","1");
 		menuCompetition.ajoute(getListeCompetition());
 		menuCompetition.ajoute(getOptionAjouterCompetition());
 		menuCompetition.ajouteRevenir("r");
@@ -64,6 +70,7 @@ public class CompMenu
 				menuCompetition.ajoute(getOptionVoirUneCompetition(element));
 				menuCompetition.ajoute(getOptionSupprimerUneCompetition(element));
 				menuCompetition.ajoute(getOptionEditerUneCompetition(element));
+				menuCompetition.ajoute(getOptionModifierDateCompetition(element));
 				menuCompetition.ajoute(getListeSupprimerUneCandidatCompetition(element));
 				menuCompetition.ajouteRevenir("r");
 				menuCompetition.setRetourAuto(true);
@@ -83,7 +90,7 @@ public class CompMenu
 	
 	static Liste<Candidat> getListeSupprimerUneCandidatCompetition(Competition competition)
 	{
-		Liste<Candidat> liste = new Liste<>("Supprimer un candidat de "+competition.getNom(),"4",getListeActionSupprimerUnCandidatCompetition(competition));
+		Liste<Candidat> liste = new Liste<>("Supprimer un candidat de "+competition.getNom(),"5",getListeActionSupprimerUnCandidatCompetition(competition));
 		liste.ajouteRevenir("r");
 		return liste;
 	}
@@ -104,7 +111,7 @@ public class CompMenu
 					public void elementSelectionne(int indice, Candidat element) 
 					{
 						competition.remove(element);
-						System.out.println(element.getNom()+" à bien été supprimer de "+competition.getNom());
+						System.out.println(element.getNom()+" à bien été supprimé de "+competition.getNom());
 					}
 
 					@Override
@@ -177,7 +184,8 @@ public class CompMenu
 	
 	private static Option getOptionEditerUneCompetition(Competition competition)
 	{
-		Option option = new Option("Editer "+competition.getNom(),"4",getActionEditerUneCompetition(competition));
+		Option option = new Option("Editer nom de la competition : "+competition.getNom(),"3",getActionEditerUneCompetition(competition));
+		
 		return option;
 	}
 	
@@ -191,6 +199,51 @@ public class CompMenu
 					{
 						String nom= utilitaires.EntreesSorties.getString("Nom : ");
 								inscriptions.modifCompetition(competition,nom);
+					}
+			
+				};
+	}
+	
+	//Modifier date de competition
+	
+	private static Option getOptionModifierDateCompetition(Competition competition)
+	{
+		Option option = new Option("Modifier la Date de la competition : "+competition.getNom(),"4",getActionModifierDateCompetition(competition));
+		
+		return option;
+	}
+	
+	private static Action getActionModifierDateCompetition(Competition competition)
+	{
+		return new Action()
+				{
+
+					@Override
+					public void optionSelectionnee() 
+					{
+						/*if (str.matches("\\d{4}-\\d{2}-\\d{2}")) {
+						    ...
+						}*/
+						LocalDate today = LocalDate.now();						
+						boolean changeDate = false;
+						
+						
+						while (changeDate == false){							
+							String dateEntree = utilitaires.EntreesSorties.getString("entrez la nouvelle date au format aaaa/mm/jj : ");
+							
+							if (dateEntree.matches("((19|20)\\d{2})-([1-9]|0[1-9]|1[0-2])-(0[1-9]|[1-9]|[12][0-9]|3[01])")) {
+								System.out.println(today);
+								LocalDate date = LocalDate.parse(dateEntree);
+						    
+								if (date.isAfter(today)){
+									inscriptions.modifDateCompetition(competition, date);
+									changeDate = true;
+								} else System.out.println("erreur positionnement");
+							}else System.out.println("erreur regex");
+						
+						}
+						
+						System.out.println("Date de cloture modifiée pour la competition : "+competition.getNom());
 					}
 			
 				};
@@ -210,7 +263,7 @@ public class CompMenu
 					public void optionSelectionnee() 
 					{
 						element.delete();
-						System.out.println(element.getNom()+" à été supprimer !");
+						System.out.println(element.getNom()+" à été supprimée !");
 					}
 			
 				};

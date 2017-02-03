@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import inscriptions.Competition;
-import inscriptions.InvalidDate;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
@@ -32,7 +31,7 @@ public class PersMenu
 	//Menu personne
 		static Menu getMenuPersonne()
 		{
-			Menu persMenu = new Menu("Gestion de personne","1");
+			Menu persMenu = new Menu("Gestion de personne","3");
 			persMenu.ajoute(getListeVoirUnePersonne());
 			persMenu.ajoute(getOptionAjouterPersonne());
 			persMenu.ajouteRevenir("r");

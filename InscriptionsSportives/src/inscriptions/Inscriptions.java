@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import userDialog.MainMenu;
 
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
@@ -112,8 +113,16 @@ public class Inscriptions implements Serializable
 		return personne;
 	}
 	
+	public Personne modifPersonne(Personne personne,String nom,String prenom,String mail)
+	{
+		personne.setPrenom(prenom);
+		personne.setNom(nom);
+		personne.setMail(mail);
+		return personne;
+}
+	
 	/**
-	 * Créée une Candidat de type équipe. Ceci est le seul moyen, il n'y a pas
+	 * Créée un Candidat de type équipe. Ceci est le seul moyen, il n'y a pas
 	 * de constructeur public dans {@link Equipe}.
 	 * @param nom
 	 * @param prenom
@@ -241,24 +250,20 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
-		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-		flechettes.add(tony);
-		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
-		lesManouches.add(boris);
-		lesManouches.add(tony);
-		System.out.println(inscriptions);
-		lesManouches.delete();
-		System.out.println(inscriptions);
-		try
-		{
-			inscriptions.sauvegarder();
-		} 
-		catch (IOException e)
-		{
-			System.out.println("Sauvegarde impossible." + e);
-		}
+		MainMenu menu = new MainMenu();
+		menu.start();
 	}
+	
+	public Competition modifCompetition(Competition competition, String nom)
+	{
+		competition.setNom(nom);
+		return competition;
+}
+	
+	public Competition modifDateCompetition(Competition competition,LocalDate dateCloture)
+	{
+		
+		competition.setDateCloture(dateCloture);
+		return competition;
+}
 }
