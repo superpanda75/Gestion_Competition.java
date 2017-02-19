@@ -37,10 +37,6 @@ public class PersonneTest {
 				
 	}
 
-	@Test
-	public void testPersonne() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetPrenom() {

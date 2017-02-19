@@ -42,7 +42,7 @@ public class CompetitionTest {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now().plusDays(3), true);
-		assertTrue(compet.inscriptionsOuvertes());
+		assertTrue(compet.inscriptionsOuvertes(null));
 	}
 
 	@Test
@@ -56,15 +56,15 @@ public class CompetitionTest {
 	public void testEstEnEquipe() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now().plusDays(20), true);	
+		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now(), true);	
 		assertEquals(true,compet.estEnEquipe());
 		
 	}
 
 	@Test
 	public void testSetDateCloture() {
-		LocalDate date = LocalDate.now().plusDays(10);
-		LocalDate  date1 = LocalDate.now().plusDays(20);
+		LocalDate date = LocalDate.now();
+		LocalDate  date1 = LocalDate.now();
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("bip", date, true);
 		compet.setDateCloture(date1);

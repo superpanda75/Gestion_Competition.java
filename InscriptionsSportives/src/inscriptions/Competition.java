@@ -1,6 +1,8 @@
 package inscriptions;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.time.LocalDate;
 import java.util.Set;
@@ -55,11 +57,17 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return
 	 */
 	
-	public boolean inscriptionsOuvertes()
+	public boolean inscriptionsOuvertes(LocalDate dateCloture)
 	{
 		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
-		return true;
+		if (dateCloture.isAfter(LocalDate.now())){
+			return true;
+		}
+		else return false;
 	}
+		
+		
+	
 	
 	/**
 	 * Retourne la date de cloture des inscriptions.
@@ -89,9 +97,12 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public void setDateCloture(LocalDate dateCloture)
 	{
-		// TODO vérifier que l'on avance pas la date.
-		this.dateCloture = dateCloture;
+		// TODO v�rifier que l'on avance pas la date.
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			sdf.setLenient(true);
+			getDateCloture();			  	
 	}
+	
 	
 	/**
 	 * Retourne l'ensemble des candidats inscrits.
