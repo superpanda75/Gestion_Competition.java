@@ -9,11 +9,8 @@ import inscriptions.Competition;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
-import utilitaires.ligneDeCommande.Action;
-import utilitaires.ligneDeCommande.ActionListe;
-import utilitaires.ligneDeCommande.Liste;
-import utilitaires.ligneDeCommande.Menu;
-import utilitaires.ligneDeCommande.Option;
+import commandLine.*;
+import commandLine.util.InOut;;
 
 public class PersMenu
 {
@@ -228,13 +225,12 @@ public class PersMenu
 			{
 				return new Action()
 						{
-
 							@Override
 							public void optionSelectionnee()
 							{
-								String nom= utilitaires.EntreesSorties.getString("Nom : "),
-						                prenom = utilitaires.EntreesSorties.getString("Prénom : "),
-						                mail = utilitaires.EntreesSorties.getString("Mail : ");
+								String nom= InOut.getString("Nom : "),
+						                prenom = InOut.getString("Prénom : "),
+						                mail = InOut.getString("Mail : ");
 										inscriptions.modifPersonne(personne,nom, prenom, mail);
 							}
 					
@@ -254,9 +250,9 @@ public class PersMenu
 					@Override
 					public void optionSelectionnee()
 					{
-						String nom= utilitaires.EntreesSorties.getString("Nom : "),
-		                prenom = utilitaires.EntreesSorties.getString("Prénom : "),
-		                mail = utilitaires.EntreesSorties.getString("Mail : ");
+						String nom= InOut.getString("Nom : "),
+		                prenom = InOut.getString("Prénom : "),
+		                mail = InOut.getString("Mail : ");
 						inscriptions.createPersonne(nom, prenom, mail);
 					}
 				};

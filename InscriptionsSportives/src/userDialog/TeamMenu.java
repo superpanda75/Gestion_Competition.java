@@ -7,11 +7,9 @@ import java.util.Set;
 import inscriptions.Competition;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
-import utilitaires.ligneDeCommande.Action;
-import utilitaires.ligneDeCommande.ActionListe;
-import utilitaires.ligneDeCommande.Liste;
-import utilitaires.ligneDeCommande.Menu;
-import utilitaires.ligneDeCommande.Option;
+
+import commandLine.*;
+import commandLine.util.InOut;;
 
 public class TeamMenu 
 {
@@ -52,7 +50,7 @@ public class TeamMenu
 						@Override
 						public void optionSelectionnee()
 						{
-							String nom= utilitaires.EntreesSorties.getString("Nom : ");
+							String nom= InOut.getString("Nom : ");
 									inscriptions.createEquipe(nom);
 						}
 					};

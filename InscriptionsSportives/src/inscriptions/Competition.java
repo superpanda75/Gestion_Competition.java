@@ -1,7 +1,7 @@
 package inscriptions;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.time.LocalDate;
@@ -60,10 +60,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean inscriptionsOuvertes(LocalDate dateCloture)
 	{
 		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
-		if (dateCloture.isAfter(LocalDate.now())){
-			return true;
-		}
-		else return false;
+		return dateCloture.isAfter(LocalDate.now());
 	}
 		
 		
@@ -95,12 +92,10 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @param dateCloture
 	 */
 	
-	public void setDateCloture(LocalDate dateCloture)
+	public void setDateCloture(LocalDate dateCloture) //throws a completer
 	{
 		// TODO v�rifier que l'on avance pas la date.
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			sdf.setLenient(true);
-			getDateCloture();			  	
+	//HAITHEM MET LE TEST DE LA DATE DANS CETTE COUCHE ET PAS DANS LA COUCHE DE DIALOGUE ! 	
 	}
 	
 	

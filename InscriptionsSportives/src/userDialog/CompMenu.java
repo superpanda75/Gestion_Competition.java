@@ -13,11 +13,10 @@ import java.util.List;
 import inscriptions.Candidat;
 import inscriptions.Competition;
 import inscriptions.Inscriptions;
-import utilitaires.ligneDeCommande.Action;
-import utilitaires.ligneDeCommande.ActionListe;
-import utilitaires.ligneDeCommande.Liste;
-import utilitaires.ligneDeCommande.Menu;
-import utilitaires.ligneDeCommande.Option;
+
+
+import commandLine.*;
+import commandLine.util.InOut;;
 
 public class CompMenu
 {
@@ -161,18 +160,18 @@ public class CompMenu
 					@Override
 					public void optionSelectionnee() 
 					{
-						String nom= utilitaires.EntreesSorties.getString("Nom : ");
+						String nom= InOut.getString("Nom : ");
 						System.out.println("Date de cloture : ");
-						String jour=utilitaires.EntreesSorties.getString("Jour : "),
-								mois=utilitaires.EntreesSorties.getString("Mois : "),
-								annee=utilitaires.EntreesSorties.getString("Annee : ");
+						String jour=InOut.getString("Jour : "),
+								mois=InOut.getString("Mois : "),
+								annee=InOut.getString("Annee : ");
 						String dateClotureString = annee+"-"+mois+"-"+jour;
 						LocalDate dateCloture = LocalDate.parse(dateClotureString);
 						boolean enEquipe = false;
 						String reponse="";
 						while(!reponse.equals("o")&&!reponse.equals("n"))
 						{
-							reponse=utilitaires.EntreesSorties.getString("En équipe ? o : Oui n : Non : ");
+							reponse=InOut.getString("En équipe ? o : Oui n : Non : ");
 						}
 						enEquipe=reponse.compareTo("o")==0;
 						inscriptions.createCompetition(nom, dateCloture, enEquipe);
@@ -197,7 +196,7 @@ public class CompMenu
 					@Override
 					public void optionSelectionnee() 
 					{
-						String nom= utilitaires.EntreesSorties.getString("Nom : ");
+						String nom= InOut.getString("Nom : ");
 								inscriptions.modifCompetition(competition,nom);
 					}
 			
@@ -217,19 +216,15 @@ public class CompMenu
 	{
 		return new Action()
 				{
-
 					@Override
 					public void optionSelectionnee() 
 					{
-						/*if (str.matches("\\d{4}-\\d{2}-\\d{2}")) {
-						    ...
-						}*/
 						LocalDate today = LocalDate.now();						
 						boolean changeDate = false;
 						
 						
-						while (changeDate == false){							
-							String dateEntree = utilitaires.EntreesSorties.getString("entrez la nouvelle date au format aaaa/mm/jj : ");
+						while (!changeDate){							
+							String dateEntree = InOut.getString("entrez la nouvelle date au format aaaa/mm/jj : ");
 							
 							if (dateEntree.matches("((19|20)\\d{2})-([1-9]|0[1-9]|1[0-2])-(0[1-9]|[1-9]|[12][0-9]|3[01])")) {
 								System.out.println(today);
