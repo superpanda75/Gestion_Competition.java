@@ -2,7 +2,8 @@ package userDialog;
 
 import java.io.IOException;
 import inscriptions.Inscriptions;
-import utilitaires.ligneDeCommande.*;
+import commandLine.*;
+import commandLine.util.InOut;;
 
 public class MainMenu 
 {

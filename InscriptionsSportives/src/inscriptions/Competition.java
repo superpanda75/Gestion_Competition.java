@@ -1,7 +1,7 @@
 package inscriptions;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.time.LocalDate;
@@ -91,13 +91,15 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @param dateCloture
 	 */
 	
-	public void setDateCloture(LocalDate dateCloture)
+	public void setDateCloture(LocalDate dateCloture) //throws a completer
 	{
 		// TODO vérifier que l'on avance pas la date.
+
 		if (dateCloture.isAfter(this.dateCloture))
 			this.dateCloture = dateCloture;		  	
 		else
 			throw new DateClotureException();
+
 	}
 	
 	/**
