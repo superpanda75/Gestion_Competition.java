@@ -15,12 +15,7 @@ import static inscriptions.Inscriptions.*;
 
 public class CompetitionTest {
 
-	@Test
-	public void testCompetition() {
-		fail("Not yet implemented");
-		
-		
-	}
+	
 
 	@Test
 	public void testGetNom() {
@@ -41,8 +36,8 @@ public class CompetitionTest {
 	public void testInscriptionsOuvertes() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now().plusDays(3), true);
-		assertTrue(compet.inscriptionsOuvertes(null));
+		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now(), true);
+		assertTrue("Must be true", compet.inscriptionsOuvertes(null));
 	}
 
 	@Test
@@ -75,7 +70,7 @@ public class CompetitionTest {
 	@Test
 	public void testGetCandidats() {
 		Inscriptions inscri = Inscriptions.getInscriptions();
-		Competition compet = inscri.createCompetition("testCompet", LocalDate.now().plusDays(20), false);
+		Competition compet = inscri.createCompetition("testCompet", LocalDate.now(), false);
 		Personne Olivier = inscri.createPersonne("ha", "oh", "eh");
 		Personne Thresh = inscri.createPersonne("ha", "oh", "eh");
 		compet.add(Olivier);
@@ -88,14 +83,10 @@ public class CompetitionTest {
 	public void testAddPersonne() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		LocalDate date = LocalDate.now().plusDays(20);
-		Competition compet = inscriptions.createCompetition("test", date, false);
+		Competition compet = inscriptions.createCompetition("test", null, false);
 		Personne personne = inscriptions.createPersonne("test", "prenom", "mail");
-		int sizeBefore = compet.getCandidats().size();
 		compet.add(personne);
-		int sizeAfter = compet.getCandidats().size();
 		assertTrue(compet.getCandidats().contains(personne));
-		assertEquals(sizeBefore+1,sizeAfter);
 	}
 
 	@Test

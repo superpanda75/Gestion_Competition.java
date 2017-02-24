@@ -57,12 +57,11 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return
 	 */
 	
-	public boolean inscriptionsOuvertes(LocalDate dateCloture)
+	public boolean inscriptionsOuvertes(LocalDate dateCloture) 
 	{
 		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
-		return dateCloture.isAfter(LocalDate.now());
+		return ( dateCloture.isBefore(LocalDate.now()));
 	}
-		
 		
 	
 	
@@ -95,9 +94,13 @@ public class Competition implements Comparable<Competition>, Serializable
 	public void setDateCloture(LocalDate dateCloture) //throws a completer
 	{
 		// TODO v�rifier que l'on avance pas la date.
-	//HAITHEM MET LE TEST DE LA DATE DANS CETTE COUCHE ET PAS DANS LA COUCHE DE DIALOGUE ! 	
+
+		if (dateCloture.isAfter(this.dateCloture))
+			this.dateCloture = dateCloture;		  	
+		else
+			throw new DateClotureException();
+
 	}
-	
 	
 	/**
 	 * Retourne l'ensemble des candidats inscrits.
@@ -120,6 +123,8 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Personne personne)
 	{
 		// TODO vérifier que la date de clôture n'est pas passée
+		if( dateCloture.isAfter(LocalDate.now()))
+			throw new InscriptionEnRetardException(personne);
 		if (enEquipe)
 			throw new RuntimeException();
 		personne.add(this);
@@ -137,12 +142,14 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Equipe equipe)
 	{
 		// TODO vérifier que la date de clôture n'est pas passée
-		if (!enEquipe)
+		if ( dateCloture.isAfter(LocalDate.now())) 
+			throw new InscriptionEnRetardException(equipe);
+		if (enEquipe)
 			throw new RuntimeException();
 		equipe.add(this);
 		return candidats.add(equipe);
 	}
-
+	
 	/**
 	 * Désinscrit un candidat.
 	 * @param candidat
@@ -176,5 +183,38 @@ public class Competition implements Comparable<Competition>, Serializable
 	public String toString()
 	{
 		return getNom();
+	}
+	
+	public class DateClotureException extends RuntimeException 
+	{
+		private LocalDate mauvaiseDate;
+		
+		 @Override
+		 public String toString()
+		 {
+		  return "Impossible de remplacer la date de cl�ture (" + getDateCloture() + ") de la competition "
+				  + getNom() + " par " + mauvaiseDate + ".";
+		 }
+
+		 public void DateClotureException(LocalDate mauvaiseDate) 
+		{
+			this.mauvaiseDate = mauvaiseDate ;	
+		}
+	}
+
+	public class InscriptionEnRetardException extends RuntimeException
+	{
+		private Candidat candidat;
+		
+		public InscriptionEnRetardException(Candidat candidat) 
+		{
+			this.candidat = candidat;
+		}
+		
+		public String toString()
+		 {
+		  return "Impossible de d'ajouter le candidat (" + candidat + ") � la competition "
+				  + getNom() + " par " + getDateCloture() + ".";
+		 }
 	}
 }
