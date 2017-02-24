@@ -37,16 +37,17 @@ public class PersMenu
 		
 		//Gérer une personne ou équipe
 		
+		
 		static Liste<Personne> getListeVoirUnePersonne()
 		{
-			Liste<Personne> liste = new Liste<>("Liste de personne","1",getActionListeVoirUnePersonne());
+			Liste<Personne> liste = new Liste<>("Liste de personne","1",ListePersonne());
 			liste.ajouteRevenir("r");
 			return liste;
 
 		}
 		
 		//Liste voir personne
-		static ActionListe<Personne> getActionListeVoirUnePersonne() 
+		static ActionListe<Personne> ListePersonne() 
 		{
 			return new ActionListe<Personne>() {
 				

@@ -12,6 +12,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import userDialog.MainMenu;
 
+
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
  * permet de gérer les compétitions, candidats (de type equipe ou personne)
@@ -23,7 +24,7 @@ public class Inscriptions implements Serializable
 	private static final long serialVersionUID = -3095339436048473524L;
 	private static final String FILE_NAME = "Inscriptions.srz";
 	private static Inscriptions inscriptions;
-	
+	public static boolean bdd = false;
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
 
@@ -91,9 +92,10 @@ public class Inscriptions implements Serializable
 	public Competition createCompetition(String nom, 
 			LocalDate dateCloture, boolean enEquipe)
 	{
-		Competition competition = new Competition(this, nom, dateCloture, enEquipe);
-		competitions.add(competition);
-		return competition;
+		
+			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
+			competitions.add(competition);
+			return competition;
 	}
 
 	/**
