@@ -1,11 +1,9 @@
 package jdbc;
 
 import inscriptions.*;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 
 public class BasePersonne {
 
@@ -21,12 +19,12 @@ public class BasePersonne {
 
 	}
 	//AFFICHER PERSONNE
-	public static void getActionListeVoirUnePersonne()
+	 public static void main(String[] args)
 	{
 		try {
+			
 			jdbc.Base.connexion();
-			req = "SELECT * FROM personne;";
-			con = jdbc.Base.connexion();
+			req = "SELECT * FROM personne";
 			smt = con.createStatement();
 			rs = smt.executeQuery(req);
 				while (rs.next())
@@ -35,14 +33,7 @@ public class BasePersonne {
 				}
 		}	
 		catch (Exception e) {
-			System.out.println( e.getMessage() );
+			//System.out.println( e.getMessage() );
 		}
-
-
 	}
-
-	
-
-
-
 }

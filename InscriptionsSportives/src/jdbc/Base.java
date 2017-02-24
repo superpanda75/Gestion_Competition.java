@@ -18,16 +18,15 @@ public class Base {
 	}
 	
 	
-	public static Connection connexion() throws ClassNotFoundException
+	public static Connection connexion() throws ClassNotFoundException, SQLException
 	{
-		
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/ppe", user = "root", password = "";
-			c = DriverManager.getConnection(url, user, password);
+			String url = "jdbc:mysql://mysql.m2l.local/ahouri", user = "ahouri", password = "azerty";
+			c = DriverManager.getConnection(url, user, password);			
 		}
-		catch (Exception e) {
-			System.out.println("Erreur de Connexion" + e.getMessage() );
+		catch (ClassNotFoundException e) {
+			System.out.println("Pilote JDBC non intallé" );
 		}
 		return con;
 	}
@@ -52,7 +51,7 @@ public class Base {
 		try {
 			connexion();
 			String sql = req  ;
-			Statement smt = c.createStatement() ;
+			Statement smt = con.createStatement() ;
 			ResultSet rs = smt.executeQuery(sql) ;
 			return rs;
 		}
@@ -63,7 +62,7 @@ public class Base {
 		finally
 		{
 			try {
-				c.close();
+				con.close();
 			} catch (Exception e) {
 				
 				
