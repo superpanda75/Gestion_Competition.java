@@ -18,12 +18,19 @@ public class Base {
 	}
 	
 	
-	public static Connection connexion() throws ClassNotFoundException, SQLException
+	public static Connection connexion() throws SQLException
 	{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://mysql.m2l.local/ahouri", user = "ahouri", password = "azerty";
 			c = DriverManager.getConnection(url, user, password);			
+			String req = "select * from personne";
+			Statement s = c.createStatement();
+			ResultSet rs = s.executeQuery(req);
+			while (rs.next())
+			{
+				System.out.println(rs.getString("id_p")  + rs.getString("nom") + " :" + rs.getString("prenom"));
+			}
 		}
 		catch (ClassNotFoundException e) {
 			System.out.println("Pilote JDBC non intallé" );
