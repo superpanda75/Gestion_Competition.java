@@ -39,7 +39,7 @@ public class BaseCompetition {
 				 String sql = "UPDATE Competition SET nom='"+nom+"', date_cloture='"+date_cloture+"', equipe='"+equipe+"' WHERE id_co="+id+"";
 				Connection c =  jdbc.Base.connexion();
 				 Statement smt = c.createStatement();
-				 ResultSet rs = smt.executeQuery(sql);
+				 int rs = smt.executeUpdate(sql);
 				 System.out.println("Modifications réussi");
 			 }catch(SQLException e){
 				 System.out.println(e.getMessage());
@@ -53,7 +53,7 @@ public class BaseCompetition {
 			 String query="INSERT INTO competition VALUES( "+nom+","+date_cloture+", "+equipe+")";
 			 Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
-			 ResultSet rs = smt.executeQuery(query);
+			 boolean rs = smt.execute(query);
 			 System.out.println("La compétition a bien été ajouté!");
 			 
 		 }catch(SQLException e){
@@ -68,7 +68,7 @@ public class BaseCompetition {
 		 String query= "DELETE FROM Competition id_co="+id+"";
 		 Connection c = jdbc.Base.connexion();
 		 Statement smt = c.createStatement();
-		 ResultSet rs = smt.executeQuery(query);
+		 int rs = smt.executeUpdate(query);
 		 System.out.println("Competition supprimé");
 		 }
 		 catch(SQLException e){
