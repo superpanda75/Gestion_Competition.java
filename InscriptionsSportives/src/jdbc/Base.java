@@ -9,7 +9,7 @@ import java.sql.Statement;
 	
 public class Base {
 	
-	public static Connection con;
+
 	public static Connection c;
 	
 	public Base()
@@ -22,20 +22,16 @@ public class Base {
 	{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://mysql.m2l.local/ahouri", user = "ahouri", password = "azerty";
-			c = DriverManager.getConnection(url, user, password);			
-			String req = "select * from personne";
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery(req);
-			while (rs.next())
-			{
-				System.out.println(rs.getString("id_p")  + rs.getString("nom") + " :" + rs.getString("prenom"));
-			}
+			c = DriverManager.getConnection("jdbc:mysql://mysql.m2l.local/ahouri", "ahouri", "azerty");	
+			System.out.println("Connexion bien établie");
+		
+			
 		}
 		catch (ClassNotFoundException e) {
 			System.out.println("Pilote JDBC non intallé" );
 		}
-		return con;
+		
+		return c;
 	}
 
 	public static void connexionExe (String req)
@@ -43,7 +39,7 @@ public class Base {
 		try {
 			connexion();
 			String sql = req  ;
-			Statement smt = con.createStatement() ;
+			Statement smt = c.createStatement() ;
 			smt.executeUpdate(sql) ;
 		}  catch (Exception e) {
 			System.out.println( e.getMessage() );
@@ -58,7 +54,7 @@ public class Base {
 		try {
 			connexion();
 			String sql = req  ;
-			Statement smt = con.createStatement() ;
+			Statement smt = c.createStatement() ;
 			ResultSet rs = smt.executeQuery(sql) ;
 			return rs;
 		}
@@ -69,7 +65,7 @@ public class Base {
 		finally
 		{
 			try {
-				con.close();
+				c.close();
 			} catch (Exception e) {
 				
 				
