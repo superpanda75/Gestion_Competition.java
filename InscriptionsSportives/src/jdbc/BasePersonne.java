@@ -19,32 +19,36 @@ public class BasePersonne {
 
 	}
 	//AFFICHER PERSONNE
-	 public static void getPersonnes()
+	 public static void AfficheP()
 	{
-		try {
-			 Connection c = jdbc.Base.connexion();
-			 String query="SELECT * FROM personne";
-			 Statement smt = c.createStatement() ;
-			 ResultSet rs = smt.executeQuery(query) ;
-				while (rs.next())
-				{
-					System.out.println(rs.getString("id_p")  + rs.getString("nom") + " :" + rs.getString("prenom"));
-				}
-			 System.out.println("Voici les personnes");
-		}	
-		catch (Exception e) {
-			System.out.println( e.getMessage() );
-		}
-	}
-	 
-	 //AJOUTER PERSONNE
-	 public static void AjouterP( String nom, String prenom, String email){
 		 try{
 			 
-			 String query="INSERT INTO personne VALUES( "+nom+","+prenom+", "+email+")";
+			 String query="SELECT * FROM personne";
 			 Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
+			 System.out.println("Liste des personnes");
+			 while (rs.next())
+				{
+					System.out.println(rs.getString("id_p")  + rs.getString("nom") + " :" + rs.getString("prenom"));
+				}
+			 
+			 
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+			 
+		 }
+		
+	}
+	 
+	 //AJOUTER PERSONNE
+	 public static void AjouterP( String nom, String prenom, String mail){
+		 try{
+			 
+			 String sql="INSERT INTO personne VALUES( "+nom+","+prenom+", "+mail+")";
+			 Connection c = jdbc.Base.connexion();
+			 Statement smt = c.createStatement();
+			 ResultSet rs = smt.executeQuery(sql);
 			 System.out.println("Personne bien ajouté!");
 			 
 		 }catch(SQLException e){
