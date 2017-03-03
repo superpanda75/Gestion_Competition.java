@@ -22,7 +22,7 @@ public class IhmMain extends JFrame
 		
 		JPanel pannel = new JPanel();	
 		
-		JTabbedPane onglets = new JTabbedPane();	
+		JTabbedPane onglets = new JTabbedPane(SwingConstants.RIGHT);	
 		
 		
 		IhmPersonne Pers = new IhmPersonne(new JLabel ("Personne"));	
