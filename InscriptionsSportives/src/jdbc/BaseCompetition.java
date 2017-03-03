@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import inscriptions.Competition;
 import inscriptions.Inscriptions;
 
 public class BaseCompetition {
@@ -26,32 +25,76 @@ public class BaseCompetition {
 			smt = con.createStatement();
 			rs =smt.executeQuery(req);
 			while (rs.next())
-		{
-				i ++;
-				System.out.println(i + " - " + rs.getString("nom_co"));
+			{
+				System.out.println(rs.getString("nom"));
 			}
-			i = 0;
 		}	
 		catch (Exception e) {
 		System.out.println( e.getMessage() );
 		}
 	}
-		
-	public static void modifcomp(String oldnom, String nom, Competition competition )
-	{
-		String modifnom;
-		int id;
-		modifnom = "call getidcomp('"+ competition.getNom() +"')";
-		rs = Base.connexionQuery(modifnom);
-		try {
-		id = rs.getInt(0);
-		String modifcomp  = "call modifnomcomp("+id+",'"+ oldnom +"','"+nom+"';";
-		jdbc.Base.connexionExe(modifcomp);
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		
-	}
+	//MODIFIER UNE COMPETITION
+		 public static void ModifP(int id,String nom, String date_cloture, String equipe){
+			 try{
+				 String sql = "UPDATE Competition SET nom='"+nom+"', date_cloture='"+date_cloture+"', equipe='"+equipe+"' WHERE id_co="+id+"";
+				Connection c =  jdbc.Base.connexion();
+				 Statement smt = c.createStatement();
+				 ResultSet rs = smt.executeQuery(sql);
+				 System.out.println("Modifications réussi");
+			 }catch(SQLException e){
+				 System.out.println(e.getMessage());
+			 } 	
+		 }
+
+//AJOUTER COMPETITION
+	 public static void AjouterComp( String nom, String date_cloture, String equipe){
+		 try{
+			 
+			 String query="INSERT INTO competition VALUES( "+nom+","+date_cloture+", "+equipe+")";
+			 Connection c = jdbc.Base.connexion();
+			 Statement smt = c.createStatement();
+			 ResultSet rs = smt.executeQuery(query);
+			 System.out.println("La compétition a bien été ajouté!");
+			 
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+			 
+		 }
+	 }
+	 
+	 // SUPPRIMER UNE COMPETITION
+	 public static void supprimerComp(int id){
+		 try{ 
+		 String query= "DELETE FROM Competition id_co="+id+"";
+		 Connection c = jdbc.Base.connexion();
+		 Statement smt = c.createStatement();
+		 ResultSet rs = smt.executeQuery(query);
+		 System.out.println("Competition supprimé");
+		 }
+		 catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 }
+	 }
+
+//RECHERCHER UNE PERSONNE
+public static void RecherchePersonne(String nom) {
+	 try{
+	 String query="SELECT* FROM Competition WHERE nom ='"+nom+"' ";
+	 Connection c = jdbc.Base.connexion();
+	 Statement smt = c.createStatement();
+	 ResultSet rs = smt.executeQuery(query);
+	 System.out.println("Rechercher les Compétitions");
+	 rs.last();
+	 int intComp = rs.getRow();
+	 if(intComp != 0 ){
+		 System.out.println("Compétition trouver");
+	 }else{
+		 System.out.println("Compétition trouver");
+	 }
+	 }catch(SQLException e){
+		 System.out.println(e.getMessage());
+	 }
+	 
 }
+}
+

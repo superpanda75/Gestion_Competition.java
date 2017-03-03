@@ -10,8 +10,6 @@ import java.util.Collections;
 import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import jdbc.BasePersonne;
 import userDialog.MainMenu;
 
 
@@ -28,7 +26,7 @@ public class Inscriptions implements Serializable
 	private static Inscriptions inscriptions;
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
-	private BasePersonne basePersonne = new BasePersonne();
+	
 
 	private Inscriptions()
 	{
@@ -65,9 +63,7 @@ public class Inscriptions implements Serializable
 		for (Candidat c : getCandidats())
 			if (c instanceof Personne)
 				personnes.add((Personne)c);
-		basePersonne.AfficheP();
 		return Collections.unmodifiableSortedSet(personnes);
-		
 	}
 
 	/**
@@ -115,7 +111,6 @@ public class Inscriptions implements Serializable
 	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
-		basePersonne.AjouterP(nom, prenom, mail);
 		candidats.add(personne);
 		return personne;
 	}
@@ -126,7 +121,7 @@ public class Inscriptions implements Serializable
 		personne.setNom(nom);
 		personne.setMail(mail);
 		return personne;
-	}
+}
 	
 	/**
 	 * Créée un Candidat de type équipe. Ceci est le seul moyen, il n'y a pas
