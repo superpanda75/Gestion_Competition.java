@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.13" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="userDialog.CompMenu" project="InscirptionCompetition" 
-    file="/InscirptionCompetition/src/userDialog/CompMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="userDialog.CompMenu" project="AncienInscriptionCompetition" 
+    file="/AncienInscriptionCompetition/src/userDialog/CompMenu.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="369" width="428" x="21" y="-84"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="userDialog.PersMenu" project="InscirptionCompetition" 
-    file="/InscirptionCompetition/src/userDialog/PersMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="userDialog.PersMenu" project="AncienInscriptionCompetition" 
+    file="/AncienInscriptionCompetition/src/userDialog/PersMenu.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="698" y="109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="userDialog.TeamMenu" project="InscirptionCompetition" 
-    file="/InscirptionCompetition/src/userDialog/TeamMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="userDialog.TeamMenu" project="AncienInscriptionCompetition" 
+    file="/AncienInscriptionCompetition/src/userDialog/TeamMenu.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="233" y="506"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="userDialog.MainMenu" project="InscirptionCompetition" 
-    file="/InscirptionCompetition/src/userDialog/MainMenu.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="userDialog.MainMenu" project="AncienInscriptionCompetition" 
+    file="/AncienInscriptionCompetition/src/userDialog/MainMenu.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="663" y="496"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -39,24 +39,36 @@
   </class>  
   <association id="5">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="6" name="persMenu"/>      
-      <multiplicity id="7" minimum="0" maximum="1"/>    
+      <attribute id="6" name="persMenu">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="7" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="8">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="9" name="compMenu"/>      
-      <multiplicity id="10" minimum="0" maximum="1"/>    
+      <attribute id="9" name="compMenu">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="10" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="11">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="12" name="teamMenu"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
+      <attribute id="12" name="teamMenu">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
