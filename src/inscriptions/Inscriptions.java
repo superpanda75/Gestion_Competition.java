@@ -43,6 +43,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Competition> getCompetitions()
 	{
+		jdbc.BaseCompetition.afficheComp();
 		return Collections.unmodifiableSortedSet(competitions);
 	}
 	
@@ -53,6 +54,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Candidat> getCandidats()
 	{
+		jdbc.BaseCandidat.AffichCand();
 		return Collections.unmodifiableSortedSet(candidats);
 	}
 
@@ -63,6 +65,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Personne> getPersonnes()
 	{
+		jdbc.BasePersonne.AfficheP();
 		SortedSet<Personne> personnes = new TreeSet<>();
 		for (Candidat c : getCandidats())
 			if (c instanceof Personne)
@@ -77,6 +80,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Equipe> getEquipes()
 	{
+		jdbc.BaseEquipe.AffichEquipe();
 		SortedSet<Equipe> equipes = new TreeSet<>();
 		for (Candidat c : getCandidats())
 			if (c instanceof Equipe)
