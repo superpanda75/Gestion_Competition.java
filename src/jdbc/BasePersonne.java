@@ -12,6 +12,7 @@ public class BasePersonne {
 	{
 
 	}
+	
 	//AFFICHER PERSONNE
 	 public static void AfficheP()
 	{
@@ -34,6 +35,30 @@ public class BasePersonne {
 		 }
 		
 	}
+
+		//AFFICHER PERSONNE
+		 public static void AffichePersonneNonEquipe()
+		{
+			 try{
+				 
+				 String query="SELECT * FROM java_personne p, java_appartenir e WHERE p.id_personne = e.id_personne";
+				 Connection c = jdbc.Base.connexion();
+				 Statement smt = c.createStatement();
+				 ResultSet rs = smt.executeQuery(query);
+				 System.out.println("Liste des personnes");
+				 while (rs.next())
+					{
+						System.out.println(rs.getInt("id_personne")  +  rs.getString("prenom_personne") + "");
+					}
+				 
+				 
+			 }catch(SQLException e){
+				 System.out.println(e.getMessage());
+				 
+			 }
+			
+		}
+
 	 
 	 //AJOUTER PERSONNE
 	 public static void AjouterP(String prenom_personne){

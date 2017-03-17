@@ -13,7 +13,7 @@ public class BaseEquipe {
 	//AFFICHER UN CANDIDAT QUI EST UN EQUIPE
 	public static void AffichEquipe(){
 		try{
-			String requete = "SELECT * FROM java_appartenir, java_candidat WHERE id_equipe = id_candidat";
+			String requete = "SELECT * FROM java_appartenir e, java_candidat c WHERE e.id_equipe = c.id_candidat";
 			Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(requete);

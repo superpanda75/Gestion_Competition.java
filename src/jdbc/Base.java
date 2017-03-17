@@ -37,7 +37,9 @@ public class Base {
 	
 
 	public static void main(String[] args) throws SQLException {
-		
+		BaseEquipe.AffichEquipe();
+		BasePersonne.AfficheP();
+		BasePersonne.AffichePersonneNonEquipe();
 		
 	}
 }
