@@ -8,12 +8,6 @@ import java.sql.Statement;
 
 public class BasePersonne {
 
-	public static ResultSet rs;
-	public static String req;
-	public static Statement smt;
-	public static Connection con;
-
-
 	public BasePersonne()
 	{
 
@@ -23,14 +17,14 @@ public class BasePersonne {
 	{
 		 try{
 			 
-			 String query="SELECT * FROM personne";
+			 String query="SELECT * FROM java_personne WHERE java_personne.id_personne = id_personne";
 			 Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
 			 System.out.println("Liste des personnes");
 			 while (rs.next())
 				{
-					System.out.println(rs.getString("id_p")  + rs.getString("nom") + " :" + rs.getString("prenom"));
+					System.out.println(rs.getInt("id_personne")  +  rs.getString("prenom_personne") + "");
 				}
 			 
 			 
@@ -42,20 +36,18 @@ public class BasePersonne {
 	}
 	 
 	 //AJOUTER PERSONNE
-	 public static void AjouterP( String nom, String prenom, String mail){
+	 public static void AjouterP(String prenom_personne){
 		 try{
-			 
-			 String sql="INSERT INTO personne VALUES( "+nom+","+prenom+", "+mail+")";
+			 String sql="INSERT INTO java_personne VALUES("+prenom_personne+")";
 			 Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
-			 ResultSet rs = smt.executeQuery(sql);
+			 int rs = smt.executeUpdate(sql);
 			 System.out.println("Personne bien ajouté!");
 			 
 		 }catch(SQLException e){
 			 System.out.println(e.getMessage());
-			 
 		 }
-		 }
+	 }
 	 //SUPPRIMER UNE PERSONNE PAR ID
 	 public static void supprimerP(int id){
 		 try{ 
