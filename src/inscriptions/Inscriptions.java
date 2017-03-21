@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import jdbc.BasePersonne;
 import userDialog.MainMenu;
 
 
@@ -28,7 +27,7 @@ public class Inscriptions implements Serializable
 	private static Inscriptions inscriptions;
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
-	private BasePersonne basePersonne = new BasePersonne();
+
 
 	
 
