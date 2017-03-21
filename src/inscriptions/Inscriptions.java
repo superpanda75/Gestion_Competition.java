@@ -114,10 +114,11 @@ public class Inscriptions implements Serializable
 	 * @param mail
 	 * @return
 	 */
-	
+	//AJOUTER PERSONNE ET CANDIDAT
 	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
+		jdbc.BasePersonne.sauvegarder(personne);
 		candidats.add(personne);
 		return personne;
 	}

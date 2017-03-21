@@ -1,12 +1,15 @@
 package jdbc;
 
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class BasePersonne {
+import inscriptions.Personne;
+
+public class BasePersonne implements Serializable {
 
 	public BasePersonne()
 	{
@@ -58,21 +61,35 @@ public class BasePersonne {
 			 }
 			
 		}
-
 	 
-	 //AJOUTER PERSONNE
-	 public static void AjouterP(String prenom_personne){
+	 //AJOUTER PERSONNE & candidat (on recupere le prenom de la classe mere personne et le nm pour la classe fille candidat )->notion héritage
+	 public static void sauvegarder(Personne personne){
 		 try{
-			 String sql="INSERT INTO java_personne VALUES("+prenom_personne+")";
+			 String sql="INSERT INTO java_personne(prenom_personne,mail_personne) VALUES('"+personne.getPrenom()+"','"+personne.getMail()+"')";
 			 Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
-			 int rs = smt.executeUpdate(sql);
-			 System.out.println("Personne bien ajouté!");
-			 
-		 }catch(SQLException e){
-			 System.out.println(e.getMessage());
+			 smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+				ResultSet rs = smt.getGeneratedKeys();
+				while(rs.next())
+				{
+					sql ="Insert into java_candidat(id_candidat,nom_candidat) values ('"+rs.getInt(1)+"','"+personne.getNom()+"')";
+					System.out.println("Personne bien ajouté!");
+				}
+				smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+				ResultSet resultat = smt.getGeneratedKeys();
+				while(resultat.next())
+				{
+					personne.setNom(resultat.getString(1));
+				}
+				
+		 }
+		 catch(SQLException e){
+			System.out.print(e.getMessage());
 		 }
 	 }
+	
+	
+		
 	 //SUPPRIMER UNE PERSONNE PAR ID
 	 public static void supprimerP(int id){
 		 try{ 

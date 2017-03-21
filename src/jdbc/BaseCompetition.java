@@ -12,6 +12,7 @@ public class BaseCompetition {
 		
 	}
 	
+	
 	// AFFICHER UNE COMPETITION
 	public static void afficheComp()
 	{
