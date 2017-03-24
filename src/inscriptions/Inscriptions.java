@@ -143,6 +143,7 @@ public class Inscriptions implements Serializable
 	public Equipe createEquipe(String nom)
 	{
 		Equipe equipe = new Equipe(this, nom);
+		jdbc.BaseEquipe.Sauvegarder(equipe);
 		candidats.add(equipe);
 		return equipe;
 	}

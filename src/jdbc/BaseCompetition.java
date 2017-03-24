@@ -48,7 +48,7 @@ public class BaseCompetition {
 	 public static void AjouterComp( String nom, String date_cloture, String equipe){
 		 try{
 			 
-			 String query="INSERT INTO competition VALUES( "+nom+","+date_cloture+", "+equipe+")";
+			 String query="INSERT INTO(nom, date_cloture) competition VALUES( "+nom+","+date_cloture+", "+equipe+")";
 			 Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 boolean rs = smt.execute(query);

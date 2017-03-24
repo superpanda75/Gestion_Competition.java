@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 import inscriptions.Personne;
 
@@ -72,7 +73,7 @@ public class BasePersonne implements Serializable {
 				ResultSet rs = smt.getGeneratedKeys();
 				while(rs.next())
 				{
-					sql ="Insert into java_candidat(id_candidat,nom_candidat) values ('"+rs.getInt(1)+"','"+personne.getNom()+"')";
+					sql ="INSERT INTO java_candidat(id_candidat,nom_candidat) VALUES ('"+rs.getInt(1)+"','"+personne.getNom()+"')";
 					System.out.println("Personne bien ajouté!");
 				}
 				smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
@@ -88,21 +89,19 @@ public class BasePersonne implements Serializable {
 		 }
 	 }
 	
-	
+	 public static void supprimerP(Personne personne)
+		{
+			try {
+				String query= "DELETE FROM java_personne WHERE id_personne="+personne+"";
+				 Connection c = jdbc.Base.connexion();
+				 Statement smt = c.createStatement();
+				 ResultSet rs = smt.executeQuery(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
 		
-	 //SUPPRIMER UNE PERSONNE PAR ID
-	 public static void supprimerP(int id){
-		 try{ 
-		 String query= "DELETE FROM personne WHERE id_p="+id+"";
-		 Connection c = jdbc.Base.connexion();
-		 Statement smt = c.createStatement();
-		 ResultSet rs = smt.executeQuery(query);
-		 System.out.println("Voici les personnes");
-		 }
-		 catch(SQLException e){
-			 System.out.println(e.getMessage());
-		 }
-	 }
 	 //RECHERCHER UNE PERSONNE
 	 public static void RecherchePersonne(String prenom) {
 		 try{

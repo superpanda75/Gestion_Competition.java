@@ -26,6 +26,7 @@ public class Equipe extends Candidat
 	
 	public SortedSet<Personne> getMembres()
 	{
+		jdbc.BaseEquipe.affichPersonneEquipe();
 		return Collections.unmodifiableSortedSet(membres);
 	}
 	

@@ -33,6 +33,7 @@ public class BaseCandidat {
 		}
 	}
 	
+	
 	public static void AffichCand(){
 		try{
 			String query="SELECT * FROM java_candidat";
@@ -48,6 +49,17 @@ public class BaseCandidat {
 		}catch(SQLException e){	
 			System.out.println(e.getMessage());
 	}
+	}
+	public static void SupprimerCand(BaseCandidat baseCandidat){
+		try{
+			String query = "DELETE FROM java_candidat WHERE id_candidat="+baseCandidat+"";
+			Connection c =jdbc.Base.connexion();
+			 Statement smt = c.createStatement();
+			 int rs = smt.executeUpdate(query);
+			
+			}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
 	}
 	
 }
