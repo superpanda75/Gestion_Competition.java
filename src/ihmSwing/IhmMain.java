@@ -8,7 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.Dimension;
 
-public class IhmMain extends JFrame 
+public class IhmMain
 	{
 		private IhmPersonne ongletPersonne;	
 		private IhmEquipe ongletEquipe;	
