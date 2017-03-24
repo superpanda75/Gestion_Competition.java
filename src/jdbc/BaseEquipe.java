@@ -5,11 +5,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import inscriptions.Equipe;
+
 public class BaseEquipe {
 	
 	public BaseEquipe(){
 		
 	} 
+	public static void affichPersonneEquipe(){
+		try{
+			String requete = "SELECT * FROM java_appartenir e, java_personne p  WHERE e.id_equipe = p.id_personne; ";
+			Connection c = jdbc.Base.connexion();
+			Statement smt = c.createStatement();
+			 ResultSet rs = smt.executeQuery(requete);
+			 System.out.println("Liste des personne formant les equipes");
+			 while (rs.next())
+				{
+					System.out.println(rs.getInt("prenom_personne") + rs.getString("mail_personne") + "");
+				}
+			
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+	}
 	//AFFICHER UN CANDIDAT QUI EST UN EQUIPE
 	public static void AffichEquipe(){
 		try{
@@ -25,6 +43,20 @@ public class BaseEquipe {
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
+	}
+	public static void Sauvegarder(Equipe equipe) 
+	{	
+		try {
+			 Connection c = jdbc.Base.connexion();
+			String requete ="INSERT INTO java_candidat(id_candidat, nom_candidat) VALUES (id_candidat, nom_candidat)";
+			 Statement smt = c.createStatement();	
+			 int rs = smt.executeUpdate(requete);
+			String query = "INSERT INTO java_appartenir ";
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+				
 	}
 
 }

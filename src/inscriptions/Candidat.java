@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
+import jdbc.BaseCandidat;
+
 /**
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
  *
@@ -16,6 +18,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	private Inscriptions inscriptions;
 	private String nom;
 	private Set<Competition> competitions;
+	BaseCandidat baseCandidat = new BaseCandidat();
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{
@@ -70,9 +73,11 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	
 	public void delete()
 	{
+		BaseCandidat.SupprimerCand(baseCandidat);
 		for (Competition c : competitions)
 			c.remove(this);
 		inscriptions.remove(this);
+		
 	}
 	
 	@Override

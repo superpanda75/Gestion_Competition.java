@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import jdbc.BasePersonne;
 import userDialog.MainMenu;
 
 
@@ -28,7 +27,7 @@ public class Inscriptions implements Serializable
 	private static Inscriptions inscriptions;
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
-	private BasePersonne basePersonne = new BasePersonne();
+
 
 	
 
@@ -43,6 +42,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Competition> getCompetitions()
 	{
+		jdbc.BaseCompetition.afficheComp();
 		return Collections.unmodifiableSortedSet(competitions);
 	}
 	
@@ -53,6 +53,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Candidat> getCandidats()
 	{
+		jdbc.BaseCandidat.AffichCand();
 		return Collections.unmodifiableSortedSet(candidats);
 	}
 
@@ -63,6 +64,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Personne> getPersonnes()
 	{
+		jdbc.BasePersonne.AfficheP();
 		SortedSet<Personne> personnes = new TreeSet<>();
 		for (Candidat c : getCandidats())
 			if (c instanceof Personne)
@@ -77,6 +79,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Equipe> getEquipes()
 	{
+		jdbc.BaseEquipe.AffichEquipe();
 		SortedSet<Equipe> equipes = new TreeSet<>();
 		for (Candidat c : getCandidats())
 			if (c instanceof Equipe)
@@ -111,10 +114,11 @@ public class Inscriptions implements Serializable
 	 * @param mail
 	 * @return
 	 */
-	
+	//AJOUTER PERSONNE ET CANDIDAT
 	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
+		jdbc.BasePersonne.sauvegarder(personne);
 		candidats.add(personne);
 		return personne;
 	}
@@ -139,6 +143,7 @@ public class Inscriptions implements Serializable
 	public Equipe createEquipe(String nom)
 	{
 		Equipe equipe = new Equipe(this, nom);
+		jdbc.BaseEquipe.Sauvegarder(equipe);
 		candidats.add(equipe);
 		return equipe;
 	}
