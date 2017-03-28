@@ -101,6 +101,7 @@ public class Inscriptions implements Serializable
 	{
 		
 			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
+			jdbc.BaseCompetition.Sauvegarder(competition);
 			competitions.add(competition);
 			return competition;
 	}
@@ -144,7 +145,7 @@ public class Inscriptions implements Serializable
 	public Equipe createEquipe(String nom)
 	{
 		Equipe equipe = new Equipe(this, nom);
-		jdbc.BaseEquipe.Sauvegarder(equipe);
+		jdbc.BaseEquipe.Sauvegarder(candidats, equipe);
 		candidats.add(equipe);
 		return equipe;
 	}

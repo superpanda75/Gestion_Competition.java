@@ -217,4 +217,6 @@ public class Competition implements Comparable<Competition>, Serializable
 				  + getNom() + " par " + getDateCloture() + ".";
 		 }
 	}
+
+
 }

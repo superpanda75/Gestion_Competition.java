@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+
+import inscriptions.Competition;
 import inscriptions.Inscriptions;
 
 public class BaseCompetition {
@@ -44,22 +47,31 @@ public class BaseCompetition {
 			 } 	
 		 }
 
-//AJOUTER COMPETITION
-	 public static void AjouterComp( String nom, String date_cloture, String equipe){
-		 try{
-			 
-			 String query="INSERT INTO(nom, date_cloture) competition VALUES( "+nom+","+date_cloture+", "+equipe+")";
-			 Connection c = jdbc.Base.connexion();
-			 Statement smt = c.createStatement();
-			 boolean rs = smt.execute(query);
-			 System.out.println("La compétition a bien été ajouté!");
-			 
-		 }catch(SQLException e){
-			 System.out.println(e.getMessage());
-			 
-		 }
-	 }
-	 
+		 //AJOUTER COMPETITION
+		 public static void Sauvegarder(Competition competition) 
+			{	
+				try {
+						Connection c =  jdbc.Base.connexion();
+						 Statement smt = c.createStatement();
+						int equipe;
+						if (competition.estEnEquipe())
+							equipe=1;
+						else
+							equipe = 0;
+						String requete ="INSERT INTO java_competition(nom_competition,date,enEquipe) VALUES ('"+competition.getNom()+"','"+competition.getDateCloture()+"','"+equipe+"')";
+						smt.executeUpdate(requete);
+						int idcomp=0;
+						String req="SELECT id_competition FROM java_competition";
+						ResultSet resultat= smt.executeQuery(req);
+						while (resultat.next()) 
+						{
+							idcomp = resultat.getInt("id_competition");
+						}				
+						System.out.print("Competition ajoutée");
+					}  catch (SQLException e) {
+						System.out.print(e.getMessage());
+					}
+			}
 	 // SUPPRIMER UNE COMPETITION
 	 public static void supprimerComp(int id){
 		 try{ 

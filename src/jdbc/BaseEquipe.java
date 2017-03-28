@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.SortedSet;
 
-import inscriptions.Equipe;
+import inscriptions.*;
 
 public class BaseEquipe {
 	
@@ -44,19 +45,36 @@ public class BaseEquipe {
 			System.out.println(e.getMessage());
 		}
 	}
-	public static void Sauvegarder(Equipe equipe) 
-	{	
-		try {
-			 Connection c = jdbc.Base.connexion();
-			String requete ="INSERT INTO java_candidat(id_candidat, nom_candidat) VALUES (id_candidat, nom_candidat)";
-			 Statement smt = c.createStatement();	
-			 int rs = smt.executeUpdate(requete);
-			String query = "INSERT INTO java_appartenir(id_equipe, id_personne) VALUES (id_equipe, id_personne) ";
-			
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+	
+		public static void Sauvegarder(SortedSet<Candidat> candidats, Equipe equipe) 
+		{	
+			try {
 				
-	}
+				Connection c = jdbc.Base.connexion();
+				 Statement smt = c.createStatement();
+				String requete ="INSERT INTO java_appartenir(id_equipe)VALUES('"+equipe+"') ";
+				 int rs = smt.executeUpdate(requete);
+				smt.executeUpdate(requete);	
+				String requete2 ="Select id_equipe From java_appartenir";
+				ResultSet result = smt.executeQuery(requete2);
+				int idequipe = 0;
+				while (result.next()) {
+				    idequipe = result.getInt("id_equipe");
+				}
+				String requete3 ="INSERT INTO java_candidat(id_candidat,nom_candidat) VALUES ('"+idequipe+"','"+equipe.getNom()+"')";
+				smt.executeUpdate(requete3);
+				int idCandidat=0;
+				String requete4="SELECT id_candidat FROM java_candidat";
+				ResultSet result2= smt.executeQuery(requete4);
+				while (result2.next()) 
+				{
+				    idCandidat = result2.getInt( "id_candidat" );
+				}
+			}  catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+					
+		}
+	
 
 }
