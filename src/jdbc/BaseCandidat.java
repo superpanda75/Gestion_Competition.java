@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.SortedSet;
 
 import inscriptions.Candidat;
 import inscriptions.Competition;
@@ -32,9 +33,8 @@ public class BaseCandidat {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	
-	public static void AffichCand(){
+	//AFFICHER CANDIDAT
+	 public static void AffichCand(SortedSet<Candidat> candidats){
 		try{
 			String query="SELECT * FROM java_candidat";
 			Connection c =jdbc.Base.connexion();
@@ -50,12 +50,14 @@ public class BaseCandidat {
 			System.out.println(e.getMessage());
 	}
 	}
-	public static void SupprimerCand(BaseCandidat baseCandidat){
+	//SUPPRIMER UN CANDIDAT
+	public static void SupprimerCand(Candidat candidat){
 		try{
-			String query = "DELETE FROM java_candidat WHERE id_candidat="+baseCandidat+"";
+			String query = "DELETE FROM java_candidat c WHERE c.id_candidat='"+candidat+"'";
 			Connection c =jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 int rs = smt.executeUpdate(query);
+			 System.out.println("candidat supprimer");
 			
 			}catch(SQLException e){
 			System.out.println(e.getMessage());

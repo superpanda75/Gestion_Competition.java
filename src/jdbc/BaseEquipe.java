@@ -28,7 +28,7 @@ public class BaseEquipe {
 			System.out.println(e.getMessage());
 		}
 	}
-	//AFFICHER UN CANDIDAT QUI EST UN EQUIPE
+	//AFFICHER UN CANDIDAT QUI EST UNE EQUIPE
 	public static void AffichEquipe(){
 		try{
 			String requete = "SELECT * FROM java_appartenir e, java_candidat c WHERE e.id_equipe = c.id_candidat";
@@ -51,7 +51,7 @@ public class BaseEquipe {
 			String requete ="INSERT INTO java_candidat(id_candidat, nom_candidat) VALUES (id_candidat, nom_candidat)";
 			 Statement smt = c.createStatement();	
 			 int rs = smt.executeUpdate(requete);
-			String query = "INSERT INTO java_appartenir ";
+			String query = "INSERT INTO java_appartenir(id_equipe, id_personne) VALUES (id_equipe, id_personne) ";
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

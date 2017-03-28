@@ -53,7 +53,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Candidat> getCandidats()
 	{
-		jdbc.BaseCandidat.AffichCand();
+		jdbc.BaseCandidat.AffichCand(candidats);
 		return Collections.unmodifiableSortedSet(candidats);
 	}
 
@@ -128,6 +128,7 @@ public class Inscriptions implements Serializable
 		personne.setPrenom(prenom);
 		personne.setNom(nom);
 		personne.setMail(mail);
+		jdbc.BasePersonne.ModificationPersonne(personne, inscriptions);
 		return personne;
 }
 	

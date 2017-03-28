@@ -95,4 +95,6 @@ public class Personne extends Candidat
 	{
 		return super.toString() + " membre de " + equipes.toString();
 	}
+
+	
 }
