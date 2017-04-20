@@ -8,7 +8,6 @@ import java.sql.Statement;
 
 	
 public class Base {
-	
 
 	public static Connection c;
 	
@@ -17,7 +16,7 @@ public class Base {
 		
 	}
 	
-	
+	//-> fonctionne la BDD dans le serveur M2L et local
 	public static Connection connexion() throws SQLException
 	{
 		try{
@@ -38,9 +37,6 @@ public class Base {
 	
 
 	public static void main(String[] args) throws SQLException {
-		BaseEquipe.AffichEquipe();
-		BasePersonne.AfficheP();
-		BasePersonne.AffichePersonneNonEquipe();
 		BaseCandidat.AffichCandInscriptionCompet();
 		
 	}

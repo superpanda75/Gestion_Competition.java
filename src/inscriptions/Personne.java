@@ -3,7 +3,7 @@ package inscriptions;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
-
+import inscriptions.*;
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
@@ -69,6 +69,7 @@ public class Personne extends Candidat
 	
 	public Set<Equipe> getEquipes()
 	{
+		jdbc.BasePersonne.AffichePersonneEquipe();
 		return Collections.unmodifiableSet(equipes);
 	}
 	

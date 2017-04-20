@@ -16,7 +16,8 @@ public class BaseCandidat {
 	public BaseCandidat(){
 		
 	}
-	//affiche les candidats qui s'inscrivent a la competition
+	
+	//affiche les candidats qui s'inscrivent a la competition-> fonctionne 
 	public static void AffichCandInscriptionCompet(){
 		try{
 			String sql ="Select * From java_competition co, java_inscription i,java_candidat c WHERE i.id_candidat= c.id_candidat AND i.id_competition = co.id_competition";
@@ -26,14 +27,14 @@ public class BaseCandidat {
 			 System.out.println("Liste des candidats inscrit a une competition");
 			 while ( rs.next() )
 				{
-				 System.out.println(rs.getInt("id_candidat")  +  rs.getString("nom_candidat") + "");
+				 System.out.println(rs.getInt("id_candidat")  +  rs.getString("nom_candidat") + "\n" +  rs.getString("nom_competition")+"");
 				}
 			
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
 	}
-	//AFFICHER CANDIDAT
+	//AFFICHER CANDIDAT --> fonctionne 
 	 public static void AffichCand(SortedSet<Candidat> candidats){
 		try{
 			String query="SELECT * FROM java_candidat";
@@ -43,20 +44,32 @@ public class BaseCandidat {
 			 System.out.println("Liste des candidats");
 			 while (rs.next())
 				{
-					System.out.println(rs.getInt("id_candidat")  +  rs.getString("nom_candidat") + "");
+					System.out.println( rs.getString("nom_candidat") + "");
 				}
 			
 		}catch(SQLException e){	
 			System.out.println(e.getMessage());
 	}
-	}
-	//SUPPRIMER UN CANDIDAT
-	public static void SupprimerCand(Candidat candidat){
+	} 
+	 //MODIFIER UN CANDIDAT --> ne fonctionne pas
+	 public static void ModifierNomCand(Candidat candidat){
+		 try{
+			 Connection c = jdbc.Base.connexion();
+			 String sql = "UPDATE java_candidat SET nom_candidat='"+candidat.getNom()+"'";
+			 Statement smt = c.createStatement();
+			 int rs = smt.executeUpdate(sql);
+			 
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 }
+	 }
+	//SUPPRIMER UN CANDIDAT --> ne fonctionne pas
+	public void SupprimerCand(){
 		try{
-			String query = "DELETE FROM java_candidat c WHERE c.id_candidat='"+candidat+"'";
+			String query = "DELETE FROM java_candidat c WHERE c.id_candidat='id_candidat'";
 			Connection c =jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
-			 int rs = smt.executeUpdate(query);
+			 boolean rs = smt.execute(query);
 			 System.out.println("candidat supprimer");
 			
 			}catch(SQLException e){

@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import jdbc.BaseCandidat;
+import jdbc.BaseEquipe;
 import userDialog.MainMenu;
 
 
@@ -27,6 +29,9 @@ public class Inscriptions implements Serializable
 	private static Inscriptions inscriptions;
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
+	BaseEquipe baseEquipe = new BaseEquipe();
+	public static boolean db = false;
+
 
 
 	
@@ -129,9 +134,9 @@ public class Inscriptions implements Serializable
 		personne.setPrenom(prenom);
 		personne.setNom(nom);
 		personne.setMail(mail);
-		jdbc.BasePersonne.ModificationPersonne(personne, inscriptions);
+		jdbc.BasePersonne.ModifP(personne);
 		return personne;
-}
+	}
 	
 	/**
 	 * Créée un Candidat de type équipe. Ceci est le seul moyen, il n'y a pas
@@ -145,13 +150,15 @@ public class Inscriptions implements Serializable
 	public Equipe createEquipe(String nom)
 	{
 		Equipe equipe = new Equipe(this, nom);
-		jdbc.BaseEquipe.Sauvegarder(candidats, equipe);
+		jdbc.BaseEquipe.addEquipe(equipe, inscriptions);
 		candidats.add(equipe);
 		return equipe;
 	}
 	
 	void remove(Competition competition)
 	{
+		if (db)
+			jdbc.BaseCompetition.suppComp(competition);
 		competitions.remove(competition);
 	}
 	
@@ -260,22 +267,22 @@ public class Inscriptions implements Serializable
 		return "Candidats : " + getCandidats().toString()
 			+ "\nCompetitions  " + getCompetitions().toString();
 	}
-	
+	//NE PAS TOUCHER 
 	public static void main(String[] args)
 	{
 		MainMenu menu = new MainMenu();
 		menu.start();
 	}
-	
+	//UPDATE COMPETITION
 	public Competition modifCompetition(Competition competition, String nom)
 	{
 		competition.setNom(nom);
 		return competition;
 }
-	
+	//UPDATE SUR LA DATE COMPETITION
 	public Competition modifDateCompetition(Competition competition,LocalDate dateCloture)
 	{
-		
+				
 		competition.setDateCloture(dateCloture);
 		return competition;
 }

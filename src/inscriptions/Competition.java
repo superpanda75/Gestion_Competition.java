@@ -159,6 +159,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean remove(Candidat candidat)
 	{
 		candidat.remove(this);
+		jdbc.BaseCompetition.delete(candidat,this);
 		return candidats.remove(candidat);
 	}
 	
@@ -168,9 +169,11 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public void delete()
 	{
+		
 		for (Candidat candidat : candidats)
 			remove(candidat);
 		inscriptions.remove(this);
+
 	}
 	
 	@Override
