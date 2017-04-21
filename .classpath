@@ -5,5 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="/CoursJava/lib/commandLine.jar"/>
 	<classpathentry kind="lib" path="src/jdbc/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CoursJava"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

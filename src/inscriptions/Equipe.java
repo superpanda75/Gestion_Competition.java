@@ -10,7 +10,7 @@ import java.util.TreeSet;
  * 
  */
 
-public class Equipe extends Candidat
+public class Equipe extends Candidat 
 {
 	private static final long serialVersionUID = 4147819927233466035L;
 	private SortedSet<Personne> membres = new TreeSet<>();
@@ -26,7 +26,7 @@ public class Equipe extends Candidat
 	
 	public SortedSet<Personne> getMembres()
 	{
-		jdbc.BaseEquipe.affichPersonneEquipe();
+		jdbc.BaseEquipe.affichEquipe();
 		return Collections.unmodifiableSortedSet(membres);
 	}
 	

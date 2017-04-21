@@ -109,7 +109,9 @@ public class Inscriptions implements Serializable
 			jdbc.BaseCompetition.Sauvegarder(competition);
 			competitions.add(competition);
 			return competition;
+	
 	}
+	
 
 	/**
 	 * Créée une Candidat de type Personne. Ceci est le seul moyen, il n'y a pas
@@ -273,6 +275,8 @@ public class Inscriptions implements Serializable
 		MainMenu menu = new MainMenu();
 		menu.start();
 	}
+	
+
 	//UPDATE COMPETITION
 	public Competition modifCompetition(Competition competition, String nom)
 	{
