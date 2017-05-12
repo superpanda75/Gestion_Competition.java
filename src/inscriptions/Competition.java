@@ -9,8 +9,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Représente une compétition, c'est-à-dire un ensemble de candidats 
- * inscrits à un événement, les inscriptions sont closes à la date dateCloture.
+ * Représente une compétition, c'est-� -dire un ensemble de candidats 
+ * inscrits �  un événement, les inscriptions sont closes �  la date dateCloture.
  *
  */
 
@@ -59,7 +59,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean inscriptionsOuvertes(LocalDate dateCloture) 
 	{
-		// TODO retourner vrai si et seulement si la date système est antérieure à la date de clôture.
+		// TODO retourner vrai si et seulement si la date système est antérieure �  la date de clôture.
 		return ( dateCloture.isBefore(LocalDate.now()));
 	}
 		
@@ -113,7 +113,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	}
 	
 	/**
-	 * Inscrit un candidat de type Personne à la compétition. Provoque une
+	 * Inscrit un candidat de type Personne �  la compétition. Provoque une
 	 * exception si la compétition est réservée aux équipes ou que les 
 	 * inscriptions sont closes.
 	 * @param personne
@@ -132,7 +132,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	}
 
 	/**
-	 * Inscrit un candidat de type Equipe à la compétition. Provoque une
+	 * Inscrit un candidat de type Equipe �  la compétition. Provoque une
 	 * exception si la compétition est réservée aux personnes ou que 
 	 * les inscriptions sont closes.
 	 * @param personne
