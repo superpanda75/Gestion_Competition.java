@@ -140,17 +140,25 @@ public class BasePersonne implements Serializable {
 			 
 		 }
 		 //MODIFIER UNE PERSONNE -> ne fonctionne pas
-		 public static void ModifP(Personne personne){
-			 try{				 
-				 String sql = "UPDATE java_personne p "
-				 				+ "SET prenom_personne='"+personne.getPrenom()+"' "
-				 						+ "WHERE p.id_personne=id_personne";
+ public static void ModifP(Personne personne){
+			 
+			 String prenom = personne.getPrenom();
+			 
+			 try
+			 {				 
+				 
 				 Connection c =  jdbc.Base.connexion();
+				 String query = "UPDATE java_personne p SET prenom_personne = "
+				 			+ prenom + " WHERE p.id_personne = id_personne";
+			
 				 Statement smt = c.createStatement();
-				 int result = smt.executeUpdate(sql);
+				 smt.executeQuery(query);
+				 
 				 System.out.println("Modifications reussi");
-				 	}catch(SQLException e){
-					 System.out.println(e.getMessage());
-				}
+			 }
+			 catch(SQLException e)
+			 {
+				 System.out.println(e.getMessage());
+			 }
 		 }
 	}
