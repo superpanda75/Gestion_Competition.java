@@ -135,7 +135,6 @@ public class Inscriptions implements Serializable
 		personne.setPrenom(prenom);
 		personne.setNom(nom);
 		personne.setMail(mail);
-		jdbc.BasePersonne.ModifP(personne);
 		return personne;
 	}
 	

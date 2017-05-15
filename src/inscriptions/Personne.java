@@ -40,6 +40,7 @@ public class Personne extends Candidat
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
+		jdbc.BasePersonne.ModifP(this);
 	}
 
 	/**

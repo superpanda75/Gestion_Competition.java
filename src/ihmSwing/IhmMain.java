@@ -1,5 +1,6 @@
 package ihmSwing;
 
+import java.util.*;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -14,7 +15,6 @@ public class IhmMain
 		private IhmEquipe ongletEquipe;	
 		private IhmCompetition ongletCompetition;	
 		private IhmInscription ongletInscription;	
-
 		
 		
 	public static void main(String[] args) {
@@ -52,7 +52,12 @@ public class IhmMain
 		f.getContentPane().add(onglets);		
 		f.setVisible(true);
 		f.setResizable(false);
+
 		}
+
+	
+
+	
 		
 		
         
