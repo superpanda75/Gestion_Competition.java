@@ -78,7 +78,6 @@ public class BaseCompetition {
 				 ResultSet rs = smt.executeQuery(query);
 				 while(rs.next())
 			        {
-			        	// TODO remplacer les deux for par une boucle utilisant MAP
 			            for (Personne personne : inscriptions.getPersonnes()) 
 							if(rs.getInt("id_candidat") == personne.getId())
 							{
