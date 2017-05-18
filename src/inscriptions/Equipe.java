@@ -19,14 +19,12 @@ public class Equipe extends Candidat
 	{
 		super(inscriptions, nom);
 	}
-
 	/**
 	 * Retourne l'ensemble des personnes formant l'équipe.
 	 */
 	
 	public SortedSet<Personne> getMembres()
 	{
-		jdbc.BaseEquipe.affichEquipe();
 		return Collections.unmodifiableSortedSet(membres);
 	}
 	

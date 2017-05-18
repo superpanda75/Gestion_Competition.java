@@ -14,22 +14,6 @@ public class BaseEquipe {
 		
 	} 
 	// fonctionne 
-	public static void affichEquipe(){
-		try{
-			String requete = "SELECT * FROM java_appartenir e, java_personne p  WHERE e.id_equipe = p.id_personne; ";
-			Connection c = jdbc.Base.connexion();
-			Statement smt = c.createStatement();
-			 ResultSet rs = smt.executeQuery(requete);
-			 System.out.println("Liste des personne formant les equipes");
-			 while (rs.next())
-				{
-					System.out.println(rs.getInt("prenom_personne") + rs.getString("mail_personne") + "");
-				}
-			
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
-		}
-	}
 	//AFFICHER UN CANDIDAT QUI EST UNE EQUIPE -> fonctionne 
 	public static void AffichEquipe(){
 		try{
@@ -46,6 +30,7 @@ public class BaseEquipe {
 			System.out.println(e.getMessage());
 		}
 	}
+	
 	//INSCRIT CANDIDAT A UNE EQUIPE-> ne fonctionne pas
 	public static void addEquipe(Equipe equipe,Inscriptions inscriptions) 
 	{	

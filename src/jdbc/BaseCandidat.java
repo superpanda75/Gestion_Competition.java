@@ -24,7 +24,6 @@ public class BaseCandidat {
 			Connection c = Base.connexion();
 			Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(sql);
-			 System.out.println("Liste des candidats inscrit a une competition");
 			 while ( rs.next() )
 				{
 				 System.out.println(rs.getInt("id_candidat")  +  rs.getString("nom_candidat") + "\n" +  rs.getString("nom_competition")+"");
@@ -41,7 +40,6 @@ public class BaseCandidat {
 			Connection c =jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
-			 System.out.println("Liste des candidats");
 			 while (rs.next())
 				{
 					System.out.println( rs.getString("nom_candidat") + "");
@@ -70,7 +68,6 @@ public class BaseCandidat {
 			Connection c =jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 boolean rs = smt.execute(query);
-			 System.out.println("candidat supprimer");
 			
 			}catch(SQLException e){
 			System.out.println(e.getMessage());

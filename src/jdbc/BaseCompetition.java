@@ -42,7 +42,6 @@ public class BaseCompetition {
 			Connection c = jdbc.Base.connexion();
 			Statement smt = c.createStatement();
 			ResultSet rs = smt.executeQuery(req);
-			System.out.println("Liste des competition");
 			while (rs.next())
 			{
 				System.out.println(rs.getInt("id_competition") + rs.getString("nom_competition"));
