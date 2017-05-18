@@ -12,16 +12,9 @@ import java.awt.Dimension;
 public class IhmMain
 	{
 		private IhmPersonne ongletPersonne;	
-<<<<<<< HEAD
-		private IhmEquipe ongletEquipe;
-		private IhmCompetition ongletCompetition;
-		private IhmInscription ongletInscription;
-
-=======
 		private IhmEquipe ongletEquipe;	
 		private IhmCompetition ongletCompetition;	
 		private IhmInscription ongletInscription;	
->>>>>>> branch 'master' of https://github.com/superpanda75/Gestion_Competition.java.git
 		
 		
 	public static void main(String[] args) {

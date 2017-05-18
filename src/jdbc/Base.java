@@ -21,7 +21,7 @@ public class Base {
 	{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			//jdbc:mysql://mysql.m2l.local/hbenromdhane", "hbenromdhane
+			//jdbc:mysql://mysql.m2l.local/ahouri", "ahouri
 			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java", "root", "");	
 			System.out.println("Connexion bien établie");
 		

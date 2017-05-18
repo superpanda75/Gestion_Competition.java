@@ -14,7 +14,6 @@ public class Equipe extends Candidat
 {
 	private static final long serialVersionUID = 4147819927233466035L;
 	private SortedSet<Personne> membres = new TreeSet<>();
-	private int id;
 	
 	Equipe(Inscriptions inscriptions, String nom)
 	{
@@ -66,17 +65,4 @@ public class Equipe extends Candidat
 	{
 		return "Equipe " + super.toString();
 	}
-<<<<<<< HEAD
-	
-	public int getId(){
-		return id;
-	}
-	
-	public void setId(int id){
-		this.id = id;
-	}
-	
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/superpanda75/Gestion_Competition.java.git

@@ -28,7 +28,7 @@ public class Inscriptions implements Serializable
 	private static final String FILE_NAME = "Inscriptions.srz";
 	private static Inscriptions inscriptions;
 	private SortedSet<Competition> competitions = new TreeSet<>();
-	private static SortedSet<Candidat> candidats = new TreeSet<>();
+	private SortedSet<Candidat> candidats = new TreeSet<>();
 	BaseEquipe baseEquipe = new BaseEquipe();
 	public static boolean db = false;
 
@@ -38,7 +38,6 @@ public class Inscriptions implements Serializable
 
 	private Inscriptions()
 	{
-		
 	}
 	
 	/**
@@ -57,7 +56,7 @@ public class Inscriptions implements Serializable
 	 * @return
 	 */
 	
-	public static SortedSet<Candidat> getCandidats()
+	public SortedSet<Candidat> getCandidats()
 	{
 		jdbc.BaseCandidat.AffichCand(candidats);
 		return Collections.unmodifiableSortedSet(candidats);
@@ -68,14 +67,14 @@ public class Inscriptions implements Serializable
 	 * @return
 	 */
 	
-	public static SortedSet<Personne> getPersonnes()
+	public SortedSet<Personne> getPersonnes()
 	{
 		jdbc.BasePersonne.AfficheP();
 		SortedSet<Personne> personnes = new TreeSet<>();
 		for (Candidat c : getCandidats())
 			if (c instanceof Personne)
 				personnes.add((Personne)c);
-		return personnes;
+		return Collections.unmodifiableSortedSet(personnes);
 	}
 
 	/**

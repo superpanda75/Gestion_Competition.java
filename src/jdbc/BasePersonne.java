@@ -29,6 +29,7 @@ public class BasePersonne implements Serializable {
 			 Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
+			 System.out.println("Liste des personnes");
 			 while (rs.next())
 				{
 					System.out.println(rs.getInt("id_personne")  +  rs.getString("prenom_personne") + "");

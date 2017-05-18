@@ -4,19 +4,13 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 import inscriptions.*;
-
 /**
-<<<<<<< HEAD
- * Représente une personne physique pouvant s'inscrire Ã  une compÃ©tition.
-=======
  * Représente une personne physique pouvant s'inscrire à une compétition.
->>>>>>> branch 'master' of https://github.com/superpanda75/Gestion_Competition.java.git
  */
 
 public class Personne extends Candidat
 {
 	private static final long serialVersionUID = 4434646724271327254L;
-	private int id;
 	private String prenom, mail;
 	private Set<Equipe> equipes;
 	
@@ -26,26 +20,6 @@ public class Personne extends Candidat
 		this.prenom = prenom;
 		this.mail = mail;
 		equipes = new TreeSet<>();
-	}
-	
-	/**
-	 * 
-	 * retourne l'id de la personne
-	 * @return
-	 */
-	public int getId()
-	{
-		return id;
-	}
-	
-	
-	/**
-	 * 
-	 * modifie l'id de la personne
-	 */
-	public void setId()
-	{
-		this.id= id;
 	}
 
 	/**
