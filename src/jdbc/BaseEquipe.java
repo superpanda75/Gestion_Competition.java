@@ -14,7 +14,7 @@ public class BaseEquipe {
 		
 	} 
 	// fonctionne 
-	public static void affichPersonneEquipe(){
+	public static void affichEquipe(){
 		try{
 			String requete = "SELECT * FROM java_appartenir e, java_personne p  WHERE e.id_equipe = p.id_personne; ";
 			Connection c = jdbc.Base.connexion();

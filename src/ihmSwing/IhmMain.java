@@ -1,5 +1,6 @@
 package ihmSwing;
 
+import java.util.*;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -11,10 +12,16 @@ import java.awt.Dimension;
 public class IhmMain
 	{
 		private IhmPersonne ongletPersonne;	
+<<<<<<< HEAD
 		private IhmEquipe ongletEquipe;
 		private IhmCompetition ongletCompetition;
 		private IhmInscription ongletInscription;
 
+=======
+		private IhmEquipe ongletEquipe;	
+		private IhmCompetition ongletCompetition;	
+		private IhmInscription ongletInscription;	
+>>>>>>> branch 'master' of https://github.com/superpanda75/Gestion_Competition.java.git
 		
 		
 	public static void main(String[] args) {
@@ -52,7 +59,12 @@ public class IhmMain
 		f.getContentPane().add(onglets);		
 		f.setVisible(true);
 		f.setResizable(false);
+
 		}
+
+	
+
+	
 		
 		
         

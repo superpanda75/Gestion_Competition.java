@@ -89,7 +89,7 @@ public class BasePersonne implements Serializable {
 					ResultSet rs = smt.getGeneratedKeys();
 					while(rs.next())
 					{
-						sql ="INSERT INTO java_candidat(id_candidat,nom_candidat) VALUES (''"+personne.getNom()+"')";
+						sql ="INSERT INTO java_candidat(nom_candidat) VALUES ('"+personne.getNom()+"')";
 						System.out.println("Personne bien ajouté!");
 					}
 					smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
@@ -139,17 +139,24 @@ public class BasePersonne implements Serializable {
 			 
 		 }
 		 //MODIFIER UNE PERSONNE -> ne fonctionne pas
-		 public static void ModifP(Personne personne){
-			 try{				 
-				 String sql = "UPDATE java_personne p "
-				 				+ "SET prenom_personne='"+personne.getPrenom()+"' "
-				 						+ "WHERE p.id_personne=id_personne";
+ public static void ModifP(Personne personne){
+			 
+			 String prenom = personne.getPrenom();
+			 
+			 try
+			 {
 				 Connection c =  jdbc.Base.connexion();
+				 String query = "UPDATE java_personne p SET prenom_personne = "
+				 			+ prenom + " WHERE p.id_personne = id_personne";
+			
 				 Statement smt = c.createStatement();
-				 int result = smt.executeUpdate(sql);
+				 smt.execute(query);
+				 
 				 System.out.println("Modifications reussi");
-				 	}catch(SQLException e){
-					 System.out.println(e.getMessage());
-				}
+			 }
+			 catch(SQLException e)
+			 {
+				 System.out.println(e.getMessage());
+			 }
 		 }
 	}

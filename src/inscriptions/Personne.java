@@ -6,7 +6,11 @@ import java.util.TreeSet;
 import inscriptions.*;
 
 /**
+<<<<<<< HEAD
  * Représente une personne physique pouvant s'inscrire Ã  une compÃ©tition.
+=======
+ * Représente une personne physique pouvant s'inscrire à une compétition.
+>>>>>>> branch 'master' of https://github.com/superpanda75/Gestion_Competition.java.git
  */
 
 public class Personne extends Candidat
@@ -45,7 +49,7 @@ public class Personne extends Candidat
 	}
 
 	/**
-	 * Retourne le prÃ©nom de la personne.
+	 * Retourne le prénom de la personne.
 	 * @return
 	 */
 	
@@ -55,17 +59,18 @@ public class Personne extends Candidat
 	}
 
 	/**
-	 * Modifie le prÃ©nom de la personne.
+	 * Modifie le prénom de la personne.
 	 * @param prenom
 	 */
 	
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
+		jdbc.BasePersonne.ModifP(this);
 	}
 
 	/**
-	 * Retourne l'adresse Ã©lectronique de la personne.
+	 * Retourne l'adresse électronique de la personne.
 	 * @return
 	 */
 	
@@ -75,7 +80,7 @@ public class Personne extends Candidat
 	}
 
 	/**
-	 * Modifie l'adresse Ã©lectronique de la personne.
+	 * Modifie l'adresse électronique de la personne.
 	 * @param mail
 	 */
 	
@@ -85,7 +90,7 @@ public class Personne extends Candidat
 	}
 
 	/**
-	 * Retoure les Ã©quipes dont cette personne fait partie.
+	 * Retoure les équipes dont cette personne fait partie.
 	 * @return
 	 */
 	

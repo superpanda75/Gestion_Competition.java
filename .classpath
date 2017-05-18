@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="tests/" kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="lib" path="/CoursJava/lib/commandLine.jar"/>
 	<classpathentry exported="true" kind="lib" path="src/jdbc/mysql-connector-java-5.1.40-bin.jar"/>
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/CoursJava/lib/commandLine.jar"/>
+	<classpathentry kind="lib" path="src/jdbc/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CoursJava"/>
+>>>>>>> branch 'master' of https://github.com/superpanda75/Gestion_Competition.java.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>
