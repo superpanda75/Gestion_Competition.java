@@ -10,7 +10,9 @@ import java.util.TreeSet;
 
 import inscriptions.Candidat;
 import inscriptions.Competition;
+import inscriptions.Equipe;
 import inscriptions.Inscriptions;
+import inscriptions.Personne;
 
 public class BaseCompetition {
 	
@@ -38,18 +40,6 @@ public class BaseCompetition {
 	}
 		return SelectComp;
 	}
-	//MODIFIER UNE COMPETITION --> ne fonctionne pas
-		 public static void ModifNomComp(Competition competition){
-			 try{
-				 Connection c =  jdbc.Base.connexion();
-				 String sql = "UPDATE java_competition SET nom_competition='"+competition.getNom()+"'";
-				 Statement smt = c.createStatement();
-				 int rs = smt.executeUpdate(sql);
-				 System.out.println("Modifications réussi");
-			 }catch(SQLException e){
-				 System.out.println(e.getMessage());
-			 } 	
-		 }
 
 		 //AJOUTER COMPETITION  --> fonctionne
 		 public static void Sauvegarder(Competition competition) 
@@ -76,50 +66,36 @@ public class BaseCompetition {
 						System.out.print(e.getMessage());
 					}
 			}
-	 // SUPPRIMER UNE COMPETITION --> ne fonctionne pas
-			public static void deleteCand(Candidat candidat, Competition competition)
-			{
-				try {
-					Connection c =  jdbc.Base.connexion();
-					 Statement smt = c.createStatement();
-					String requete ="DELETE FROM java_candidat c WHERE c.id_candidat="+candidat.getId()+" AND id_competition="+competition.getNom();
-					smt.executeUpdate(requete);	
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				
-				}
-			}
-
-
-//RECHERCHER UNE PERSONNE --> ne fonctionne pas 
-public static void RecherchePersonne(String nom) {
-	 try{
-	 String query="SELECT* FROM Competition WHERE nom ='"+nom+"' ";
-	 Connection c = jdbc.Base.connexion();
-	 Statement smt = c.createStatement();
-	 ResultSet rs = smt.executeQuery(query);
-	 System.out.println("Rechercher les Compétitions");
-	 rs.last();
-	 int intComp = rs.getRow();
-	 if(intComp != 0 ){
-		 System.out.println("Compétition trouver");
-	 }else{
-		 System.out.println("Compétition trouver");
-	 }
-	 }catch(SQLException e){
-		 System.out.println(e.getMessage());
-	 }
-	 
-}
-public static void suppComp(Competition competition) {	
-	try {		
-		String req = "DELETE FROM java_competition WHERE id_competition = '"+competition+"'";
-		 Connection c = jdbc.Base.connexion();
-		 Statement smt = c.createStatement();
-		 smt.executeUpdate(req);
-	} catch (SQLException e) {
-		System.out.print(e.getMessage());
+	public static void selectInscritoComp(Inscriptions inscriptions)
+	{
+		try{
+			Connection c =  jdbc.Base.connexion();
+			 Statement smt = c.createStatement();
+			 for (Competition comp : inscriptions.getCompetitions()) 
+				{
+				 // CANDIDAT = PERSONNE || EQUIPE
+				 String query="";
+				 ResultSet rs = smt.executeQuery(query);
+				 while(rs.next())
+			        {
+			        	// TODO remplacer les deux for par une boucle utilisant MAP
+			            for (Personne personne : inscriptions.getPersonnes()) 
+							if(rs.getInt("id_candidat") == personne.getId())
+							{
+								comp.add(personne);
+							}
+			            for (Equipe equipe : inscriptions.getEquipes()) 
+			            {
+							if(rs.getInt("id_candidat") == equipe.getId())
+							{
+								comp.add(equipe);
+							}
+						}
+			        } 
+				}   
+				 
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
 	}
-	
-}
 }

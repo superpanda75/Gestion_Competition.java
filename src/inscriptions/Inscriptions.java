@@ -152,8 +152,6 @@ public class Inscriptions implements Serializable
 	
 	void remove(Competition competition)
 	{
-		if (db)
-			jdbc.BaseCompetition.suppComp(competition);
 		competitions.remove(competition);
 	}
 	
@@ -267,14 +265,18 @@ public class Inscriptions implements Serializable
 	{
 		//MainMenu menu = new MainMenu();
 		//menu.start();
+		//RENVOIE UNE COLLECTION DE CANDIDAT
 		//Inscriptions inscription = Inscriptions.getInscriptions();
 		//for (Candidat c : inscription.getCandidats()) {
 		//}
+		//RENVOIE UNE COLLECTION DE COMPETITION & Equipe
 		//Inscriptions inscription = Inscriptions.getInscriptions();
-				//for (Competition c : inscription.getCompetitions()) {
-					//System.out.println(c);
-				//}
-		
+		//for (Competition c : inscription.getCompetitions()) {
+		//System.out.println(c);
+	//}
+		 //for(Equipe equipe: inscription.getEquipes()){
+			 //System.out.println(equipe);
+		 //}	
 	}
 	
 
