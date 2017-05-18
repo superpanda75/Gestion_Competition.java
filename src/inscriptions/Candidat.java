@@ -96,7 +96,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	{
 		for (Competition c : competitions)
 			c.remove(this);
-		baseCandidat.SupprimerCand();
+		baseCandidat.SupprimerCand(this);
 		inscriptions.remove(this);
 	}
 	

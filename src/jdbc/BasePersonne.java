@@ -7,7 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
+import inscriptions.Candidat;
 import inscriptions.Competition;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
@@ -29,7 +32,6 @@ public class BasePersonne implements Serializable {
 			 Connection c = jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
-			 System.out.println("Liste des personnes");
 			 while (rs.next())
 				{
 					System.out.println(rs.getInt("id_personne")  +  rs.getString("prenom_personne") + "");
@@ -43,28 +45,7 @@ public class BasePersonne implements Serializable {
 		
 	}
 
-		//AFFICHER PERSONNE ->fonctionne 
-		 public static void AffichePersonneEquipe()
-		{
-			 try{
-				 
-				 String query="SELECT * FROM java_personne p, java_appartenir e WHERE p.id_personne = e.id_personne";
-				 Connection c = jdbc.Base.connexion();
-				 Statement smt = c.createStatement();
-				 ResultSet rs = smt.executeQuery(query);
-				 System.out.println("Liste des personnes");
-				 while (rs.next())
-					{
-						System.out.println(rs.getInt("id_personne")  +  rs.getString("prenom_personne") + "");
-					}
-				 
-				 
-			 }catch(SQLException e){
-				 System.out.println(e.getMessage());
-				 
-			 }
-			
-		}
+		
 		 //  -> ne fonctionne pas
 		 public static void InscrirePersonneComp(Personne personne, Competition competition){
 			 try{
@@ -105,6 +86,28 @@ public class BasePersonne implements Serializable {
 				System.out.print(e.getMessage());
 			 }
 		 }
+		//AFFICHER CANDIDAT --> fonctionne 
+		 public static SortedSet<Candidat> SelectPers(Inscriptions inscription){
+				SortedSet<Candidat> listePers = new TreeSet();
+			 try{
+				String query="SELECT * FROM java_candidat WHERE id_candidat IN ("
+				 		+ " SELECT id_personne FROM java_personne)";
+				Connection c =jdbc.Base.connexion();
+				 Statement smt = c.createStatement();
+				 ResultSet rs = smt.executeQuery(query);
+				 while(rs.next())
+					{
+					 Candidat leCandidat = inscription.createPersonne(rs.getString("nom_candidat"),
+							 rs.getString("prenom_personne"), rs.getString("mail_personne"));
+					 leCandidat.setId(rs.getInt("id_candidat"));
+					 listePers.add(leCandidat);
+					}
+				
+			}catch(SQLException e){	
+				System.out.println(e.getMessage());
+		}
+			return listePers;
+		} 
 //-> ne fonctionne pas
 
 		 public static void supprimerP(Personne personne, Equipe equipe)

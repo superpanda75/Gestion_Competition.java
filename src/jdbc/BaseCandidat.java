@@ -1,14 +1,14 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
-import inscriptions.Candidat;
-import inscriptions.Competition;
-import inscriptions.Inscriptions;
+import inscriptions.*;
 
 public class BaseCandidat {
 	
@@ -34,29 +34,14 @@ public class BaseCandidat {
 			System.out.println(e.getMessage());
 		}
 	}
-	//AFFICHER CANDIDAT --> fonctionne 
-	 public static void AffichCand(SortedSet<Candidat> candidats){
-		try{
-			String query="SELECT * FROM java_candidat";
-			Connection c =jdbc.Base.connexion();
-			 Statement smt = c.createStatement();
-			 ResultSet rs = smt.executeQuery(query);
-			 System.out.println("Liste des candidats");
-			 while (rs.next())
-				{
-					System.out.println( rs.getString("nom_candidat") + "");
-				}
-			
-		}catch(SQLException e){	
-			System.out.println(e.getMessage());
-	}
-	} 
+	
 	 //MODIFIER UN CANDIDAT --> ne fonctionne pas
 	 public static void ModifierNomCand(Candidat candidat){
 		 try{
 			 Connection c = jdbc.Base.connexion();
-			 String sql = "UPDATE java_candidat SET nom_candidat='"+candidat.getNom()+"'";
-			 Statement smt = c.createStatement();
+			 String sql = "UPDATE java_candidat c SET c.id_candidat= ? ";
+			 PreparedStatement smt = c.prepareStatement(sql);
+			 smt.setInt(candidat.getId(), 1);
 			 int rs = smt.executeUpdate(sql);
 			 
 		 }catch(SQLException e){
@@ -64,13 +49,13 @@ public class BaseCandidat {
 		 }
 	 }
 	//SUPPRIMER UN CANDIDAT --> ne fonctionne pas
-	public void SupprimerCand(){
+	public void SupprimerCand(Candidat candidat){
 		try{
-			String query = "DELETE FROM java_candidat c WHERE c.id_candidat='id_candidat'";
+			String query = "DELETE FROM java_candidat c WHERE c.id_candidat = ? ";
 			Connection c =jdbc.Base.connexion();
-			 Statement smt = c.createStatement();
-			 boolean rs = smt.execute(query);
-			 System.out.println("candidat supprimer");
+			PreparedStatement  smt = c.prepareStatement(query);
+			smt.setInt(candidat.getId(), 1);
+			boolean rs = smt.execute(query);
 			
 			}catch(SQLException e){
 			System.out.println(e.getMessage());

@@ -45,7 +45,6 @@ public class Equipe extends Candidat
 	 */	
 	public SortedSet<Personne> getMembres()
 	{
-		jdbc.BaseEquipe.affichEquipe();
 		return Collections.unmodifiableSortedSet(membres);
 	}
 	
@@ -57,7 +56,9 @@ public class Equipe extends Candidat
 
 	public boolean add(Personne membre)
 	{
+		
 		membre.add(this);
+		
 		return membres.add(membre);
 	}
 

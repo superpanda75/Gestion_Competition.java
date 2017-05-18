@@ -92,7 +92,6 @@ public class Personne extends Candidat
 	
 	public Set<Equipe> getEquipes()
 	{
-		jdbc.BasePersonne.AffichePersonneEquipe();
 		return Collections.unmodifiableSet(equipes);
 	}
 	
