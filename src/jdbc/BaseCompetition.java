@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import inscriptions.Candidat;
 import inscriptions.Competition;
@@ -15,43 +17,27 @@ public class BaseCompetition {
 	public BaseCompetition(){
 		
 	}
-	//AFFICHE LES COMPETITION EN EQUIPE  --> fonctionne 
-	public static void afficheCompEnEquipe()
-	{
-		try {
-			String req = "SELECT * FROM java_competition co WHERE enEquipe = 1";
-			Connection c = jdbc.Base.connexion();
-			Statement smt = c.createStatement();
-			ResultSet rs = smt.executeQuery(req);
-			System.out.println("Liste des competition");
-			while (rs.next())
-			{
-				System.out.println(rs.getInt("id_competition") + rs.getString("nom_competition"));
-			}
-		}	
-		catch (SQLException e) {
-		System.out.println(e.getMessage());
-		}
-	}	
-	
-	// AFFICHER UNE COMPETITION --> fonctionne 
-	public static void afficheComp()
-	{
-		try {
-			String req = "SELECT * FROM java_competition";
-			Connection c = jdbc.Base.connexion();
-			Statement smt = c.createStatement();
-			ResultSet rs = smt.executeQuery(req);
-			System.out.println("Liste des competition");
-			while (rs.next())
-			{
-				System.out.println(rs.getInt("id_competition") + rs.getString("nom_competition"));
-			}
-		}	
-		catch (SQLException e) {
-		System.out.println(e.getMessage());
-		}
-	}	
+	//AFFICHER CANDIDAT - Equipe --> fonctionne 
+	 public static SortedSet<Competition> SelectComp(Inscriptions inscription){
+			SortedSet<Competition> SelectComp = new TreeSet();
+		 try{
+			 String query="SELECT * FROM java_competition";
+			Connection c =jdbc.Base.connexion();
+			 Statement smt = c.createStatement();
+			 ResultSet rs = smt.executeQuery(query);
+			 while(rs.next())
+				{
+				 LocalDate dateCloture = rs.getDate("date").toLocalDate();
+				 Competition laCompetition = inscription.createCompetition(rs.getString("nom_competition"), dateCloture, rs.getBoolean("enEquipe"));
+				 laCompetition.setId(rs.getInt("id_competition"));
+				 SelectComp.add(laCompetition);
+				}
+			
+		}catch(SQLException e){	
+			System.out.println(e.getMessage());
+	}
+		return SelectComp;
+	}
 	//MODIFIER UNE COMPETITION --> ne fonctionne pas
 		 public static void ModifNomComp(Competition competition){
 			 try{
@@ -91,12 +77,12 @@ public class BaseCompetition {
 					}
 			}
 	 // SUPPRIMER UNE COMPETITION --> ne fonctionne pas
-			public static void delete(Candidat candidat, Competition competition)
+			public static void deleteCand(Candidat candidat, Competition competition)
 			{
 				try {
 					Connection c =  jdbc.Base.connexion();
 					 Statement smt = c.createStatement();
-					String requete ="DELETE FROM java_inscription WHERE id_candidat="+candidat.getNom()+" AND id_competition="+competition.getNom();
+					String requete ="DELETE FROM java_candidat c WHERE c.id_candidat="+candidat.getId()+" AND id_competition="+competition.getNom();
 					smt.executeUpdate(requete);	
 				} catch (SQLException e) {
 					System.out.println(e.getMessage());

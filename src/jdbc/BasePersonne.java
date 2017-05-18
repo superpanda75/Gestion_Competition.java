@@ -90,7 +90,9 @@ public class BasePersonne implements Serializable {
 		 public static SortedSet<Candidat> SelectPers(Inscriptions inscription){
 				SortedSet<Candidat> listePers = new TreeSet();
 			 try{
-				String query="SELECT * FROM java_candidat WHERE id_candidat IN ("
+				String query="SELECT C.*, P.prenom_personne, P.mail_personne"
+						+ " FROM java_candidat C, java_personne P"
+						+ " WHERE id_candidat IN ("
 				 		+ " SELECT id_personne FROM java_personne)";
 				Connection c =jdbc.Base.connexion();
 				 Statement smt = c.createStatement();

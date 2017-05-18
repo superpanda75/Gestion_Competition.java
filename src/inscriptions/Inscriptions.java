@@ -12,6 +12,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import jdbc.BaseCandidat;
+import jdbc.BaseCompetition;
 import jdbc.BaseEquipe;
 import userDialog.MainMenu;
 
@@ -35,6 +36,7 @@ public class Inscriptions implements Serializable
 	private Inscriptions()
 	{
 		candidats = BaseCandidat.SelectCand(this);
+		competitions = BaseCompetition.SelectComp(this);
 	}
 	
 	/**
@@ -44,7 +46,6 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Competition> getCompetitions()
 	{
-		jdbc.BaseCompetition.afficheComp();
 		return Collections.unmodifiableSortedSet(competitions);
 	}
 	
@@ -101,7 +102,7 @@ public class Inscriptions implements Serializable
 	{
 		
 			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
-			jdbc.BaseCompetition.Sauvegarder(competition);
+			//jdbc.BaseCompetition.Sauvegarder(competition);
 			competitions.add(competition);
 			return competition;
 	
@@ -120,7 +121,7 @@ public class Inscriptions implements Serializable
 	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
-		jdbc.BasePersonne.sauvegarder(personne);
+		//jdbc.BasePersonne.sauvegarder(personne);
 		candidats.add(personne);
 		return personne;
 	}
@@ -264,8 +265,16 @@ public class Inscriptions implements Serializable
 	//NE PAS TOUCHER 
 	public static void main(String[] args)
 	{
-		MainMenu menu = new MainMenu();
-		menu.start();
+		//MainMenu menu = new MainMenu();
+		//menu.start();
+		//Inscriptions inscription = Inscriptions.getInscriptions();
+		//for (Candidat c : inscription.getCandidats()) {
+		//}
+		//Inscriptions inscription = Inscriptions.getInscriptions();
+				//for (Competition c : inscription.getCompetitions()) {
+					//System.out.println(c);
+				//}
+		
 	}
 	
 
@@ -274,12 +283,11 @@ public class Inscriptions implements Serializable
 	{
 		competition.setNom(nom);
 		return competition;
-}
+	}
 	//UPDATE SUR LA DATE COMPETITION
 	public Competition modifDateCompetition(Competition competition,LocalDate dateCloture)
 	{
-				
 		competition.setDateCloture(dateCloture);
 		return competition;
-}
+	}
 }

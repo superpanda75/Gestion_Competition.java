@@ -21,10 +21,12 @@ public class BaseCandidat {
 				SortedSet<Candidat> listeCand = new TreeSet();
 				for (Candidat candidat : BasePersonne.SelectPers(inscription)) {
 					listeCand.add(candidat);
+					candidat.getId();
 				}
 				for (Candidat candidat : BaseEquipe.SelectEquipe(inscription)) {
 					listeCand.add(candidat);
 				}
+
 			return listeCand;
 		}
 	//affiche les candidats qui s'inscrivent a la competition-> fonctionne 

@@ -22,7 +22,7 @@ public class Base {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			//jdbc:mysql://mysql.m2l.local/ahouri", "ahouri
-			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java", "root", "");	
+			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java?autoReconnect=true&useSSL=false", "root", "");	
 			System.out.println("Connexion bien établie");
 		
 			
