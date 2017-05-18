@@ -14,6 +14,7 @@ public class Equipe extends Candidat
 {
 	private static final long serialVersionUID = 4147819927233466035L;
 	private SortedSet<Personne> membres = new TreeSet<>();
+	private int id;
 	
 	Equipe(Inscriptions inscriptions, String nom)
 	{
@@ -21,9 +22,27 @@ public class Equipe extends Candidat
 	}
 
 	/**
-	 * Retourne l'ensemble des personnes formant l'équipe.
-	 */
+	 * Retourne l'id de la personne.
+	 * @return
+	 */	
+	public int getId()
+	{
+		return id;
+	}
+
+	/**
+	 * Modifie l'id de la personne.
+	 * @param prenom
+	 */	
+	public void setId(int id)
+	{
+		this.id = id;
+	}
 	
+	
+	/**
+	 * Retourne l'ensemble des personnes formant l'équipe.
+	 */	
 	public SortedSet<Personne> getMembres()
 	{
 		jdbc.BaseEquipe.affichEquipe();

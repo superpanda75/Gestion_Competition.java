@@ -19,6 +19,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	private static final long serialVersionUID = -2882150118573759729L;
 	private Inscriptions inscriptions;
 	private String nom;
+	private int id;
 	private Set<Candidat> candidats;
 	private LocalDate dateCloture;
 	private boolean enEquipe = false;
@@ -30,6 +31,24 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.nom = nom;
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
+	}
+	
+	/**
+	 * Retourne l'id de la competition.
+	 * @return
+	 */	
+	public int getId()
+	{
+		return id;
+	}
+
+	/**
+	 * Modifie l'id de la competition.
+	 * @param prenom
+	 */	
+	public void setId(int id)
+	{
+		this.id = id;
 	}
 	
 	/**

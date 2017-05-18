@@ -12,6 +12,7 @@ public class Personne extends Candidat
 {
 	private static final long serialVersionUID = 4434646724271327254L;
 	private String prenom, mail;
+	private int id;
 	private Set<Equipe> equipes;
 	
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
@@ -22,6 +23,27 @@ public class Personne extends Candidat
 		equipes = new TreeSet<>();
 	}
 
+	
+	/**
+	 * Retourne l'id de la personne.
+	 * @return
+	 */	
+	public int getId()
+	{
+		return id;
+	}
+
+	/**
+	 * Modifie l'id de la personne.
+	 * @param prenom
+	 */	
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+
+	
+	
 	/**
 	 * Retourne le prénom de la personne.
 	 * @return
