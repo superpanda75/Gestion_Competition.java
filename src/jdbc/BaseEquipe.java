@@ -14,7 +14,6 @@ public class BaseEquipe {
 	public BaseEquipe(){
 		
 	} 
-	// fonctionne 
 	//AFFICHER CANDIDAT - Equipe --> fonctionne 
 	 public static SortedSet<Candidat> SelectEquipe(Inscriptions inscription){
 			SortedSet<Candidat> listeEquipe = new TreeSet();

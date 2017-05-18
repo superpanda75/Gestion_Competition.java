@@ -16,7 +16,17 @@ public class BaseCandidat {
 	public BaseCandidat(){
 		
 	}
-	
+	//AFFICHER CANDIDAT - Equipe --> fonctionne 
+		 public static SortedSet<Candidat> SelectCand(Inscriptions inscription){
+				SortedSet<Candidat> listeCand = new TreeSet();
+				for (Candidat candidat : BasePersonne.SelectPers(inscription)) {
+					listeCand.add(candidat);
+				}
+				for (Candidat candidat : BaseEquipe.SelectEquipe(inscription)) {
+					listeCand.add(candidat);
+				}
+			return listeCand;
+		}
 	//affiche les candidats qui s'inscrivent a la competition-> fonctionne 
 	public static void AffichCandInscriptionCompet(){
 		try{
@@ -24,7 +34,6 @@ public class BaseCandidat {
 			Connection c = Base.connexion();
 			Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(sql);
-			 System.out.println("Liste des candidats inscrit a une competition");
 			 while ( rs.next() )
 				{
 				 System.out.println(rs.getInt("id_candidat")  +  rs.getString("nom_candidat") + "\n" +  rs.getString("nom_competition")+"");

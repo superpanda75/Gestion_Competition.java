@@ -30,15 +30,11 @@ public class Inscriptions implements Serializable
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
 	BaseEquipe baseEquipe = new BaseEquipe();
-	public static boolean db = false;
-
-
-
-	
+	public static boolean db = false;	
 
 	private Inscriptions()
 	{
-		
+		candidats = BaseCandidat.SelectCand(this);
 	}
 	
 	/**
