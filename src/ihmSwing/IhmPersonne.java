@@ -4,34 +4,44 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.SortedSet;
 import java.awt.*;
 import javax.swing.*;
 
+import inscriptions.Personne;
 
-public class IhmPersonne implements ItemListener
+
+public class IhmPersonne implements ItemListener, Iterator
 	{	
 		JPanel cards;
 		private JPanel ongletPers = new JPanel();
 		private JTabbedPane menuPersonne = new JTabbedPane(SwingConstants.RIGHT);
 		private JPanel panelDroite = new JPanel();
 		
+		
+		
+		
+		//cette methode permet de parcourir la liste d'objet et récupérer les noms... normalement
+		
+		
 		public IhmPersonne(JLabel titreOnglet)
-		{
-			
+		{			
 			this.ongletPers.setLayout(new BorderLayout());
 			this.ongletPers.add(titreOnglet);
 			addComponentToPane(ongletPers);
 			//itemStateChanged(event);
-//			this.ongletPers.add(panelDroite,BorderLayout.EAST);
-			
+//			this.ongletPers.add(panelDroite,BorderLayout.EAST);			
 		}
 		
 		public void addComponentToPane(Container pane) {
 	        //Put the JComboBox in a JPanel to get a nicer look.
 	        JPanel comboBoxPane = new JPanel(); //use FlowLayout
 	        String optionAjouter = "Ajouter une Personne";
-	        String optionModifier = "Modifier une Personne";
+	        String optionModifier = "Modifier une Personne";        
 	        
 
 	        String comboBoxItems[] = { optionAjouter, optionModifier};
@@ -52,10 +62,10 @@ public class IhmPersonne implements ItemListener
 	        card1.add(new JLabel("email :"));
 	        card1.add(new JTextField("exemple@exemple.com", 20));
 	        card1.add(new JButton("Button 1"));
-	        card1.add(new JButton("Button 2"));
-	        card1.add(new JButton("Button 3"));
-	         
-	        JPanel card2 = new JPanel();
+
+	        JPanel card2 = new JPanel();	        
+	        String listePersonneItems[] = { optionAjouter, optionModifier};
+	        JComboBox listePersonne = new JComboBox(listePersonneItems);	        
 	        card2.add(new JTextField("TextField", 20));
 	        
 	        
@@ -103,6 +113,22 @@ public class IhmPersonne implements ItemListener
 		
 		public JPanel getOnglet(){
 			return this.ongletPers;
+		}
+
+
+		@Override
+		public boolean hasNext()
+		{
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+
+		@Override
+		public Object next()
+		{
+			// TODO Auto-generated method stub
+			return null;
 		}
 	
 		

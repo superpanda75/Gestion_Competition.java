@@ -4,13 +4,15 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 import inscriptions.*;
+
 /**
- * Représente une personne physique pouvant s'inscrire à une compétition.
+ * Repr�sente une personne physique pouvant s'inscrire à une compétition.
  */
 
 public class Personne extends Candidat
 {
 	private static final long serialVersionUID = 4434646724271327254L;
+	private int id;
 	private String prenom, mail;
 	private Set<Equipe> equipes;
 	
@@ -20,6 +22,26 @@ public class Personne extends Candidat
 		this.prenom = prenom;
 		this.mail = mail;
 		equipes = new TreeSet<>();
+	}
+	
+	/**
+	 * 
+	 * retourne l'id de la personne
+	 * @return
+	 */
+	public int getId()
+	{
+		return id;
+	}
+	
+	
+	/**
+	 * 
+	 * modifie l'id de la personne
+	 */
+	public void setId()
+	{
+		this.id= id;
 	}
 
 	/**

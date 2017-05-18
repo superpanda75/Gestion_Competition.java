@@ -17,6 +17,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	private static final long serialVersionUID = -6035399822298694746L;
 	private Inscriptions inscriptions;
 	private String nom;
+	private int id;
 	private Set<Competition> competitions;
 	BaseCandidat baseCandidat = new BaseCandidat();
 	
@@ -25,6 +26,21 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		this.inscriptions = inscriptions;	
 		this.nom = nom;
 		competitions = new TreeSet<>();
+	}
+	
+	
+	
+	public int getId()
+	{
+		return id;
+	}	
+	/**
+	 * 
+	 * modifie l'id de la personne
+	 */
+	public void setId()
+	{
+		this.id= id;
 	}
 
 	/**

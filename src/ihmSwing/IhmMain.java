@@ -11,9 +11,9 @@ import java.awt.Dimension;
 public class IhmMain
 	{
 		private IhmPersonne ongletPersonne;	
-		private IhmEquipe ongletEquipe;	
-		private IhmCompetition ongletCompetition;	
-		private IhmInscription ongletInscription;	
+		private IhmEquipe ongletEquipe;
+		private IhmCompetition ongletCompetition;
+		private IhmInscription ongletInscription;
 
 		
 		

@@ -18,12 +18,12 @@ public class BaseCompetition {
 	//AFFICHE LES COMPETITION EN EQUIPE  --> fonctionne 
 	public static void afficheCompEnEquipe()
 	{
+		
 		try {
 			String req = "SELECT * FROM java_competition co WHERE enEquipe = 1";
 			Connection c = jdbc.Base.connexion();
 			Statement smt = c.createStatement();
 			ResultSet rs = smt.executeQuery(req);
-			System.out.println("Liste des competition");
 			while (rs.next())
 			{
 				System.out.println(rs.getInt("id_competition") + rs.getString("nom_competition"));
