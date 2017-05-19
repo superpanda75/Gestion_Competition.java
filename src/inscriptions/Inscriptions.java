@@ -66,6 +66,7 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Personne> getPersonnes()
 	{
+		jdbc.BasePersonne.AfficheP();
 		SortedSet<Personne> personnes = new TreeSet<>();
 		for (Candidat c : getCandidats())
 			if (c instanceof Personne)
@@ -265,27 +266,18 @@ public class Inscriptions implements Serializable
 		//MainMenu menu = new MainMenu();
 		//menu.start();
 		//RENVOIE UNE COLLECTION DE CANDIDAT
-		Inscriptions inscription = Inscriptions.getInscriptions();
-		/*for (Candidat c : inscription.getCandidats()) {
-			System.out.println(c);
-		}
-		//RENVOIE UNE COLLECTION DE COMPETITION
-		Inscriptions inscription1 = Inscriptions.getInscriptions();
-		for (Competition c: inscription1.getCompetitions()) {
-		System.out.println(c);
+		//Inscriptions inscription = Inscriptions.getInscriptions();
+		//for (Candidat c : inscription.getCandidats()) {
+		//}
+		//RENVOIE UNE COLLECTION DE COMPETITION & Equipe
+		//Inscriptions inscription = Inscriptions.getInscriptions();
+		//for (Competition c : inscription.getCompetitions()) {
+		//System.out.println(c);
+	//}
+		 //for(Equipe equipe: inscription.getEquipes()){
+			 //System.out.println(equipe);
+		 //}	
 	}
-		 for(Equipe equipe: inscription1.getEquipes()){
-			 System.out.println(equipe);
-		 }	*/
-		 
-		 for (Personne p : inscription.getPersonnes())
-		{
-			System.out.println(p.getNom() + " "+ p.getId() + " "+ p.getPrenom());
-		}
-		 
-	}
-		
-		
 	
 
 	//UPDATE COMPETITION
