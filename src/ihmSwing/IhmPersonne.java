@@ -1,13 +1,15 @@
 package ihmSwing;
 
+import inscriptions.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
-
+import javax.swing.table.AbstractTableModel;
 
 public class IhmPersonne implements ItemListener
 	{	
@@ -18,13 +20,11 @@ public class IhmPersonne implements ItemListener
 		
 		public IhmPersonne(JLabel titreOnglet)
 		{
-			
 			this.ongletPers.setLayout(new BorderLayout());
 			this.ongletPers.add(titreOnglet);
 			addComponentToPane(ongletPers);
 			//itemStateChanged(event);
-//			this.ongletPers.add(panelDroite,BorderLayout.EAST);
-			
+//			this.ongletPers.add(panelDroite,BorderLayout.EAST);			
 		}
 		
 		public void addComponentToPane(Container pane) {
@@ -105,7 +105,64 @@ public class IhmPersonne implements ItemListener
 			return this.ongletPers;
 		}
 	
-		
+		public class ModeleDynamiqueObjet extends AbstractTableModel {
+			    ArrayList<Personne> personnes = new ArrayList();
+			    
+			    public ArrayList<Personne> chargerDonnees()  {
+					
+					ArrayList<Personne> personnes = new ArrayList<>(); 
+						for (Personne p : Inscriptions.getInscriptions().getPersonnes())
+						{
+							personnes.add(p);
+						}
+					 
+					//catch (SQLException e) {
+						// TODO Auto-generated catch block
+					//	e.printStackTrace();
+					//}
+					return personnes;
+			    }
+			 
+			    private final String[] entetes = {"Prénom", "Nom", "e-mail"};
+			 
+			 
+			    public int getRowCount() {
+			        return personnes.size();
+			    }
+			 
+			    public int getColumnCount() {
+			        return entetes.length;
+			    }
+			 
+			    public String getColumnName(int columnIndex) {
+			        return entetes[columnIndex];
+			    }
+			 
+			    public Object getValueAt(int rowIndex, int columnIndex) {
+			        switch(columnIndex){
+			            case 0:
+			                return personnes.get(rowIndex).getPrenom();
+			            case 1:
+			                return personnes.get(rowIndex).getNom();
+			            case 2:
+			                return personnes.get(rowIndex).getMail();
+			            default:
+			                return null; //Ne devrait jamais arriver
+			        }
+			    }
+			 
+			    public void addAmi(Personne personne) {
+			        personnes.add(personne);
+			 
+			        fireTableRowsInserted(personnes.size() -1, personnes.size() -1);
+			    }
+			 
+			    public void removeAmi(int rowIndex) {
+			        personnes.remove(rowIndex);
+			 
+			        fireTableRowsDeleted(rowIndex, rowIndex);
+			    }
+			}	
 			
 	}
 
