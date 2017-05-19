@@ -71,6 +71,7 @@ public class IhmCompetition implements ItemListener
         cl.show(cards, (String)evt.getItem());
     }
 	
+    //test
 	//Menu de l'onglet Personne
 //	public JTabbedPane makeSousMenuPersonne(){
 //		JTabbedPane onglets = new JTabbedPane();
