@@ -1,21 +1,9 @@
 package inscriptions;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Collections;
+import java.io.*;
+import java.util.*;
 import java.time.LocalDate;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import jdbc.BaseCandidat;
-import jdbc.BaseCompetition;
-import jdbc.BaseEquipe;
-import jdbc.BasePersonne;
-import userDialog.MainMenu;
+import jdbc.*;
 
 
 /**
@@ -31,12 +19,12 @@ public class Inscriptions implements Serializable
 	private static Inscriptions inscriptions;
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
-	BaseEquipe baseEquipe = new BaseEquipe();
+	BaseEquipe baseEq = new BaseEquipe();
 	private Inscriptions()
 	{
 		candidats = BaseCandidat.SelectCand(this);
 		competitions = BaseCompetition.SelectComp(this);
-		jdbc.BaseEquipe.selectMembreEquipe(this);
+		baseEq.selectMembreEquipe(this);
 	}
 	
 	/**
@@ -66,7 +54,6 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Personne> getPersonnes()
 	{
-		jdbc.BasePersonne.AfficheP();
 		SortedSet<Personne> personnes = new TreeSet<>();
 		for (Candidat c : getCandidats())
 			if (c instanceof Personne)
@@ -277,7 +264,9 @@ public class Inscriptions implements Serializable
 		//System.out.println(c);
 	//}
 		 for(Equipe e: inscription.getEquipes()){
-			 System.out.println(e.getMembres());
+			 
+			System.out.println(e.getMembres());
+			 
 		 }	
 	}
 	

@@ -31,25 +31,22 @@ public class BaseEquipe {
 		return listeEquipe;
 	}
 	 //Afficher les membres d'une equipe
-	 public static void selectMembreEquipe(Inscriptions inscriptions){
+	 public void selectMembreEquipe(Inscriptions inscriptions){
 		 try{
 			 for(Equipe e: inscriptions.getEquipes())
 			 {
 					 Connection c =jdbc.Base.connexion();
 					 
-					 String sql = "SELECT c.id_candidat "
-					 		+ "FROM java_candidat c , java_personne p, java_appartenir a "
-					 		+ "WHERE p.id_candidat = c.id_candidat "
-					 		+ "AND a.id_personne = c.id_candidat "
-					 		+ "AND a.id_equipe = ? ";
-					 PreparedStatement smt = c.prepareStatement(sql);
-					 smt.setInt(e.getId(), 1);
+					 String sql = "SELECT a.id_personne ";
+					 sql += "FROM java_candidat c , java_personne p, java_appartenir a ";
+					 sql += "WHERE p.id_personne = c.id_candidat ";
+					 sql += "AND c.id_candidat = a.id_personne AND a.id_equipe = " + e.getId();
+					 Statement smt = c.createStatement();
 					 ResultSet rs = smt.executeQuery(sql);
-					 
 					 while(rs.next()){
 						 for (Personne pers: inscriptions.getPersonnes()) 
 				            {
-								if(rs.getInt("id_candidat") == pers.getId())
+								if(rs.getInt("id_personne") == pers.getId())
 								{
 									e.add(pers);
 								}

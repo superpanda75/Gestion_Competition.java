@@ -1,13 +1,7 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
+import java.sql.*;
+import java.util.*;
 import inscriptions.*;
 
 public class BaseCandidat {
@@ -37,7 +31,7 @@ public class BaseCandidat {
 			 Connection c = jdbc.Base.connexion();
 			 String sql = "UPDATE java_candidat c SET c.id_candidat= ? ";
 			 PreparedStatement smt = c.prepareStatement(sql);
-			 smt.setInt(candidat.getId(), 1);
+			 smt.setInt(1,candidat.getId());
 			 int rs = smt.executeUpdate(sql);
 			 
 		 }catch(SQLException e){
