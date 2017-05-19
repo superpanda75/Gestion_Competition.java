@@ -23,27 +23,6 @@ public class BasePersonne implements Serializable {
 
 	}
 	
-	//AFFICHER TOUTES LES PERSONNE -> fonctionne
-	 public static void AfficheP()
-	{
-		 try{
-			 
-			 String query="SELECT * FROM java_personne WHERE java_personne.id_personne = id_personne";
-			 Connection c = jdbc.Base.connexion();
-			 Statement smt = c.createStatement();
-			 ResultSet rs = smt.executeQuery(query);
-			 while (rs.next())
-				{
-					System.out.println(rs.getInt("id_personne")  +  rs.getString("prenom_personne") + "");
-				}
-			 
-			 
-		 }catch(SQLException e){
-			 System.out.println(e.getMessage());
-			 
-		 }
-		
-	}
 
 		
 		 //  -> ne fonctionne pas
