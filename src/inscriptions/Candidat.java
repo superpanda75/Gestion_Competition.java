@@ -74,7 +74,6 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 
 	public Set<Competition> getCompetitions()
 	{
-		jdbc.BaseCandidat.AffichCandInscriptionCompet();
 		return Collections.unmodifiableSet(competitions);	
 	}
 	
@@ -96,7 +95,6 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	{
 		for (Competition c : competitions)
 			c.remove(this);
-		baseCandidat.SupprimerCand(this);
 		inscriptions.remove(this);
 	}
 	

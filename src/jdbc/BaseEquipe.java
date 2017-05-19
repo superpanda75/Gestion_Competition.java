@@ -1,13 +1,7 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
+import java.sql.*;
+import java.util.*;
 import inscriptions.*;
 
 public class BaseEquipe {
@@ -39,32 +33,41 @@ public class BaseEquipe {
 	 //Afficher les membres d'une equipe
 	 public static void selectMembreEquipe(Inscriptions inscriptions){
 		 try{
-			
-			 for(Equipe equipe: inscriptions.getEquipes()){
-				 Connection c =jdbc.Base.connexion();
-				 String sql = "SELECT c.nom_candidat FROM java_candidat c,java_appartenir a"
-				 		+ " WHERE c.id_candidat = a.id_equipe "
-				 		+ " AND a.id_equipe = id_equipe "
-				 		+ "	GROUP BY c.id_candidat";
-				 PreparedStatement smt = c.prepareStatement(sql);
-				 smt.setInt(equipe.getId(), 1);
-				 ResultSet rs = smt.executeQuery();
-				 while(rs.next()){
-					 for (Personne equip: inscriptions.getPersonnes()) 
-			            {
-							if(rs.getInt("id_candidat") == equip.getId())
-							{
-								equipe.add(equip);
-							}
-
-			            } 
-				 }
+			 for(Equipe e: inscriptions.getEquipes())
+			 {
+					 Connection c =jdbc.Base.connexion();
+					 
+					 String sql = "SELECT c.id_candidat "
+					 		+ "FROM java_candidat c , java_personne p, java_appartenir a "
+					 		+ "WHERE p.id_candidat = c.id_candidat "
+					 		+ "AND a.id_personne = c.id_candidat "
+					 		+ "AND a.id_equipe = ? ";
+					 PreparedStatement smt = c.prepareStatement(sql);
+					 smt.setInt(e.getId(), 1);
+					 ResultSet rs = smt.executeQuery(sql);
+					 while(rs.next()){
+						 for (Personne pers: inscriptions.getPersonnes()) 
+				            {
+								if(rs.getInt("id_candidat") == pers.getId())
+								{
+									e.add(pers);
+								}
+	
+				            } 
+					 }
 			 }
+		 }catch(SQLException eq){
+			 System.out.println(eq.getMessage());
+		 } 
+	 }
+	 public static void addEquipe(Equipe equipe, Personne personne){
+		 try{
+			 Connection c =jdbc.Base.connexion();			 
+			 String sql = "INSERT INTO java_appartenir(id_equipe, id_personne) "
+			 			+ "	VALUES('"+equipe.getId()+"', '"+personne.getId()+"'); ";
+			 
 		 }catch(SQLException e){
 			 System.out.println(e.getMessage());
 		 }
-	 }
-	 
-
-	
-	}
+		 }
+}

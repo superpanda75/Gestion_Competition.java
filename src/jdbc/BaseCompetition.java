@@ -74,6 +74,7 @@ public class BaseCompetition {
 			 for (Competition comp : inscriptions.getCompetitions()) 
 				{
 				 // CANDIDAT = PERSONNE || EQUIPE
+				 
 				 String query="";
 				 ResultSet rs = smt.executeQuery(query);
 				 while(rs.next())

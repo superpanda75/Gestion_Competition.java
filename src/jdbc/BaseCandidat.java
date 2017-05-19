@@ -29,22 +29,7 @@ public class BaseCandidat {
 
 			return listeCand;
 		}
-	//affiche les candidats qui s'inscrivent a la competition-> fonctionne 
-	public static void AffichCandInscriptionCompet(){
-		try{
-			String sql ="Select * From java_competition co, java_inscription i,java_candidat c WHERE i.id_candidat= c.id_candidat AND i.id_competition = co.id_competition";
-			Connection c = Base.connexion();
-			Statement smt = c.createStatement();
-			 ResultSet rs = smt.executeQuery(sql);
-			 while ( rs.next() )
-				{
-				 System.out.println(rs.getInt("id_candidat")  +  rs.getString("nom_candidat") + "\n" +  rs.getString("nom_competition")+"");
-				}
-			
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
-		}
-	}
+
 	
 	 //MODIFIER UN CANDIDAT --> ne fonctionne pas
 	 public static void ModifierNomCand(Candidat candidat){
@@ -59,18 +44,5 @@ public class BaseCandidat {
 			 System.out.println(e.getMessage());
 		 }
 	 }
-	//SUPPRIMER UN CANDIDAT --> ne fonctionne pas
-	public void SupprimerCand(Candidat candidat){
-		try{
-			String query = "DELETE FROM java_candidat c WHERE c.id_candidat = ? ";
-			Connection c =jdbc.Base.connexion();
-			PreparedStatement  smt = c.prepareStatement(query);
-			smt.setInt(candidat.getId(), 1);
-			boolean rs = smt.execute(query);
-			
-			}catch(SQLException e){
-			System.out.println(e.getMessage());
-		}
-	}
 	
 }

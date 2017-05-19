@@ -14,6 +14,7 @@ import java.util.TreeSet;
 import jdbc.BaseCandidat;
 import jdbc.BaseCompetition;
 import jdbc.BaseEquipe;
+import jdbc.BasePersonne;
 import userDialog.MainMenu;
 
 
@@ -31,12 +32,11 @@ public class Inscriptions implements Serializable
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
 	BaseEquipe baseEquipe = new BaseEquipe();
-	public static boolean db = false;	
-
 	private Inscriptions()
 	{
 		candidats = BaseCandidat.SelectCand(this);
 		competitions = BaseCompetition.SelectComp(this);
+		jdbc.BaseEquipe.selectMembreEquipe(this);
 	}
 	
 	/**
@@ -263,20 +263,22 @@ public class Inscriptions implements Serializable
 	//NE PAS TOUCHER 
 	public static void main(String[] args)
 	{
+	
 		//MainMenu menu = new MainMenu();
 		//menu.start();
 		//RENVOIE UNE COLLECTION DE CANDIDAT
-		//Inscriptions inscription = Inscriptions.getInscriptions();
+		Inscriptions inscription = Inscriptions.getInscriptions();
 		//for (Candidat c : inscription.getCandidats()) {
+			//System.out.println(c);
 		//}
 		//RENVOIE UNE COLLECTION DE COMPETITION & Equipe
 		//Inscriptions inscription = Inscriptions.getInscriptions();
 		//for (Competition c : inscription.getCompetitions()) {
 		//System.out.println(c);
 	//}
-		 //for(Equipe equipe: inscription.getEquipes()){
-			 //System.out.println(equipe);
-		 //}	
+		 for(Equipe e: inscription.getEquipes()){
+			 System.out.println(e.getMembres());
+		 }	
 	}
 	
 
