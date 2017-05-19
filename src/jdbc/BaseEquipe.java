@@ -45,6 +45,7 @@ public class BaseEquipe {
 					 PreparedStatement smt = c.prepareStatement(sql);
 					 smt.setInt(e.getId(), 1);
 					 ResultSet rs = smt.executeQuery(sql);
+					 //test
 					 while(rs.next()){
 						 for (Personne pers: inscriptions.getPersonnes()) 
 				            {
