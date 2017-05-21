@@ -58,6 +58,7 @@ public class BaseEquipe {
 			 System.out.println(eq.getMessage());
 		 } 
 	 }
+	 //Ajouter un membre 
 	 public static void addEquipe(Equipe equipe, Personne personne){
 		 try{
 			 Connection c =jdbc.Base.connexion();			 
@@ -67,5 +68,9 @@ public class BaseEquipe {
 		 }catch(SQLException e){
 			 System.out.println(e.getMessage());
 		 }
-		 }
+	}
+	 //Modifie 
+	 //Supprime
+	 //Creation d'une equipe (nom_candidat)
+	 //remove membre equipe
 }

@@ -1,23 +1,44 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.*;
 import java.time.LocalDate;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import inscriptions.Candidat;
-import inscriptions.Competition;
-import inscriptions.Equipe;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
+import inscriptions.*;
+import inscriptions.Competition.*;
 
 public class BaseCompetition {
 	
 	public BaseCompetition(){
 		
+	}
+	
+	public static void updateComp(Competition competition){
+		try{
+			String req="UPDATE java_competition co "
+					+ "SET co.nom_competition = "+competition.getNom()
+					+"co.date ="+competition.getDateCloture()
+					+"co.enEquipe ="+competition.estEnEquipe()
+					+"WHERE co.id_competition = "+competition.getId();
+			Connection c =jdbc.Base.connexion();
+			 Statement smt = c.createStatement();
+			 ResultSet rs = smt.executeQuery(req);
+		}catch(SQLException e){
+			
+		}
+	}
+	public static void deleteComp(Competition competition)
+	{
+		try 
+		{
+			String sql = "DELETE FROM java_competition co WHERE co.id_competition =" +competition.getId();
+			Connection c =jdbc.Base.connexion();
+			 Statement smt = c.createStatement();
+			 ResultSet rs = smt.executeQuery(sql);
+	    } 
+		catch (SQLException e)
+		{
+			System.out.println(e.getMessage());
+	    }
 	}
 	//AFFICHER CANDIDAT - Equipe --> fonctionne 
 	 public static SortedSet<Competition> SelectComp(Inscriptions inscription){
@@ -40,6 +61,40 @@ public class BaseCompetition {
 	}
 		return SelectComp;
 	}
+	 
+	 /*public void selectInscription(Inscriptions inscriptions)throws InscriptionEnRetardException, RuntimeException{
+		 try{
+			 for(Competition comp: inscriptions.getCompetitions())
+			 {
+					 Connection c =jdbc.Base.connexion();
+					 String sql = "SELECT c.id_candidat, c.nom_candidat "
+					 			+ "	FROM java_candidat c, java_inscription i "
+					 			+ "WHERE i.id_candidat = c.id_candidat "
+					 			+ "AND i.id_competition =" + comp.getId() ;
+					 Statement smt = c.createStatement();
+					 ResultSet rs = smt.executeQuery(sql);
+					 while(rs.next()){
+						 for (Personne pers: inscriptions.getPersonnes()) 
+				            {
+								if(rs.getInt("id_candidat") == pers.getId())
+								{
+									comp.add(pers);
+								}
+	
+				            } 
+						 for (Equipe e : inscriptions.getEquipes()) 
+				            {
+								if(rs.getInt("id_candidat") == e.getId())
+								{
+									comp.add(e);
+								}
+							}
+					 }
+			 }
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 } 
+	 }*/
 
 		 //AJOUTER COMPETITION  --> fonctionne
 		 public static void Sauvegarder(Competition competition) 
@@ -66,36 +121,4 @@ public class BaseCompetition {
 						System.out.print(e.getMessage());
 					}
 			}
-	public static void selectInscritoComp(Inscriptions inscriptions)
-	{
-		try{
-			Connection c =  jdbc.Base.connexion();
-			 Statement smt = c.createStatement();
-			 for (Competition comp : inscriptions.getCompetitions()) 
-				{
-				 // CANDIDAT = PERSONNE || EQUIPE
-				 
-				 String query="";
-				 ResultSet rs = smt.executeQuery(query);
-				 while(rs.next())
-			        {
-			            for (Personne personne : inscriptions.getPersonnes()) 
-							if(rs.getInt("id_candidat") == personne.getId())
-							{
-								comp.add(personne);
-							}
-			            for (Equipe equipe : inscriptions.getEquipes()) 
-			            {
-							if(rs.getInt("id_candidat") == equipe.getId())
-							{
-								comp.add(equipe);
-							}
-						}
-			        } 
-				}   
-				 
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
-		}
-	}
 }

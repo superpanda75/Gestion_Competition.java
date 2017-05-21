@@ -10,7 +10,7 @@ public class BaseCandidat {
 	public BaseCandidat(){
 		
 	}
-	//AFFICHER CANDIDAT - Equipe --> fonctionne 
+	//1- AFFICHER CANDIDAT - Equipe --> fonctionne 
 		 public static SortedSet<Candidat> SelectCand(Inscriptions inscription){
 				SortedSet<Candidat> listeCand = new TreeSet();
 				for (Candidat candidat : BasePersonne.SelectPers(inscription)) {
@@ -25,18 +25,8 @@ public class BaseCandidat {
 		}
 
 	
-	 //MODIFIER UN CANDIDAT --> ne fonctionne pas
-	 public static void ModifierNomCand(Candidat candidat){
-		 try{
-			 Connection c = jdbc.Base.connexion();
-			 String sql = "UPDATE java_candidat c SET c.id_candidat= ? ";
-			 PreparedStatement smt = c.prepareStatement(sql);
-			 smt.setInt(1,candidat.getId());
-			 int rs = smt.executeUpdate(sql);
-			 
-		 }catch(SQLException e){
-			 System.out.println(e.getMessage());
-		 }
-	 }
+		 //2- modifie le candidat 
+		 //3- supprime le candidat
+		 //4- Inscrire un candidat (java_inscription)
 	
 }

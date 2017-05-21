@@ -2,8 +2,9 @@ package inscriptions;
 
 import java.io.*;
 import java.util.*;
-import java.time.LocalDate;
+import java.time.*;
 import jdbc.*;
+import userDialog.*;
 
 
 /**
@@ -20,11 +21,14 @@ public class Inscriptions implements Serializable
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
 	BaseEquipe baseEq = new BaseEquipe();
+	BaseCompetition Comp = new BaseCompetition();
+	
 	private Inscriptions()
 	{
 		candidats = BaseCandidat.SelectCand(this);
 		competitions = BaseCompetition.SelectComp(this);
 		baseEq.selectMembreEquipe(this);
+		//Comp.selectInscription(this);
 	}
 	
 	/**
@@ -108,7 +112,7 @@ public class Inscriptions implements Serializable
 	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
-		//jdbc.BasePersonne.sauvegarder(personne);
+		jdbc.BasePersonne.sauvegarder(personne);
 		candidats.add(personne);
 		return personne;
 	}
@@ -248,26 +252,29 @@ public class Inscriptions implements Serializable
 			+ "\nCompetitions  " + getCompetitions().toString();
 	}
 	//NE PAS TOUCHER 
-	public static void main(String[] args)
+	public static void main(String[] args) 
 	{
 	
-		//MainMenu menu = new MainMenu();
-		//menu.start();
+		MainMenu menu = new MainMenu();
+		menu.start();
 		//RENVOIE UNE COLLECTION DE CANDIDAT
 		Inscriptions inscription = Inscriptions.getInscriptions();
 		//for (Candidat c : inscription.getCandidats()) {
 			//System.out.println(c);
 		//}
 		//RENVOIE UNE COLLECTION DE COMPETITION & Equipe
-		//Inscriptions inscription = Inscriptions.getInscriptions();
+		//Inscriptions inscriptions = Inscriptions.getInscriptions();
 		//for (Competition c : inscription.getCompetitions()) {
 		//System.out.println(c);
 	//}
-		 for(Equipe e: inscription.getEquipes()){
+		 //for(Equipe e: inscription.getEquipes()){
 			 
-			System.out.println(e.getMembres());
+			//System.out.println(e.getMembres());
 			 
-		 }	
+		 //}
+		//for(Competition comp: inscription.getCompetitions()){
+			//System.out.println(comp.getNom());
+		//}
 	}
 	
 
