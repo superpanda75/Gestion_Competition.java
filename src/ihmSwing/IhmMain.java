@@ -1,13 +1,10 @@
 package ihmSwing;
 
 import java.util.*;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.Dimension;
 
 public class IhmMain
 	{
@@ -20,7 +17,7 @@ public class IhmMain
 	public static void main(String[] args) {
 		
 		JFrame f = new JFrame("Gestion des Inscriptions");
-		f.setSize(900, 700);
+		f.setSize(600, 500);
 				
 		JTabbedPane onglets = new JTabbedPane(SwingConstants.TOP);
 		
@@ -46,7 +43,6 @@ public class IhmMain
 		onglets.addTab("Equipe", ongletEqui);
 		onglets.addTab("Inscription", ongletInsc);
 	
-		
 		onglets.setOpaque(true);		
 		f.add(onglets);		
 		f.getContentPane().add(onglets);		
@@ -54,11 +50,29 @@ public class IhmMain
 		f.setResizable(false);
 
 		}
-
 	
-
+	/**
+	 * Cette fonction permet d'activer un champ : activerChamp(libelle, JTextField)
+	 * @param lbl
+	 * @param tf
+	 */
+	public static void activerChamp(JLabel lbl, JTextField tf){
+		 tf.setEditable(true);
+	     tf.setEnabled(true);
+	     tf.setBackground(new Color(51, 102, 153));
+	     lbl.setForeground(new Color(0,0,0));	     
+	}
 	
-		
-		
+	/**
+	 * Cette fonction permet de désactiver un champ en le grisant et en le désactivant : desactiverChamp(libelle, JTextField)
+	 * @param lbl
+	 * @param tf
+	 */
+	public static void desactiverChamp(JLabel lbl, JTextField tf){
+		 tf.setEditable(false);
+	     tf.setEnabled(false);
+	     tf.setBackground(new Color(102, 102, 102));
+	     lbl.setForeground(new Color(102, 102, 102));	     
+	}
         
 	}
