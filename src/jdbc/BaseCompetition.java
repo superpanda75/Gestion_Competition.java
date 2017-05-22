@@ -15,11 +15,11 @@ public class BaseCompetition {
 	
 	public static void updateComp(Competition competition){
 		try{
-			String req="UPDATE java_competition co "
-					+ "SET co.nom_competition = "+competition.getNom()
-					+"co.date ="+competition.getDateCloture()
-					+"co.enEquipe ="+competition.estEnEquipe()
-					+"WHERE co.id_competition = "+competition.getId();
+			String req="UPDATE java_competition "
+					+ "SET java_competition.nom_competition = "+competition.getNom()
+					+"java_competition.date = "+competition.getDateCloture()
+					+"java_competition.enEquipe = "+competition.getEnEquipe()
+					+"WHERE java_competition.id_competition = "+competition.getId();
 			Connection c =jdbc.Base.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(req);
@@ -27,14 +27,15 @@ public class BaseCompetition {
 			
 		}
 	}
-	public static void deleteComp(Competition competition)
+	public static void deleteComp(Competition comp)
 	{
 		try 
 		{
-			String sql = "DELETE FROM java_competition WHERE java_competition.id_competition = "+competition.getId();
+			String sql = "{call suppComp( ? )}";
 			Connection c =jdbc.Base.connexion();
-			Statement smt = c.createStatement();
-			 boolean rs = smt.execute(sql);
+			java.sql.CallableStatement smt = c.prepareCall(sql);
+			smt.setLong(1,comp.getId());
+			smt.executeUpdate(); 
 	    } 
 		catch (SQLException e)
 		{
@@ -63,7 +64,7 @@ public class BaseCompetition {
 		return SelectComp;
 	}
 	 
-	 public void selectInscription(Inscriptions inscriptions)
+	 /*public void selectInscription(Inscriptions inscriptions)
 	 {
 		 try{
 			 for(Competition comp: inscriptions.getCompetitions())
@@ -95,7 +96,7 @@ public class BaseCompetition {
 			 e.printStackTrace();
 			 System.out.println(e.getMessage());
 		 } 
-	 }
+	 }*/
 
 		 //AJOUTER COMPETITION  --> fonctionne
 		 public static void Sauvegarder(Competition competition) 
@@ -104,7 +105,7 @@ public class BaseCompetition {
 						Connection c =  jdbc.Base.connexion();
 						 Statement smt = c.createStatement();
 						int equipe;
-						if (competition.estEnEquipe())
+						if (competition.getEnEquipe())
 							equipe=1;
 						else
 							equipe = 0;

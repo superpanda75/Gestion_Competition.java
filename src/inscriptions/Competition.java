@@ -68,6 +68,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public void setNom(String nom)
 	{
 		this.nom = nom ;
+		jdbc.BaseCompetition.updateComp(this);
 	}
 	
 	/**
@@ -99,9 +100,13 @@ public class Competition implements Comparable<Competition>, Serializable
 	 * @return
 	 */
 	
-	public boolean estEnEquipe()
-	{
+	public boolean getEnEquipe() {
 		return enEquipe;
+	}
+	
+	public void setEnEquipe(boolean enEquipe) {
+		this.enEquipe = enEquipe;
+		jdbc.BaseCompetition.updateComp(this);
 	}
 	
 	/**

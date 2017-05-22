@@ -31,7 +31,7 @@ public class Inscriptions implements Serializable
 		candidats = BaseCandidat.SelectCand(this);
 		competitions = BaseCompetition.SelectComp(this);
 		baseEq.selectMembreEquipe(this);
-		Comp.selectInscription(this);
+		//Comp.selectInscription(this);
 	}
 	
 	/**
@@ -258,8 +258,8 @@ public class Inscriptions implements Serializable
 	public static void main(String[] args)throws InscriptionEnRetardException, RuntimeException, IOException
 	{
 	
-		//MainMenu menu = new MainMenu();
-		//menu.start();
+		MainMenu menu = new MainMenu();
+		menu.start();
 		//RENVOIE UNE COLLECTION DE CANDIDAT
 		//Inscriptions inscriptions = Inscriptions.getInscriptions();
 		//for (Candidat c : inscription.getCandidats()) {

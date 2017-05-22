@@ -162,7 +162,7 @@ public class TeamMenu
 									Set<Competition> getCompetition = inscriptions.getCompetitions();
 									for(Competition competition : getCompetition)
 									{
-										if(competition.estEnEquipe())
+										if(competition.getEnEquipe())
 										{
 											liste.add(competition);
 										}
