@@ -187,11 +187,10 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public void delete()
 	{
-		
 		for (Candidat candidat : candidats)
 			remove(candidat);
 		inscriptions.remove(this);
-
+		jdbc.BaseCompetition.deleteComp(this);
 	}
 	
 	@Override

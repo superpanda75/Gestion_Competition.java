@@ -30,6 +30,21 @@ public class BaseEquipe {
 	}
 		return listeEquipe;
 	}
+	 //AJOUTER UNE EQUIPE
+	 public void sauvegarder(Equipe equipe){
+		 try{
+			 Connection c =jdbc.Base.connexion();
+			 String sql= "INSERT INTO java_candidat (nom_candidat) VALUES ('"+equipe.getNom()+"')";
+			 Statement smt = c.createStatement();
+			 smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = smt.getGeneratedKeys();
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+			 System.out.println("l'equipe n'a pas ete crée");
+		 }
+	 }
+	
+
 	 //Afficher les membres d'une equipe
 	 public void selectMembreEquipe(Inscriptions inscriptions){
 		 try{
@@ -59,18 +74,46 @@ public class BaseEquipe {
 		 } 
 	 }
 	 //Ajouter un membre 
-	 public static void addEquipe(Equipe equipe, Personne personne){
+	 public static void addMembreEquipe(Equipe equipe, Personne pers){
 		 try{
 			 Connection c =jdbc.Base.connexion();			 
 			 String sql = "INSERT INTO java_appartenir(id_equipe, id_personne) "
-			 			+ "	VALUES('"+equipe.getId()+"', '"+personne.getId()+"'); ";
+			 			+ "	VALUES('"+equipe.getId()+"', '"+pers.getId()+"')";
 			 
 		 }catch(SQLException e){
 			 System.out.println(e.getMessage());
 		 }
 	}
-	 //Modifie 
-	 //Supprime
-	 //Creation d'une equipe (nom_candidat)
+	 //Modifie le nom de l'equipe
+	 public static void modifEquipe(Equipe equipe){
+		 try{
+			 Connection c =jdbc.Base.connexion();			 
+			 String sql = " UPDATE java_candidat c "
+			 		+ "SET c.nom_candidat "
+			 		+ "WHERE id_candidat = "+equipe.getId();
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 }
+	 }
+	 //Supprime l'equipe
+	 public static void suppEquipe(Equipe equipe){
+		 try{
+			 Connection c =jdbc.Base.connexion();			 
+			 String sql = "DELETE FROM java_candidat c "
+			 		+ "WHERE c.id_candidat =" +equipe.getId();
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 }
+	 }
 	 //remove membre equipe
+	 public static void suppMembreEquipe(Equipe equipe , Personne pers){
+		 try{
+			 Connection c =jdbc.Base.connexion();			 
+			 String sql = "DELETE FROM appartenir"
+			 		+ "WHERE id_equipe=" +equipe.getId()
+			 		+ "AND id_personne=" +pers.getId();
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 }
+	 }
 }

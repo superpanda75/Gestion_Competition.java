@@ -2,6 +2,9 @@ package inscriptions;
 
 import java.io.*;
 import java.util.*;
+
+import inscriptions.Competition.InscriptionEnRetardException;
+
 import java.time.*;
 import jdbc.*;
 import userDialog.*;
@@ -28,7 +31,7 @@ public class Inscriptions implements Serializable
 		candidats = BaseCandidat.SelectCand(this);
 		competitions = BaseCompetition.SelectComp(this);
 		baseEq.selectMembreEquipe(this);
-		//Comp.selectInscription(this);
+		Comp.selectInscription(this);
 	}
 	
 	/**
@@ -93,7 +96,7 @@ public class Inscriptions implements Serializable
 	{
 		
 			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
-			//jdbc.BaseCompetition.Sauvegarder(competition);
+			jdbc.BaseCompetition.Sauvegarder(competition);
 			competitions.add(competition);
 			return competition;
 	
@@ -252,13 +255,13 @@ public class Inscriptions implements Serializable
 			+ "\nCompetitions  " + getCompetitions().toString();
 	}
 	//NE PAS TOUCHER 
-	public static void main(String[] args) 
+	public static void main(String[] args)throws InscriptionEnRetardException, RuntimeException, IOException
 	{
 	
-		MainMenu menu = new MainMenu();
-		menu.start();
+		//MainMenu menu = new MainMenu();
+		//menu.start();
 		//RENVOIE UNE COLLECTION DE CANDIDAT
-		Inscriptions inscription = Inscriptions.getInscriptions();
+		//Inscriptions inscriptions = Inscriptions.getInscriptions();
 		//for (Candidat c : inscription.getCandidats()) {
 			//System.out.println(c);
 		//}
@@ -272,8 +275,10 @@ public class Inscriptions implements Serializable
 			//System.out.println(e.getMembres());
 			 
 		 //}
-		//for(Competition comp: inscription.getCompetitions()){
-			//System.out.println(comp.getNom());
+
+		//for (Competition c : inscriptions.getCompetitions()) 
+		//{
+			//System.out.println(c);
 		//}
 	}
 	

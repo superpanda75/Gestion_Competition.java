@@ -26,7 +26,26 @@ public class BaseCandidat {
 
 	
 		 //2- modifie le candidat 
+		 public void updateCand(){
+			 try{
+					Connection c = jdbc.Base.connexion();
+					String req = "";
+					
+
+			 }catch(SQLException e){
+				 System.out.println(e.getMessage());
+			 }
+		 }
 		 //3- supprime le candidat
-		 //4- Inscrire un candidat (java_inscription)
+		 public void deleteCand(){
+			 try{
+				 Connection c = jdbc.Base.connexion();
+					String req = "";
+				 
+			 }catch(SQLException e){
+				 System.out.println(e.getMessage());
+			 }
+		 }
+		 //4- Inscrire un candidat (java_inscription) 
 	
 }

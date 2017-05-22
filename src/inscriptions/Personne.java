@@ -61,6 +61,7 @@ public class Personne extends Candidat
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
+		jdbc.BasePersonne.updatePers(this);
 	}
 
 	/**
@@ -71,6 +72,7 @@ public class Personne extends Candidat
 	public String getMail()
 	{
 		return mail;
+
 	}
 
 	/**
@@ -81,6 +83,8 @@ public class Personne extends Candidat
 	public void setMail(String mail)
 	{
 		this.mail = mail;
+		jdbc.BasePersonne.updatePers(this);
+
 	}
 
 	/**

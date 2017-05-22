@@ -12,15 +12,16 @@ public class BasePersonne {
 
 	}
 	//SUPPRIMER 
-	/*public static void deletePers(Personne personne, Candidat candidat)
+	public static void deletePers(Personne personne)
 	{
 		try 
 		{
 			String requete = "DELETE FROM java_personne p"
-						+"WHERE p.id_personne ="+personne.getId();
+						+"WHERE p.id_personne = ?";
 			Connection c = jdbc.Base.connexion();
-			Statement smt = c.createStatement();
-			ResultSet rs = smt.executeQuery(requete);
+			PreparedStatement smt = c.prepareStatement(requete);
+			smt.setInt(1, personne.getId());
+			boolean rs = smt.execute(requete);
 		
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -31,21 +32,23 @@ public class BasePersonne {
 	{
 		try 
 		{
-			String sql = "UPDATE java_personne p, java_candidat c "
-						+ "SET p.prenom_personne = "+personne.getPrenom()
-						+"p.mail_personne ="+personne.getMail()
-						+"c.nom_candidat =" +personne.getNom()
-						+ "WHERE c.id_candidat =" +personne.getId();
+			String sql = "UPDATE java_personne p "
+						+ "SET p.prenom_personne = ?"
+						+" p.mail_personne = ?"
+						+ "WHERE p.id_personne = ?";
 			Connection c = jdbc.Base.connexion();
-			Statement smt = c.createStatement();
-			ResultSet rs = smt.executeQuery(sql);			
+			PreparedStatement smt = c.prepareStatement(sql);
+			smt.setString(1, personne.getPrenom());
+			smt.setString(2, personne.getMail());
+			smt.setInt(3, personne.getId());
+			int rs = smt.executeUpdate(sql);			
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
-	}*/
+	}
 	 
 		 //FONCTIONNE AJOUTER PERSONNE & candidat (on recupere le prenom de la classe mere personne et le nm pour la classe fille candidat )->notion héritage
-		 public static void sauvegarder(Personne personne){
+		public static void sauvegarder(Personne personne){
 			 try{
 				 String sql="INSERT INTO java_personne(prenom_personne,mail_personne) VALUES('"+personne.getPrenom()+"','"+personne.getMail()+"')";
 				 Connection c = jdbc.Base.connexion();
@@ -55,13 +58,12 @@ public class BasePersonne {
 					while(rs.next())
 					{
 						sql ="INSERT INTO java_candidat(nom_candidat) VALUES ('"+personne.getNom()+"')";
-						System.out.println("Personne bien ajouté!");
 					}
 					smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
 					ResultSet resultat = smt.getGeneratedKeys();
 					while(resultat.next())
 					{
-						personne.setNom(resultat.getString(1));
+						personne.setId(resultat.getInt(1));
 					}
 					
 			 }
@@ -94,4 +96,4 @@ public class BasePersonne {
 			return listePers;
 		} 
 
-	}
+}

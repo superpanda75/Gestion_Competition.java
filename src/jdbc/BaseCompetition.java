@@ -7,7 +7,8 @@ import inscriptions.*;
 import inscriptions.Competition.*;
 
 public class BaseCompetition {
-	
+	private boolean sauvegarder = true;
+
 	public BaseCompetition(){
 		
 	}
@@ -30,10 +31,10 @@ public class BaseCompetition {
 	{
 		try 
 		{
-			String sql = "DELETE FROM java_competition co WHERE co.id_competition =" +competition.getId();
+			String sql = "DELETE FROM java_competition WHERE java_competition.id_competition = "+competition.getId();
 			Connection c =jdbc.Base.connexion();
-			 Statement smt = c.createStatement();
-			 ResultSet rs = smt.executeQuery(sql);
+			Statement smt = c.createStatement();
+			 boolean rs = smt.execute(sql);
 	    } 
 		catch (SQLException e)
 		{
@@ -62,39 +63,39 @@ public class BaseCompetition {
 		return SelectComp;
 	}
 	 
-	 /*public void selectInscription(Inscriptions inscriptions)throws InscriptionEnRetardException, RuntimeException{
+	 public void selectInscription(Inscriptions inscriptions)
+	 {
 		 try{
 			 for(Competition comp: inscriptions.getCompetitions())
-			 {
+				{
 					 Connection c =jdbc.Base.connexion();
-					 String sql = "SELECT c.id_candidat, c.nom_candidat "
-					 			+ "	FROM java_candidat c, java_inscription i "
-					 			+ "WHERE i.id_candidat = c.id_candidat "
-					 			+ "AND i.id_competition =" + comp.getId() ;
+					 String sql = "SELECT * "
+					 		+ "FROM java_candidat c, java_inscription i "
+					 		+ "WHERE i.id_candidat = c.id_candidat "
+					 		+ "AND i.id_competition = i.id_competition";
 					 Statement smt = c.createStatement();
 					 ResultSet rs = smt.executeQuery(sql);
-					 while(rs.next()){
-						 for (Personne pers: inscriptions.getPersonnes()) 
-				            {
-								if(rs.getInt("id_candidat") == pers.getId())
+					 while (rs.next())
+						{
+						 for (Personne p : inscriptions.getPersonnes()) 
+								if(rs.getInt("id_candidat") == p.getId())
 								{
-									comp.add(pers);
+									comp.add(p);
 								}
-	
-				            } 
-						 for (Equipe e : inscriptions.getEquipes()) 
+				            for (Equipe e : inscriptions.getEquipes()) 
 				            {
 								if(rs.getInt("id_candidat") == e.getId())
 								{
 									comp.add(e);
 								}
 							}
-					 }
-			 }
+				        } 
+				}
 		 }catch(SQLException e){
+			 e.printStackTrace();
 			 System.out.println(e.getMessage());
 		 } 
-	 }*/
+	 }
 
 		 //AJOUTER COMPETITION  --> fonctionne
 		 public static void Sauvegarder(Competition competition) 
