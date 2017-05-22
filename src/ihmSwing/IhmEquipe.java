@@ -49,9 +49,7 @@ public class IhmEquipe implements ItemListener
 	        card1.add(new JTextField(20));
 	        card1.add(new JLabel("membres"));
 	        card1.add(new JTextField(20));
-	        card1.add(new JButton("Button 1"));
-	        card1.add(new JButton("Button 2"));
-	        card1.add(new JButton("Button 3"));
+	       
 	         
 	        JPanel card2 = new JPanel();
 	        card2.add(new JTextField("TextField", 20));
@@ -68,7 +66,7 @@ public class IhmEquipe implements ItemListener
         
 	         
 	        pane.add(comboBoxPane, BorderLayout.PAGE_START);
-	        pane.add(cards, BorderLayout.CENTER);
+	        pane.add(cards, BorderLayout.SOUTH);
 	    }
 	     
 	    public void itemStateChanged(ItemEvent evt) {
