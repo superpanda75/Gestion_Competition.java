@@ -119,7 +119,7 @@ public class IhmPersonne implements ItemListener
 	        card2.setLayout(null);
 	        
 	        List liste_personne = new List();
-	        liste_personne.setMultipleSelections(false);
+	        liste_personne.setMultipleMode(false);
 	        liste_personne.setMultipleMode(false);
 	        liste_personne.setBounds(37, 80, 190, 256);
 	        liste_personne.setBackground(new Color(51, 102, 153));
