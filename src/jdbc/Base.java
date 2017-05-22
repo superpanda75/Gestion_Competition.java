@@ -22,8 +22,7 @@ public class Base {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			//jdbc:mysql://mysql.m2l.local/ahouri", "ahouri
-			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java", "root", "");	
-			System.out.println("Connexion bien établie");
+			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java?autoReconnect=true&useSSL=false", "root", "");	
 		
 			
 		}
@@ -37,7 +36,6 @@ public class Base {
 	
 
 	public static void main(String[] args) throws SQLException {
-		BaseCandidat.AffichCandInscriptionCompet();
 		
 	}
 }

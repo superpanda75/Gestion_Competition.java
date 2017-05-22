@@ -1,9 +1,8 @@
 package inscriptions;
 
 import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
-import inscriptions.*;
+import java.util.*;
+
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
@@ -62,7 +61,7 @@ public class Personne extends Candidat
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
-		jdbc.BasePersonne.ModifP(this);
+		jdbc.BasePersonne.updatePers(this);
 	}
 
 	/**
@@ -73,6 +72,7 @@ public class Personne extends Candidat
 	public String getMail()
 	{
 		return mail;
+
 	}
 
 	/**
@@ -83,6 +83,8 @@ public class Personne extends Candidat
 	public void setMail(String mail)
 	{
 		this.mail = mail;
+		jdbc.BasePersonne.updatePers(this);
+
 	}
 
 	/**

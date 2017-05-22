@@ -1,20 +1,13 @@
 package inscriptions;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.Collections;
-import java.time.LocalDate;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.io.*;
+import java.util.*;
 
-import jdbc.BaseCandidat;
-import jdbc.BaseCompetition;
-import jdbc.BaseEquipe;
-import userDialog.MainMenu;
+import inscriptions.Competition.InscriptionEnRetardException;
+
+import java.time.*;
+import jdbc.*;
+import userDialog.*;
 
 
 /**
@@ -30,13 +23,15 @@ public class Inscriptions implements Serializable
 	private static Inscriptions inscriptions;
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
-	BaseEquipe baseEquipe = new BaseEquipe();
-	public static boolean db = false;	
-
+	BaseEquipe baseEq = new BaseEquipe();
+	BaseCompetition Comp = new BaseCompetition();
+	
 	private Inscriptions()
 	{
 		candidats = BaseCandidat.SelectCand(this);
 		competitions = BaseCompetition.SelectComp(this);
+		baseEq.selectMembreEquipe(this);
+		//Comp.selectInscription(this);
 	}
 	
 	/**
@@ -101,7 +96,7 @@ public class Inscriptions implements Serializable
 	{
 		
 			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
-			//jdbc.BaseCompetition.Sauvegarder(competition);
+			jdbc.BaseCompetition.Sauvegarder(competition);
 			competitions.add(competition);
 			return competition;
 	
@@ -120,7 +115,7 @@ public class Inscriptions implements Serializable
 	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
-		//jdbc.BasePersonne.sauvegarder(personne);
+		jdbc.BasePersonne.sauvegarder(personne);
 		candidats.add(personne);
 		return personne;
 	}
@@ -260,32 +255,32 @@ public class Inscriptions implements Serializable
 			+ "\nCompetitions  " + getCompetitions().toString();
 	}
 	//NE PAS TOUCHER 
-	public static void main(String[] args)
+	public static void main(String[] args)throws InscriptionEnRetardException, RuntimeException, IOException
 	{
-		//MainMenu menu = new MainMenu();
-		//menu.start();
+	
+		MainMenu menu = new MainMenu();
+		menu.start();
 		//RENVOIE UNE COLLECTION DE CANDIDAT
-		Inscriptions inscription = Inscriptions.getInscriptions();
-		/*for (Candidat c : inscription.getCandidats()) {
-			System.out.println(c);
-		}
-		//RENVOIE UNE COLLECTION DE COMPETITION
-		Inscriptions inscription1 = Inscriptions.getInscriptions();
-		for (Competition c: inscription1.getCompetitions()) {
-		System.out.println(c);
+		//Inscriptions inscriptions = Inscriptions.getInscriptions();
+		//for (Candidat c : inscription.getCandidats()) {
+			//System.out.println(c);
+		//}
+		//RENVOIE UNE COLLECTION DE COMPETITION & Equipe
+		//Inscriptions inscriptions = Inscriptions.getInscriptions();
+		//for (Competition c : inscription.getCompetitions()) {
+		//System.out.println(c);
+	//}
+		 //for(Equipe e: inscription.getEquipes()){
+			 
+			//System.out.println(e.getMembres());
+			 
+		 //}
+
+		//for (Competition c : inscriptions.getCompetitions()) 
+		//{
+			//System.out.println(c);
+		//}
 	}
-		 for(Equipe equipe: inscription1.getEquipes()){
-			 System.out.println(equipe);
-		 }	*/
-		 
-		 for (Personne p : inscription.getPersonnes())
-		{
-			System.out.println(p.getNom() + " "+ p.getId() + " "+ p.getPrenom());
-		}
-		 
-	}
-		
-		
 	
 
 	//UPDATE COMPETITION

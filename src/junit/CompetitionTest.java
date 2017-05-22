@@ -52,7 +52,7 @@ public class CompetitionTest {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now(), true);	
-		assertEquals(true,compet.estEnEquipe());
+		assertEquals(true,compet.getEnEquipe());
 		
 	}
 

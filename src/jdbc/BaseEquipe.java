@@ -1,13 +1,7 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
+import java.sql.*;
+import java.util.*;
 import inscriptions.*;
 
 public class BaseEquipe {
@@ -36,35 +30,90 @@ public class BaseEquipe {
 	}
 		return listeEquipe;
 	}
-	 //Afficher les membres d'une equipe
-	 public static void selectMembreEquipe(Inscriptions inscriptions){
+	 //AJOUTER UNE EQUIPE
+	 public void sauvegarder(Equipe equipe){
 		 try{
-			
-			 for(Equipe equipe: inscriptions.getEquipes()){
-				 Connection c =jdbc.Base.connexion();
-				 String sql = "SELECT c.nom_candidat FROM java_candidat c,java_appartenir a"
-				 		+ " WHERE c.id_candidat = a.id_equipe "
-				 		+ " AND a.id_equipe = id_equipe "
-				 		+ "	GROUP BY c.id_candidat";
-				 PreparedStatement smt = c.prepareStatement(sql);
-				 smt.setInt(equipe.getId(), 1);
-				 ResultSet rs = smt.executeQuery();
-				 while(rs.next()){
-					 for (Personne equip: inscriptions.getPersonnes()) 
-			            {
-							if(rs.getInt("id_candidat") == equip.getId())
-							{
-								equipe.add(equip);
-							}
+			 Connection c =jdbc.Base.connexion();
+			 String sql= "INSERT INTO java_candidat (nom_candidat) VALUES ('"+equipe.getNom()+"')";
+			 Statement smt = c.createStatement();
+			 smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+			ResultSet rs = smt.getGeneratedKeys();
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+			 System.out.println("l'equipe n'a pas ete crée");
+		 }
+	 }
+	
 
-			            } 
-				 }
+	 //Afficher les membres d'une equipe
+	 public void selectMembreEquipe(Inscriptions inscriptions){
+		 try{
+			 for(Equipe e: inscriptions.getEquipes())
+			 {
+					 Connection c =jdbc.Base.connexion();
+					 
+					 String sql = "SELECT a.id_personne ";
+					 sql += "FROM java_candidat c , java_personne p, java_appartenir a ";
+					 sql += "WHERE p.id_personne = c.id_candidat ";
+					 sql += "AND c.id_candidat = a.id_personne AND a.id_equipe = " + e.getId();
+					 Statement smt = c.createStatement();
+					 ResultSet rs = smt.executeQuery(sql);
+					 while(rs.next()){
+						 for (Personne pers: inscriptions.getPersonnes()) 
+				            {
+								if(rs.getInt("id_personne") == pers.getId())
+								{
+									e.add(pers);
+								}
+	
+				            } 
+					 }
 			 }
+		 }catch(SQLException eq){
+			 System.out.println(eq.getMessage());
+		 } 
+	 }
+	 //Ajouter un membre 
+	 public static void addMembreEquipe(Equipe equipe, Personne pers){
+		 try{
+			 Connection c =jdbc.Base.connexion();			 
+			 String sql = "INSERT INTO java_appartenir(id_equipe, id_personne) "
+			 			+ "	VALUES('"+equipe.getId()+"', '"+pers.getId()+"')";
+			 
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 }
+	}
+	 //Modifie le nom de l'equipe
+	 public static void modifEquipe(Equipe equipe){
+		 try{
+			 Connection c =jdbc.Base.connexion();			 
+			 String sql = " UPDATE java_candidat c "
+			 		+ "SET c.nom_candidat "
+			 		+ "WHERE id_candidat = "+equipe.getId();
 		 }catch(SQLException e){
 			 System.out.println(e.getMessage());
 		 }
 	 }
-	 
-
-	
-	}
+	 //Supprime l'equipe
+	 public static void suppEquipe(Equipe equipe){
+		 try{
+			 Connection c =jdbc.Base.connexion();			 
+			 String sql = "DELETE FROM java_candidat c "
+			 		+ "WHERE c.id_candidat =" +equipe.getId();
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 }
+	 }
+	 //remove membre equipe
+	 public static void suppMembreEquipe(Equipe equipe , Personne pers){
+		 try{
+			 Connection c =jdbc.Base.connexion();			 
+			 String sql = "DELETE FROM appartenir"
+			 		+ "WHERE id_equipe=" +equipe.getId()
+			 		+ "AND id_personne=" +pers.getId();
+		 }catch(SQLException e){
+			 System.out.println(e.getMessage());
+		 }
+	 }
+}

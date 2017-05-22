@@ -4,7 +4,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+
 import java.awt.*;
+
 
 import java.util.ArrayList;
 import java.util.SortedSet;
@@ -27,6 +29,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 
+
 public class IhmPersonne implements ItemListener
 	{	
 		JPanel cards;
@@ -39,10 +42,7 @@ public class IhmPersonne implements ItemListener
 		
 		public IhmPersonne(JLabel titreOnglet)
 		{
-			
-			BorderLayout bl_ongletPers = new BorderLayout();
-			bl_ongletPers.setHgap(50);
-			this.ongletPers.setLayout(bl_ongletPers);
+			this.ongletPers.setLayout(new BorderLayout());
 			this.ongletPers.add(titreOnglet);
 			addComponentToPane(ongletPers);
 			//itemStateChanged(event);
@@ -203,6 +203,7 @@ public class IhmPersonne implements ItemListener
 		public JPanel getOnglet(){
 			return this.ongletPers;
 		}
+
 	}
 
 	
