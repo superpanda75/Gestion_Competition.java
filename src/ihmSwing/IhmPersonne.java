@@ -1,10 +1,11 @@
 package ihmSwing;
 
+import inscriptions.Inscriptions;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-
 import java.awt.*;
 
 
@@ -13,6 +14,9 @@ import java.util.SortedSet;
 
 
 import java.util.ArrayList;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
@@ -22,6 +26,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import inscriptions.Candidat;
+import inscriptions.Personne;
+
 import javax.swing.border.LineBorder;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -118,25 +126,16 @@ public class IhmPersonne implements ItemListener
 	        cards.add(card2, optionModifier);
 	        card2.setLayout(null);
 	        
-	        List liste_personne = new List();
-	        liste_personne.setMultipleMode(false);
-	        liste_personne.setMultipleMode(false);
-	        liste_personne.setBounds(37, 80, 190, 256);
-	        liste_personne.setBackground(new Color(51, 102, 153));
-	        liste_personne.setMultipleMode(false);
-	        liste_personne.add("premier membre", 0);
-	        liste_personne.add("second membre", 1);
-	        liste_personne.add("troisième membre", 2);
-	        card2.add(liste_personne);
+	        
 	       
 	        
 	        JLabel lblListeDesPersonnes = new JLabel("Liste des personnes enregistr\u00E9es :");
 	        lblListeDesPersonnes.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-	        lblListeDesPersonnes.setLabelFor(liste_personne);
 	        lblListeDesPersonnes.setBounds(37, 43, 249, 16);
 	        card2.add(lblListeDesPersonnes);
 	        
 	        JButton btnModifier = new JButton("Modifier");
+	        btnModifier.setEnabled(false);
 	        btnModifier.setBounds(270, 196, 89, 23);
 	        card2.add(btnModifier);
 	        
@@ -190,10 +189,62 @@ public class IhmPersonne implements ItemListener
 	        btnValiderLaModification.setBounds(250, 351, 160, 23);
 	        card2.add(btnValiderLaModification);
 	        
+	        
+	        
+	        Inscriptions ins = inscriptions.Inscriptions.getInscriptions();
+	        SortedSet personnes = ins.getPersonnes();
+	        DefaultListModel model = new DefaultListModel<>();
+			JList<Personne> list_1 = new JList<>(model);
+	        for(Object personne : personnes){
+	            model.addElement(personne);
+	        }
+	        list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	        list_1.setBackground(new Color(51, 102, 153));
+	        list_1.setBounds(37, 80, 190, 256);
+	        list_1.setCellRenderer(getCellRenderer());
+	        card2.add(list_1);
+	        
 	         
 	        pane.add(ActionPersonne, BorderLayout.PAGE_START);
 	        pane.add(cards, BorderLayout.CENTER);
 	    }
+		
+		private ListCellRenderer<? super Personne> getCellRenderer() {
+	        return new DefaultListCellRenderer(){
+	            @Override
+	            public Component getListCellRendererComponent(JList<?> list,
+	                    Object value, int index, boolean isSelected,
+	                    boolean cellHasFocus) {
+	            	Personne p = (Personne) value;
+	                Component listCellRendererComponent = super.getListCellRendererComponent(list, p.getNom()+"/"+p.getPrenom()+"/"+p.getMail(), index, isSelected,cellHasFocus);
+	                return listCellRendererComponent;
+	            }
+	        };
+	    }
+		
+		
+//		public Component getListCellRendererComponent(
+//			       JList list,
+//			       Object value,            // value to display
+//			       int index,               // cell index
+//			       boolean isSelected,      // is the cell selected
+//			       boolean cellHasFocus)    // the list and the cell have the focus
+//			     {
+//			         String s = value.toString();			         
+//			   	   if (isSelected) {
+//			           list.setBackground(list.getSelectionBackground());
+//				       list.setForeground(list.getSelectionForeground());
+//				   }
+//			         else {
+//				      list.setBackground(list.getBackground());
+//				      list.setForeground(list.getForeground());
+//				   }
+//				   list.setEnabled(list.isEnabled());
+//				   list.setFont(list.getFont());
+//			         list.setOpaque(true);
+//			         return list;
+//			     }
+//			 
 	     
 	    public void itemStateChanged(ItemEvent evt) {
 	        CardLayout cl = (CardLayout)(cards.getLayout());
@@ -203,7 +254,6 @@ public class IhmPersonne implements ItemListener
 		public JPanel getOnglet(){
 			return this.ongletPers;
 		}
-
 	}
 
 	

@@ -5,8 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 
-public class IhmMain
+
+public class IhmMain 
 	{
 		private IhmPersonne ongletPersonne;	
 		private IhmEquipe ongletEquipe;	
@@ -51,6 +53,7 @@ public class IhmMain
 
 		}
 	
+		
 	/**
 	 * Cette fonction permet d'activer un champ : activerChamp(libelle, JTextField)
 	 * @param lbl
