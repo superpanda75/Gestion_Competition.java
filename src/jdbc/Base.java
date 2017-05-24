@@ -21,8 +21,10 @@ public class Base {
 	{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			//jdbc:mysql://mysql.m2l.local/ahouri", "ahouri
-			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java?autoReconnect=true&useSSL=false", "root", "");
+			//jdbc:mysql://localhost:3306/java", "root", ""
+			//jdbc:mysql://mysql.m2l.local/ahouri", "ahouri", "azerty"
+			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java", "root", "");	
+			System.out.println("Connexion bien établie");
 			
 		}
 		catch (ClassNotFoundException e) {
