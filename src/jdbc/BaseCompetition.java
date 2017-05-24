@@ -8,6 +8,7 @@ import inscriptions.Competition.*;
 
 public class BaseCompetition {
 	private boolean sauvegarder = true;
+	public static Base bdd = new Base();
 
 	public BaseCompetition(){
 		
@@ -20,7 +21,7 @@ public class BaseCompetition {
 					+"java_competition.date = "+competition.getDateCloture()
 					+"java_competition.enEquipe = "+competition.getEnEquipe()
 					+"WHERE java_competition.id_competition = "+competition.getId();
-			Connection c =jdbc.Base.connexion();
+			Connection c =bdd.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(req);
 		}catch(SQLException e){
@@ -32,7 +33,7 @@ public class BaseCompetition {
 		try 
 		{
 			String sql = "{call suppComp( ? )}";
-			Connection c =jdbc.Base.connexion();
+			Connection c =bdd.connexion();
 			java.sql.CallableStatement smt = c.prepareCall(sql);
 			smt.setLong(1,comp.getId());
 			smt.executeUpdate(); 
@@ -47,7 +48,7 @@ public class BaseCompetition {
 			SortedSet<Competition> SelectComp = new TreeSet();
 		 try{
 			 String query="SELECT * FROM java_competition";
-			Connection c =jdbc.Base.connexion();
+			 Connection c =bdd.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
 			 while(rs.next())
@@ -64,12 +65,12 @@ public class BaseCompetition {
 		return SelectComp;
 	}
 	 
-	 /*public void selectInscription(Inscriptions inscriptions)
+	 public void selectInscription(Inscriptions inscriptions)
 	 {
 		 try{
+		  Connection c =jdbc.Base.connexion();
 			 for(Competition comp: inscriptions.getCompetitions())
 				{
-					 Connection c =jdbc.Base.connexion();
 					 String sql = "SELECT * "
 					 		+ "FROM java_candidat c, java_inscription i "
 					 		+ "WHERE i.id_candidat = c.id_candidat "
@@ -96,10 +97,10 @@ public class BaseCompetition {
 			 e.printStackTrace();
 			 System.out.println(e.getMessage());
 		 } 
-	 }*/
+	 }
 
 		 //AJOUTER COMPETITION  --> fonctionne
-		 public static void Sauvegarder(Competition competition) 
+		/* public static void Sauvegarder(Competition competition) 
 			{	
 				try {
 						Connection c =  jdbc.Base.connexion();
@@ -122,5 +123,5 @@ public class BaseCompetition {
 					}  catch (SQLException e) {
 						System.out.print(e.getMessage());
 					}
-			}
+			}*/
 }

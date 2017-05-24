@@ -96,7 +96,7 @@ public class Inscriptions implements Serializable
 	{
 		
 			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
-			jdbc.BaseCompetition.Sauvegarder(competition);
+			//jdbc.BaseCompetition.Sauvegarder(competition);
 			competitions.add(competition);
 			return competition;
 	
