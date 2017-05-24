@@ -12,7 +12,7 @@ public class BasePersonne {
 
 	}
 	//SUPPRIMER 
-	public static void deletePers(Personne personne)
+	/*public static void deletePers(Personne personne)
 	{
 		try 
 		{
@@ -45,12 +45,12 @@ public class BasePersonne {
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
-	}
+	}*/
 	 
 		 //FONCTIONNE AJOUTER PERSONNE & candidat (on recupere le prenom de la classe mere personne et le nm pour la classe fille candidat )->notion héritage
-		public static void sauvegarder(Personne personne){
+		/*public static void sauvegarder(Personne personne){
 			 try{
-				 String sql="INSERT INTO java_personne(prenom_personne,mail_personne) VALUES('"+personne.getPrenom()+"','"+personne.getMail()+"')";
+				 String sql="INSERT INTO java_personne(id_personne,prenom_personne,mail_personne) VALUES('"+personne.getId()+"','"+personne.getPrenom()+"','"+personne.getMail()+"')";
 				 Connection c = jdbc.Base.connexion();
 				 Statement smt = c.createStatement();
 				 smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
@@ -70,7 +70,7 @@ public class BasePersonne {
 			 catch(SQLException e){
 				System.out.print(e.getMessage());
 			 }
-		 }
+		 }*/
 		//AFFICHER CANDIDAT --> fonctionne 
 		 public static SortedSet<Candidat> SelectPers(Inscriptions inscription){
 				SortedSet<Candidat> listePers = new TreeSet();
