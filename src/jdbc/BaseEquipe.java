@@ -31,19 +31,23 @@ public class BaseEquipe {
 		return listeEquipe;
 	}
 	 //AJOUTER UNE EQUIPE
-	 public void sauvegarder(Equipe equipe){
-		 try{
-			 Connection c =jdbc.Base.connexion();
-			 String sql= "INSERT INTO java_candidat (nom_candidat) VALUES ('"+equipe.getNom()+"')";
-			 Statement smt = c.createStatement();
-			 smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
-			ResultSet rs = smt.getGeneratedKeys();
-		 }catch(SQLException e){
-			 System.out.println(e.getMessage());
-			 System.out.println("l'equipe n'a pas ete crée");
-		 }
-	 }
-	
+	 /*public static void sauvegarder(Equipe equipe)
+		{
+			try	
+			{
+				Connection c =jdbc.Base.connexion();
+				String sql = "{call addEquipe( ? )}";
+				java.sql.CallableStatement smt = c.prepareCall(sql);
+				smt.setInt(1, equipe.getId());
+				smt.executeUpdate(); 
+				equipe.setId(smt.RETURN_GENERATED_KEYS);
+			}
+			catch (SQLException e)
+			{
+				System.out.println(e.getMessage());
+				System.out.println("L'équipe n'a pas été créée.");
+			}
+		}	*/
 
 	 //Afficher les membres d'une equipe
 	 public void selectMembreEquipe(Inscriptions inscriptions){
