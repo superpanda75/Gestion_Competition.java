@@ -54,7 +54,7 @@ public class IhmPersonne implements ItemListener
 			this.ongletPers.add(titreOnglet);
 			addComponentToPane(ongletPers);
 			//itemStateChanged(event);
-//			this.ongletPers.add(panelDroite,BorderLayout.EAST);
+			//this.ongletPers.add(panelDroite,BorderLayout.EAST);
 			
 		}
 		
@@ -196,18 +196,35 @@ public class IhmPersonne implements ItemListener
 	        DefaultListModel model = new DefaultListModel<>();
 			JList<Personne> list_1 = new JList<>(model);
 	        for(Object personne : personnes){
-	            model.addElement(personnes);
+	            model.addElement(personne);
 	        }
 	        list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	        list_1.setBackground(new Color(51, 102, 153));
 	        list_1.setBounds(37, 80, 190, 256);
 	        list_1.setCellRenderer(getCellRenderer());
+	        //=====================DECOMMENTER ET REMPLACER LA LISTE D AfFICHAGE FACTICE====
 	        card2.add(list_1);
-	        
-	        
-	         
+	        //==============================================================================
 	        pane.add(ActionPersonne, BorderLayout.PAGE_START);
 	        pane.add(cards, BorderLayout.CENTER);
+	        
+	        
+	        // LISTE DE TEST
+	        DefaultListModel model_test = new DefaultListModel<>();
+			JList<Personne> list_test = new JList<>(model_test);
+			list_test.setBackground(new Color(51, 102, 153));
+	        list_test.setBounds(37, 80, 190, 256);
+	        
+	        
+	        //card2.add(list_test);
+	        
+	        list_1.addListSelectionListener(new ListSelectionListener() {	        	 
+	             public void valueChanged(ListSelectionEvent e) {
+	               JList source = (JList)e.getSource();
+	               Object selection = source.getSelectedValue();
+	              	              
+	             }
+	           });
 	    }
 		
 		private ListCellRenderer<? super Personne> getCellRenderer() {
@@ -217,36 +234,12 @@ public class IhmPersonne implements ItemListener
 	                    Object value, int index, boolean isSelected,
 	                    boolean cellHasFocus) {
 	            	Personne p = (Personne) value;
-	                Component listCellRendererComponent = super.getListCellRendererComponent(list,p.getId() +"/"+ p.getNom()+"/"+p.getPrenom()+"/"+p.getMail(), index, isSelected,cellHasFocus);
+	                Component listCellRendererComponent = super.getListCellRendererComponent(list, p.getNom()+"/"+p.getPrenom()+"/"+p.getMail(), index, isSelected,cellHasFocus);
 	                return listCellRendererComponent;
 	            }
 	        };
 	    }
-		
-		
-		public Component getListCellRendererComponent(
-			       JList list,
-			       Object value,            // value to display
-			       int index,               // cell index
-			       boolean isSelected,      // is the cell selected
-			       boolean cellHasFocus)    // the list and the cell have the focus
-			     {
-			         String s = value.toString();			         
-			   	   if (isSelected) {
-			           list.setBackground(list.getSelectionBackground());
-				       list.setForeground(list.getSelectionForeground());
-				   }
-			         else {
-				      list.setBackground(list.getBackground());
-				      list.setForeground(list.getForeground());
-				   }
-				   list.setEnabled(list.isEnabled());
-				   list.setFont(list.getFont());
-			         list.setOpaque(true);
-			         return list;
-			     }
-			 
-	     
+
 	    public void itemStateChanged(ItemEvent evt) {
 	        CardLayout cl = (CardLayout)(cards.getLayout());
 	        cl.show(cards, (String)evt.getItem());
