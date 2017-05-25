@@ -2,20 +2,18 @@ package junit;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 import org.junit.Test;
 
 import inscriptions.Competition;
-import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
 
 public class CandidatTest {
 	
 	@Test
-	public void testGetNom() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testGetNom() {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b","c");
 		String inscri = Personne.getPrenom();
@@ -24,7 +22,7 @@ public class CandidatTest {
 	}
 
 	@Test
-	public void testSetNom() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testSetNom() {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		Personne.setNom("a");
@@ -33,7 +31,7 @@ public class CandidatTest {
 	}
 
 	@Test
-	public void testGetCompetitions() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testGetCompetitions() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
@@ -49,7 +47,7 @@ public class CandidatTest {
 
 
 	@Test
-	public void testDelete() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testDelete() {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("Yeah", "Ya", "Yo");
 		Personne.delete();
@@ -58,7 +56,7 @@ public class CandidatTest {
 	
 
 	@Test
-	public void testCompareTo() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testCompareTo() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("Ha", "Ho", "He");
@@ -68,7 +66,7 @@ public class CandidatTest {
 	}
 
 	@Test
-	public void testToString() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testToString() {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("Thresh", "Olivier", "Yo");
 		

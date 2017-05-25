@@ -1,12 +1,10 @@
 package userDialog;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import inscriptions.Competition;
-import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 
@@ -16,7 +14,7 @@ import commandLine.util.InOut;;
 public class TeamMenu 
 {
 	private static Inscriptions inscriptions;
-	public TeamMenu() throws InscriptionEnRetardException, RuntimeException, IOException
+	public TeamMenu()
 	{
 		inscriptions = Inscriptions.getInscriptions();
 	}

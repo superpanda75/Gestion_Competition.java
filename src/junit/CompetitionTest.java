@@ -2,13 +2,11 @@ package junit;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 import org.junit.Test;
 
 import inscriptions.Competition;
-import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
@@ -20,14 +18,14 @@ public class CompetitionTest {
 	
 
 	@Test
-	public void testGetNom() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testGetNom() {
 		inscriptions.Inscriptions inscriptions = getInscriptions();
 		Competition compet = inscriptions.createCompetition("Tournoi de fléchettes", null, true);
 		assertEquals("Tournoi de fléchettes", compet.getNom());
 	}
 
 	@Test
-	public void testSetNom() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testSetNom() {
 		inscriptions.Inscriptions inscriptions = getInscriptions();
 		Competition compet = inscriptions.createCompetition("gertrude", null, true);
 		compet.setNom("gertrude");
@@ -35,7 +33,7 @@ public class CompetitionTest {
 	}
 
 	@Test
-	public void testInscriptionsOuvertes() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testInscriptionsOuvertes() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now(), true);
@@ -43,14 +41,14 @@ public class CompetitionTest {
 	}
 
 	@Test
-	public void testGetDateCloture() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testGetDateCloture() {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("test", LocalDate.now(), false);	
 		assertEquals(LocalDate.now(),compet.getDateCloture());
 	}
 
 	@Test
-	public void testEstEnEquipe() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testEstEnEquipe() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now(), true);	
@@ -59,7 +57,7 @@ public class CompetitionTest {
 	}
 
 	@Test
-	public void testSetDateCloture() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testSetDateCloture() {
 		LocalDate date = LocalDate.now();
 		LocalDate  date1 = LocalDate.now();
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
@@ -70,7 +68,7 @@ public class CompetitionTest {
 	
 
 	@Test
-	public void testGetCandidats() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testGetCandidats() {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Competition compet = inscri.createCompetition("testCompet", LocalDate.now(), false);
 		Personne Olivier = inscri.createPersonne("ha", "oh", "eh");
@@ -82,7 +80,7 @@ public class CompetitionTest {
 		}
 
 	@Test
-	public void testAddPersonne() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testAddPersonne() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("test", null, false);
@@ -92,7 +90,7 @@ public class CompetitionTest {
 	}
 
 	@Test
-	public void testAddEquipe() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testAddEquipe() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		LocalDate date = LocalDate.now().plusDays(20);
@@ -122,7 +120,7 @@ public class CompetitionTest {
 	}
 
 	@Test
-	public void testRemove() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testRemove() {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		LocalDate date = LocalDate.now().plusDays(20);
 		Competition compet = inscri.createCompetition("test", date,false);
@@ -137,7 +135,7 @@ public class CompetitionTest {
 	}
 
 	@Test
-	public void testDelete() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testDelete() {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("Compet", LocalDate.now().plusDays(20), false);
 		int size = inscriptions.getCompetitions().size();
@@ -146,7 +144,7 @@ public class CompetitionTest {
 	}
 
 	@Test
-	public void testCompareTo() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testCompareTo() {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("Compet", LocalDate.now().plusDays(20), false);
 		Competition compet2 = inscriptions.createCompetition("Compet", LocalDate.now().plusDays(20), false);
@@ -155,7 +153,7 @@ public class CompetitionTest {
 	}
 
 	@Test
-	public void testToString() throws InscriptionEnRetardException, RuntimeException, IOException {
+	public void testToString() {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("compet", LocalDate.now().plusDays(20), false);

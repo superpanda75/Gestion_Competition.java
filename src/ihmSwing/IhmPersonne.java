@@ -28,12 +28,10 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import inscriptions.Candidat;
-import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Personne;
 
 import javax.swing.border.LineBorder;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -50,7 +48,7 @@ public class IhmPersonne implements ItemListener
 		private JTextField modifPrenomPers;
 		private JTextField modifNomPers;
 		
-		public IhmPersonne(JLabel titreOnglet) throws InscriptionEnRetardException, RuntimeException, IOException
+		public IhmPersonne(JLabel titreOnglet)
 		{
 			this.ongletPers.setLayout(new BorderLayout());
 			this.ongletPers.add(titreOnglet);
@@ -60,7 +58,7 @@ public class IhmPersonne implements ItemListener
 			
 		}
 		
-		public void addComponentToPane(Container pane) throws InscriptionEnRetardException, RuntimeException, IOException {
+		public void addComponentToPane(Container pane) {
 	        //Put the JComboBox in a JPanel to get a nicer look.
 	        JPanel ActionPersonne = new JPanel(); //use FlowLayout
 	        ActionPersonne.setBackground(new Color(51, 102, 153));

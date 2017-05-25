@@ -1,8 +1,6 @@
 package userDialog;
 
 import java.io.IOException;
-
-import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Inscriptions;
 import commandLine.*;
 import commandLine.util.InOut;;
@@ -15,7 +13,7 @@ public class MainMenu
 	private static CompMenu compMenu;
 	private static Inscriptions inscriptions;
 	
-	public MainMenu() throws InscriptionEnRetardException, RuntimeException, IOException
+	public MainMenu()
 	{
 		inscriptions = Inscriptions.getInscriptions();
 		mainMenu=getMainMenu();

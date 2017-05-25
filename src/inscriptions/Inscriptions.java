@@ -26,14 +26,12 @@ public class Inscriptions implements Serializable
 	BaseEquipe baseEq = new BaseEquipe();
 	BaseCompetition Comp = new BaseCompetition();
 	
-	private Inscriptions()throws InscriptionEnRetardException, RuntimeException
+	private Inscriptions()
 	{
-		Base.setSauvegarder(true);
 			candidats = BaseCandidat.SelectCand(this);
 			competitions = BaseCompetition.SelectComp(this);
 			baseEq.selectMembreEquipe(this);
 			//Comp.selectInscription(this);
-		Base.setSauvegarder(false);
 		
 	}
 	
@@ -100,7 +98,7 @@ public class Inscriptions implements Serializable
 		
 			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
 			competitions.add(competition);
-//			jdbc.BaseCompetition.Sauvegarder(competition);
+			//jdbc.BaseCompetition.Sauvegarder(competition);
 			return competition;
 	
 	}
@@ -165,7 +163,7 @@ public class Inscriptions implements Serializable
 	 * @return l'unique objet de type {@link Inscriptions}.
 	 */
 	
-	public static Inscriptions getInscriptions() throws InscriptionEnRetardException, RuntimeException
+	public static Inscriptions getInscriptions()
 	{
 		
 		if (inscriptions == null)
@@ -182,7 +180,7 @@ public class Inscriptions implements Serializable
 	 * et candidats déjà existants.
 	 */
 	
-	public Inscriptions reinitialiser() throws InscriptionEnRetardException, RuntimeException
+	public Inscriptions reinitialiser()
 	{
 		inscriptions = new Inscriptions();
 		return getInscriptions();
@@ -193,7 +191,7 @@ public class Inscriptions implements Serializable
 	 * Ne modifie pas les compétitions et candidats déjà existants.
 	 */
 	
-	public Inscriptions recharger() throws InscriptionEnRetardException, RuntimeException
+	public Inscriptions recharger()
 	{
 		inscriptions = null;
 		return getInscriptions();
@@ -260,7 +258,7 @@ public class Inscriptions implements Serializable
 			+ "\nCompetitions  " + getCompetitions().toString();
 	}
 	//NE PAS TOUCHER 
-	public static void main(String[] args) throws InscriptionEnRetardException, RuntimeException, IOException
+	public static void main(String[] args)throws InscriptionEnRetardException, RuntimeException, IOException
 	{
 	
 		MainMenu menu = new MainMenu();

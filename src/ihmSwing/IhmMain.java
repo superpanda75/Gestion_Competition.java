@@ -3,12 +3,9 @@ package ihmSwing;
 import java.util.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
-
-import inscriptions.Competition.InscriptionEnRetardException;
 
 
 public class IhmMain 
@@ -19,7 +16,7 @@ public class IhmMain
 		private IhmInscription ongletInscription;	
 		
 		
-	public static void main(String[] args) throws InscriptionEnRetardException, RuntimeException, IOException {
+	public static void main(String[] args) {
 		
 		JFrame f = new JFrame("Gestion des Inscriptions");
 		f.setSize(600, 500);

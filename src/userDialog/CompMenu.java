@@ -1,6 +1,5 @@
 package userDialog;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import inscriptions.Candidat;
 import inscriptions.Competition;
-import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Inscriptions;
 
 
@@ -23,7 +21,7 @@ import commandLine.util.InOut;;
 public class CompMenu
 {
 	private static Inscriptions inscriptions;
-	public CompMenu() throws InscriptionEnRetardException, RuntimeException, IOException
+	public CompMenu()
 	{
 		inscriptions = Inscriptions.getInscriptions();
 	}

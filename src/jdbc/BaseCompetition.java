@@ -106,7 +106,6 @@ public class BaseCompetition {
 		 } 
 	 }
 	 //PROCEDURE STOCKEE AJOUTER COMPETITION  --> fonctionne
-	 
 	 public static void Sauvegarder(Competition competition)
 		{
 			try	
