@@ -117,7 +117,15 @@ public class Personne extends Candidat
 	@Override
 	public String toString()
 	{
-		return super.toString() + " membre de " + equipes.toString();
+		if (equipes.size() == 1){
+			return super.toString() + " est un membre de l'équipe :  " + equipes.toString();
+		}
+		else if(equipes.size() > 1){
+			return super.toString() + " est un membre des équipes :  " + equipes.toString();
+		}		
+		else{
+			return super.toString() + "et ne fait partie d'aucune equipe";
+		}
 	}
 
 	
