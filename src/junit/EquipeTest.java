@@ -2,8 +2,11 @@ package junit;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
+import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
@@ -11,7 +14,7 @@ import inscriptions.Personne;
 public class EquipeTest {
 
 	@Test
-	public void testDelete() {
+	public void testDelete() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		Equipe Equipe = inscriptions.createEquipe("d");
@@ -27,7 +30,7 @@ public class EquipeTest {
 	}
 
 	@Test
-	public void testToString() {
+	public void testToString() throws InscriptionEnRetardException, RuntimeException, IOException {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
@@ -38,7 +41,7 @@ public class EquipeTest {
 
 
 	@Test
-	public void testGetMembres() {
+	public void testGetMembres() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		Personne Personne1 = inscriptions.createPersonne("c", "d", "e");
@@ -55,7 +58,7 @@ public class EquipeTest {
 	}
 
 	@Test
-	public void testAddPersonne() {
+	public void testAddPersonne() throws InscriptionEnRetardException, RuntimeException, IOException {
 
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
@@ -69,7 +72,7 @@ public class EquipeTest {
 	}
 
 	@Test
-	public void testRemovePersonne() {
+	public void testRemovePersonne() throws InscriptionEnRetardException, RuntimeException, IOException {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");

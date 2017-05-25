@@ -2,11 +2,13 @@ package junit;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import org.junit.Test;
 
 import inscriptions.Competition;
+import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
@@ -14,7 +16,7 @@ import inscriptions.Personne;
 public class InscriptionsTest {
 
 	@Test
-	public void testGetCompetitions() {
+	public void testGetCompetitions() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Competition compet = inscri.createCompetition("a", LocalDate.now().plusDays(10), true);
 		Competition compet1 = inscri.createCompetition("b", LocalDate.now().plusDays(10), true);
@@ -23,7 +25,7 @@ public class InscriptionsTest {
 	}
 
 	@Test
-	public void testGetCandidats() {
+	public void testGetCandidats() throws InscriptionEnRetardException, RuntimeException, IOException {
 		
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a", "b", "c");
@@ -39,7 +41,7 @@ public class InscriptionsTest {
 	}
 
 	@Test
-	public void testGetPersonnes() {
+	public void testGetPersonnes() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne1 = inscri.createPersonne("d", "e", "f");
 		assertTrue(inscri.getPersonnes().contains(Personne1));
@@ -48,7 +50,7 @@ public class InscriptionsTest {
 	}
 
 	@Test
-	public void testGetEquipes() {
+	public void testGetEquipes() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Equipe Equipe = inscri.createEquipe("a");
 		Equipe Equipe1 = inscri.createEquipe("b");
@@ -60,7 +62,7 @@ public class InscriptionsTest {
 
 
 	@Test
-	public void testCreateCompetition() {
+	public void testCreateCompetition() throws InscriptionEnRetardException, RuntimeException, IOException {
 		
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		int avant = inscri.getCompetitions().size();
@@ -74,7 +76,7 @@ public class InscriptionsTest {
 
 
 	@Test
-	public void testCreatePersonne() {
+	public void testCreatePersonne() throws InscriptionEnRetardException, RuntimeException, IOException {
 		
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a","b", "c");
@@ -83,7 +85,7 @@ public class InscriptionsTest {
 
 
 	@Test
-	public void testCreateEquipe() {
+	public void testCreateEquipe() throws InscriptionEnRetardException, RuntimeException, IOException {
 		
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Equipe Equipe = inscri.createEquipe("a");
@@ -93,19 +95,19 @@ public class InscriptionsTest {
 
 
 	@Test
-	public void testGetInscriptions() {
+	public void testGetInscriptions() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		assertNotNull(inscri);
 	}
 
 	@Test
-	public void testReinitialiser()
+	public void testReinitialiser() throws InscriptionEnRetardException, RuntimeException, IOException
 	{
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		assertNotNull("Une inscription a été réinitialisée", inscriptions);
 	}
 	@Test
-	public void testRecharger()
+	public void testRecharger() throws InscriptionEnRetardException, RuntimeException, IOException
 	{
 		Inscriptions inscriptions = null;
 		inscriptions = Inscriptions.getInscriptions();
@@ -114,7 +116,7 @@ public class InscriptionsTest {
 
 
 	@Test
-	public void testToString() {
+	public void testToString() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		assertNotNull(inscriptions.toString());
 	}

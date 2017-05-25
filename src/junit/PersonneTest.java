@@ -2,11 +2,13 @@ package junit;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import org.junit.Test;
 
 import inscriptions.Competition;
+import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
@@ -14,7 +16,7 @@ import inscriptions.Personne;
 public class PersonneTest {
 
 	@Test
-	public void testDelete() {
+	public void testDelete() throws InscriptionEnRetardException, RuntimeException, IOException {
 		
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
@@ -29,7 +31,7 @@ public class PersonneTest {
 
 
 	@Test
-	public void testToString() {
+	public void testToString() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		assertNotNull(Personne.toString());
@@ -39,7 +41,7 @@ public class PersonneTest {
 
 
 	@Test
-	public void testGetPrenom() {
+	public void testGetPrenom() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		String inscri = Personne.getPrenom();
@@ -47,7 +49,7 @@ public class PersonneTest {
 		}
 
 	@Test
-	public void testSetPrenom() {
+	public void testSetPrenom() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		Personne.setPrenom("d");
@@ -56,7 +58,7 @@ public class PersonneTest {
 	}
 
 	@Test
-	public void testGetMail() {
+	public void testGetMail() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a", "b", "c");
 		String m = Personne.getMail();
@@ -64,7 +66,7 @@ public class PersonneTest {
 	}
 	@Test
 	
-	public void testSetMail() {
+	public void testSetMail() throws InscriptionEnRetardException, RuntimeException, IOException {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a", "b", "c");
 		Personne.setMail("d");
@@ -73,7 +75,7 @@ public class PersonneTest {
 	}
 
 	@Test
-	public void testGetEquipes() {
+	public void testGetEquipes() throws InscriptionEnRetardException, RuntimeException, IOException {
 		
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a", "b", "c");
