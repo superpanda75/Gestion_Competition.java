@@ -5,6 +5,7 @@ import java.util.*;
 import inscriptions.*;
 
 public class BaseCandidat {
+	public static Base bdd = new Base();
 	
 	//AFFICHER CANDIDAT
 	public BaseCandidat(){
@@ -28,7 +29,7 @@ public class BaseCandidat {
 		 //2- modifie le candidat 
 		 public void updateCand(){
 			 try{
-					Connection c = jdbc.Base.connexion();
+					Connection c = bdd.connexion();
 					String req = "";
 					
 
@@ -39,7 +40,7 @@ public class BaseCandidat {
 		 //3- supprime le candidat
 		 public void deleteCand(){
 			 try{
-				 Connection c = jdbc.Base.connexion();
+				 Connection c = bdd.connexion();
 					String req = "";
 				 
 			 }catch(SQLException e){

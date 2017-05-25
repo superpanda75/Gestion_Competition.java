@@ -5,6 +5,8 @@ import java.util.*;
 import inscriptions.*;
 
 public class BaseEquipe {
+	public static Base bdd = new Base();
+
 	
 	public BaseEquipe(){
 		
@@ -15,7 +17,7 @@ public class BaseEquipe {
 		 try{
 			 String query="SELECT * FROM java_candidat WHERE id_candidat NOT IN ("
 				 		+ " SELECT id_personne FROM java_personne)";
-			Connection c =jdbc.Base.connexion();
+			Connection c = bdd.connexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
 			 while(rs.next())
@@ -54,7 +56,7 @@ public class BaseEquipe {
 		 try{
 			 for(Equipe e: inscriptions.getEquipes())
 			 {
-					 Connection c =jdbc.Base.connexion();
+					 Connection c = bdd.connexion();
 					 
 					 String sql = "SELECT a.id_personne ";
 					 sql += "FROM java_candidat c , java_personne p, java_appartenir a ";
@@ -80,7 +82,7 @@ public class BaseEquipe {
 	 //Ajouter un membre 
 	 public static void addMembreEquipe(Equipe equipe, Personne pers){
 		 try{
-			 Connection c =jdbc.Base.connexion();			 
+			 Connection c = bdd.connexion();			 
 			 String sql = "INSERT INTO java_appartenir(id_equipe, id_personne) "
 			 			+ "	VALUES('"+equipe.getId()+"', '"+pers.getId()+"')";
 			 
@@ -91,7 +93,7 @@ public class BaseEquipe {
 	 //Modifie le nom de l'equipe
 	 public static void modifEquipe(Equipe equipe){
 		 try{
-			 Connection c =jdbc.Base.connexion();			 
+			 Connection c = bdd.connexion();			 
 			 String sql = " UPDATE java_candidat c "
 			 		+ "SET c.nom_candidat "
 			 		+ "WHERE id_candidat = "+equipe.getId();
@@ -102,7 +104,7 @@ public class BaseEquipe {
 	 //Supprime l'equipe
 	 public static void suppEquipe(Equipe equipe){
 		 try{
-			 Connection c =jdbc.Base.connexion();			 
+			 Connection c = bdd.connexion();			 
 			 String sql = "DELETE FROM java_candidat c "
 			 		+ "WHERE c.id_candidat =" +equipe.getId();
 		 }catch(SQLException e){
@@ -112,7 +114,7 @@ public class BaseEquipe {
 	 //remove membre equipe
 	 public static void suppMembreEquipe(Equipe equipe , Personne pers){
 		 try{
-			 Connection c =jdbc.Base.connexion();			 
+			 Connection c = bdd.connexion();			 
 			 String sql = "DELETE FROM appartenir"
 			 		+ "WHERE id_equipe=" +equipe.getId()
 			 		+ "AND id_personne=" +pers.getId();
