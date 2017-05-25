@@ -6,71 +6,73 @@ import inscriptions.*;
 
 
 public class BasePersonne {
+	public static Base bdd = new Base();
+
 
 	public BasePersonne()
 	{
 
 	}
-	//SUPPRIMER 
-	/*public static void deletePers(Personne personne)
-	{
-		try 
-		{
-			String requete = "DELETE FROM java_personne p"
-						+"WHERE p.id_personne = ?";
-			Connection c = jdbc.Base.connexion();
-			PreparedStatement smt = c.prepareStatement(requete);
-			smt.setInt(1, personne.getId());
-			boolean rs = smt.execute(requete);
-		
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
-		}
-	}
-	//MODIFIE LE NOM, PRENOM, MAIL  de la personne 
 	public static void updatePers(Personne personne)
 	{
 		try 
 		{
-			String sql = "UPDATE java_personne p "
-						+ "SET p.prenom_personne = ?"
-						+" p.mail_personne = ?"
-						+ "WHERE p.id_personne = ?";
-			Connection c = jdbc.Base.connexion();
-			PreparedStatement smt = c.prepareStatement(sql);
-			smt.setString(1, personne.getPrenom());
-			smt.setString(2, personne.getMail());
-			smt.setInt(3, personne.getId());
-			int rs = smt.executeUpdate(sql);			
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
+			Connection c = bdd.connexion();
+			String sql = "{call modifPersonne(?, ?, ?, ?)}";
+        	java.sql.CallableStatement smt = c.prepareCall(sql);
+        	smt.setInt(1,personne.getId());
+        	smt.setString(2,personne.getNom());
+        	smt.setString(3,personne.getPrenom());
+        	smt.setString(4,personne.getMail());
+        	smt.executeUpdate();
 		}
-	}*/
+        						
+        catch (SQLException e)
+        {
+        	e.printStackTrace();
+        }
+	}
+	public static void suppPersonne(Personne personne)
+	{
+		try 
+		{
+			Connection c = bdd.connexion();
+			String sql = "{call suppPersonne( ? )}";
+			java.sql.CallableStatement smt = c.prepareCall(sql);
+			smt.setInt(1,personne.getId());
+			smt.executeUpdate(); 	
+	    } 
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+			System.out.println("La personne n'a pas été supprimé.");
+	    }
+	}
 	 
 		 //FONCTIONNE AJOUTER PERSONNE & candidat (on recupere le prenom de la classe mere personne et le nm pour la classe fille candidat )->notion héritage
-		/*public static void sauvegarder(Personne personne){
-			 try{
-				 String sql="INSERT INTO java_personne(id_personne,prenom_personne,mail_personne) VALUES('"+personne.getId()+"','"+personne.getPrenom()+"','"+personne.getMail()+"')";
-				 Connection c = jdbc.Base.connexion();
-				 Statement smt = c.createStatement();
-				 smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
-					ResultSet rs = smt.getGeneratedKeys();
-					while(rs.next())
-					{
-						sql ="INSERT INTO java_candidat(nom_candidat) VALUES ('"+personne.getNom()+"')";
-					}
-					smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
-					ResultSet resultat = smt.getGeneratedKeys();
-					while(resultat.next())
-					{
-						personne.setId(resultat.getInt(1));
-					}
-					
-			 }
-			 catch(SQLException e){
-				System.out.print(e.getMessage());
-			 }
-		 }*/
+//		/*public static void sauvegarder(Personne personne){
+//			 try{
+//				 String sql="INSERT INTO java_personne(id_personne,prenom_personne,mail_personne) VALUES('"+personne.getId()+"','"+personne.getPrenom()+"','"+personne.getMail()+"')";
+//				 Connection c = jdbc.Base.connexion();
+//				 Statement smt = c.createStatement();
+//				 smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+//					ResultSet rs = smt.getGeneratedKeys();
+//					while(rs.next())
+//					{
+//						sql ="INSERT INTO java_candidat(nom_candidat) VALUES ('"+personne.getNom()+"')";
+//					}
+//					smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+//					ResultSet resultat = smt.getGeneratedKeys();
+//					while(resultat.next())
+//					{
+//						personne.setId(resultat.getInt(1));
+//					}
+//					
+//			 }
+//			 catch(SQLException e){
+//				System.out.print(e.getMessage());
+//			 }
+//		 }*/
 		//AFFICHER CANDIDAT --> fonctionne 
 		 public static SortedSet<Candidat> SelectPers(Inscriptions inscription){
 				SortedSet<Candidat> listePers = new TreeSet();
@@ -79,7 +81,7 @@ public class BasePersonne {
 						+ " FROM java_candidat C, java_personne P"
 						+ " WHERE id_candidat IN ("
 				 		+ " SELECT id_personne FROM java_personne)";
-				Connection c =jdbc.Base.connexion();
+				Connection c =bdd.connexion();
 				 Statement smt = c.createStatement();
 				 ResultSet rs = smt.executeQuery(query);
 				 while(rs.next())

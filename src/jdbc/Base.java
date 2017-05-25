@@ -9,7 +9,7 @@ import java.sql.Statement;
 	
 public class Base {
 
-	public static Connection c;
+	private static Connection c;	
 	
 	public Base()
 	{
@@ -17,26 +17,22 @@ public class Base {
 	}
 	
 	//-> fonctionne la BDD dans le serveur M2L et local
-	public static Connection connexion() throws SQLException
+	public Connection connexion() throws SQLException
 	{
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
 			//jdbc:mysql://localhost:3306/java", "root", ""
 			//jdbc:mysql://mysql.m2l.local/ahouri", "ahouri", "azerty"
-			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java", "root", "");	
-			System.out.println("Connexion bien établie");
-			
+			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java?autoReconnect=true&useSSL=false", "root", "");	
 		}
-		catch (ClassNotFoundException e) {
-			System.out.println("Pilote JDBC non intallé" );
+		catch (SQLException e)
+		{
+			e.printStackTrace();
 		}
 		
 		return c;
 	}
-
 	
 
 	public static void main(String[] args) throws SQLException {
-		
 	}
 }

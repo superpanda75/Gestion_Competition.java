@@ -7,27 +7,34 @@ import inscriptions.*;
 import inscriptions.Competition.*;
 
 public class BaseCompetition {
-	private boolean sauvegarder = true;
 	public static Base bdd = new Base();
 
 	public BaseCompetition(){
 		
 	}
-	
-	public static void updateComp(Competition competition){
-		try{
-			String req="UPDATE java_competition "
-					+ "SET java_competition.nom_competition = "+competition.getNom()
-					+"java_competition.date = "+competition.getDateCloture()
-					+"java_competition.enEquipe = "+competition.getEnEquipe()
-					+"WHERE java_competition.id_competition = "+competition.getId();
+	//PROCEDURE STOCKEE MODIFIER UNE COMPETITION
+	public static void update(Competition competition)
+	{
+		try 
+		{
 			Connection c =bdd.connexion();
-			 Statement smt = c.createStatement();
-			 ResultSet rs = smt.executeQuery(req);
-		}catch(SQLException e){
-			
+			String sql = "{call modifComp( ? , ? , ? , ? )}";
+        	java.sql.CallableStatement smt = c.prepareCall(sql);
+        	
+        	smt.setString(1,competition.getNom());
+        	java.sql.Date date = java.sql.Date.valueOf(competition.getDateCloture());
+        	smt.setDate(2,date);
+        	smt.setBoolean(3,competition.getEnEquipe());
+        	smt.setInt(4,competition.getId());
+        	smt.executeUpdate();
 		}
+        						
+        catch (SQLException e)
+        {
+        	System.out.println(e.getMessage());
+        }
 	}
+	//PROCEDURE STOCKEE SUPPRIMER UNE COMPETITION
 	public static void deleteComp(Competition comp)
 	{
 		try 
@@ -68,7 +75,7 @@ public class BaseCompetition {
 	 public void selectInscription(Inscriptions inscriptions)
 	 {
 		 try{
-		  Connection c =jdbc.Base.connexion();
+		  Connection c = bdd.connexion();
 			 for(Competition comp: inscriptions.getCompetitions())
 				{
 					 String sql = "SELECT * "
@@ -98,30 +105,25 @@ public class BaseCompetition {
 			 System.out.println(e.getMessage());
 		 } 
 	 }
+	 //PROCEDURE STOCKEE AJOUTER COMPETITION  --> fonctionne
+	 public static void Sauvegarder(Competition competition)
+		{
+			try	
+			{
+				Connection c = bdd.connexion();
+				String sql = "{call addCompetition( ? , ? , ? )}";
+				java.sql.CallableStatement smt = c.prepareCall(sql);
+	        	smt.setString(1,competition.getNom());
+	        	java.sql.Date date = java.sql.Date.valueOf(competition.getDateCloture());
+	        	smt.setDate(2,date);
+	        	smt.setBoolean(3,competition.getEnEquipe());
+				smt.executeUpdate();	
+				competition.setId(smt.RETURN_GENERATED_KEYS);
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
 
-		 //AJOUTER COMPETITION  --> fonctionne
-		/* public static void Sauvegarder(Competition competition) 
-			{	
-				try {
-						Connection c =  jdbc.Base.connexion();
-						 Statement smt = c.createStatement();
-						int equipe;
-						if (competition.getEnEquipe())
-							equipe=1;
-						else
-							equipe = 0;
-						String requete ="INSERT INTO java_competition(nom_competition,date,enEquipe) VALUES ('"+competition.getNom()+"','"+competition.getDateCloture()+"','"+equipe+"')";
-						smt.executeUpdate(requete);
-						int idcomp=0;
-						String req="SELECT id_competition FROM java_competition";
-						ResultSet resultat= smt.executeQuery(req);
-						while (resultat.next()) 
-						{
-							idcomp = resultat.getInt("id_competition");
-						}				
-						System.out.println("Competition ajoutée");
-					}  catch (SQLException e) {
-						System.out.print(e.getMessage());
-					}
-			}*/
 }

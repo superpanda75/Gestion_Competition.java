@@ -54,7 +54,7 @@ public class IhmPersonne implements ItemListener
 			this.ongletPers.add(titreOnglet);
 			addComponentToPane(ongletPers);
 			//itemStateChanged(event);
-//			this.ongletPers.add(panelDroite,BorderLayout.EAST);
+			//this.ongletPers.add(panelDroite,BorderLayout.EAST);
 			
 		}
 		

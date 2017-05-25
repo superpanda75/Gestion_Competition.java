@@ -28,10 +28,11 @@ public class Inscriptions implements Serializable
 	
 	private Inscriptions()
 	{
-		candidats = BaseCandidat.SelectCand(this);
-		competitions = BaseCompetition.SelectComp(this);
-		baseEq.selectMembreEquipe(this);
-		//Comp.selectInscription(this);
+			candidats = BaseCandidat.SelectCand(this);
+			competitions = BaseCompetition.SelectComp(this);
+			baseEq.selectMembreEquipe(this);
+			//Comp.selectInscription(this);
+		
 	}
 	
 	/**
@@ -96,8 +97,8 @@ public class Inscriptions implements Serializable
 	{
 		
 			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
-			//jdbc.BaseCompetition.Sauvegarder(competition);
 			competitions.add(competition);
+			//jdbc.BaseCompetition.Sauvegarder(competition);
 			return competition;
 	
 	}
@@ -125,6 +126,7 @@ public class Inscriptions implements Serializable
 		personne.setPrenom(prenom);
 		personne.setNom(nom);
 		personne.setMail(mail);
+		jdbc.BasePersonne.updatePers(personne);
 		return personne;
 	}
 	
