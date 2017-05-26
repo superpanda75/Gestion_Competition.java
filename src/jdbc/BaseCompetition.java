@@ -61,7 +61,7 @@ public class BaseCompetition {
 			 while(rs.next())
 				{
 				 LocalDate dateCloture = rs.getDate("date").toLocalDate();
-				 Competition laCompetition = inscription.createCompetition(rs.getString("nom_competition"), dateCloture, rs.getBoolean("enEquipe"));
+				 Competition laCompetition = inscription.createCompetition(rs.getString("nom_competition"), dateCloture, rs.getBoolean("enEquipe"),false);
 				 laCompetition.setId(rs.getInt("id_competition"));
 				 SelectComp.add(laCompetition);
 				}
@@ -106,19 +106,13 @@ public class BaseCompetition {
 		 } 
 	 }
 	 //PROCEDURE STOCKEE AJOUTER COMPETITION  --> fonctionne
-	 public static void Sauvegarder(Competition competition)
+	 public static void Sauvegarder(String nom, LocalDate dateCloture,Boolean enEquipe)
 		{
 			try	
 			{
 				Connection c = bdd.connexion();
-				String sql = "{call addCompetition( ? , ? , ? )}";
-				java.sql.CallableStatement smt = c.prepareCall(sql);
-	        	smt.setString(1,competition.getNom());
-	        	java.sql.Date date = java.sql.Date.valueOf(competition.getDateCloture());
-	        	smt.setDate(2,date);
-	        	smt.setBoolean(3,competition.getEnEquipe());
-				smt.executeUpdate();	
-				competition.setId(smt.RETURN_GENERATED_KEYS);
+				String sql = "{call addCompetition( '"+ nom +"','"+dateCloture+"','"+ enEquipe + "')}";
+				Base.connexionExe(sql);	
 			}
 			catch (SQLException e)
 			{

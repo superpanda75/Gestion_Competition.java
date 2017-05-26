@@ -12,8 +12,8 @@ public class EquipeTest {
 
 	@Test
 	public void testDelete() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
+		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
 		Equipe Equipe = inscriptions.createEquipe("d");
 		Equipe.add(Personne);
 		
@@ -29,8 +29,8 @@ public class EquipeTest {
 	@Test
 	public void testToString() {
 		
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
+		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
 		Equipe Equipe = inscriptions.createEquipe("d");
 		Equipe.add(Personne);
 		assertNotNull(Personne.toString());
@@ -39,9 +39,9 @@ public class EquipeTest {
 
 	@Test
 	public void testGetMembres() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Personne Personne = inscriptions.createPersonne("a", "b", "c");
-		Personne Personne1 = inscriptions.createPersonne("c", "d", "e");
+		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
+		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
+		Personne Personne1 = inscriptions.createPersonne("c", "d", "e", false);
 		Equipe Equipe = inscriptions.createEquipe("d");
 		Equipe.add(Personne);
 		Equipe.add(Personne1);
@@ -57,9 +57,9 @@ public class EquipeTest {
 	@Test
 	public void testAddPersonne() {
 
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Personne Personne = inscriptions.createPersonne("a", "b", "c");
-		Personne Personne1 = inscriptions.createPersonne("d", "e", "f");
+		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
+		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
+		Personne Personne1 = inscriptions.createPersonne("d", "e", "f", false);
 		Equipe Equipe = inscriptions.createEquipe("g");
 		Equipe.add(Personne);
 		Equipe.add(Personne1);
@@ -71,8 +71,8 @@ public class EquipeTest {
 	@Test
 	public void testRemovePersonne() {
 		
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
+		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
 		Equipe Equipe = inscriptions.createEquipe("d");
 		Equipe.add(Personne);
 		

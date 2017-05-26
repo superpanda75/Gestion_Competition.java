@@ -14,9 +14,11 @@ import commandLine.util.InOut;;
 public class TeamMenu 
 {
 	private static Inscriptions inscriptions;
+	static boolean db = true;
+	public static final Inscriptions inscript = Inscriptions.getInscriptions(db);
 	public TeamMenu()
 	{
-		inscriptions = Inscriptions.getInscriptions();
+		inscriptions = Inscriptions.getInscriptions(db);
 	}
 	
 	static Menu getMenuEquipe()

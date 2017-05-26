@@ -15,9 +15,11 @@ import commandLine.util.InOut;;
 public class PersMenu
 {
 	private static Inscriptions inscriptions;
+	static boolean db = true;
+	public static final Inscriptions inscript = Inscriptions.getInscriptions(db);
 	public PersMenu()
 	{
-		inscriptions = Inscriptions.getInscriptions();
+		inscriptions = Inscriptions.getInscriptions(db);
 	}
 	
 	public Inscriptions getInscriptions()
@@ -254,7 +256,7 @@ public class PersMenu
 						String nom= InOut.getString("Nom : "),
 		                prenom = InOut.getString("Prénom : "),
 		                mail = InOut.getString("Mail : ");
-						inscriptions.createPersonne(nom, prenom, mail);
+						inscriptions.createPersonne(nom, prenom, mail, false);
 					}
 				};
 			}
