@@ -32,12 +32,12 @@ public class BaseEquipe {
 	}
 		return listeEquipe;
 	}
-	 //AJOUTER UNE EQUIPE
-	 /*public static void sauvegarder(Equipe equipe)
+	 //AJOUTER UNE EQUIPE -> fonctionne procedure stockee
+	public static void sauvegarder(Equipe equipe)
 		{
 			try	
 			{
-				Connection c =jdbc.Base.connexion();
+				Connection c = bdd.connexion();
 				String sql = "{call addEquipe( ? )}";
 				java.sql.CallableStatement smt = c.prepareCall(sql);
 				smt.setInt(1, equipe.getId());
@@ -47,11 +47,10 @@ public class BaseEquipe {
 			catch (SQLException e)
 			{
 				System.out.println(e.getMessage());
-				System.out.println("L'équipe n'a pas été créée.");
 			}
-		}	*/
+		}
 
-	 //Afficher les membres d'une equipe
+	 //Afficher les membres d'une equipe -> fonctionne REQUETE 
 	 public void selectMembreEquipe(Inscriptions inscriptions){
 		 try{
 			 for(Equipe e: inscriptions.getEquipes())
@@ -79,46 +78,57 @@ public class BaseEquipe {
 			 System.out.println(eq.getMessage());
 		 } 
 	 }
-	 //Ajouter un membre 
-	 public static void addMembreEquipe(Equipe equipe, Personne pers){
+	 //Ajouter un membre -> fonctionne PROCEDURE STOCKEE
+	 public static void addMembreEquipe(Equipe equipe, Personne personne){
 		 try{
 			 Connection c = bdd.connexion();			 
-			 String sql = "INSERT INTO java_appartenir(id_equipe, id_personne) "
-			 			+ "	VALUES('"+equipe.getId()+"', '"+pers.getId()+"')";
+			 String sql = "{call addMembreEquipe( ? , ?)}";
+			 java.sql.CallableStatement smt = c.prepareCall(sql);
+	         smt.setInt(1,personne.getId());
+	         smt.setInt(2,equipe.getId());
+			 smt.executeUpdate();
 			 
 		 }catch(SQLException e){
 			 System.out.println(e.getMessage());
 		 }
 	}
-	 //Modifie le nom de l'equipe
-	 public static void modifEquipe(Equipe equipe){
+	 //Modifie le nom de l'equipe -> FONCTIONNE : PROCEDURE STOCKEE
+	 public static void modifEquipe(Candidat candidat){
 		 try{
 			 Connection c = bdd.connexion();			 
-			 String sql = " UPDATE java_candidat c "
-			 		+ "SET c.nom_candidat "
-			 		+ "WHERE id_candidat = "+equipe.getId();
+			 String sql = "{call updateCand( ? , ? )}";
+			 java.sql.CallableStatement smt = c.prepareCall(sql);
+	         smt.setInt(1, candidat.getId());
+	         smt.setString(2, candidat.getNom());
+	         smt.executeUpdate();
 		 }catch(SQLException e){
 			 System.out.println(e.getMessage());
 		 }
 	 }
-	 //Supprime l'equipe
-	 public static void suppEquipe(Equipe equipe){
+	 //Supprime l'equipe -> fonctionne PROCEDURE STOCKEE
+	 public static void suppEquipe(Candidat candidat){
 		 try{
 			 Connection c = bdd.connexion();			 
-			 String sql = "DELETE FROM java_candidat c "
-			 		+ "WHERE c.id_candidat =" +equipe.getId();
+			 String sql = "{call deleteCand( ? )}";
+			 java.sql.CallableStatement smt = c.prepareCall(sql);
+			 smt.setInt(1,candidat.getId());
+			 smt.executeUpdate();	
+			 
 		 }catch(SQLException e){
 			 System.out.println(e.getMessage());
 		 }
 	 }
-	 //remove membre equipe
-	 public static void suppMembreEquipe(Equipe equipe , Personne pers){
+	 //remove membre equipe -> fonctionne PROCEDURE STOCKEE
+	 public static void suppMembreEquipe(Equipe equipe, Personne personne){
 		 try{
 			 Connection c = bdd.connexion();			 
-			 String sql = "DELETE FROM appartenir"
-			 		+ "WHERE id_equipe=" +equipe.getId()
-			 		+ "AND id_personne=" +pers.getId();
-		 }catch(SQLException e){
+			 String sql = "{call deletePersonneEquipe( ? , ? )}";
+			 java.sql.CallableStatement smt = c.prepareCall(sql);
+			 smt.setInt(1,equipe.getId());
+			 smt.setInt(2,personne.getId());
+			 smt.executeUpdate(); 
+			 
+		 }catch(SQLException e){ 
 			 System.out.println(e.getMessage());
 		 }
 	 }

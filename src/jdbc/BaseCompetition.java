@@ -12,7 +12,7 @@ public class BaseCompetition {
 	public BaseCompetition(){
 		
 	}
-	//PROCEDURE STOCKEE MODIFIER UNE COMPETITION
+	//PROCEDURE STOCKEE MODIFIER UNE COMPETITION -> fonctionne
 	public static void update(Competition competition)
 	{
 		try 
@@ -20,7 +20,6 @@ public class BaseCompetition {
 			Connection c =bdd.connexion();
 			String sql = "{call modifComp( ? , ? , ? , ? )}";
         	java.sql.CallableStatement smt = c.prepareCall(sql);
-        	
         	smt.setString(1,competition.getNom());
         	java.sql.Date date = java.sql.Date.valueOf(competition.getDateCloture());
         	smt.setDate(2,date);
@@ -34,7 +33,7 @@ public class BaseCompetition {
         	System.out.println(e.getMessage());
         }
 	}
-	//PROCEDURE STOCKEE SUPPRIMER UNE COMPETITION
+	//PROCEDURE STOCKEE SUPPRIMER UNE COMPETITION-> fonctionne
 	public static void deleteComp(Competition comp)
 	{
 		try 
@@ -72,17 +71,16 @@ public class BaseCompetition {
 		return SelectComp;
 	}
 	 
+	 //PROCEDURE STOCKEE -> fonctionne
 	 public void selectInscription(Inscriptions inscriptions)
 	 {
 		 try{
 		  Connection c = bdd.connexion();
 			 for(Competition comp: inscriptions.getCompetitions())
 				{
-					 String sql = "SELECT * "
-					 		+ "FROM java_candidat c, java_inscription i "
-					 		+ "WHERE i.id_candidat = c.id_candidat "
-					 		+ "AND i.id_competition = i.id_competition";
-					 Statement smt = c.createStatement();
+					 String sql = "{call inscriptionCandToComp( ? )}";
+					 java.sql.CallableStatement smt = c.prepareCall(sql);
+					 smt.setInt(1, comp.getId());
 					 ResultSet rs = smt.executeQuery(sql);
 					 while (rs.next())
 						{
@@ -124,6 +122,23 @@ public class BaseCompetition {
 			{
 				e.printStackTrace();
 			}
+		}
+	 //PROCEDURE STOCKEE -> fonctionne
+	 public static void removeCandidatComp(Competition competition, Candidat candidat)
+		{
+			try 
+			{
+				Connection c = bdd.connexion();
+				String sql = "{call removeCandToComp( ? , ? )}";
+				java.sql.CallableStatement smt = c.prepareCall(sql);
+				smt.setInt(1,competition.getId());
+				smt.setInt(2,candidat.getId());
+				smt.executeUpdate(); 	
+		    } 
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+		    }
 		}
 
 }
