@@ -14,8 +14,8 @@ public class CandidatTest {
 	
 	@Test
 	public void testGetNom() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("a", "b","c", false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b","c");
 		String inscri = Personne.getPrenom();
 		assertEquals("b",inscri);
 		
@@ -23,8 +23,8 @@ public class CandidatTest {
 
 	@Test
 	public void testSetNom() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		Personne.setNom("a");
 		String inscri = Personne.getNom();
 		assertEquals("a",inscri);
@@ -33,10 +33,10 @@ public class CandidatTest {
 	@Test
 	public void testGetCompetitions() {
 		
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
-		Competition Compet = inscriptions.createCompetition("Compet", LocalDate.now().plusDays(20), false, false);
-		Competition Compet1 = inscriptions.createCompetition("Compet", LocalDate.now().plusDays(20), false, false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		Competition Compet = inscriptions.createCompetition("Compet", LocalDate.now().plusDays(20), false);
+		Competition Compet1 = inscriptions.createCompetition("Compet", LocalDate.now().plusDays(20), false);
 		Compet.add(Personne);
 		Compet1.add(Personne);
 		assertTrue(Personne.getCompetitions().contains(Compet));
@@ -48,8 +48,8 @@ public class CandidatTest {
 
 	@Test
 	public void testDelete() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("Yeah", "Ya", "Yo", false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("Yeah", "Ya", "Yo");
 		Personne.delete();
 		assertTrue(!inscriptions.getCandidats().contains(Personne));
 	}
@@ -58,17 +58,17 @@ public class CandidatTest {
 	@Test
 	public void testCompareTo() {
 		
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("Ha", "Ho", "He", false);
-		Personne Personne1 = inscriptions.createPersonne("Ha", "Ho", "He", false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("Ha", "Ho", "He");
+		Personne Personne1 = inscriptions.createPersonne("Ha", "Ho", "He");
 		
 		assertEquals(0,Personne.compareTo(Personne1));		
 	}
 
 	@Test
 	public void testToString() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("Thresh", "Olivier", "Yo", false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("Thresh", "Olivier", "Yo");
 		
 		assertNotNull(Personne.toString());
 	}

@@ -12,12 +12,10 @@ public class MainMenu
 	private static TeamMenu teamMenu;
 	private static CompMenu compMenu;
 	private static Inscriptions inscriptions;
-	static boolean db = true;
-	public static final Inscriptions inscript = Inscriptions.getInscriptions(db);
 	
 	public MainMenu()
 	{
-		inscriptions = Inscriptions.getInscriptions(db);
+		inscriptions = Inscriptions.getInscriptions();
 		mainMenu=getMainMenu();
 		persMenu = new PersMenu();
 		teamMenu = new TeamMenu();
@@ -65,7 +63,7 @@ public class MainMenu
 							inscriptions.sauvegarder();
 							System.out.println("Sauvegardé !");							
 						} 
-						catch (Exception e) 
+						catch (IOException e) 
 						{
 							System.out.println("Echec de la sauvegarde. " + e);
 						}

@@ -181,7 +181,7 @@ public class IhmPersonne implements ItemListener
 			btnValiderLaModification.setBounds(250, 351, 160, 23);
 			card2.add(btnValiderLaModification);
 
-			Inscriptions ins = inscriptions.Inscriptions.getInscriptions(false);
+			Inscriptions ins = inscriptions.Inscriptions.getInscriptions();
 			SortedSet personnes = ins.getPersonnes();
 			DefaultListModel model = new DefaultListModel<>();
 			JList<Personne> list_1 = new JList<>(model);

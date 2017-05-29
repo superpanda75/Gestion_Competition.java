@@ -25,23 +25,15 @@ public class Inscriptions implements Serializable
 	private SortedSet<Candidat> candidats = new TreeSet<>();
 	BaseEquipe baseEq = new BaseEquipe();
 	BaseCompetition Comp = new BaseCompetition();
-	public static boolean db = false;
 	
-	private Inscriptions(boolean db)
+	private Inscriptions()
 	{
-		Inscriptions.db = db;
-		if (db) {
 			candidats = BaseCandidat.SelectCand(this);
 			competitions = BaseCompetition.SelectComp(this);
 			baseEq.selectMembreEquipe(this);
 			//Comp.selectInscription(this);
-		}
 		
 	}
-	public void setdb(boolean db) {
-		this.db = db;
-	}
-
 	
 	/**
 	 * Retourne les compétitions.
@@ -101,12 +93,9 @@ public class Inscriptions implements Serializable
 	 */
 	
 	public Competition createCompetition(String nom, 
-			LocalDate dateCloture, boolean enEquipe,boolean bool)
+			LocalDate dateCloture, boolean enEquipe)
 	{
-		if (bool)
-			if (db){
-				jdbc.BaseCompetition.Sauvegarder(nom, dateCloture, enEquipe);
-			}
+		
 			Competition competition = new Competition(this, nom, dateCloture, enEquipe);
 			competitions.add(competition);
 			//jdbc.BaseCompetition.Sauvegarder(competition);
@@ -124,12 +113,10 @@ public class Inscriptions implements Serializable
 	 * @return
 	 */
 	//AJOUTER PERSONNE ET CANDIDAT
-	public Personne createPersonne(String nom, String prenom, String mail, boolean bool)
+	public Personne createPersonne(String nom, String prenom, String mail)
 	{
 		Personne personne = new Personne(this, nom, prenom, mail);
-		if (bool)
-			if(db)
-		jdbc.BasePersonne.sauvegarder(personne);
+		//jdbc.BasePersonne.sauvegarder(personne);
 		candidats.add(personne);
 		return personne;
 	}
@@ -176,14 +163,14 @@ public class Inscriptions implements Serializable
 	 * @return l'unique objet de type {@link Inscriptions}.
 	 */
 	
-	public static Inscriptions getInscriptions(boolean db) {
-		if (inscriptions == null) {
-			if (!db)
-				inscriptions = readObject();
-			else {
-				if (inscriptions == null)
-					inscriptions = new Inscriptions(db);
-			}
+	public static Inscriptions getInscriptions()
+	{
+		
+		if (inscriptions == null)
+		{
+			inscriptions = readObject();
+			if (inscriptions == null)
+				inscriptions = new Inscriptions();
 		}
 		return inscriptions;
 	}
@@ -195,8 +182,8 @@ public class Inscriptions implements Serializable
 	
 	public Inscriptions reinitialiser()
 	{
-		inscriptions = new Inscriptions(false);
-		return getInscriptions(false);
+		inscriptions = new Inscriptions();
+		return getInscriptions();
 	}
 
 	/**
@@ -207,7 +194,7 @@ public class Inscriptions implements Serializable
 	public Inscriptions recharger()
 	{
 		inscriptions = null;
-		return getInscriptions(false);
+		return getInscriptions();
 	}
 	
 	private static Inscriptions readObject()
@@ -237,9 +224,10 @@ public class Inscriptions implements Serializable
 	/**
 	 * Sauvegarde le gestionnaire pour qu'il soit ouvert automatiquement 
 	 * lors d'une exécution ultérieure du programme.
+	 * @throws IOException 
 	 */
 	
-	public void sauvegarder() 
+	public void sauvegarder() throws IOException
 	{
 		ObjectOutputStream oos = null;
 		try
@@ -250,7 +238,7 @@ public class Inscriptions implements Serializable
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			throw e;
 		}
 		finally
 		{
@@ -270,7 +258,7 @@ public class Inscriptions implements Serializable
 			+ "\nCompetitions  " + getCompetitions().toString();
 	}
 	//NE PAS TOUCHER 
-	public static void main(String[] args)
+	public static void main(String[] args)throws InscriptionEnRetardException, RuntimeException, IOException
 	{
 	
 		MainMenu menu = new MainMenu();

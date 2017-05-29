@@ -15,9 +15,9 @@ public class InscriptionsTest {
 
 	@Test
 	public void testGetCompetitions() {
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
-		Competition compet = inscri.createCompetition("a", LocalDate.now().plusDays(10), true, false);
-		Competition compet1 = inscri.createCompetition("b", LocalDate.now().plusDays(10), true, false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Competition compet = inscri.createCompetition("a", LocalDate.now().plusDays(10), true);
+		Competition compet1 = inscri.createCompetition("b", LocalDate.now().plusDays(10), true);
 		assertTrue(inscri.getCompetitions().contains(compet));
 		assertTrue(inscri.getCompetitions().contains(compet1));
 	}
@@ -25,10 +25,10 @@ public class InscriptionsTest {
 	@Test
 	public void testGetCandidats() {
 		
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
-		Personne Personne = inscri.createPersonne("a", "b", "c", false);
-		Personne Personne1 = inscri.createPersonne("d", "e", "f", false);
-		Personne Personne2 = inscri.createPersonne("g", "h", "i", false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne = inscri.createPersonne("a", "b", "c");
+		Personne Personne1 = inscri.createPersonne("d", "e", "f");
+		Personne Personne2 = inscri.createPersonne("g", "h", "i");
 		Equipe Equipe = inscri.createEquipe("j");
 		Equipe.add(Personne1);
 		Equipe.add(Personne2);
@@ -40,8 +40,8 @@ public class InscriptionsTest {
 
 	@Test
 	public void testGetPersonnes() {
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
-		Personne Personne1 = inscri.createPersonne("d", "e", "f", false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne1 = inscri.createPersonne("d", "e", "f");
 		assertTrue(inscri.getPersonnes().contains(Personne1));
 		
 			
@@ -49,7 +49,7 @@ public class InscriptionsTest {
 
 	@Test
 	public void testGetEquipes() {
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
 		Equipe Equipe = inscri.createEquipe("a");
 		Equipe Equipe1 = inscri.createEquipe("b");
 		assertTrue(inscri.getEquipes().contains(Equipe));
@@ -62,9 +62,9 @@ public class InscriptionsTest {
 	@Test
 	public void testCreateCompetition() {
 		
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
 		int avant = inscri.getCompetitions().size();
-		Competition c = inscri.createCompetition("a", LocalDate.now().plusDays(10), true, false);
+		Competition c = inscri.createCompetition("a", LocalDate.now().plusDays(10), true);
 		int apres = inscri.getCompetitions().size();
 		assertTrue(inscri.getCompetitions().contains(c));
 		assertEquals(avant+1,apres);
@@ -76,8 +76,8 @@ public class InscriptionsTest {
 	@Test
 	public void testCreatePersonne() {
 		
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
-		Personne Personne = inscri.createPersonne("a","b", "c", false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne = inscri.createPersonne("a","b", "c");
 		assertTrue(inscri.getCandidats().contains(Personne));
 	}
 
@@ -85,7 +85,7 @@ public class InscriptionsTest {
 	@Test
 	public void testCreateEquipe() {
 		
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
 		Equipe Equipe = inscri.createEquipe("a");
 		assertTrue(inscri.getCandidats().contains(Equipe));
 		
@@ -94,28 +94,28 @@ public class InscriptionsTest {
 
 	@Test
 	public void testGetInscriptions() {
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
 		assertNotNull(inscri);
 	}
 
 	@Test
 	public void testReinitialiser()
 	{
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		assertNotNull("Une inscription a été réinitialisée", inscriptions);
 	}
 	@Test
 	public void testRecharger()
 	{
 		Inscriptions inscriptions = null;
-		inscriptions = Inscriptions.getInscriptions(false);
+		inscriptions = Inscriptions.getInscriptions();
 		assertNotNull("Une inscription a été rechargée", inscriptions);
 	}
 
 
 	@Test
 	public void testToString() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		assertNotNull(inscriptions.toString());
 	}
 

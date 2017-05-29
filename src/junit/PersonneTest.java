@@ -16,9 +16,9 @@ public class PersonneTest {
 	@Test
 	public void testDelete() {
 		
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
-		Competition compet = inscriptions.createCompetition("d", LocalDate.of(2016,12,31),false, false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
+		Competition compet = inscriptions.createCompetition("d", LocalDate.of(2016,12,31),false);
 		compet.add(Personne);
 		Personne.delete();
 		assertTrue(!inscriptions.getCandidats().contains(Personne));
@@ -30,8 +30,8 @@ public class PersonneTest {
 
 	@Test
 	public void testToString() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		assertNotNull(Personne.toString());
 
 				
@@ -40,16 +40,16 @@ public class PersonneTest {
 
 	@Test
 	public void testGetPrenom() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		String inscri = Personne.getPrenom();
 		assertEquals("b",inscri);
 		}
 
 	@Test
 	public void testSetPrenom() {
-		Inscriptions inscriptions = Inscriptions.getInscriptions(false);
-		Personne Personne = inscriptions.createPersonne("a", "b", "c", false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Personne Personne = inscriptions.createPersonne("a", "b", "c");
 		Personne.setPrenom("d");
 		String inscri = Personne.getPrenom();
 		assertEquals("d",inscri);
@@ -57,16 +57,16 @@ public class PersonneTest {
 
 	@Test
 	public void testGetMail() {
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
-		Personne Personne = inscri.createPersonne("a", "b", "c", false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne = inscri.createPersonne("a", "b", "c");
 		String m = Personne.getMail();
 		assertEquals("c",m);
 	}
 	@Test
 	
 	public void testSetMail() {
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
-		Personne Personne = inscri.createPersonne("a", "b", "c", false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne = inscri.createPersonne("a", "b", "c");
 		Personne.setMail("d");
 		String m = Personne.getMail();
 		assertEquals("d",m);
@@ -75,8 +75,8 @@ public class PersonneTest {
 	@Test
 	public void testGetEquipes() {
 		
-		Inscriptions inscri = Inscriptions.getInscriptions(false);
-		Personne Personne = inscri.createPersonne("a", "b", "c", false);
+		Inscriptions inscri = Inscriptions.getInscriptions();
+		Personne Personne = inscri.createPersonne("a", "b", "c");
 		Equipe Equipe = inscri.createEquipe("1");
 		Equipe Equipe1 = inscri.createEquipe("2");
 		Equipe.add(Personne);

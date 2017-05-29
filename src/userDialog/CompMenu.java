@@ -21,11 +21,9 @@ import commandLine.util.InOut;;
 public class CompMenu
 {
 	private static Inscriptions inscriptions;
-	static boolean db = true;
-	public static final Inscriptions inscript = Inscriptions.getInscriptions(db);
 	public CompMenu()
 	{
-		inscriptions = Inscriptions.getInscriptions(db);
+		inscriptions = Inscriptions.getInscriptions();
 	}
 	
 	static Menu getMenuCompetition()
@@ -176,7 +174,7 @@ public class CompMenu
 							reponse=InOut.getString("En équipe ? o : Oui n : Non : ");
 						}
 						enEquipe=reponse.compareTo("o")==0;
-						inscriptions.createCompetition(nom, dateCloture, enEquipe, enEquipe);
+						inscriptions.createCompetition(nom, dateCloture, enEquipe);
 					}
 				};
 	}
