@@ -14,9 +14,11 @@ public class BaseCandidat {
 	//1- AFFICHER CANDIDAT - Equipe --> fonctionne 
 		 public static SortedSet<Candidat> SelectCand(Inscriptions inscription){
 				SortedSet<Candidat> listeCand = new TreeSet();
+				
 				for (Candidat candidat : BasePersonne.SelectPers(inscription)) {
 					listeCand.add(candidat);
 					candidat.getId();
+					System.out.println(listeCand);
 				}
 				for (Candidat candidat : BaseEquipe.SelectEquipe(inscription)) {
 					listeCand.add(candidat);

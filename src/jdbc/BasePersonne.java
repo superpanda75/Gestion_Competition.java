@@ -77,10 +77,9 @@ public class BasePersonne {
 		 public static SortedSet<Candidat> SelectPers(Inscriptions inscription){
 				SortedSet<Candidat> listePers = new TreeSet();
 			 try{
-				String query="SELECT C.*, P.prenom_personne, P.mail_personne"
-						+ " FROM java_candidat C, java_personne P"
-						+ " WHERE id_candidat IN ("
-				 		+ " SELECT id_personne FROM java_personne)";
+				String query="SELECT c.id_candidat, c.nom_candidat, p.prenom_personne, p.mail_personne "
+							+"FROM java_candidat c, java_personne p "
+							+"WHERE c.id_candidat = p.id_personne";
 				Connection c =bdd.connexion();
 				 Statement smt = c.createStatement();
 				 ResultSet rs = smt.executeQuery(query);

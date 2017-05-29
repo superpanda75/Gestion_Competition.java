@@ -183,6 +183,7 @@ public class IhmPersonne implements ItemListener
 
 			Inscriptions ins = inscriptions.Inscriptions.getInscriptions();
 			SortedSet personnes = ins.getPersonnes();
+			System.out.println(personnes);
 			DefaultListModel model = new DefaultListModel<>();
 			JList<Personne> list_1 = new JList<>(model);
 			for (Object personne : personnes)
@@ -221,6 +222,7 @@ public class IhmPersonne implements ItemListener
 					String mail =((Personne) selection).getMail();
 					String prenom =((Personne) selection).getPrenom();
 					String Nom = ((Personne) selection).getNom();
+					System.out.println(selection);
 					System.out.println(id);
 					System.out.println(mail);
 					System.out.println(prenom);
@@ -239,7 +241,7 @@ public class IhmPersonne implements ItemListener
 				{
 					Personne p = (Personne) value;
 					Component listCellRendererComponent = super.getListCellRendererComponent(list,
-							p.getNom() + "/" + p.getPrenom() + "/" + p.getMail(), index, isSelected, cellHasFocus);
+							p.getId()+"/"+ p.getNom() + "/" + p.getPrenom() + "/" + p.getMail(), index, isSelected, cellHasFocus);
 					return listCellRendererComponent;
 				}
 			};
