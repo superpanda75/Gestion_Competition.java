@@ -65,6 +65,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	public void setNom(String nom)
 	{
 		this.nom = nom;
+		jdbc.BaseEquipe.modifEquipe(this);
 	}
 
 	/**

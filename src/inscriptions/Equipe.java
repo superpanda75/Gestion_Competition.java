@@ -58,7 +58,7 @@ public class Equipe extends Candidat
 	{
 		
 		membre.add(this);
-		
+		jdbc.BaseEquipe.addMembreEquipe(this,membre);
 		return membres.add(membre);
 	}
 
@@ -71,6 +71,7 @@ public class Equipe extends Candidat
 	public boolean remove(Personne membre)
 	{
 		membre.remove(this);
+		jdbc.BaseEquipe.suppMembreEquipe(this, membre);
 		return membres.remove(membre);
 	}
 
@@ -78,6 +79,10 @@ public class Equipe extends Candidat
 	public void delete()
 	{
 		super.delete();
+		for (Personne p : membres)
+			this.remove(p);
+		jdbc.BaseEquipe.suppEquipe(this);
+
 	}
 	
 	@Override

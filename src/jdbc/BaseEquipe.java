@@ -33,7 +33,7 @@ public class BaseEquipe {
 		return listeEquipe;
 	}
 	 //AJOUTER UNE EQUIPE -> fonctionne procedure stockee
-	public static void sauvegarder(Equipe equipe)
+	public void sauvegarder(Equipe equipe)
 		{
 			try	
 			{
@@ -79,12 +79,12 @@ public class BaseEquipe {
 		 } 
 	 }
 	 //Ajouter un membre -> fonctionne PROCEDURE STOCKEE
-	 public static void addMembreEquipe(Equipe equipe, Personne personne){
+	 public static void addMembreEquipe(Equipe equipe, Personne membre){
 		 try{
 			 Connection c = bdd.connexion();			 
 			 String sql = "{call addMembreEquipe( ? , ?)}";
 			 java.sql.CallableStatement smt = c.prepareCall(sql);
-	         smt.setInt(1,personne.getId());
+	         smt.setInt(1,membre.getId());
 	         smt.setInt(2,equipe.getId());
 			 smt.executeUpdate();
 			 
@@ -119,13 +119,13 @@ public class BaseEquipe {
 		 }
 	 }
 	 //remove membre equipe -> fonctionne PROCEDURE STOCKEE
-	 public static void suppMembreEquipe(Equipe equipe, Personne personne){
+	 public static void suppMembreEquipe(Equipe equipe, Personne membre){
 		 try{
 			 Connection c = bdd.connexion();			 
 			 String sql = "{call deletePersonneEquipe( ? , ? )}";
 			 java.sql.CallableStatement smt = c.prepareCall(sql);
-			 smt.setInt(1,equipe.getId());
-			 smt.setInt(2,personne.getId());
+			 smt.setInt(1, equipe.getId());
+			 smt.setInt(2, membre.getId());
 			 smt.executeUpdate(); 
 			 
 		 }catch(SQLException e){ 
