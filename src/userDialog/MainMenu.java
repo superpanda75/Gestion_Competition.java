@@ -2,6 +2,7 @@ package userDialog;
 
 import java.io.IOException;
 import inscriptions.Inscriptions;
+import inscriptions.Competition.InscriptionEnRetardException;
 import commandLine.*;
 import commandLine.util.InOut;;
 
@@ -22,6 +23,31 @@ public class MainMenu
 		compMenu = new CompMenu();
 	}
 	
+	public static void main(String[] args) throws InscriptionEnRetardException, RuntimeException, IOException
+	{
+		MainMenu menu = new MainMenu();
+		menu.start();
+		// RENVOIE UNE COLLECTION DE CANDIDAT
+		// Inscriptions inscriptions = Inscriptions.getInscriptions();
+		// for (Candidat c : inscription.getCandidats()) {
+		// System.out.println(c);
+		// }
+		// RENVOIE UNE COLLECTION DE COMPETITION & Equipe
+		// Inscriptions inscriptions = Inscriptions.getInscriptions();
+		// for (Competition c : inscription.getCompetitions()) {
+		// System.out.println(c);
+		// }
+		// for(Equipe e: inscription.getEquipes()){
+
+		// System.out.println(e.getMembres());
+
+		// }
+
+		// for (Competition c : inscriptions.getCompetitions())
+		// {
+		// System.out.println(c);
+		// }
+	}
 	public void start()
 	{
 		mainMenu.start();

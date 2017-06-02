@@ -49,6 +49,7 @@ public class Inscriptions implements Serializable
 		 * Retourne les compétitions.
 		 * 
 		 * @return
+		 * 
 		 */
 
 		public SortedSet<Competition> getCompetitions()

@@ -11,6 +11,7 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -106,11 +107,6 @@ public class IhmCompetition extends JFrame implements ItemListener, ActionListen
 			card3.add(new JButton("Supprimer"));
 
 			// Create the panel that contains the "cards".
-			cards = new JPanel(new CardLayout());
-			cards.add(card1, optionAjouter);
-			JButton button = new JButton("Ajouter");
-			button.setBounds(180, 300, 120, 23);
-			card1.add(button);
 			
 			JCheckBox checkBox = new JCheckBox("");
 			checkBox.setBackground(new Color(51, 153, 204));
@@ -127,6 +123,7 @@ public class IhmCompetition extends JFrame implements ItemListener, ActionListen
 			chckbxNewCheckBox.setBounds(226, 132, 113, 25);
 			card1.add(chckbxNewCheckBox);
 		
+
 			JLabel lblDate_1 = new JLabel("Date : ");
 			lblDate_1.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
 			lblDate_1.setBounds(370, 223, 56, 16);
@@ -140,11 +137,10 @@ public class IhmCompetition extends JFrame implements ItemListener, ActionListen
 		      { 
 		               public void actionPerformed(ActionEvent e) 
 		               {
-		            	   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		            	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		       				btnDate.addActionListener(this);
 		       				card2.add(btnDate, BorderLayout.WEST);
 		       				setLocationRelativeTo(null);
-		       	 
 		       			SwingUtilities.invokeLater(new Runnable() {
 		    				@Override
 		    				public void run() {
@@ -160,12 +156,12 @@ public class IhmCompetition extends JFrame implements ItemListener, ActionListen
 		    					d.setVisible(true);
 		    	 
 		    					Date date = c.getCalendar().getTime(); // on récupère la date
-		    	 
+		    					
 		    					/* on affiche la date dans le label */
 		    					Locale locale = Locale.getDefault();
-		    					DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL, locale);
+		    					DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		    					btnDate.setText(dateFormat.format(date));
-		    				}
+		    					}
 		    			});
 		               } 
 		       });
@@ -174,7 +170,11 @@ public class IhmCompetition extends JFrame implements ItemListener, ActionListen
 				cards.add(card1, optionAjouter);
 				JButton btn = new JButton("Ajouter");
 				btn.setBounds(242, 353, 120, 23);
-				card1.add(button);
+				card1.add(btn);
+				
+				JButton btnAjouter = new JButton("Ajouter");
+				btnAjouter.setBounds(202, 236, 89, 23);
+				card1.add(btnAjouter);
 				cards.add(card2, optionModifier);
 				card2.setLayout(null);
 

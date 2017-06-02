@@ -5,25 +5,35 @@ import java.util.*;
 import inscriptions.*;
 
 public class BaseEquipe {
+	private static Map<Integer, Equipe> equipes = new TreeMap<>();	
+	private final static Connection c = Base.getConnexion();
+
+
 	public BaseEquipe(){
 		
 	} 
+	
+	 public static Equipe getEquipe(int id)
+	 {
+		 return equipes.get(id);
+	 }
 	//AFFICHER CANDIDAT - Equipe --> fonctionne 
 	 public static /*SortedSet<Candidat>*/ void SelectEquipe(Inscriptions inscription){
 //			SortedSet<Candidat> listeEquipe = new TreeSet<>();
-		 // TODO idem dans Basecandidat et BASECOMPETITION
+		 // TODO idem dans Basecandidat et BASECOMPETITION-> fais 
 		 try{
 			 String query="SELECT * FROM java_candidat WHERE id_candidat NOT IN ("
 				 		+ " SELECT id_personne FROM java_personne)";
-			Connection c = Base.getConnexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
 			 while(rs.next())
 				{
-				 Candidat leCandidat = inscription.createEquipe(rs.getString("nom_candidat"));
-				 leCandidat.setId(rs.getInt("id_candidat"));
+				 Equipe leCandidat = inscription.createEquipe(rs.getString("nom_candidat"));
+				 int id = rs.getInt("id_competition");
+				 leCandidat.setId(id);
+				 equipes.put(id, leCandidat);
 //				 listeEquipe.add(leCandidat);
-				 // TODO dans une MAP qui contient les equipes
+				 // TODO dans une MAP qui contient les equipes -> fais 
 				}
 			
 		}catch(SQLException e){	
@@ -31,17 +41,17 @@ public class BaseEquipe {
 	}
 //		return listeEquipe;
 	}
+	 
 	 //AJOUTER UNE EQUIPE -> fonctionne procedure stockee
 	public void sauvegarder(Equipe equipe)
 		{
 			try	
 			{
-				// TODO mettre c n attribut de la classe
-				Connection c = Base.getConnexion();
-				String sql = "{call addEquipe( ? )}";// TODO passer le nom en paramètre
-				// TODO faire pareil pour personne
+				// TODO mettre c n attribut de la classe -> fais 
+				String sql = "{call addEquipe( ? )}";// TODO passer le nom en paramètre dans la procedure stockee-> fais 
+				// TODO faire pareil pour personne -> sauvegarder Personne -> fais
 				java.sql.CallableStatement smt = c.prepareCall(sql);
-				smt.setInt(1, equipe.getId());
+				smt.setString(1, equipe.getNom());
 				smt.executeUpdate(); 
 				equipe.setId(smt.RETURN_GENERATED_KEYS);
 			}
@@ -82,7 +92,6 @@ public class BaseEquipe {
 	 //Ajouter un membre -> fonctionne PROCEDURE STOCKEE
 	 public static void addMembreEquipe(Equipe equipe, Personne membre){
 		 try{
-			 Connection c = Base.getConnexion();			 
 			 String sql = "{call addMembreEquipe( ? , ?)}";
 			 java.sql.CallableStatement smt = c.prepareCall(sql);
 	         smt.setInt(1,membre.getId());
@@ -96,7 +105,6 @@ public class BaseEquipe {
 	 //Modifie le nom de l'equipe -> FONCTIONNE : PROCEDURE STOCKEE
 	 public static void modifEquipe(Candidat candidat){
 		 try{
-			 Connection c = Base.getConnexion();			 
 			 String sql = "{call updateCand( ? , ? )}";
 			 java.sql.CallableStatement smt = c.prepareCall(sql);
 	         smt.setInt(1, candidat.getId());
@@ -109,7 +117,6 @@ public class BaseEquipe {
 	 //Supprime l'equipe -> fonctionne PROCEDURE STOCKEE
 	 public static void suppEquipe(Candidat candidat){
 		 try{
-			 Connection c = Base.getConnexion();			 
 			 String sql = "{call deleteCand( ? )}";
 			 java.sql.CallableStatement smt = c.prepareCall(sql);
 			 smt.setInt(1,candidat.getId());
@@ -122,7 +129,6 @@ public class BaseEquipe {
 	 //remove membre equipe -> fonctionne PROCEDURE STOCKEE
 	 public static void suppMembreEquipe(Equipe equipe, Personne membre){
 		 try{
-			 Connection c = Base.getConnexion();			 
 			 String sql = "{call deletePersonneEquipe( ? , ? )}";
 			 java.sql.CallableStatement smt = c.prepareCall(sql);
 			 smt.setInt(1, equipe.getId());

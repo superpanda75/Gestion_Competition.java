@@ -9,6 +9,8 @@ import inscriptions.Competition.*;
 public class BaseCompetition {
 
 	private static Map<Integer, Competition> competitions = new TreeMap<>();	
+	private final static Connection c = Base.getConnexion();
+
 		
 		
 
@@ -17,7 +19,6 @@ public class BaseCompetition {
 	{
 		try 
 		{
-			Connection c = Base.getConnexion();
 			String sql = "{call modifComp( ? , ? , ? , ? )}";
         	java.sql.CallableStatement smt = c.prepareCall(sql);
         	smt.setString(1,competition.getNom());
@@ -39,7 +40,6 @@ public class BaseCompetition {
 		try 
 		{
 			String sql = "{call suppComp( ? )}";
-			Connection c = Base.getConnexion();
 			java.sql.CallableStatement smt = c.prepareCall(sql);
 			smt.setLong(1,comp.getId());
 			smt.executeUpdate(); 
@@ -54,7 +54,6 @@ public class BaseCompetition {
 			
 		 try{
 			 String query="SELECT * FROM java_competition";
-			 Connection c = Base.getConnexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
 			 while(rs.next())
@@ -75,7 +74,6 @@ public class BaseCompetition {
 	 public void selectInscription(Inscriptions inscriptions)
 	 {
 		 try{
-		  Connection c = Base.getConnexion();
 			 for(Competition comp: inscriptions.getCompetitions())
 				{
 					 String sql = "{call inscriptionCandToComp( ? )}";
@@ -108,7 +106,6 @@ public class BaseCompetition {
 		{
 			try	
 			{
-				Connection c = Base.getConnexion();
 				String sql = "{call addCompetition( ? , ? , ? )}";
 				java.sql.CallableStatement smt = c.prepareCall(sql);
 	        	smt.setString(1,competition.getNom());
@@ -128,7 +125,6 @@ public class BaseCompetition {
 		{
 			try 
 			{
-				Connection c = Base.getConnexion();
 				String sql = "{call removeCandToComp( ? , ? )}";
 				java.sql.CallableStatement smt = c.prepareCall(sql);
 				smt.setInt(1,competition.getId());
