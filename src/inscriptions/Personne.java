@@ -29,6 +29,8 @@ public class Personne extends Candidat
 	 */	
 	public int getId()
 	{
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
 		return id;
 	}
 
@@ -38,9 +40,12 @@ public class Personne extends Candidat
 	 */	
 	public void setId(int id)
 	{
-		this.id = id;
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
+		if (this.id == -1)
+			this.id = id;
+		throw new RuntimeException();
 	}
-
 	
 	
 	/**
@@ -50,6 +55,8 @@ public class Personne extends Candidat
 	
 	public String getPrenom()
 	{
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
 		return prenom;
 	}
 
@@ -73,6 +80,8 @@ public class Personne extends Candidat
 	
 	public String getMail()
 	{
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
 		return mail;
 
 	}
@@ -85,6 +94,7 @@ public class Personne extends Candidat
 	public void setMail(String mail)
 	{
 		this.mail = mail;
+		if (Inscriptions.bd)
 		jdbc.BasePersonne.updatePers(this);
 
 	}
@@ -96,6 +106,8 @@ public class Personne extends Candidat
 	
 	public Set<Equipe> getEquipes()
 	{
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
 		return Collections.unmodifiableSet(equipes);
 	}
 	

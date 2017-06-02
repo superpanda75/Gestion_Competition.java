@@ -39,6 +39,8 @@ public class Competition implements Comparable<Competition>, Serializable
 	 */	
 	public int getId()
 	{
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
 		return id;
 	}
 
@@ -48,7 +50,11 @@ public class Competition implements Comparable<Competition>, Serializable
 	 */	
 	public void setId(int id)
 	{
-		this.id = id;
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
+		if (this.id == -1)
+			this.id = id;
+		throw new RuntimeException();
 	}
 	
 	/**

@@ -78,7 +78,6 @@ public class TeamMenu
 				{
 					//return new Option("Afficher "+element.getNom(),null, getActionAfficherEquipe(element));
 					Menu menuEquipe = new Menu("Option pour "+element.getNom(),null);
-					//TODO : Ajouter des options pour les équipes
 					menuEquipe.ajoute(getOptionVoirUneEquipe(element));
 					menuEquipe.ajoute(getOptionSupprimerEquipe(element));
 					menuEquipe.ajoute(getListeAjouterUneEquipeCompetition(element));

@@ -45,7 +45,6 @@ public class BaseCandidat {
 					 {
 						 Equipe lEquipe = jdbc.BaseEquipe.getEquipe(rs.getInt(1));
 						 if (lEquipe == null)
-							 throw new RuntimeException();
 						 laCompetition.add(lEquipe);
 					 }
 					}

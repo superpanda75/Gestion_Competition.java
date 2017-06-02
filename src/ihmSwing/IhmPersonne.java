@@ -145,6 +145,8 @@ public class IhmPersonne implements ItemListener
 			lbl_nom_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
 			lbl_nom_pers.setBounds(409, 80, 181, 14);
 			card2.add(lbl_nom_pers);
+			
+			
 
 			JLabel lbl_prenom_pers = new JLabel("Pr\u00E9nom :");
 			lbl_prenom_pers.setForeground(new Color(102, 102, 102));

@@ -31,8 +31,10 @@ public class Inscriptions implements Serializable
 		{
 			if (bd){
 				enChargement = true;
-				candidats = BaseCandidat.SelectCand(this);
-				competitions = BaseCompetition.SelectComp(this);
+			//	jdbc.BaseCandidat.inscritCandidats(this);
+				//TODO : fallait faire ça ?
+//				candidats = BaseCandidat.SelectCand(this);
+//				competitions = BaseCompetition.SelectComp(this);
 				baseEq.selectMembreEquipe(this);
 				enChargement = false;
 				// Comp.selectInscription(this);
@@ -133,22 +135,22 @@ public class Inscriptions implements Serializable
 		public Personne createPersonne(String nom, String prenom, String mail)
 		{
 			Personne personne = new Personne(this, nom, prenom, mail);
-			if (bd) // TODO vérifier cgargement
+			if (bd && !enChargement) // TODO vérifier cgargement => fait
 				jdbc.BasePersonne.sauvegarder(personne);
 			candidats.add(personne);
 			return personne;
 		}
 
-//		public Personne modifPersonne(Personne personne, String nom, String prenom, String mail)
-//		{
-//			personne.setPrenom(prenom);
-//			personne.setNom(nom);
-//			personne.setMail(mail);
-//			if (bd)
-//				jdbc.BasePersonne.updatePers(personne);
-//			return personne;
-//		}
-//
+		public Personne modifPersonne(Personne personne, String nom, String prenom, String mail)
+		{
+			personne.setPrenom(prenom);
+			personne.setNom(nom);
+			personne.setMail(mail);
+			if (bd && !enChargement)
+				jdbc.BasePersonne.updatePers(personne);
+			return personne;
+		}
+
 		/**
 		 * Créée un Candidat de type équipe. Ceci est le seul moyen, il n'y a
 		 * pas de constructeur public dans {@link Equipe}.
