@@ -66,6 +66,7 @@ public class MainMenu
 						catch (IOException e) 
 						{
 							System.out.println("Echec de la sauvegarde. " + e);
+							e.printStackTrace();
 						}
 					}
 				};

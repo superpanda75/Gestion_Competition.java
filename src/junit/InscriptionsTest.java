@@ -75,7 +75,6 @@ public class InscriptionsTest {
 
 	@Test
 	public void testCreatePersonne() {
-		
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a","b", "c");
 		assertTrue(inscri.getCandidats().contains(Personne));

@@ -2,6 +2,7 @@ package ihmSwing;
 
 import inscriptions.Inscriptions;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -40,9 +41,17 @@ public class IhmPersonne implements ItemListener
 		private JPanel		ongletPers		= new JPanel();
 		private JTabbedPane	menuPersonne	= new JTabbedPane(SwingConstants.RIGHT);
 		private JPanel		panelDroite		= new JPanel();
+		
 		private JTextField	modifEmailPers;
 		private JTextField	modifPrenomPers;
 		private JTextField	modifNomPers;
+		
+		private final Inscriptions inscription = inscriptions.Inscriptions.getInscriptions(); 
+		
+		private Integer id_personne_modif;
+		private String nom_personne_modif;
+		private String prenom_personne_modif;
+		private String mail_personne_modif;
 
 		public IhmPersonne(JLabel titreOnglet)
 		{
@@ -181,9 +190,10 @@ public class IhmPersonne implements ItemListener
 			btnValiderLaModification.setBounds(250, 351, 160, 23);
 			card2.add(btnValiderLaModification);
 
-			Inscriptions ins = inscriptions.Inscriptions.getInscriptions();
+			Inscriptions ins = inscription;
 			SortedSet personnes = ins.getPersonnes();
 			System.out.println(personnes);
+			// TODO crer votre liste model vous-même
 			DefaultListModel model = new DefaultListModel<>();
 			JList<Personne> list_1 = new JList<>(model);
 			for (Object personne : personnes)
@@ -221,15 +231,133 @@ public class IhmPersonne implements ItemListener
 					int id =((Personne) selection).getId();
 					String mail =((Personne) selection).getMail();
 					String prenom =((Personne) selection).getPrenom();
-					String Nom = ((Personne) selection).getNom();
+					String nom = ((Personne) selection).getNom();
+					
+					setChampMail(mail);
+					setChampNom(nom);
+					setChampPrenom(prenom);
 					System.out.println(selection);
 					System.out.println(id);
 					System.out.println(mail);
 					System.out.println(prenom);
-					System.out.println(Nom);
+					System.out.println(nom);
 					
+					desactiverChamp(lbl_nom_pers, modifNomPers);
+					desactiverChamp(lbl_prenom_pers, modifPrenomPers);
+					desactiverChamp(lbl_email_pers, modifEmailPers);
+					
+					btnModifier.setEnabled(true);
+					btnModifier.addActionListener(new ActionListener() {						
+						@Override
+						public void actionPerformed(ActionEvent e)
+						{
+							activerChamp(lbl_nom_pers, modifNomPers, getChampNom());
+							activerChamp(lbl_prenom_pers, modifPrenomPers, getChamPrenom());
+							activerChamp(lbl_email_pers, modifEmailPers, getChampMail());
+						}
+					});
+				}
+			});		
+			
+			btnValiderLaModification.addActionListener(new ActionListener() {						
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					inscription.createPersonne(getChampNom(), getChamPrenom(), getChampMail()); 
 				}
 			});
+			
+		}
+		
+		/**
+		 * 
+		 * @return Integer nom_personne_modif
+		 */
+		private int getIdPersonne(){
+			return id_personne_modif;
+		}
+		
+		/**
+		 * 
+		 * @return String nom_personne_modif
+		 */
+		private String getChampNom(){
+			return nom_personne_modif;
+		}
+		
+		/**
+		 * 
+		 * @return String nom_personne_modif
+		 */
+		private String getChamPrenom(){
+			return prenom_personne_modif;
+		}
+		
+		/**
+		 * 
+		 * @return String nom_personne_modif
+		 */
+		private String getChampMail(){
+			return mail_personne_modif;
+		}
+		
+		/**
+		 * 
+		 * @param Integer id
+		 */
+		private void setIdPersonne(Integer id){
+			id_personne_modif = id;
+		}
+		
+		/**
+		 * 
+		 * @param String name
+		 */
+		private void setChampNom(String name){
+			nom_personne_modif = name;
+		}
+		
+		/**
+		 * 
+		 * @param String firstname
+		 */
+		private void setChampPrenom(String firstname){
+			prenom_personne_modif = firstname;
+		}
+		
+		/**
+		 * 
+		 * @param String  email
+		 */
+		private void setChampMail(String email){
+			mail_personne_modif = email ;
+		}
+		
+		/**
+		 * Cette fonction permet d'activer un champ : activerChamp(libelle, JTextField)
+		 * @param lbl
+		 * @param tf
+		 */
+		public void activerChamp(JLabel lbl, JTextField tf, String data){
+			tf.setText("");
+			 tf.setEditable(true);
+		     tf.setEnabled(true);
+		     tf.setBackground(new Color(51, 102, 153));
+		     lbl.setForeground(new Color(0,0,0));
+		     tf.setText(data);	
+		}
+		
+		/**
+		 * Cette fonction permet de désactiver un champ en le grisant et en le désactivant : desactiverChamp(libelle, JTextField)
+		 * @param lbl
+		 * @param tf
+		 */
+		public void desactiverChamp(JLabel lbl, JTextField tf){
+			 tf.setEditable(false);
+		     tf.setEnabled(false);
+		     tf.setBackground(new Color(102, 102, 102));
+		     lbl.setForeground(new Color(102, 102, 102));
+		     tf.setText("");
 		}
 
 		private ListCellRenderer<? super Personne> getCellRenderer()

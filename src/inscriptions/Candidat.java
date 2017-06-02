@@ -19,7 +19,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	private int id;
 	private String nom;
 	private Set<Competition> competitions;
-	BaseCandidat baseCandidat = new BaseCandidat();
+//	BaseCandidat baseCandidat = new BaseCandidat();
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{

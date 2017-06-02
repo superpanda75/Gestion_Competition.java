@@ -61,7 +61,9 @@ public class Personne extends Candidat
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
-		jdbc.BasePersonne.updatePers(this);
+		if (Inscriptions.bd)
+			jdbc.BasePersonne.updatePers(this);
+		// TODO faire pareil sur les autres setters
 	}
 
 	/**
@@ -113,7 +115,8 @@ public class Personne extends Candidat
 		super.delete();
 		for (Equipe e : equipes)
 			e.remove(this);
-		jdbc.BasePersonne.suppPersonne(this);
+		if (Inscriptions.bd)
+			jdbc.BasePersonne.suppPersonne(this);
 	}
 	
 	@Override

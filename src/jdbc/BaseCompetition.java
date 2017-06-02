@@ -7,17 +7,17 @@ import inscriptions.*;
 import inscriptions.Competition.*;
 
 public class BaseCompetition {
-	public static Base bdd = new Base();
 
-	public BaseCompetition(){
+	private static Map<Integer, Competition> competitions = new TreeMap<>();	
 		
-	}
+		
+
 	//PROCEDURE STOCKEE MODIFIER UNE COMPETITION -> fonctionne
 	public static void update(Competition competition)
 	{
 		try 
 		{
-			Connection c =bdd.connexion();
+			Connection c = Base.getConnexion();
 			String sql = "{call modifComp( ? , ? , ? , ? )}";
         	java.sql.CallableStatement smt = c.prepareCall(sql);
         	smt.setString(1,competition.getNom());
@@ -39,7 +39,7 @@ public class BaseCompetition {
 		try 
 		{
 			String sql = "{call suppComp( ? )}";
-			Connection c =bdd.connexion();
+			Connection c = Base.getConnexion();
 			java.sql.CallableStatement smt = c.prepareCall(sql);
 			smt.setLong(1,comp.getId());
 			smt.executeUpdate(); 
@@ -50,32 +50,32 @@ public class BaseCompetition {
 	    }
 	}
 	//AFFICHER CANDIDAT - Equipe --> fonctionne 
-	 public static SortedSet<Competition> SelectComp(Inscriptions inscription){
-			SortedSet<Competition> SelectComp = new TreeSet();
+	 public static void SelectComp(Inscriptions inscription){
+			
 		 try{
 			 String query="SELECT * FROM java_competition";
-			 Connection c =bdd.connexion();
+			 Connection c = Base.getConnexion();
 			 Statement smt = c.createStatement();
 			 ResultSet rs = smt.executeQuery(query);
 			 while(rs.next())
 				{
 				 LocalDate dateCloture = rs.getDate("date").toLocalDate();
 				 Competition laCompetition = inscription.createCompetition(rs.getString("nom_competition"), dateCloture, rs.getBoolean("enEquipe"));
-				 laCompetition.setId(rs.getInt("id_competition"));
-				 SelectComp.add(laCompetition);
+				 int id = rs.getInt("id_competition");
+				 laCompetition.setId(id);
+				 competitions.put(id, laCompetition);
 				}
 			
 		}catch(SQLException e){	
 			System.out.println(e.getMessage());
 	}
-		return SelectComp;
 	}
 	 
 	 //PROCEDURE STOCKEE -> fonctionne
 	 public void selectInscription(Inscriptions inscriptions)
 	 {
 		 try{
-		  Connection c = bdd.connexion();
+		  Connection c = Base.getConnexion();
 			 for(Competition comp: inscriptions.getCompetitions())
 				{
 					 String sql = "{call inscriptionCandToComp( ? )}";
@@ -108,7 +108,7 @@ public class BaseCompetition {
 		{
 			try	
 			{
-				Connection c = bdd.connexion();
+				Connection c = Base.getConnexion();
 				String sql = "{call addCompetition( ? , ? , ? )}";
 				java.sql.CallableStatement smt = c.prepareCall(sql);
 	        	smt.setString(1,competition.getNom());
@@ -128,7 +128,7 @@ public class BaseCompetition {
 		{
 			try 
 			{
-				Connection c = bdd.connexion();
+				Connection c = Base.getConnexion();
 				String sql = "{call removeCandToComp( ? , ? )}";
 				java.sql.CallableStatement smt = c.prepareCall(sql);
 				smt.setInt(1,competition.getId());
@@ -140,5 +140,10 @@ public class BaseCompetition {
 				e.printStackTrace();
 		    }
 		}
+	 
+	 public static Competition getCompetition(int id)
+	 {
+		 return competitions.get(id);
+	 }
 
 }

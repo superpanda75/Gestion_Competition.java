@@ -6,9 +6,6 @@ import inscriptions.*;
 
 
 public class BasePersonne {
-	public static Base bdd = new Base();
-
-
 	public BasePersonne()
 	{
 
@@ -18,7 +15,7 @@ public class BasePersonne {
 	{
 		try 
 		{
-			Connection c = bdd.connexion();
+			Connection c = Base.getConnexion();
 			String sql = "{call modifPersonne(?, ?, ?, ?)}";
         	java.sql.CallableStatement smt = c.prepareCall(sql);
         	smt.setInt(1,personne.getId());
@@ -38,7 +35,7 @@ public class BasePersonne {
 	{
 		try 
 		{
-			Connection c = bdd.connexion();
+			Connection c = Base.getConnexion();
 			String sql = "{call suppPersonne( ? )}";
 			java.sql.CallableStatement smt = c.prepareCall(sql);
 			smt.setInt(1,personne.getId());
@@ -55,11 +52,11 @@ public class BasePersonne {
 		public static void sauvegarder(Personne personne){
 			 try{
 				 String sql="INSERT INTO java_personne(id_personne,prenom_personne,mail_personne) VALUES('"+personne.getId()+"','"+personne.getPrenom()+"','"+personne.getMail()+"')";
-				 Connection c = bdd.connexion();
+				 Connection c = Base.getConnexion();
 				 Statement smt = c.createStatement();
 				 smt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
 					ResultSet rs = smt.getGeneratedKeys();
-					while(rs.next())
+					if(rs.next())
 					{
 						sql ="INSERT INTO java_candidat(nom_candidat) VALUES ('"+personne.getNom()+"')";
 					}
@@ -82,7 +79,7 @@ public class BasePersonne {
 				String query="SELECT c.id_candidat, c.nom_candidat, p.prenom_personne, p.mail_personne "
 							+"FROM java_candidat c, java_personne p "
 							+"WHERE c.id_candidat = p.id_personne";
-				Connection c =bdd.connexion();
+				Connection c =Base.getConnexion();
 				 Statement smt = c.createStatement();
 				 ResultSet rs = smt.executeQuery(query);
 				 while(rs.next())

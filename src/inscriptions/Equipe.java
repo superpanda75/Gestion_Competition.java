@@ -14,7 +14,7 @@ public class Equipe extends Candidat
 {
 	private static final long serialVersionUID = 4147819927233466035L;
 	private SortedSet<Personne> membres = new TreeSet<>();
-	private int id;
+	private int id = -1;
 	
 	Equipe(Inscriptions inscriptions, String nom)
 	{
@@ -27,6 +27,9 @@ public class Equipe extends Candidat
 	 */	
 	public int getId()
 	{
+		// TODO faire pareil dans les autres classes.
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
 		return id;
 	}
 
@@ -36,7 +39,11 @@ public class Equipe extends Candidat
 	 */	
 	public void setId(int id)
 	{
-		this.id = id;
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
+		if (this.id == -1)
+			this.id = id;
+		throw new RuntimeException();
 	}
 	
 	
@@ -58,6 +65,7 @@ public class Equipe extends Candidat
 	{
 		
 		membre.add(this);
+		// TODO if bd
 		jdbc.BaseEquipe.addMembreEquipe(this,membre);
 		return membres.add(membre);
 	}
