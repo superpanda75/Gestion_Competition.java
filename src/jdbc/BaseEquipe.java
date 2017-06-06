@@ -29,7 +29,7 @@ public class BaseEquipe {
 			 while(rs.next())
 				{
 				 Equipe leCandidat = inscription.createEquipe(rs.getString("nom_candidat"));
-				 int id = rs.getInt("id_competition");
+				 int id = rs.getInt("id_candidat");
 				 leCandidat.setId(id);
 				 equipes.put(id, leCandidat);
 //				 listeEquipe.add(leCandidat);
@@ -43,7 +43,7 @@ public class BaseEquipe {
 	}
 	 
 	 //AJOUTER UNE EQUIPE -> fonctionne procedure stockee
-	public void sauvegarder(Equipe equipe)
+	public static void sauvegarder(Equipe equipe)
 		{
 			try	
 			{
@@ -53,7 +53,7 @@ public class BaseEquipe {
 				java.sql.CallableStatement smt = c.prepareCall(sql);
 				smt.setString(1, equipe.getNom());
 				smt.executeUpdate(); 
-				equipe.setId(smt.RETURN_GENERATED_KEYS);
+				equipe.setId(0);
 			}
 			catch (SQLException e)
 			{

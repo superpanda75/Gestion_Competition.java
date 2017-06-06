@@ -23,7 +23,11 @@ public class CompMenu
 	private static Inscriptions inscriptions;
 	public CompMenu()
 	{
-		inscriptions = Inscriptions.getInscriptions();
+		getInscriptions();
+	}
+	public static Inscriptions getInscriptions()
+	{
+		return inscriptions;
 	}
 	
 	static Menu getMenuCompetition()
