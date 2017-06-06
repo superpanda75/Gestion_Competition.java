@@ -59,11 +59,12 @@ public class BasePersonne {
 		 //FONCTIONNE AJOUTER PERSONNE & candidat (on recupere le prenom de la classe mere personne et le nm pour la classe fille candidat )->notion héritage
 		public static void sauvegarder(Personne personne){
 			 try{
-					String sql = "{call addPers(?, ?, ?)}";
+					String sql = "{call addPers( ? , ? , ? , ? )}";
 					// TODO faire pareil pour personne -> sauvegarder Personne
 					java.sql.CallableStatement smt = c.prepareCall(sql);
-					smt.setString(1, personne.getNom());
-					smt.setString(2, personne.getPrenom());
+					smt.setInt(1, personne.getId());
+					smt.setString(2, personne.getNom());
+					smt.setString(3, personne.getPrenom());
 					smt.setString(3, personne.getMail());
 					smt.executeUpdate(); 
 					personne.setId(smt.RETURN_GENERATED_KEYS);
