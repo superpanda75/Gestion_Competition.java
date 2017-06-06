@@ -16,7 +16,11 @@ public class TeamMenu
 	private static Inscriptions inscriptions;
 	public TeamMenu()
 	{
-		inscriptions = Inscriptions.getInscriptions();
+		getInscriptions();
+	}
+	public static Inscriptions getInscriptions()
+	{
+		return inscriptions;
 	}
 	
 	static Menu getMenuEquipe()

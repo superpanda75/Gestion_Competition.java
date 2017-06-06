@@ -169,7 +169,7 @@ public class Inscriptions implements Serializable
 		{
 			Equipe equipe = new Equipe(this, nom);
 			candidats.add(equipe);
-			// baseEq.sauvegarder(equipe);
+//			jdbc.BaseEquipe.sauvegarder(equipe);
 			return equipe;
 		}
 
