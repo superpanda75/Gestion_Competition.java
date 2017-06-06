@@ -54,6 +54,7 @@ public class Competition implements Comparable<Competition>, Serializable
 			throw new RuntimeException();
 		if (this.id == -1)
 			this.id = id;
+		throw new RuntimeException();
 	}
 	
 	/**
@@ -173,7 +174,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		// TODO vérifier que la date de clôture n'est pas passée
 		if ( dateCloture.isAfter(LocalDate.now())) 
+			throw new InscriptionEnRetardException(equipe);
 		if (enEquipe)
+			throw new RuntimeException();
 		equipe.add(this);
 		jdbc.BaseCandidat.inscCandToComp(equipe, this);
 		return candidats.add(equipe);

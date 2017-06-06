@@ -17,10 +17,10 @@ public class PersMenu
 	private static Inscriptions inscriptions;
 	public PersMenu()
 	{
-		getInscriptions();
+		inscriptions = Inscriptions.getInscriptions();
 	}
 	
-	public static Inscriptions getInscriptions()
+	public Inscriptions getInscriptions()
 	{
 		return inscriptions;
 	}

@@ -44,6 +44,7 @@ public class Personne extends Candidat
 			throw new RuntimeException();
 		if (this.id == -1)
 			this.id = id;
+		throw new RuntimeException();
 	}
 	
 	
@@ -94,7 +95,7 @@ public class Personne extends Candidat
 	{
 		this.mail = mail;
 		if (Inscriptions.bd)
-			jdbc.BasePersonne.updatePers(this);
+		jdbc.BasePersonne.updatePers(this);
 
 	}
 

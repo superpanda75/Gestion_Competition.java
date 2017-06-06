@@ -29,11 +29,11 @@ public class BaseCandidat {
 	
 	
 		// TODO faire de même pour mettre en relation les équipes et les personnes -> fais 
-		 public static void inscritCandidats(Inscriptions inscription, int idCandidat){
+		 public static void inscritCandidats(Inscriptions inscription){
 			 try{
-				 
-				String query="{call selectInscriptionCandidat('" + idCandidat + "')}";
-				 java.sql.CallableStatement smt = c.prepareCall(query);
+				String query="SELECT * "
+							+"FROM java_inscription";
+				 Statement smt = c.createStatement();
 				 ResultSet rs = smt.executeQuery(query);
 				 while(rs.next())
 					{	
