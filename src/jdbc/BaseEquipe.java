@@ -29,7 +29,7 @@ public class BaseEquipe {
 			 while(rs.next())
 				{
 				 Equipe leCandidat = inscription.createEquipe(rs.getString("nom_candidat"));
-				 int id = rs.getInt("id_candidat");
+				 int id = rs.getInt("id_competition");
 				 leCandidat.setId(id);
 				 equipes.put(id, leCandidat);
 //				 listeEquipe.add(leCandidat);

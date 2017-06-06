@@ -16,15 +16,14 @@ public class MainMenu
 	
 	public MainMenu()
 	{
-
+		inscriptions = Inscriptions.getInscriptions();
 		mainMenu=getMainMenu();
 		persMenu = new PersMenu();
 		teamMenu = new TeamMenu();
 		compMenu = new CompMenu();
 	}
 	
-	@SuppressWarnings("static-access")
-	public static void main(String[] args) 
+	public static void main(String[] args) throws InscriptionEnRetardException, RuntimeException, IOException
 	{
 		MainMenu menu = new MainMenu();
 		menu.start();
@@ -49,7 +48,7 @@ public class MainMenu
 		// System.out.println(c);
 		// }
 	}
-	public static void start()
+	public void start()
 	{
 		mainMenu.start();
 	}

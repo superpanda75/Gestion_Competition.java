@@ -52,6 +52,7 @@ public class BasePersonne {
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+			System.out.println("La personne n'a pas été supprimé.");
 	    }
 	}
 	 

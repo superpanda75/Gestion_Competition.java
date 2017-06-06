@@ -31,11 +31,7 @@ public class Inscriptions implements Serializable
 		{
 			if (bd){
 				enChargement = true;
-				jdbc.BaseCompetition.SelectComp(this);
-				jdbc.BaseEquipe.SelectEquipe(this);
-//				jdbc.BaseCompetition.SelectComp(this);
-//				jdbc.BaseCandidat.inscritCandidats(this);
-			//jdbc.BaseCandidat.inscritCandidats(this);
+			//	jdbc.BaseCandidat.inscritCandidats(this);
 				//TODO : fallait faire ça ?
 //				candidats = BaseCandidat.SelectCand(this);
 //				competitions = BaseCompetition.SelectComp(this);
@@ -292,7 +288,32 @@ public class Inscriptions implements Serializable
 
 		// NE PAS TOUCHER
 		//TODO : déplacer dans le package userDialog
-		
+		public static void main(String[] args) throws InscriptionEnRetardException, RuntimeException, IOException
+		{
+
+			MainMenu menu = new MainMenu();
+			menu.start();
+			// RENVOIE UNE COLLECTION DE CANDIDAT
+			// Inscriptions inscriptions = Inscriptions.getInscriptions();
+			// for (Candidat c : inscription.getCandidats()) {
+			// System.out.println(c);
+			// }
+			// RENVOIE UNE COLLECTION DE COMPETITION & Equipe
+			// Inscriptions inscriptions = Inscriptions.getInscriptions();
+			// for (Competition c : inscription.getCompetitions()) {
+			// System.out.println(c);
+			// }
+			// for(Equipe e: inscription.getEquipes()){
+
+			// System.out.println(e.getMembres());
+
+			// }
+
+			// for (Competition c : inscriptions.getCompetitions())
+			// {
+			// System.out.println(c);
+			// }
+		}
 
 		// UPDATE COMPETITION
 		public Competition modifCompetition(Competition competition, String nom)
