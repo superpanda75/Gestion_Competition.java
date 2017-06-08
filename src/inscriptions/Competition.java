@@ -54,7 +54,6 @@ public class Competition implements Comparable<Competition>, Serializable
 			throw new RuntimeException();
 		if (this.id == -1)
 			this.id = id;
-		throw new RuntimeException();
 	}
 	
 	/**

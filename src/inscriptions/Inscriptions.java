@@ -165,7 +165,8 @@ public class Inscriptions implements Serializable
 		{
 			Equipe equipe = new Equipe(this, nom);
 			candidats.add(equipe);
-			// baseEq.sauvegarder(equipe);
+				if (bd && !enChargement)
+			jdbc.BaseEquipe.sauvegarder(equipe);
 			return equipe;
 		}
 
