@@ -43,7 +43,7 @@ public class BaseEquipe {
 	}
 	 
 	 //AJOUTER UNE EQUIPE -> fonctionne procedure stockee
-	public void sauvegarder(Equipe equipe)
+	public static void sauvegarder(Equipe equipe)
 		{
 			try	
 			{

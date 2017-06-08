@@ -44,7 +44,6 @@ public class Personne extends Candidat
 			throw new RuntimeException();
 		if (this.id == -1)
 			this.id = id;
-		throw new RuntimeException();
 	}
 	
 	
