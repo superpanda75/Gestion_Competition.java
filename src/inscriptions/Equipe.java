@@ -62,7 +62,6 @@ public class Equipe extends Candidat
 
 	public boolean add(Personne membre)
 	{
-		
 		membre.add(this);
 		// TODO if bd
 		if (!Inscriptions.bd)

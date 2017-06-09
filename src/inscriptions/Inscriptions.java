@@ -22,7 +22,7 @@ public class Inscriptions implements Serializable
 		private static Inscriptions		inscriptions;
 		private SortedSet<Competition>	competitions		= new TreeSet<>();
 		private SortedSet<Candidat>		candidats			= new TreeSet<>();
-		private transient BaseEquipe	baseEq	= new BaseEquipe();
+		//private transient BaseEquipe	baseEq	= new BaseEquipe();
 //		private transient BaseCompetition Comp = new BaseCompetition();
 		transient final static boolean bd = true; 
 		private transient static boolean enChargement = false;
@@ -31,13 +31,13 @@ public class Inscriptions implements Serializable
 		{
 			if (bd){
 				enChargement = true;
-			//	jdbc.BaseCandidat.inscritCandidats(this);
-				//TODO : fallait faire ça ?
-//				candidats = BaseCandidat.SelectCand(this);
-//				competitions = BaseCompetition.SelectComp(this);
-				baseEq.selectMembreEquipe(this);
+				jdbc.BaseCompetition.SelectComp(this);
+				jdbc.BaseEquipe.SelectEquipe(this);
+				jdbc.BasePersonne.SelectPers(this);
+				jdbc.BaseEquipe.selectMembreEquipe(this);
+//				jdbc.BaseCompetition.selectInscription(this);
+				jdbc.BaseCandidat.inscritCandidats(this);
 				enChargement = false;
-				// Comp.selectInscription(this);
 			}
 
 		}
@@ -190,13 +190,15 @@ public class Inscriptions implements Serializable
 		@SuppressWarnings("unused")
 		public static Inscriptions getInscriptions()
 		{
+			//SERIALISER
 			if (!bd && inscriptions == null)
 			{
 				inscriptions = readObject();
 				if (inscriptions == null)
 					inscriptions = new Inscriptions();
 			}
-			if(bd){
+			//BASE
+			if(bd && inscriptions == null){
 				inscriptions = new Inscriptions();
 			}
 			return inscriptions;

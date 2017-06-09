@@ -74,8 +74,7 @@ public class BasePersonne {
 			 }
 		}
 		//AFFICHER CANDIDAT de type personne --> fonctionne 
-		 public static SortedSet<Candidat> SelectPers(Inscriptions inscription){
-				SortedSet<Candidat> listePers = new TreeSet<>();
+		 public static /*SortedSet<Candidat>*/ void SelectPers(Inscriptions inscription){
 			 try{
 				String query="SELECT c.id_candidat, c.nom_candidat, p.prenom_personne, p.mail_personne "
 							+"FROM java_candidat c, java_personne p "
@@ -85,15 +84,16 @@ public class BasePersonne {
 				 while(rs.next())
 					{
 					 Candidat leCandidat = inscription.createPersonne(rs.getString("nom_candidat"),
-							 rs.getString("prenom_personne"), rs.getString("mail_personne"));
-					 leCandidat.setId(rs.getInt("id_candidat"));
-					 listePers.add(leCandidat);
+					rs.getString("prenom_personne"), rs.getString("mail_personne"));
+					 int idPers = rs.getInt("id_candidat");
+					 leCandidat.setId(idPers);
+					 personnes.put(idPers, (Personne) leCandidat);
+					// listePers.add(leCandidat);
 					}
 				
 			}catch(SQLException e){	
 				System.out.println(e.getMessage());
 		}
-			return listePers;
 		}
 
 }

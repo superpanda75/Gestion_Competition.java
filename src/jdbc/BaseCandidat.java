@@ -13,14 +13,15 @@ public class BaseCandidat {
 	
 //	//1- AFFICHER CANDIDAT - Equipe --> fonctionne 
 //	// TODO renommer
-//		 public static /*SortedSet<Candidat>*/ void SelectCand(Inscriptions inscription){
+//		 public static SortedSet<Candidat> void SelectCand(Inscriptions inscription){
 //				//SortedSet<Candidat> listeCand = new TreeSet<>();
-//				for (Candidat candidat : BasePersonne.SelectPers(inscription)) {
+//				for (inscriptions.Candidat candidat : BasePersonne.SelectPers(inscription)) {
 //					//listeCand.add(candidat);
 //					candidat.getId();
 //				}
-//				for (Candidat candidat : BaseEquipe.SelectEquipe(inscription)) {
+//				for (inscriptions.Candidat equipe : BaseEquipe.SelectEquipe(inscription)) {
 //					//listeCand.add(candidat);
+//					equipe.getId();
 //				}
 //
 //			//return listeCand;
@@ -31,6 +32,7 @@ public class BaseCandidat {
 		// TODO faire de même pour mettre en relation les équipes et les personnes -> fais 
 		 public static void inscritCandidats(Inscriptions inscription){
 			 try{
+				 System.out.println("inscription des candidats");
 				String query="SELECT * "
 							+"FROM java_inscription";
 				 Statement smt = c.createStatement();
@@ -40,36 +42,21 @@ public class BaseCandidat {
 					 Competition laCompetition = jdbc.BaseCompetition.getCompetition(rs.getInt(2));
 					 Personne laPersonne = jdbc.BasePersonne.getPersonne(rs.getInt(1));
 					 if (laPersonne != null)
-						 laCompetition.add(laPersonne);					 
+						 laCompetition.add(laPersonne);						 
 					 else
 					 {
 						 Equipe lEquipe = jdbc.BaseEquipe.getEquipe(rs.getInt(1));
 						 if (lEquipe == null)
+							 throw new RuntimeException("Impossible de trouver le candidat numéro " + rs.getInt(1));
 						 laCompetition.add(lEquipe);
 					 }
+					 System.out.println("Competition = " + laCompetition.getNom()+",Candidat = " + laPersonne.getNom() );
 					}
 				
 			}catch(SQLException e){	
 				System.out.println(e.getMessage());
 		}
 		} 
-
-		 
-		 //2- modifie le candidat ->fonctionne
-		// TODO en doublon avec BaseEquipe -> fait -- supprimer car doublon
-		 
-		 //3- supprime le candidat -> fonctionne 
-		 public void deleteCandidat(Candidat candidat){
-			 try{
-					String req = "{call deleteCand( ? )}";
-					java.sql.CallableStatement smt = c.prepareCall(req);
-					smt.setInt(1,candidat.getId());
-					smt.executeUpdate(); 
-				 
-			 }catch(SQLException e){
-				 System.out.println(e.getMessage());
-			 }
-		 }
 		 //4- Inscrire un candidat (java_inscription) -> ne fonctionne pas
 		 public static void inscCandToComp(Candidat candidat, Competition competition)
 			{
@@ -86,5 +73,34 @@ public class BaseCandidat {
 					e.printStackTrace();
 				}
 			}
+
+		 
+		 //2- modifie le candidat ->fonctionne
+		// TODO en doublon avec BaseEquipe -> fait -- supprimer car doublon
+//		 public static void modifEquipe(Candidat candidat){
+//			 try{
+//				 String sql = "{call updateCand( ? , ? )}";
+//				 java.sql.CallableStatement smt = c.prepareCall(sql);
+//		         smt.setInt(1, candidat.getId());
+//		         smt.setString(2, candidat.getNom());
+//		         smt.executeUpdate();
+//			 }catch(SQLException e){
+//				 System.out.println(e.getMessage());
+//			 }
+//		 }
+//		 
+//		 //3- supprime le candidat -> fonctionne 
+//		 public void deleteCandidat(Candidat candidat){
+//			 try{
+//					String req = "{call deleteCand( ? )}";
+//					java.sql.CallableStatement smt = c.prepareCall(req);
+//					smt.setInt(1,candidat.getId());
+//					smt.executeUpdate(); 
+//				 
+//			 }catch(SQLException e){
+//				 System.out.println(e.getMessage());
+//			 }
+//		 }
+		
 	
 }

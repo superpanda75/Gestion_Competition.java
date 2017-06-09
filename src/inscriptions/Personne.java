@@ -143,6 +143,5 @@ public class Personne extends Candidat
 			return super.toString() + ""+ getPrenom()+ "et ne fait partie d'aucune equipe";
 		}
 	}
-
 	
 }

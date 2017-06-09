@@ -71,36 +71,37 @@ public class BaseCompetition {
 	}
 	 
 	 //PROCEDURE STOCKEE -> fonctionne
-	 public void selectInscription(Inscriptions inscriptions)
-	 {
-		 try{
-			 for(Competition comp: inscriptions.getCompetitions())
-				{
-					 String sql = "{call inscriptionCandToComp( ? )}";
-					 java.sql.CallableStatement smt = c.prepareCall(sql);
-					 smt.setInt(1, comp.getId());
-					 ResultSet rs = smt.executeQuery(sql);
-					 while (rs.next())
-						{
-						 for (Personne p : inscriptions.getPersonnes()) 
-								if(rs.getInt("id_candidat") == p.getId())
-								{
-									comp.add(p);
-								}
-				            for (Equipe e : inscriptions.getEquipes()) 
-				            {
-								if(rs.getInt("id_candidat") == e.getId())
-								{
-									comp.add(e);
-								}
-							}
-				        } 
-				}
-		 }catch(SQLException e){
-			 e.printStackTrace();
-			 System.out.println(e.getMessage());
-		 } 
-	 }
+//	 public  void selectInscription(Inscriptions inscriptions)
+//	 {
+//		 try{
+//			 for(Competition comp: inscriptions.getCompetitions())
+//				 
+//				{
+//					String sql = "{call inscriptionCandToComp( ? )}";
+//					 java.sql.CallableStatement smt = c.prepareCall(sql);
+//					 smt.setInt(1, comp.getId());
+//					 ResultSet rs = smt.executeQuery(sql);
+//					 while (rs.next())
+//						{
+//						 for (Personne p : inscriptions.getPersonnes()) 
+//								if(rs.getInt("id_candidat") == p.getId())
+//								{
+//									comp.add(p);
+//								}
+//				            for (Equipe e : inscriptions.getEquipes()) 
+//				            {
+//								if(rs.getInt("id_candidat") == e.getId())
+//								{
+//									comp.add(e);
+//								}
+//							}
+//				        } 
+//				}
+//		 }catch(SQLException e){
+//			 e.printStackTrace();
+//			 System.out.println(e.getMessage());
+//		 } 
+//	 }
 	 //PROCEDURE STOCKEE AJOUTER COMPETITION  --> fonctionne
 	 public static void Sauvegarder(Competition competition)
 		{

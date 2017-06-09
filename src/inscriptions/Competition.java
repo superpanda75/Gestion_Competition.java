@@ -73,7 +73,8 @@ public class Competition implements Comparable<Competition>, Serializable
 	public void setNom(String nom)
 	{
 		this.nom = nom ;
-		jdbc.BaseCompetition.update(this);
+		if (Inscriptions.bd)
+			jdbc.BaseCompetition.update(this);
 	}
 	
 	/**
@@ -111,7 +112,8 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public void setEnEquipe(boolean enEquipe) {
 		this.enEquipe = enEquipe;
-		jdbc.BaseCompetition.update(this);
+		if (Inscriptions.bd)
+			jdbc.BaseCompetition.update(this);
 	}
 	
 	/**
@@ -152,7 +154,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Personne personne) throws InscriptionEnRetardException,RuntimeException
 	{
 		// TODO vérifier que la date de clôture n'est pas passée
-		if( dateCloture.isAfter(LocalDate.now()))
+		if( !inscriptions.estEnChargement() && dateCloture.isAfter(LocalDate.now()))
 			throw new InscriptionEnRetardException(personne);
 		if (enEquipe)
 			throw new RuntimeException();
