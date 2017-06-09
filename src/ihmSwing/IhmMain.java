@@ -7,6 +7,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 
+import inscriptions.Inscriptions;
+
 
 public class IhmMain 
 	{
@@ -15,42 +17,42 @@ public class IhmMain
 		private IhmCompetition ongletCompetition;	
 		private IhmInscription ongletInscription;	
 		
+		public IhmMain(Inscriptions inscriptions)
+		{
+			JFrame f = new JFrame("Gestion des Inscriptions");
+			f.setSize(600, 500);
+					
+			JTabbedPane onglets = new JTabbedPane(SwingConstants.TOP);
+			
+			
+			JPanel ongletPers = (new IhmPersonne(inscriptions)).getOnglet();	
+			
+			IhmEquipe Equi = new IhmEquipe(new JLabel ("Equipe"));	
+			JPanel ongletEqui = Equi.getOnglet();
+			
+			
+			IhmCompetition Comp = new IhmCompetition(new JLabel ("Competition"));	
+			JPanel ongletComp = Comp.getOnglet();
+			
+			
+			IhmInscription Insc = new IhmInscription(new JLabel ("Inscription"));	
+			JPanel ongletInsc = Insc.getOnglet();
+			
+			
+			onglets.addTab("Competition", ongletComp);
+			onglets.addTab("Personne", ongletPers);
+			onglets.addTab("Equipe", ongletEqui);
+			onglets.addTab("Inscription", ongletInsc);
+		
+			onglets.setOpaque(true);		
+			f.add(onglets);		
+			f.getContentPane().add(onglets);		
+			f.setVisible(true);
+			f.setResizable(false);
+		}
 		
 	public static void main(String[] args) {
-		
-		JFrame f = new JFrame("Gestion des Inscriptions");
-		f.setSize(600, 500);
-				
-		JTabbedPane onglets = new JTabbedPane(SwingConstants.TOP);
-		
-		
-		IhmPersonne Pers = new IhmPersonne(new JLabel ("Personne"));	
-		JPanel ongletPers = Pers.getOnglet();
-		
-		
-		IhmEquipe Equi = new IhmEquipe(new JLabel ("Equipe"));	
-		JPanel ongletEqui = Equi.getOnglet();
-		
-		
-		IhmCompetition Comp = new IhmCompetition(new JLabel ("Competition"));	
-		JPanel ongletComp = Comp.getOnglet();
-		
-		
-		IhmInscription Insc = new IhmInscription(new JLabel ("Inscription"));	
-		JPanel ongletInsc = Insc.getOnglet();
-		
-		
-		onglets.addTab("Competition", ongletComp);
-		onglets.addTab("Personne", ongletPers);
-		onglets.addTab("Equipe", ongletEqui);
-		onglets.addTab("Inscription", ongletInsc);
-	
-		onglets.setOpaque(true);		
-		f.add(onglets);		
-		f.getContentPane().add(onglets);		
-		f.setVisible(true);
-		f.setResizable(false);
-
+		new IhmMain(Inscriptions.getInscriptions());
 		}
 	
 		
