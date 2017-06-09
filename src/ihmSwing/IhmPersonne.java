@@ -18,13 +18,14 @@ import inscriptions.Personne;
 
 public class IhmPersonne// implements ItemListener
 	{
-//		private JPanel	cards 			= new JPanel();
-//		private JPanel	ongletPers		= new JPanel();
-
 		
-		private JTextField	modifEmailPers;
-		private JTextField	modifPrenomPers;
-		private JTextField	modifNomPers;
+		private JTextField	modifEmailPers	= mkTfMail();
+		private JTextField	modifPrenomPers	= mkTfPrenom();
+		private JTextField	modifNomPers	= mkTfNom();
+		
+		private JLabel lblEmail 	= mkLbEmailPers();
+		private JLabel lblPrenom 	= mkLbPrenomPers();
+		private JLabel lblNom		= mkLbNomPers();
 		
 		private final Inscriptions inscriptions ; 
 		private Map<Integer, Personne> mapPersonnes;
@@ -34,26 +35,32 @@ public class IhmPersonne// implements ItemListener
 			this.inscriptions = inscriptions;
 		}
 		
-		//public JPanel get
+		private void associateLabels(){
+			lblEmail.setLabelFor(modifEmailPers);
+			lblPrenom.setLabelFor(modifPrenomPers);
+			lblNom.setLabelFor(modifNomPers);
+		}
+		
 		private JLabel mkLbListPers(){
 			JLabel lblListeDesPersonnes = new JLabel("Liste des personnes enregistr\u00E9es :");
 			lblListeDesPersonnes.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
 			lblListeDesPersonnes.setBounds(37, 43, 249, 16);
-			return lblListeDesPersonnes;
+		return lblListeDesPersonnes;
 		}
 		
 		private JLabel mkLbNomPers(){
-		JLabel lbl_nom_pers = new JLabel("Nom de candidat :");
-		lbl_nom_pers.setForeground(new Color(102, 102, 102));
-		lbl_nom_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-		lbl_nom_pers.setBounds(409, 80, 181, 14);
+			JLabel lbl_nom_pers = new JLabel("Nom de candidat :");
+			lbl_nom_pers.setForeground(new Color(102, 102, 102));
+			lbl_nom_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
+			lbl_nom_pers.setBounds(409, 80, 181, 14);
 		return lbl_nom_pers;
 		}
+		
 		private JLabel mkLbPrenomPers(){
-		JLabel lbl_prenom_pers = new JLabel("Pr\u00E9nom :");
-		lbl_prenom_pers.setForeground(new Color(102, 102, 102));
-		lbl_prenom_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-		lbl_prenom_pers.setBounds(409, 174, 181, 14);
+			JLabel lbl_prenom_pers = new JLabel("Pr\u00E9nom :");
+			lbl_prenom_pers.setForeground(new Color(102, 102, 102));
+			lbl_prenom_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
+			lbl_prenom_pers.setBounds(409, 174, 181, 14);
 		return lbl_prenom_pers;
 		}
 		
@@ -63,7 +70,7 @@ public class IhmPersonne// implements ItemListener
 			lbl_email_pers.setBackground(new Color(0, 0, 0));
 			lbl_email_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
 			lbl_email_pers.setBounds(409, 265, 181, 14);
-			return lbl_email_pers;
+		return lbl_email_pers;
 		}
 		
 		private JTextField mkTfMail(){
@@ -73,20 +80,20 @@ public class IhmPersonne// implements ItemListener
 			modifEmailPers.setBackground(new Color(102, 102, 102));
 			modifEmailPers.setBounds(406, 287, 160, 20);
 			modifEmailPers.setColumns(10);
-			return modifEmailPers;
-			}
+		return modifEmailPers;
+		}
 
-			private JTextField mkTfPrenom(){
+		private JTextField mkTfPrenom(){
 			modifPrenomPers = new JTextField();
 			modifPrenomPers.setEnabled(false);
 			modifPrenomPers.setEditable(false);
 			modifPrenomPers.setBackground(new Color(102, 102, 102));
 			modifPrenomPers.setBounds(406, 197, 160, 20);
 			modifPrenomPers.setColumns(10);
-			return modifPrenomPers;
-			}
+		return modifPrenomPers;
+		}
 			
-			private JTextField mkTfNom(){
+		private JTextField mkTfNom(){
 			modifNomPers = new JTextField();
 			modifNomPers.setBackground(new Color(102, 102, 102));
 			modifNomPers.setEditable(false);
@@ -94,11 +101,9 @@ public class IhmPersonne// implements ItemListener
 			modifNomPers.setBounds(406, 105, 160, 20);
 			modifNomPers.setColumns(10);
 			return modifNomPers;
-			}
+		}
 			
-			private void attach(JTextField tf, JLabel lb){
-				lb.setLabelFor(tf);
-			}
+
 			
 		public JPanel getCardModif(){
 			
@@ -107,75 +112,22 @@ public class IhmPersonne// implements ItemListener
 			cardPersonnes.setLayout(null);
 			cardPersonnes.add(mkLbListPers());
 			
+			cardPersonnes.add(modifEmailPers);
+			cardPersonnes.add(lblEmail);
 			
-			JTextField mail = mkTfMail();
-			JLabel lbMail = mkLbEmailPers();
-			attach(mail,lbMail);
-			cardPersonnes.add(mail);
-			cardPersonnes.add(lbMail);
+			cardPersonnes.add(modifPrenomPers);
+			cardPersonnes.add(lblPrenom);
 			
-			JTextField prenom = mkTfPrenom();
-			JLabel lbPrenom = mkLbPrenomPers();
-			attach(prenom,lbPrenom);
-			cardPersonnes.add(prenom);
-			cardPersonnes.add(lbPrenom);
+			cardPersonnes.add(modifNomPers);
+			cardPersonnes.add(lblNom);		
 			
-			JTextField nom = mkTfNom();
-			JLabel lbNom = mkLbNomPers();
-			attach(nom,lbNom);
-			cardPersonnes.add(nom);
-			cardPersonnes.add(lbNom);
-			
-
-			
-
-			
-//			JLabel lblListeDesPersonnes = new JLabel("Liste des personnes enregistr\u00E9es :");
-//			lblListeDesPersonnes.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-//			lblListeDesPersonnes.setBounds(37, 43, 249, 16);
-//			cardPersonnes.add(lblListeDesPersonnes);
-//			
-//			
-//			//A supprimer
-//			
-////			JButton btnModifier = new JButton("Modifier");
-////			btnModifier.setEnabled(false);
-////			btnModifier.setBounds(270, 196, 89, 23);
-////			cardPersonnes.add(btnModifier);
-//			
-//			//FIN A SUPPRIMER
-//
-////			JLabel lbl_nom_pers = new JLabel("Nom de candidat :");
-////			lbl_nom_pers.setForeground(new Color(102, 102, 102));
-////			lbl_nom_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-////			lbl_nom_pers.setBounds(409, 80, 181, 14);
-//			//lbl_nom_pers.setLabelFor();
-//			cardPersonnes.add(lbl_nom_pers);
-			
-			
-
-//			JLabel lbl_prenom_pers = new JLabel("Pr\u00E9nom :");
-//			lbl_prenom_pers.setForeground(new Color(102, 102, 102));
-//			lbl_prenom_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-//			lbl_prenom_pers.setBounds(409, 174, 181, 14);
-//			cardPersonnes.add(lbl_prenom_pers);
-
-//			JLabel lbl_email_pers = new JLabel("email :");
-//			lbl_email_pers.setForeground(new Color(102, 102, 102));
-//			lbl_email_pers.setBackground(new Color(0, 0, 0));
-//			lbl_email_pers.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-//			lbl_email_pers.setBounds(409, 265, 181, 14);
-//			cardPersonnes.add(lbl_email_pers);
-
-			
-
 			JButton btnValiderLaModification = new JButton("Valider la modification");
 			btnValiderLaModification.setBounds(250, 351, 160, 23);
 			cardPersonnes.add(btnValiderLaModification);
-
+			
 			cardPersonnes.add(getListPersonne());
 
-			return cardPersonnes;
+		return cardPersonnes;
 		}
 		
 		private ListModel<String> getListPersonneModel()
@@ -222,6 +174,7 @@ public class IhmPersonne// implements ItemListener
 				mapPersonnes.put(i++, p);
 		}
 		
+
 		private ListSelectionListener getListPersonneSelectionListener()
 		{
 			return new ListSelectionListener() {
@@ -229,10 +182,45 @@ public class IhmPersonne// implements ItemListener
 				{
 					JList<String> source = (JList<String>) e.getSource();
 					int index = source.getSelectedIndex();
-					if (index == source.getModel().getSize() - 1)
+					System.out.println(index);
+					System.out.println(source.getModel().getSize() -1);
+					if (index == source.getModel().getSize() - 1){
+						//gérer l'ajout ici
 						System.out.println("Ajout d'une personne");
-					else						
+					}
+					else{						
+						//gérer la modif ici
+						activerChampNom(mapPersonnes.get(index).getNom());
+						activerChampPrenom(mapPersonnes.get(index).getPrenom());
+						activerChampEmail(mapPersonnes.get(index).getMail());
+						
 						System.out.println("Selection de " + mapPersonnes.get(index).getNom());
+					}
+				}
+			};
+		}
+		
+		private ListSelectionListener getValidatioSelectionListener()
+		{
+			return new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent e)
+				{
+					JList<String> source = (JList<String>) e.getSource();
+					int index = source.getSelectedIndex();
+					System.out.println(index);
+					System.out.println(source.getModel().getSize() -1);
+					if (index == source.getModel().getSize() - 1){
+						//gérer l'ajout ici
+						System.out.println("Ajout d'une personne");
+					}
+					else{						
+						//gérer la modif ici
+						activerChampNom(mapPersonnes.get(index).getNom());
+						activerChampPrenom(mapPersonnes.get(index).getPrenom());
+						activerChampEmail(mapPersonnes.get(index).getMail());
+						
+						System.out.println("Selection de " + mapPersonnes.get(index).getNom());
+					}
 				}
 			};
 		}
@@ -245,6 +233,100 @@ public class IhmPersonne// implements ItemListener
 			listePersonnes.addListSelectionListener(getListPersonneSelectionListener());	
 			return listePersonnes;
 			}
+		
+		
+		/**
+		 * Permet d'activer un champ et de le remplir
+		 * @param data
+		 */
+		public void activerChampEmail(String data){
+			modifEmailPers.setText("");
+			modifEmailPers.setEditable(true);
+		    modifEmailPers.setEnabled(true);
+		    modifEmailPers.setBackground(new Color(51, 102, 153));
+		    lblEmail.setForeground(new Color(0,0,0));
+		    modifEmailPers.setText(data);	
+		}
+		
+		/**
+		 * Permet d'activer un champ et de le remplir
+		 * @param data
+		 */
+		public void activerChampPrenom(String data){
+			modifPrenomPers.setText("");
+			modifPrenomPers.setEditable(true);
+			modifPrenomPers.setEnabled(true);
+			modifPrenomPers.setBackground(new Color(51, 102, 153));
+		    lblPrenom.setForeground(new Color(0,0,0));
+		    modifPrenomPers.setText(data);	
+		}
+		
+		/**
+		 * Permet d'activer un champ et de le remplir
+		 * @param data
+		 */
+		public void activerChampNom(String data){
+			modifNomPers.setEditable(true);
+			modifNomPers.setText("");
+		    modifNomPers.setEnabled(true);
+		    modifNomPers.setBackground(new Color(51, 102, 153));
+		    lblNom.setForeground(new Color(0,0,0));
+		    modifNomPers.setText(data);	
+		}
+		
+		/**
+		 * 
+		 * Cette méthode permet de désactiver le champ
+		 * @param lbl
+		 * @param modifEmailPers
+		 */
+		public void desactiverChampMail(){
+			modifEmailPers.setEditable(false);
+		    modifEmailPers.setEnabled(false);
+		    modifEmailPers.setBackground(new Color(102, 102, 102));
+		    lblEmail.setForeground(new Color(102, 102, 102));
+		    modifEmailPers.setText("");
+		}
+		
+		/**
+		 * 
+		 * Cette méthode permet de désactiver le champ
+		 * @param lbl
+		 * @param modifPrenomPers
+		 */
+		public void desactiverChampPrenom(){
+			modifPrenomPers.setEditable(false);
+		    modifPrenomPers.setEnabled(false);
+		    modifPrenomPers.setBackground(new Color(102, 102, 102));
+		    lblPrenom.setForeground(new Color(102, 102, 102));
+		    modifPrenomPers.setText("");
+		}
+		
+		/**
+		 * 
+		 * Cette méthode permet de désactiver le champ
+		 * @param lbl
+		 * @param modifNomPers
+		 */
+		public void desactiverChampNom(){
+			modifNomPers.setEditable(false);
+		    modifNomPers.setEnabled(false);
+		    modifNomPers.setBackground(new Color(102, 102, 102));
+		    lblNom.setForeground(new Color(102, 102, 102));
+		    modifNomPers.setText("");
+		}
+
+		
+		
+		public JPanel getOnglet()
+		{
+			JPanel ongletPers = new JPanel();
+			associateLabels();
+			ongletPers.setLayout(new BorderLayout());
+			ongletPers.setName("Personnes");
+			ongletPers.add(getCardModif());
+			return ongletPers;
+		}
 		
 		/**
 		 * 
@@ -295,38 +377,51 @@ public class IhmPersonne// implements ItemListener
 		}
 		
 		/**
-		 * Cette fonction permet d'activer un champ : activerChamp(libelle, JTextField)
-		 * @param lbl
-		 * @param tf
+		 * @return the lblEmail
 		 */
-		public void activerChamp(JLabel lbl, JTextField tf, String data){
-			tf.setText("");
-			 tf.setEditable(true);
-		     tf.setEnabled(true);
-		     tf.setBackground(new Color(51, 102, 153));
-		     lbl.setForeground(new Color(0,0,0));
-		     tf.setText(data);	
-		}
-		
-		/**
-		 * Cette fonction permet de désactiver un champ en le grisant et en le désactivant : desactiverChamp(libelle, JTextField)
-		 * @param lbl
-		 * @param tf
-		 */
-		public void desactiverChamp(JLabel lbl, JTextField tf){
-			 tf.setEditable(false);
-		     tf.setEnabled(false);
-		     tf.setBackground(new Color(102, 102, 102));
-		     lbl.setForeground(new Color(102, 102, 102));
-		     tf.setText("");
+		private JLabel getLblEmail()
+		{
+			return lblEmail;
 		}
 
-		public JPanel getOnglet()
+		/**
+		 * @param lblEmail the lblEmail to set
+		 */
+		private void setLblEmail(JLabel lblEmail)
 		{
-			JPanel ongletPers = new JPanel();
-			ongletPers.setLayout(new BorderLayout());
-			ongletPers.setName("Personnes");
-			ongletPers.add(getCardModif());
-			return ongletPers;
+			this.lblEmail = lblEmail;
 		}
+
+		/**
+		 * @return the lblPrenom
+		 */
+		private JLabel getLblPrenom()
+		{
+			return lblPrenom;
+		}
+
+		/**
+		 * @param lblPrenom the lblPrenom to set
+		 */
+		private void setLblPrenom(JLabel lblPrenom)
+		{
+			this.lblPrenom = lblPrenom;
+		}
+
+		/**
+		 * @return the lblNom
+		 */
+		private JLabel getLblNom()
+		{
+			return lblNom;
+		}
+
+		/**
+		 * @param lblNom the lblNom to set
+		 */
+		private void setLblNom(JLabel lblNom)
+		{
+			this.lblNom = lblNom;
+		}
+		
 	}
