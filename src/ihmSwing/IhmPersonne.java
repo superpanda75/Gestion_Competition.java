@@ -1,7 +1,8 @@
 package ihmSwing;
 
 import java.awt.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -121,8 +122,9 @@ public class IhmPersonne// implements ItemListener
 			cardPersonnes.add(modifNomPers);
 			cardPersonnes.add(lblNom);		
 			
-			JButton btnValiderLaModification = new JButton("Valider la modification");
+			JButton btnValiderLaModification = new JButton("Valider");
 			btnValiderLaModification.setBounds(250, 351, 160, 23);
+			btnValiderLaModification.addActionListener(getValidationSelectionListener());
 			cardPersonnes.add(btnValiderLaModification);
 			
 			cardPersonnes.add(getListPersonne());
@@ -200,30 +202,22 @@ public class IhmPersonne// implements ItemListener
 			};
 		}
 		
-		private ListSelectionListener getValidatioSelectionListener()
+		private ActionListener getValidationSelectionListener()
 		{
-			return new ListSelectionListener() {
-				public void valueChanged(ListSelectionEvent e)
+			return new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e)
 				{
-					JList<String> source = (JList<String>) e.getSource();
-					int index = source.getSelectedIndex();
-					System.out.println(index);
-					System.out.println(source.getModel().getSize() -1);
-					if (index == source.getModel().getSize() - 1){
-						//gérer l'ajout ici
-						System.out.println("Ajout d'une personne");
-					}
-					else{						
-						//gérer la modif ici
-						activerChampNom(mapPersonnes.get(index).getNom());
-						activerChampPrenom(mapPersonnes.get(index).getPrenom());
-						activerChampEmail(mapPersonnes.get(index).getMail());
-						
-						System.out.println("Selection de " + mapPersonnes.get(index).getNom());
-					}
+					inscriptions.createPersonne(modifNomPers.getText(),
+												modifPrenomPers.getText(),
+												modifEmailPers.getText()
+												);	
+					rafraichirMap();
 				}
 			};
-		}
+		} 
+		
 		
 		private JList<String> getListPersonne(){
 			JList<String> listePersonnes = new JList<>(getListPersonneModel());
