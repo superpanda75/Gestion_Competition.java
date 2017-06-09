@@ -62,34 +62,34 @@ public class BaseEquipe {
 		}
 
 	 //Afficher les membres d'une equipe -> fonctionne REQUETE 
-	 @SuppressWarnings({ "null", "unused" })
-	public static void selectMembreEquipe(Inscriptions inscriptions){
-		 try{
-			 System.out.println("inscription des candidats");
-				String query="SELECT * "
-							+"FROM java_appartenir";
-				 Statement smt = c.createStatement();
-				 ResultSet rs = smt.executeQuery(query);
-				 while(rs.next())
-					{	
-					 Equipe lEquipe = jdbc.BaseEquipe.getEquipe(rs.getInt(2));
-					 Personne laPersonne = jdbc.BasePersonne.getPersonne(rs.getInt(1));
-					 if (lEquipe != null)
-						 lEquipe.add(laPersonne);						 
-					 else
-					 {
-						 if (lEquipe == null)
-							 throw new RuntimeException("Impossible de trouver le candidat numéro " + rs.getInt(1));
-						 lEquipe.add(laPersonne);
-					 }
-					 System.out.println("Equipe = " + lEquipe.getNom()+",Personne = " + laPersonne.getPrenom() );
-
-					}
-		 }
-		catch(SQLException e){	
-			System.out.println(e.getMessage());
-	}
-}
+//	 @SuppressWarnings({ "null", "unused" })
+//	public static void selectMembreEquipe(Inscriptions inscriptions){
+//		 try{
+//			 System.out.println("inscription des candidats");
+//				String query="SELECT * "
+//							+"FROM java_appartenir";
+//				 Statement smt = c.createStatement();
+//				 ResultSet rs = smt.executeQuery(query);
+//				 while(rs.next())
+//					{	
+//					 Equipe lEquipe = jdbc.BaseEquipe.getEquipe(rs.getInt(2));
+//					 Personne laPersonne = jdbc.BasePersonne.getPersonne(rs.getInt(1));
+//					 if (lEquipe != null)
+//						 lEquipe.add(laPersonne);						 
+//					 else
+//					 {
+//						 if (lEquipe == null)
+//							 throw new RuntimeException("Impossible de trouver le candidat numéro " + rs.getInt(1));
+//						 lEquipe.add(laPersonne);
+//					 }
+//					 System.out.println("Equipe = " + lEquipe.getNom()+",Personne = " + laPersonne.getPrenom() );
+//
+//					}
+//		 }
+//		catch(SQLException e){	
+//			System.out.println(e.getMessage());
+//	}
+//}
 //		 try{
 //			 for(Equipe e: inscriptions.getEquipes())
 //			 {
