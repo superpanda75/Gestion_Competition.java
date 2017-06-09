@@ -32,8 +32,8 @@ public class Inscriptions implements Serializable
 			if (bd){
 				enChargement = true;
 			//	jdbc.BaseCandidat.inscritCandidats(this);
-				//TODO : fallait faire ça ?
-//				candidats = BaseCandidat.SelectCand(this);
+				//TODO : fallait faire ça ? oui
+				jdbc.BasePersonne.SelectPers(this);
 //				competitions = BaseCompetition.SelectComp(this);
 				baseEq.selectMembreEquipe(this);
 				enChargement = false;
