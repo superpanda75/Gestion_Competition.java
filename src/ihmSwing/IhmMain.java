@@ -31,8 +31,7 @@ public class IhmMain
 			JPanel ongletEqui = Equi.getOnglet();
 			
 			
-			IhmCompetition Comp = new IhmCompetition(new JLabel ("Competition"));	
-			JPanel ongletComp = Comp.getOnglet();
+			JPanel ongletComp = (new IhmCompetition(inscriptions)).getOnglet();	
 			
 			
 			IhmInscription Insc = new IhmInscription(new JLabel ("Inscription"));	
