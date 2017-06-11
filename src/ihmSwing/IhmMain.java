@@ -27,9 +27,7 @@ public class IhmMain
 			
 			JPanel ongletPers = (new IhmPersonne(inscriptions)).getOnglet();	
 			
-			IhmEquipe Equi = new IhmEquipe(new JLabel ("Equipe"));	
-			JPanel ongletEqui = Equi.getOnglet();
-			
+			JPanel ongletEqui = (new IhmEquipe(inscriptions)).getOnglet();				
 			
 			JPanel ongletComp = (new IhmCompetition(inscriptions)).getOnglet();	
 			

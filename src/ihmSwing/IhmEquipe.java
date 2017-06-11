@@ -171,8 +171,8 @@ public class IhmEquipe// implements ItemListener
 		{
 			mapEquipe = new TreeMap<>();
 			int i = 0;
-			for (Equipe p : inscriptions.getEquipe())
-				mapEquipe.put(i++, p);
+			for (Equipe e : inscriptions.getEquipes())
+				mapEquipe.put(i++, e);
 		}
 		
 
@@ -192,33 +192,6 @@ public class IhmEquipe// implements ItemListener
 					else{						
 						//gérer la modif ici
 						activerChampNom(mapEquipe.get(index).getNom());
-						activerChampPrenom(mapEquipe.get(index).getPrenom());
-						activerChampEmail(mapEquipe.get(index).getMail());
-						
-						System.out.println("Selection de " + mapEquipe.get(index).getNom());
-					}
-				}
-			};
-		}
-		
-		private ListSelectionListener getValidatioSelectionListener()
-		{
-			return new ListSelectionListener() {
-				public void valueChanged(ListSelectionEvent e)
-				{
-					JList<String> source = (JList<String>) e.getSource();
-					int index = source.getSelectedIndex();
-					System.out.println(index);
-					System.out.println(source.getModel().getSize() -1);
-					if (index == source.getModel().getSize() - 1){
-						//gérer l'ajout ici
-						System.out.println("Ajout d'une personne");
-					}
-					else{						
-						//gérer la modif ici
-						activerChampNom(mapEquipe.get(index).getNom());
-						activerChampPrenom(mapEquipe.get(index).getPrenom());
-						activerChampEmail(mapEquipe.get(index).getMail());
 						
 						System.out.println("Selection de " + mapEquipe.get(index).getNom());
 					}
