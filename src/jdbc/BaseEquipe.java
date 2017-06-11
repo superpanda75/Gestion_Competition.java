@@ -62,7 +62,7 @@ public class BaseEquipe {
 		}
 
 	 //Afficher les membres d'une equipe -> fonctionne REQUETE 
-//	 @SuppressWarnings({ "null", "unused" })
+	 @SuppressWarnings({ "null", "unused" })
 //	public static void selectMembreEquipe(Inscriptions inscriptions){
 //		 try{
 //			 System.out.println("inscription des candidats");
@@ -74,14 +74,10 @@ public class BaseEquipe {
 //					{	
 //					 Equipe lEquipe = jdbc.BaseEquipe.getEquipe(rs.getInt(2));
 //					 Personne laPersonne = jdbc.BasePersonne.getPersonne(rs.getInt(1));
-//					 if (lEquipe != null)
+//					 if (lEquipe == null)
+//						 throw new RuntimeException("Impossible de trouver le candidat numéro " + rs.getInt(1));
 //						 lEquipe.add(laPersonne);						 
-//					 else
-//					 {
-//						 if (lEquipe == null)
-//							 throw new RuntimeException("Impossible de trouver le candidat numéro " + rs.getInt(1));
-//						 lEquipe.add(laPersonne);
-//					 }
+//					
 //					 System.out.println("Equipe = " + lEquipe.getNom()+",Personne = " + laPersonne.getPrenom() );
 //
 //					}
@@ -90,31 +86,6 @@ public class BaseEquipe {
 //			System.out.println(e.getMessage());
 //	}
 //}
-//		 try{
-//			 for(Equipe e: inscriptions.getEquipes())
-//			 {
-//					 Connection c = Base.getConnexion();
-//					 
-//					 String sql = "SELECT a.id_personne ";
-//					 sql += "FROM java_candidat c , java_personne p, java_appartenir a ";
-//					 sql += "WHERE p.id_personne = c.id_candidat ";
-//					 sql += "AND c.id_candidat = a.id_personne AND a.id_equipe = " + e.getId();
-//					 Statement smt = c.createStatement();
-//					 ResultSet rs = smt.executeQuery(sql);
-//					 while(rs.next()){
-//						 for (Personne pers: inscriptions.getPersonnes()) 
-//				            {
-//								if(rs.getInt("id_personne") == pers.getId())
-//								{
-//									e.add(pers);
-//								}
-//	
-//				            } 
-//					 }
-//			 }
-//		 }catch(SQLException eq){
-//			 System.out.println(eq.getMessage());
-//		 } 
 	 
 	 //Ajouter un membre -> fonctionne PROCEDURE STOCKEE
 	 public static void addMembreEquipe(Equipe equipe, Personne membre){
