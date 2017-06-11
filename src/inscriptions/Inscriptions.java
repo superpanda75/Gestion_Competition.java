@@ -140,15 +140,15 @@ public class Inscriptions implements Serializable
 			return personne;
 		}
 
-		public Personne modifPersonne(Personne personne, String nom, String prenom, String mail)
-		{
-			personne.setPrenom(prenom);
-			personne.setNom(nom);
-			personne.setMail(mail);
-			if (bd && !enChargement)
-				jdbc.BasePersonne.updatePers(personne);
-			return personne;
-		}
+//		public Personne modifPersonne(Personne personne, String nom, String prenom, String mail)
+//		{
+//			personne.setPrenom(prenom);
+//			personne.setNom(nom);
+//			personne.setMail(mail);
+//			if (bd && !enChargement)
+//				jdbc.BasePersonne.updatePers(personne);
+//			return personne;
+//		}
 
 		/**
 		 * Créée un Candidat de type équipe. Ceci est le seul moyen, il n'y a
@@ -318,16 +318,16 @@ public class Inscriptions implements Serializable
 		}
 
 		// UPDATE COMPETITION
-		public Competition modifCompetition(Competition competition, String nom)
-		{
-			competition.setNom(nom);
-			return competition;
-		}
-
-		// UPDATE SUR LA DATE COMPETITION
-		public Competition modifDateCompetition(Competition competition, LocalDate dateCloture)
-		{
-			competition.setDateCloture(dateCloture);
-			return competition;
-		}
+//		public Competition modifCompetition(Competition competition, String nom)
+//		{
+//			competition.setNom(nom);
+//			return competition;
+//		}
+//
+//		// UPDATE SUR LA DATE COMPETITION
+//		public Competition modifDateCompetition(Competition competition, LocalDate dateCloture)
+//		{
+//			competition.setDateCloture(dateCloture);
+//			return competition;
+//		}
 	}

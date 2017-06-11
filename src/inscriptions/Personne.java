@@ -13,7 +13,7 @@ public class Personne extends Candidat
 	private String prenom, mail;
 	private int id;
 	private Set<Equipe> equipes;
-	
+
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
 	{
 		super(inscriptions, nom);
@@ -67,8 +67,7 @@ public class Personne extends Candidat
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
-		if (Inscriptions.bd)
-			jdbc.BasePersonne.updatePers(this);
+		jdbc.BasePersonne.updatePers(this);
 		// TODO faire pareil sur les autres setters
 	}
 
@@ -93,7 +92,6 @@ public class Personne extends Candidat
 	public void setMail(String mail)
 	{
 		this.mail = mail;
-		if (Inscriptions.bd)
 		jdbc.BasePersonne.updatePers(this);
 
 	}
@@ -122,11 +120,10 @@ public class Personne extends Candidat
 	
 	@Override
 	public void delete()
-	{
+	{			
 		super.delete();
 		for (Equipe e : equipes)
 			e.remove(this);
-		if (Inscriptions.bd)
 			jdbc.BasePersonne.suppPersonne(this);
 	}
 	

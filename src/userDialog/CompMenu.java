@@ -12,6 +12,7 @@ import java.util.List;
 
 import inscriptions.Candidat;
 import inscriptions.Competition;
+import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Inscriptions;
 
 
@@ -196,8 +197,21 @@ public class CompMenu
 					@Override
 					public void optionSelectionnee() 
 					{
-						String nom= InOut.getString("Nom : ");
-								inscriptions.modifCompetition(competition,nom);
+						String nom = commandLine.util.InOut.getString("Nom: ");
+						int jour = commandLine.util.InOut.getInt("Jour :"),
+								mois = commandLine.util.InOut.getInt("Mois :"),
+								annee = commandLine.util.InOut.getInt(" Année:");
+						LocalDate newDate = LocalDate.of (annee,mois,jour);
+						
+						competition.setNom(nom);
+						try
+						{
+							competition.setDateCloture(newDate);
+						} 
+						catch (InscriptionEnRetardException e)
+						{
+							System.out.println(e);
+						}
 					}
 			
 				};
@@ -231,7 +245,7 @@ public class CompMenu
 								LocalDate date = LocalDate.parse(dateEntree);
 						    
 								if (date.isAfter(today)){
-									inscriptions.modifDateCompetition(competition, date);
+									competition.setDateCloture(date);
 									changeDate = true;
 								} else System.out.println("erreur positionnement");
 							}else System.out.println("erreur regex");

@@ -66,10 +66,10 @@ public class Equipe extends Candidat
 	public boolean add(Personne membre)
 	{
 		// TODO if bd
-		if( !inscriptions.estEnChargement())
+		membre.add(this);
+		if (Inscriptions.bd && !inscriptions.estEnChargement())
 			throw new RuntimeException();
-			jdbc.BaseEquipe.addMembreEquipe(this,membre);
-			membre.add(this);
+		jdbc.BaseEquipe.addMembreEquipe(this,membre);
 		return membres.add(membre);
 	}
 
@@ -81,10 +81,9 @@ public class Equipe extends Candidat
 	
 	public boolean remove(Personne membre)
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
 		membre.remove(this);
-		jdbc.BaseEquipe.suppMembreEquipe(this, membre);
+		if (Inscriptions.bd)
+			jdbc.BaseEquipe.suppMembreEquipe(this, membre);
 		return membres.remove(membre);
 	}
 
@@ -94,10 +93,7 @@ public class Equipe extends Candidat
 		super.delete();
 		for (Personne p : membres)
 			this.remove(p);
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
-		jdbc.BaseEquipe.suppEquipe(this);
-
+			jdbc.BaseEquipe.suppEquipe(this);
 	}
 	
 	@Override

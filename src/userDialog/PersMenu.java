@@ -232,7 +232,9 @@ public class PersMenu
 								String nom= InOut.getString("Nom : "),
 						                prenom = InOut.getString("Prénom : "),
 						                mail = InOut.getString("Mail : ");
-										inscriptions.modifPersonne(personne,nom, prenom, mail);
+										personne.setNom(nom);
+										personne.setPrenom(prenom);
+										personne.setMail(mail);
 							}
 					
 						};
