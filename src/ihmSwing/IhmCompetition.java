@@ -219,7 +219,6 @@ public class IhmCompetition// implements ItemListener
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
-					String nom = getChampDate();
 					LocalDate dateComp = LocalDate.parse(getChampDate());
 					boolean enEquipe = getChampEnEquipe();
 					inscriptions.createCompetition(getChampNom(), dateComp, enEquipe); 

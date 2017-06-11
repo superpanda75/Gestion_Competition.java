@@ -32,7 +32,6 @@ public class BaseCandidat {
 		// TODO faire de même pour mettre en relation les équipes et les personnes -> fais 
 		 public static void inscritCandidats(Inscriptions inscription){
 			 try{
-				 System.out.println("inscription des candidats");
 				String query="SELECT * "
 							+"FROM java_inscription";
 				 Statement smt = c.createStatement();
@@ -50,7 +49,6 @@ public class BaseCandidat {
 							 throw new RuntimeException("Impossible de trouver le candidat numéro " + rs.getInt(1));
 						 laCompetition.add(lEquipe);
 					 }
-					 System.out.println("Competition = " + laCompetition.getNom()+",Candidat = " + laPersonne.getNom() );
 					}
 				
 			}catch(SQLException e){	

@@ -34,8 +34,7 @@ public class Inscriptions implements Serializable
 				jdbc.BaseCompetition.SelectComp(this);
 				jdbc.BaseEquipe.SelectEquipe(this);
 				jdbc.BasePersonne.SelectPers(this);
-//				jdbc.BaseEquipe.selectMembreEquipe(this);
-//				jdbc.BaseCompetition.selectInscription(this);
+				jdbc.BaseEquipe.selectMembreEquipe(this);
 				jdbc.BaseCandidat.inscritCandidats(this);
 				enChargement = false;
 			}

@@ -62,30 +62,27 @@ public class BaseEquipe {
 		}
 
 	 //Afficher les membres d'une equipe -> fonctionne REQUETE 
-	 @SuppressWarnings({ "null", "unused" })
-//	public static void selectMembreEquipe(Inscriptions inscriptions){
-//		 try{
-//			 System.out.println("inscription des membres d'une equipe");
-//				String query="SELECT * "
-//							+"FROM java_appartenir";
-//				 Statement smt = c.createStatement();
-//				 ResultSet rs = smt.executeQuery(query);
-//				 while(rs.next())
-//					{	
-//					 Equipe lEquipe = jdbc.BaseEquipe.getEquipe(rs.getInt(2));
-//					 Personne laPersonne = jdbc.BasePersonne.getPersonne(rs.getInt(1));
-//					 if (laPersonne == null)
-//						 throw new RuntimeException("Impossible de trouver le candidat numéro " + rs.getInt(1));
-//					 lEquipe.add(laPersonne);						 
-//					
-//					 System.out.println("Equipe = " + lEquipe.getNom()+",Personne = " + laPersonne.getPrenom() );
-//
-//					}
-//		 }
-//		catch(SQLException e){	
-//			System.out.println(e.getMessage());
-//	}
-//}
+	public static void selectMembreEquipe(Inscriptions inscriptions){
+		 try{
+				String query="SELECT * "
+							+"FROM java_appartenir";
+				 Statement smt = c.createStatement();
+				 ResultSet rs = smt.executeQuery(query);
+				 while(rs.next())
+					{	
+					 Equipe lEquipe = jdbc.BaseEquipe.getEquipe(rs.getInt(1));
+					 Personne laPersonne = jdbc.BasePersonne.getPersonne(rs.getInt(2));
+					 if (laPersonne != null && lEquipe != null){
+						 lEquipe.add(laPersonne);						 
+					 }else{
+						 throw new RuntimeException("Impossible de trouver le candidat numéro " + rs.getInt(2));
+					 }
+					}
+		 }
+		catch(SQLException e){	
+			System.out.println(e.getMessage());
+	}
+}
 	 
 	 //Ajouter un membre -> fonctionne PROCEDURE STOCKEE
 	 public static void addMembreEquipe(Equipe equipe, Personne membre){

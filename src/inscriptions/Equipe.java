@@ -15,10 +15,13 @@ public class Equipe extends Candidat
 	private static final long serialVersionUID = 4147819927233466035L;
 	private SortedSet<Personne> membres = new TreeSet<>();
 	private int id = -1;
+	private Inscriptions inscriptions;
 	
 	Equipe(Inscriptions inscriptions, String nom)
 	{
 		super(inscriptions, nom);
+		this.inscriptions = inscriptions;
+
 	}
 
 	/**
@@ -62,11 +65,11 @@ public class Equipe extends Candidat
 
 	public boolean add(Personne membre)
 	{
-		membre.add(this);
 		// TODO if bd
-		if (!Inscriptions.bd)
+		if( !inscriptions.estEnChargement())
 			throw new RuntimeException();
 			jdbc.BaseEquipe.addMembreEquipe(this,membre);
+			membre.add(this);
 		return membres.add(membre);
 	}
 
