@@ -10,7 +10,7 @@ import java.util.TreeMap;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.Caret;
+
 import javax.swing.*;
 
 import inscriptions.Competition;
@@ -21,133 +21,116 @@ import inscriptions.Personne;
 
 public class IhmCompetition// implements ItemListener
 	{
-//		private JPanel	cards 			= new JPanel();
-//		private JPanel	ongletPers		= new JPanel();
-
+		private JTextField	modifNomComp	= mkTfNomComp();
+		private JTextField	modifDateComp	= mkTfDateComp();
+		private JRadioButton	modifEnEquipe	= mkTfEnEquipe();
 		
-		private JTextField	modifNomComp;
-		private JTextField	modifDateComp;
-		private JTextField	modifEnEquipe;
-		
-		private JLabel lblNomComp 	= mkLbNomComp();
-		private JLabel lblDate 	= mkLbDateComp();
-		private JLabel lblEnEquipe		= mkLbEnEquipComp();
-		
+		private JLabel lblNomComp		= mkLbNomComp();
+		private JLabel lblDateComp 	= mkLbDateComp();
+		private JLabel lblEnEquipeComp 	= mkLbEnEquipeComp();
+	
 		
 		private final Inscriptions inscriptions ; 
 		private Map<Integer, Competition> mapCompetition;
-
 
 		public IhmCompetition(Inscriptions inscriptions)
 		{
 			this.inscriptions = inscriptions;
 		}
 		
-		//public JPanel get
-		private JLabel mkLbListPers(){
+		private void associateLabels(){
+			lblNomComp.setLabelFor(modifNomComp);
+			lblDateComp.setLabelFor(modifDateComp);
+			lblEnEquipeComp.setLabelFor(modifEnEquipe);
+			
+		}
+		
+		private JLabel mkLbListComp(){
 			JLabel lblListeDesCompetitions = new JLabel("Liste des competitions enregistr\u00E9es :");
 			lblListeDesCompetitions.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
 			lblListeDesCompetitions.setBounds(37, 43, 249, 16);
-			return lblListeDesCompetitions;
-		}
-		
-		private JLabel mkLbNomComp(){
-		JLabel lbl_nom_Comp = new JLabel("Nom de la competition :");
-		lbl_nom_Comp.setForeground(new Color(102, 102, 102));
-		lbl_nom_Comp.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-		lbl_nom_Comp.setBounds(409, 80, 181, 14);
-		return lbl_nom_Comp;
-		}
-		private JLabel mkLbDateComp(){
-		JLabel lbl_date_comp = new JLabel("Date");
-		lbl_date_comp.setForeground(new Color(102, 102, 102));
-		lbl_date_comp.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-		lbl_date_comp.setBounds(409, 174, 181, 14);
-		return lbl_date_comp;
-		}
-		
-		private JLabel mkLbEnEquipComp(){
-			JLabel lbl_equipe_comp = new JLabel("Equipe");
-			lbl_equipe_comp.setForeground(new Color(102, 102, 102));
-			lbl_equipe_comp.setBackground(new Color(0, 0, 0));
-			lbl_equipe_comp.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
-			lbl_equipe_comp.setBounds(409, 265, 181, 14);
-			return lbl_equipe_comp;
+		return lblListeDesCompetitions;
 		}
 		
 		private JTextField mkTfNomComp(){
 			modifNomComp = new JTextField();
-			modifNomComp.setEnabled(false);
-			modifNomComp.setEditable(false);
 			modifNomComp.setBackground(new Color(102, 102, 102));
-			modifNomComp.setBounds(406, 287, 160, 20);
+			modifNomComp.setEditable(false);
+			modifNomComp.setEnabled(false);
+			modifNomComp.setBounds(406, 105, 160, 20);
 			modifNomComp.setColumns(10);
 			return modifNomComp;
-			}
-
-			private JTextField mkTfDate(){
+		}
+		private JLabel mkLbNomComp(){
+			JLabel lbl_nom_comp = new JLabel("Nom de competition :");
+			lbl_nom_comp.setForeground(new Color(102, 102, 102));
+			lbl_nom_comp.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
+			lbl_nom_comp.setBounds(409, 80, 181, 14);
+		return lbl_nom_comp;
+		}
+		
+		private JLabel mkLbEnEquipeComp(){
+			JLabel lblEnEquipeComp = new JLabel(" En Equipe:");
+			lblEnEquipeComp.setForeground(new Color(102, 102, 102));
+			lblEnEquipeComp.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
+			lblEnEquipeComp.setBounds(409, 174, 181, 14);
+		return lblEnEquipeComp;
+		}
+		
+		private JLabel mkLbDateComp(){
+			JLabel lblDateComp = new JLabel("Date :");
+			lblDateComp.setForeground(new Color(102, 102, 102));
+			lblDateComp.setBackground(new Color(0, 0, 0));
+			lblDateComp.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
+			lblDateComp.setBounds(409, 265, 181, 14);
+		return lblDateComp;
+		}
+		
+		private JTextField mkTfDateComp(){
 			modifDateComp = new JTextField();
 			modifDateComp.setEnabled(false);
 			modifDateComp.setEditable(false);
 			modifDateComp.setBackground(new Color(102, 102, 102));
-			modifDateComp.setBounds(406, 197, 160, 20);
+			modifDateComp.setBounds(406, 287, 160, 20);
 			modifDateComp.setColumns(10);
-			return modifDateComp;
-			}
-			
-			private JTextField mkTfEnEquipe(){
-			modifEnEquipe = new JTextField();
-			modifEnEquipe.setBackground(new Color(102, 102, 102));
-			modifEnEquipe.setEditable(false);
+		return modifDateComp;
+		}
+
+		private JRadioButton mkTfEnEquipe(){
+			modifEnEquipe = new JRadioButton();
 			modifEnEquipe.setEnabled(false);
-			modifEnEquipe.setBounds(406, 105, 160, 20);
-			modifEnEquipe.setColumns(10);
-			return modifEnEquipe;
-			}
-			
-			private void attach(JTextField tf, JLabel lb){
-				lb.setLabelFor(tf);
-			}
-			
+			modifEnEquipe.setBackground(new Color(102, 102, 102));
+			modifEnEquipe.setBounds(406, 197, 160, 20);
+		return modifEnEquipe;
+		}
+
 		public JPanel getCardModif(){
 			
-			JPanel cardCompetition = new JPanel();
-			cardCompetition.setBackground(new Color(51, 153, 204));
-			cardCompetition.setLayout(null);
-			cardCompetition.add(mkLbListPers());
+			JPanel cardPersonnes = new JPanel();
+			cardPersonnes.setBackground(new Color(51, 153, 204));
+			cardPersonnes.setLayout(null);
+			cardPersonnes.add(mkLbListComp());
 			
+			cardPersonnes.add(modifDateComp);
+			cardPersonnes.add(lblDateComp);
 			
-			JTextField mail = mkTfNomComp();
-			JLabel lbMail = mkLbEnEquipComp();
-			attach(mail,lbMail);
-			cardCompetition.add(mail);
-			cardCompetition.add(lbMail);
+			cardPersonnes.add(modifEnEquipe);
+			cardPersonnes.add(lblEnEquipeComp);
 			
-			JTextField date = mkTfDate();
-			JLabel lbDate = mkLbDateComp();
-			attach(date,lbDate);
-			cardCompetition.add(date);
-			cardCompetition.add(lbDate);
+			cardPersonnes.add(modifNomComp);
+			cardPersonnes.add(lblNomComp);		
 			
-			JTextField e = mkTfEnEquipe();
-			JLabel lbNom = mkLbNomComp();
-			attach(e,lbNom);
-			cardCompetition.add(e);
-			cardCompetition.add(lbNom);
-
-			
-
-			JButton btnValiderLaModification = new JButton("Valider la modification");
+			JButton btnValiderLaModification = new JButton("Valider");
 			btnValiderLaModification.setBounds(250, 351, 160, 23);
 			btnValiderLaModification.addActionListener(getValidationSelectionListener());
-			cardCompetition.add(btnValiderLaModification);
+			cardPersonnes.add(btnValiderLaModification);
+			
+			cardPersonnes.add(getListPersonne());
 
-			cardCompetition.add(getListCompetition());
-
-			return cardCompetition;
+		return cardPersonnes;
 		}
 		
-		private ListModel<String> getListCompetitionModel()
+		private ListModel<String> getListPersonneModel()
 		{
 			rafraichirMap();
 			return new ListModel<String>() {
@@ -162,7 +145,7 @@ public class IhmCompetition// implements ItemListener
 				@Override
 				public int getSize()
 				{
-					return   mapCompetition.size() + 1;
+					return mapCompetition.size() + 1;
 				}
 				
 				@Override
@@ -187,19 +170,24 @@ public class IhmCompetition// implements ItemListener
 		{
 			mapCompetition = new TreeMap<>();
 			int i = 0;
-			for (Competition comp : inscriptions.getCompetitions())
+			for (Competition comp: inscriptions.getCompetitions())
 				mapCompetition.put(i++, comp);
 		}
 		
-		private ListSelectionListener getListCompetitionSelectionListener()
+
+		private ListSelectionListener getListPersonneSelectionListener()
 		{
 			return new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent e)
 				{
 					JList<String> source = (JList<String>) e.getSource();
 					int index = source.getSelectedIndex();
-					if (index == source.getModel().getSize() - 1)
-						System.out.println("Ajout d'une personne");
+					System.out.println(index);
+					System.out.println(source.getModel().getSize() -1);
+					if (index == source.getModel().getSize() - 1){
+						//gérer l'ajout ici
+						System.out.println("Ajout d'une competition");
+					}
 					else{						
 						//gérer la modif ici
 						activerChampNom(mapCompetition.get(index).getNom());
@@ -211,115 +199,125 @@ public class IhmCompetition// implements ItemListener
 				}
 			};
 		}
-		//AJOUT
+		
 		private ActionListener getValidationSelectionListener()
 		{
 			return new ActionListener() {
-				
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
 					LocalDate dateComp = LocalDate.parse(getChampDate());
-					boolean enEquipe = getChampEnEquipe();
-					inscriptions.createCompetition(getChampNom(), dateComp, enEquipe); 
+					boolean enEquipe = enEquipe();
+					inscriptions.createCompetition(getChampNom(), dateComp, enEquipe);
 					rafraichirMap();
+				}
+				private boolean enEquipe() {
+					boolean e = modifEnEquipe.isSelected()? true : false;
+					return e;
 				}
 			};
 		} 
 		
-		private JList<String> getListCompetition(){
-			JList<String> listeCompetition = new JList<>(getListCompetitionModel());
-			listeCompetition.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			listeCompetition.setBackground(new Color(51, 102, 153));
-			listeCompetition.setBounds(37, 80, 190, 256);
-			listeCompetition.addListSelectionListener(getListCompetitionSelectionListener());	
-			return listeCompetition;
+		
+		private JList<String> getListPersonne(){
+			JList<String> listePersonnes = new JList<>(getListPersonneModel());
+			listePersonnes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			listePersonnes.setBackground(new Color(51, 102, 153));
+			listePersonnes.setBounds(37, 80, 190, 256);
+			listePersonnes.addListSelectionListener(getListPersonneSelectionListener());	
+			return listePersonnes;
 			}
+		
 		
 		/**
 		 * Permet d'activer un champ et de le remplir
-		 * @param b
-		 * lblNomComp 	= mkLbNomComp();
-		private JLabel lblDate 	= mkLbDateComp();
-		private JLabel lblEnEquipe
+		 * @param data
+		 */
+		public void activerChampEnEquipe(Boolean data){
+			modifDateComp.setText("");
+			modifDateComp.setEditable(true);
+		    modifDateComp.setEnabled(true);
+		    modifDateComp.setBackground(new Color(51, 102, 153));
+		    lblDateComp.setForeground(new Color(0,0,0));
+		    setChampEnEquipe(true);
+		}
 		
-			private JTextField	modifNomComp;
-		private JTextField	modifDateComp;
-		private JTextField	modifEnEquipe;
+		/**
+		 * Permet d'activer un champ et de le remplir
+		 * @param data
+		 */
+		public void activerChampDate(LocalDate data){
+			modifEnEquipe.setText("");
+			modifEnEquipe.setEnabled(true);
+			modifEnEquipe.setBackground(new Color(51, 102, 153));
+		    lblEnEquipeComp.setForeground(new Color(0,0,0));
+		    setChampDate(data);	
+		}
+		
+		/**
+		 * Permet d'activer un champ et de le remplir
+		 * @param data
 		 */
 		public void activerChampNom(String data){
-			setChampNom("");
 			modifNomComp.setEditable(true);
-			modifNomComp.setEnabled(true);
-			modifNomComp.setBackground(new Color(51, 102, 153));
-			lblNomComp.setForeground(new Color(0,0,0));
-			setChampNom(data);
+			modifNomComp.setText("");
+		    modifNomComp.setEnabled(true);
+		    modifNomComp.setBackground(new Color(51, 102, 153));
+		    lblNomComp.setForeground(new Color(0,0,0));
+		    modifNomComp.setText(data);	
 		}
 		
 		/**
 		 * 
 		 * Cette méthode permet de désactiver le champ
-		 * @param lblNomComp
+		 * @param lbl
+		 * @param modifDateComp
+		 */
+		public void desactiverChampMail(){
+			modifDateComp.setEditable(false);
+		    modifDateComp.setEnabled(false);
+		    modifDateComp.setBackground(new Color(102, 102, 102));
+		    lblDateComp.setForeground(new Color(102, 102, 102));
+		    modifDateComp.setText("");
+		}
+		
+		/**
+		 * 
+		 * Cette méthode permet de désactiver le champ
+		 * @param lbl
+		 * @param modifEnEquipe
+		 */
+		public void desactiverChampPrenom(){
+		    modifEnEquipe.setEnabled(false);
+		    modifEnEquipe.setBackground(new Color(102, 102, 102));
+		    lblEnEquipeComp.setForeground(new Color(102, 102, 102));
+		    modifEnEquipe.setText("");
+		}
+		
+		/**
+		 * 
+		 * Cette méthode permet de désactiver le champ
+		 * @param lbl
 		 * @param modifNomComp
 		 */
 		public void desactiverChampNom(){
 			modifNomComp.setEditable(false);
-			modifNomComp.setEnabled(false);
-			modifNomComp.setBackground(new Color(102, 102, 102));
-			lblNomComp.setForeground(new Color(102, 102, 102));
-			setChampNom("");
-		}
-		
-		
-		/**
-		 * Permet d'activer un champ et de le remplir
-		 * @param localDate
-		 */
-		public void activerChampDate(LocalDate localDate){
-			setChampDate("");
-			modifDateComp.setEditable(true);
-			modifDateComp.setEnabled(true);
-			modifDateComp.setBackground(new Color(51, 102, 153));
-			lblDate.setForeground(new Color(0,0,0));
-			activerChampDate(localDate);
+		    modifNomComp.setEnabled(false);
+		    modifNomComp.setBackground(new Color(102, 102, 102));
+		    lblNomComp.setForeground(new Color(102, 102, 102));
+		    modifNomComp.setText("");
 		}
 
-		/**
-		 * 
-		 * Cette méthode permet de désactiver le champ
-		 * @param lblDate
-		 * @param modifDateComp
-		 */
-		public void desactiverChampDate(){
-			modifDateComp.setEditable(false);
-			modifDateComp.setEnabled(false);
-			modifDateComp.setBackground(new Color(102, 102, 102));
-			lblDate.setForeground(new Color(102, 102, 102));
-			desactiverChampDate();
-		}
 		
-		public void activerChampEnEquipe(boolean b){
-			setChampEnEquipe("");
-			modifEnEquipe.setEditable(true);
-			modifEnEquipe.setEnabled(true);
-			modifEnEquipe.setBackground(new Color(51, 102, 153));
-			lblEnEquipe.setForeground(new Color(0,0,0));
-			activerChampEnEquipe(b);
-		}
-		/**
-		 * 
-		 * Cette méthode permet de désactiver le champ
-		 * @param lblEnEquipe
-		 * @param modifEnEquipe
-		 */
-		public void desactiverChampEnEquipe(){
-			modifEnEquipe.setEditable(false);
-			modifEnEquipe.setEnabled(false);
-			modifEnEquipe.setBackground(new Color(102, 102, 102));
-		    lblEnEquipe.setForeground(new Color(102, 102, 102));
-		    setChampEnEquipe("");
-		}
 		
+		public JPanel getOnglet()
+		{
+			JPanel ongletPers = new JPanel();
+			ongletPers.setLayout(new BorderLayout());
+			ongletPers.setName("Personnes");
+			ongletPers.add(getCardModif());
+			return ongletPers;
+		}
 		
 		/**
 		 * 
@@ -327,24 +325,22 @@ public class IhmCompetition// implements ItemListener
 		 */
 		private String getChampNom(){
 			return modifNomComp.getText();
-			
 		}
 		
 		/**
 		 * 
-		 * @param LocalDate Date
-		 *
+		 * @param String firstname
+		 */
+		private String getChampEnEquipe(){
+			return modifEnEquipe.getText();
+		}
+		
+		/**
+		 * 
+		 * @param String  date
 		 */
 		private String getChampDate(){
 			return modifDateComp.getText();
-		}
-		
-		/**
-		 * 
-		 * @param String  equipe
-		 */
-		private boolean getChampEnEquipe(){
-			return modifEnEquipe.getText() != null;
 		}
 		
 		/**
@@ -359,100 +355,64 @@ public class IhmCompetition// implements ItemListener
 		 * 
 		 * @param String firstname
 		 */
-		private void setChampDate(String data){
-			modifDateComp.setText(data);
+		private void setChampEnEquipe(boolean enEquipe){
+			modifEnEquipe.setFocusable(enEquipe);
 		}
 		
 		/**
 		 * 
-		 * @param boolean  enEquipe
+		 * @param String  email
 		 */
-		private void setChampEnEquipe(String enEquipe){
-			modifEnEquipe.setText(enEquipe);
+		private void setChampDate(LocalDate Date){
+			modifDateComp.setText(""+LocalDate.now());
 		}
 		
 		/**
-		 * Cette fonction permet d'activer un champ : activerChamp(libelle, JTextField)
-		 * @param lbl
-		 * @param tf
+		 * @return the lblEmail
 		 */
-		public void activerChamp(JLabel lbl, JTextField tf, String data){
-			tf.setText("");
-			 tf.setEditable(true);
-		     tf.setEnabled(true);
-		     tf.setBackground(new Color(51, 102, 153));
-		     lbl.setForeground(new Color(0,0,0));
-		     tf.setText(data);	
-		}
-		
-		/**
-		 * Cette fonction permet de désactiver un champ en le grisant et en le désactivant : desactiverChamp(libelle, JTextField)
-		 * @param lbl
-		 * @param tf
-		 */
-		public void desactiverChamp(JLabel lbl, JTextField tf){
-			 tf.setEditable(false);
-		     tf.setEnabled(false);
-		     tf.setBackground(new Color(102, 102, 102));
-		     lbl.setForeground(new Color(102, 102, 102));
-		     tf.setText("");
+		private JLabel getLblDateComp()
+		{
+			return lblDateComp;
 		}
 
-		public JPanel getOnglet()
-		{
-			JPanel ongletPers = new JPanel();
-			ongletPers.setLayout(new BorderLayout());
-			ongletPers.setName("Personnes");
-			ongletPers.add(getCardModif());
-			return ongletPers;
-		}
-		
-		
 		/**
-		 * @return the lblDate
+		 * @param lblDate the lblEmail to set
 		 */
-		private JLabel getLblNomCompetition()
+		private void setLblDate(JLabel lblDate)
+		{
+			this.lblDateComp = lblDate;
+		}
+
+		/**
+		 * @return the lblPrenom
+		 */
+		private JLabel getLblEnEquipe()
+		{
+			return lblEnEquipeComp;
+		}
+
+		/**
+		 * @param lblEnEquipe the lblPrenom to set
+		 */
+		private void setLblEnEquipe(JLabel lblEnEquipe)
+		{
+			this.lblEnEquipeComp = lblEnEquipe;
+		}
+
+		/**
+		 * @return the lblNom
+		 */
+		private JLabel getLblNomComp()
 		{
 			return lblNomComp;
 		}
 
 		/**
-		 * @param lblDate the lblDate to set
+		 * @param lblNomComp the lblNom to set
 		 */
-		private void setLblNomCompetition(JLabel lblNomComp)
+		private void setLblNomComp(JLabel lblNomComp)
 		{
 			this.lblNomComp = lblNomComp;
 		}
-
-		/**
-		 * @return the lblDate
-		 */
-		private JLabel getLblDate()
-		{
-			return lblDate;
-		}
-
-		/**
-		 * @param lblDate the lblDate to set
-		 */
-		private void setLblDate(JLabel lblDate)
-		{
-			this.lblDate = lblDate;
-		}
-
-		/**
-		 * @return the lblEnEquipe
-		 */
-		private JLabel getLblEnEquipe()
-		{
-			return lblEnEquipe;
-		}
-
-		/**
-		 * @param lblEnEquipe the lblEnEquipe to set
-		 */
-		private void setLblEnEquipe(JLabel lblEnEquipe)
-		{
-			this.lblEnEquipe = lblEnEquipe;
-		}
+		
 	}
