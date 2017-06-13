@@ -11,24 +11,7 @@ public class BaseCandidat {
 		
 	}
 	
-//	//1- AFFICHER CANDIDAT - Equipe --> fonctionne 
-//	// TODO renommer
-//		 public static SortedSet<Candidat> void SelectCand(Inscriptions inscription){
-//				//SortedSet<Candidat> listeCand = new TreeSet<>();
-//				for (inscriptions.Candidat candidat : BasePersonne.SelectPers(inscription)) {
-//					//listeCand.add(candidat);
-//					candidat.getId();
-//				}
-//				for (inscriptions.Candidat equipe : BaseEquipe.SelectEquipe(inscription)) {
-//					//listeCand.add(candidat);
-//					equipe.getId();
-//				}
-//
-//			//return listeCand;
-//		}
 
-	
-	
 		// TODO faire de même pour mettre en relation les équipes et les personnes -> fais 
 		 public static void inscritCandidats(Inscriptions inscription){
 			 try{
@@ -55,6 +38,30 @@ public class BaseCandidat {
 				System.out.println(e.getMessage());
 		}
 		} 
+		 //2- modifie le candidat ->fonctionne
+		 public void updateCand(Candidat candidat){
+			 try{
+					String req = "{call updateCand( ? , ? )}";
+					java.sql.CallableStatement smt = c.prepareCall(req);
+					smt.setInt(1,candidat.getId());
+					smt.setString(2, candidat.getNom());
+					smt.executeUpdate(); 
+			 }catch(SQLException e){
+				 System.out.println(e.getMessage());
+			 }
+		 }
+		 //3- supprime le candidat -> fonctionne 
+		 public void deleteCandidat(Candidat candidat){
+			 try{
+					String req = "{call deleteCand( ? )}";
+					java.sql.CallableStatement smt = c.prepareCall(req);
+					smt.setInt(1,candidat.getId());
+					smt.executeUpdate(); 
+				 
+			 }catch(SQLException e){
+				 System.out.println(e.getMessage());
+			 }
+		 }
 		 //4- Inscrire un candidat (java_inscription) -> ne fonctionne pas
 		 public static void inscCandToComp(Candidat candidat, Competition competition)
 			{

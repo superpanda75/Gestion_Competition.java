@@ -26,11 +26,14 @@ public class IhmEquipe// implements ItemListener
 	private JLabel lblMembres 	= mkLbMembres();
 
 	private final Inscriptions inscriptions ; 
-
 	private Map<Integer, Equipe> mapEquipe;
 	private Map<Integer, Personne> mapPersonnes;
+	
 
-	private JDialog modifyWindow = new JDialog();
+	private JDialog fenetre = new JDialog();
+	private JButton btnValiderLaModification = new JButton("Valider");
+	private JButton btnSupprimerLaModification = new JButton("Supprimer");
+	private JButton btnModifier = new JButton("Modifier");
 
 
 	public IhmEquipe(Inscriptions inscriptions)
@@ -52,7 +55,7 @@ public class IhmEquipe// implements ItemListener
 	}
 	// LABEL POUR NOM EQUIPE
 	private JLabel mkLbNomEqui(){
-		JLabel lbl_nom_Equi = new JLabel("Nom de candidat :");
+		JLabel lbl_nom_Equi = new JLabel("Nom de l'equipe :");
 		lbl_nom_Equi.setForeground(new Color(102, 102, 102));
 		lbl_nom_Equi.setFont(new Font("Bookman Old Style", Font.BOLD, 14));
 		lbl_nom_Equi.setBounds(409, 80, 181, 14);
@@ -107,11 +110,14 @@ public class IhmEquipe// implements ItemListener
 		cardEquipes.add(modifNomEqui);
 		cardEquipes.add(lblNomEqui);		
 
-		JButton btnValiderLaModification = new JButton("Valider");
 		btnValiderLaModification.setBounds(250, 351, 160, 23);
 		btnValiderLaModification.addActionListener(getValidationSelectionListener());
 		cardEquipes.add(btnValiderLaModification);
-		
+//		btnSupprimerLaModification.addActionListener(getSupprimerEquipe());
+//		cardEquipes.add(btnSupprimerLaModification);
+//		btnModifier.setBounds(409, 150, 181, 14);
+//		btnModifier.addActionListener(getModifierEquipe());
+//		cardEquipes.add(btnModifier);
 
 		cardEquipes.add(getListEquipe());
 
@@ -197,10 +203,12 @@ public class IhmEquipe// implements ItemListener
 	}
 	private void rafraichirMap()
 	{
+
 		mapEquipe = new TreeMap<>();
 		int i = 0;
 		for (Equipe e : inscriptions.getEquipes())
 			mapEquipe.put(i++, e);
+
 	}
 
 
@@ -220,9 +228,10 @@ public class IhmEquipe// implements ItemListener
 				else{						
 					//gérer la modif ici
 					activerChampNom(mapEquipe.get(index).getNom());
-					modifyWindow.setSize(400, 400);
-					modifyWindow.add(getListMembreEquipe());
-					modifyWindow.setVisible(true);
+
+					fenetre.setSize(400, 400);
+					fenetre.add(getListMembreEquipe());
+					fenetre.setVisible(true);
 
 					System.out.println("Selection de " + mapPersonnes.get(index).getNom());
 				}
@@ -245,24 +254,46 @@ public class IhmEquipe// implements ItemListener
 				else{						
 					//gérer la modif ici
 					activerChampNom(mapPersonnes.get(index).getNom());
-					modifyWindow.setSize(400, 400);
-					modifyWindow.add(getListMembreEquipe());
-					modifyWindow.setVisible(true);
 
+					fenetre.setSize(400, 400);
+					fenetre.add(getListMembreEquipe());
+					fenetre.setVisible(true);
+					regexNomEquipe();
 					System.out.println("Selection de " + mapPersonnes.get(index).getNom());
 				}
 			}
 		};
 	}
+//	private ActionListener getModifierEquipe()
+//	{
+//		return new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e)
+//			{		
+//				Candidat.setNom(setChampNom(name));
+//				rafraichirMap();
+//			}
+//		};
+//	} 
+//	private ActionListener getSupprimerEquipe()
+//	{
+//		return new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e)
+//			{		
+//				Candidat.delete();
+//				rafraichirMap();
+//			}
+//		};
+//	} 
 	private ActionListener getValidationSelectionListener()
 	{
 		return new ActionListener() {
-
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{						
+			public void actionPerformed(ActionEvent arg0)
+			{		
 				inscriptions.createEquipe(getChampNom());
-				rafraichirMap();   	
+				rafraichirMap();
 			}
 		};
 	} 
@@ -430,7 +461,23 @@ public class IhmEquipe// implements ItemListener
 	{
 		this.lblNomEqui = lblNom;
 	}
-	
+
+	/** REGEX -- controle le nom de l'equipe **/
+	private boolean ValidationNom() {
+		return getChampNom().matches("[a-zA-Z0-9 ]{1,}");
+	}
+	private void regexNomEquipe()
+	{
+		modifNomEqui.setBorder(BorderFactory.createLineBorder(ValidationNom() ? Color.GREEN : Color.RED));
+		btnValiderLaModification.setEnabled(estValider());
+	}
+	private boolean estValider() 
+	{
+		if(ValidationNom() ? true : false);
+		return false;
+
+	}
+
 }
 
 

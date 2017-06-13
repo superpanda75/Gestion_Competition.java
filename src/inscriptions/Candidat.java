@@ -60,6 +60,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	
 	public String getNom()
 	{
+		System.out.println(nom);
 		return nom;
 	}
 
@@ -71,8 +72,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	public void setNom(String nom)
 	{
 		this.nom = nom;
-		if (Inscriptions.bd)
-			jdbc.BaseEquipe.modifEquipe(this);
+		jdbc.BaseEquipe.modifEquipe(this);
 	}
 
 	/**

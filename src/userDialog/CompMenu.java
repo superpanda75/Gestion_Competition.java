@@ -12,6 +12,7 @@ import java.util.List;
 
 import inscriptions.Candidat;
 import inscriptions.Competition;
+import inscriptions.Competition.DateClotureException;
 import inscriptions.Competition.InscriptionEnRetardException;
 import inscriptions.Inscriptions;
 
@@ -70,8 +71,7 @@ public class CompMenu
 				menuCompetition.ajoute(getOptionVoirUneCompetition(element));
 				menuCompetition.ajoute(getOptionSupprimerUneCompetition(element));
 				menuCompetition.ajoute(getOptionEditerUneCompetition(element));
-				menuCompetition.ajoute(getOptionModifierDateCompetition(element));
-				menuCompetition.ajoute(getListeSupprimerUneCandidatCompetition(element));
+				menuCompetition.ajoute(getListeSupprimerUnCandidatCompetition(element));
 				menuCompetition.ajouteRevenir("r");
 				menuCompetition.setRetourAuto(true);
 				return menuCompetition;
@@ -88,7 +88,7 @@ public class CompMenu
 	
 	//Supprimer une personne d'une competition
 	
-	static Liste<Candidat> getListeSupprimerUneCandidatCompetition(Competition competition)
+	static Liste<Candidat> getListeSupprimerUnCandidatCompetition(Competition competition)
 	{
 		Liste<Candidat> liste = new Liste<>("Supprimer un candidat de "+competition.getNom(),"5",getListeActionSupprimerUnCandidatCompetition(competition));
 		liste.ajouteRevenir("r");
@@ -217,44 +217,31 @@ public class CompMenu
 				};
 	}
 	
-	//Modifier date de competition
+	//Modifier la competition
 	
-	private static Option getOptionModifierDateCompetition(Competition competition)
+	static Action getActionModifCompetition (final Competition competition)
 	{
-		Option option = new Option("Modifier la Date de la competition : "+competition.getNom(),"4",getActionModifierDateCompetition(competition));
-		
-		return option;
-	}
-	
-	private static Action getActionModifierDateCompetition(Competition competition)
-	{
-		return new Action()
+		return new Action ()
 				{
 					@Override
-					public void optionSelectionnee() 
+					public void optionSelectionnee()
 					{
-						LocalDate today = LocalDate.now();						
-						boolean changeDate = false;
+						String nouveauNom = commandLine.util.InOut.getString(" nom: ");
+						int jour = commandLine.util.InOut.getInt("jour :"),
+								mois = commandLine.util.InOut.getInt("mois :"),
+								annee = commandLine.util.InOut.getInt("Année:");
+						LocalDate nouvelledateCloture = LocalDate.of (annee,mois,jour);
 						
-						
-						while (!changeDate){							
-							String dateEntree = InOut.getString("entrez la nouvelle date au format aaaa/mm/jj : ");
-							
-							if (dateEntree.matches("((19|20)\\d{2})-([1-9]|0[1-9]|1[0-2])-(0[1-9]|[1-9]|[12][0-9]|3[01])")) {
-								System.out.println(today);
-								LocalDate date = LocalDate.parse(dateEntree);
-						    
-								if (date.isAfter(today)){
-									competition.setDateCloture(date);
-									changeDate = true;
-								} else System.out.println("erreur positionnement");
-							}else System.out.println("erreur regex");
-						
+						competition.setNom(nouveauNom);
+						try
+						{
+							competition.setDateCloture(nouvelledateCloture);
+						} 
+						catch (DateClotureException e)
+						{
+							System.out.println(e);
 						}
-						
-						System.out.println("Date de cloture modifiée pour la competition : "+competition.getNom());
 					}
-			
 				};
 	}
 	//Supprimer une compétition

@@ -21,40 +21,40 @@ public class BasePersonne {
 	 }
 	
 	//MODIFIE LE NOM, PRENOM, MAIL du candidat(personne)-> fonctionne PROCEDURE STOCKEE
-	public static void updatePers(Personne personne)
-	{
-		try 
+		public static void updatePers(Personne personne)
 		{
-			String sql = "{call modifPersonne(?, ?, ?, ?)}";
-        	java.sql.CallableStatement smt = c.prepareCall(sql);
-        	smt.setInt(1,personne.getId());
-        	smt.setString(2,personne.getNom());
-        	smt.setString(3,personne.getPrenom());
-        	smt.setString(4,personne.getMail());
-        	smt.executeUpdate();
+			try 
+			{
+				String sql = "{call modifPersonne(?, ?, ?, ?)}";
+	        	java.sql.CallableStatement smt = c.prepareCall(sql);
+	        	smt.setInt(1,personne.getId());
+	        	smt.setString(2,personne.getNom());
+	        	smt.setString(3,personne.getPrenom());
+	        	smt.setString(4,personne.getMail());
+	        	smt.executeUpdate();
+			}
+	        						
+	        catch (SQLException e)
+	        {
+	        	e.printStackTrace();
+	        }
 		}
-        						
-        catch (SQLException e)
-        {
-        	e.printStackTrace();
-        }
-	}
-	// supprime l'id de la personne et l'id candidat -> fonctionne PROCEDURE STOCKEE
-	public static void suppPersonne(Personne personne)
-	{
-		try 
+		// supprime l'id de la personne et l'id candidat -> fonctionne PROCEDURE STOCKEE
+		public static void suppPersonne(Personne personne)
 		{
-			String sql = "{call suppPersonne( ? )}";
-			java.sql.CallableStatement smt = c.prepareCall(sql);
-			smt.setInt(1,personne.getId());
-			smt.executeUpdate(); 	
-	    } 
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-			System.out.println("La personne n'a pas été supprimé.");
-	    }
-	}
+			try 
+			{
+				String sql = "{call suppPersonne( ? )}";
+				java.sql.CallableStatement smt = c.prepareCall(sql);
+				smt.setInt(1,personne.getId());
+				smt.executeUpdate(); 	
+		    } 
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+				System.out.println("La personne n'a pas été supprimé.");
+		    }
+		}
 	 
 		 //FONCTIONNE AJOUTER PERSONNE & candidat (on recupere le prenom de la classe mere personne et le nm pour la classe fille candidat )->notion héritage
 		public static void sauvegarder(Personne personne){

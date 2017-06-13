@@ -1,13 +1,15 @@
 package userDialog;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import inscriptions.Competition;
+import inscriptions.Competition.DateClotureException;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
-
+import inscriptions.Personne;
 import commandLine.*;
 import commandLine.util.InOut;;
 
@@ -40,7 +42,7 @@ public class TeamMenu
 	
 		static Option getOptionAjouterEquipe()
 		{
-			return new Option("Ajouter une equipe","5",getActionAjouterEquipe());
+			return new Option("Ajouter une equipe","2",getActionAjouterEquipe());
 		}
 		
 		private static Action getActionAjouterEquipe()
@@ -55,6 +57,27 @@ public class TeamMenu
 						}
 					};
 		}
+		//Modifier une equipe
+		static Option getOptionModifEquipe(Equipe equipe)
+
+		{
+			Option ModifEquipe = new Option("Modifier une Equipe","4",getActionModifEquipe(equipe));
+			return ModifEquipe;
+		}
+		// Action qui permet de modifier une equipe
+		static Action getActionModifEquipe (final Equipe equipe)
+		{
+			return new Action ()
+					{
+						@Override
+						public void optionSelectionnee()
+						{
+							String nouveauNom = commandLine.util.InOut.getString("Entrez un nom d'équipe ");
+							equipe.setNom(nouveauNom);
+						}
+					};
+		} 
+		
 	
 	//Liste voir equipe
 		private static ActionListe<Equipe> getActionListeVoirUneEquipe() 
@@ -80,6 +103,7 @@ public class TeamMenu
 					Menu menuEquipe = new Menu("Option pour "+element.getNom(),null);
 					menuEquipe.ajoute(getOptionVoirUneEquipe(element));
 					menuEquipe.ajoute(getOptionSupprimerEquipe(element));
+					menuEquipe.ajoute(getOptionModifEquipe(element));
 					menuEquipe.ajoute(getListeAjouterUneEquipeCompetition(element));
 					menuEquipe.ajouteRevenir("r");
 					menuEquipe.setRetourAuto(true);

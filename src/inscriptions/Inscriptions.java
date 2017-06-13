@@ -22,8 +22,6 @@ public class Inscriptions implements Serializable
 		private static Inscriptions		inscriptions;
 		private SortedSet<Competition>	competitions		= new TreeSet<>();
 		private SortedSet<Candidat>		candidats			= new TreeSet<>();
-		//private transient BaseEquipe	baseEq	= new BaseEquipe();
-//		private transient BaseCompetition Comp = new BaseCompetition();
 		transient final static boolean bd = true; 
 		private transient static boolean enChargement = false;
 

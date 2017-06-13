@@ -56,6 +56,7 @@ public class Personne extends Candidat
 	{
 		if (!Inscriptions.bd)
 			throw new RuntimeException();
+		System.out.println(prenom);
 		return prenom;
 	}
 
@@ -92,7 +93,8 @@ public class Personne extends Candidat
 	public void setMail(String mail)
 	{
 		this.mail = mail;
-		jdbc.BasePersonne.updatePers(this);
+		if(Inscriptions.bd)
+			jdbc.BasePersonne.updatePers(this);
 
 	}
 
@@ -124,21 +126,16 @@ public class Personne extends Candidat
 		super.delete();
 		for (Equipe e : equipes)
 			e.remove(this);
+		if(Inscriptions.bd)
 			jdbc.BasePersonne.suppPersonne(this);
 	}
 	
 	@Override
 	public String toString()
 	{
-		if (equipes.size() == 1){
-			return super.toString() + " est un membre de l'équipe :  " + equipes.toString();
-		}
-		else if(equipes.size() > 1){
-			return super.toString() + ""+ getPrenom()+ " est un membre des équipes :  " + equipes.toString();
-		}		
-		else{
+		
 			return super.toString() + ""+ getPrenom()+ "et ne fait partie d'aucune equipe";
-		}
+		
 	}
 	
 }

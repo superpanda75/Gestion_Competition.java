@@ -110,11 +110,11 @@ public class BaseEquipe {
 		 }
 	 }
 	 //Supprime l'equipe -> fonctionne PROCEDURE STOCKEE
-	 public static void suppEquipe(Equipe equipe){
+	 public static void suppEquipe(Candidat candidat){
 		 try{
 			 String sql = "{call deleteCand( ? )}";
 			 java.sql.CallableStatement smt = c.prepareCall(sql);
-			 smt.setInt(1,equipe.getId());
+			 smt.setInt(1,candidat.getId());
 			 smt.executeUpdate();	
 			 
 		 }catch(SQLException e){
