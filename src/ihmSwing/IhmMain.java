@@ -32,8 +32,7 @@ public class IhmMain
 			JPanel ongletComp = (new IhmCompetition(inscriptions)).getOnglet();	
 			
 			
-			IhmInscription Insc = new IhmInscription(new JLabel ("Inscription"));	
-			JPanel ongletInsc = Insc.getOnglet();
+			JPanel ongletInsc = (new IhmInscription(inscriptions)).getOnglet();
 			
 			
 			onglets.addTab("Competition", ongletComp);
