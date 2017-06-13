@@ -49,6 +49,7 @@ public class IhmMain
 		
 	public static void main(String[] args) {
 		new IhmMain(Inscriptions.getInscriptions());
+		
 		}
 	
 		

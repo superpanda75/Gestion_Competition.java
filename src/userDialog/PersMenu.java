@@ -71,6 +71,7 @@ public class PersMenu
 					persMenu.ajoute(getOptionSupprimerPersonne(element));
 					persMenu.ajoute(getListeAjouterUnePersonneCompetition(element));
 					persMenu.ajoute(getListeAjouterUnePersonneEquipe(element));
+					persMenu.ajoute(getOptionSupprPersonneEquipe(element, inscriptions));
 					persMenu.ajoute(getOptionEditerUnePersonne(element));
 					//TODO:D'autres options pour l'utilisateur
 					persMenu.ajouteRevenir("r");
@@ -81,7 +82,7 @@ public class PersMenu
 			
 		}
 		
-		//Détails personne
+		//Détails personne FAIS
 		private static Option getOptionVoirUnePersonne(Personne element)
 		{
 			return new Option("Détails sur "+element.getPrenom(),"1",getActionVoirPersonne(element));
@@ -115,22 +116,20 @@ public class PersMenu
 					};
 		}
 		
-		//Supprimer une personne 
-		
-		
+		//Supprimer une personne  FAIS
 		static Option getOptionSupprimerPersonne(Personne personne)
 		{
 			return new Option("Supprimer "+personne.getPrenom(),"2",getActionSupprimerPersonne(personne));
 		}
 		
-		private static Action getActionSupprimerPersonne(Personne personne)
+		static Action getActionSupprimerPersonne(final Personne personne)
 		{
-			return new Action()
+			return new Action ()
 					{
+						@Override
 						public void optionSelectionnee()
 						{
 							personne.delete();
-							System.out.println(personne.getPrenom()+" à été supprimer !");
 						}
 					};
 		}
@@ -187,59 +186,86 @@ public class PersMenu
 			
 			private static Liste<Equipe> getListeAjouterUnePersonneEquipe(Personne personne)
 			{
-				Liste<Equipe> liste = new Liste<>("Ajouter "+personne.getPrenom()+" dans une équipe","4",getActionListeAjouterUnePersonneEquipe(personne));
+				Liste<Equipe> liste = new Liste<>("Ajouter "+personne.getPrenom()+" dans une équipe","4",getActionListeAjouterUnePersonneEquipe(personne, inscriptions));
 				liste.ajouteRevenir("r");
 				return liste;
 			}
 			
-			private static ActionListe<Equipe> getActionListeAjouterUnePersonneEquipe(Personne personne)
+			
+			static ActionListe<Equipe> getActionListeAjouterUnePersonneEquipe (Personne personne, Inscriptions inscriptions)
 			{
 				return new ActionListe<Equipe>()
 						{
-							@Override
-							public List<Equipe> getListe() {
-								return new ArrayList<>(inscriptions.getEquipes());
-							}
+									public List<Equipe> getListe()
+					                {
+					                        return new ArrayList<>(inscriptions.getEquipes());
+					                }
+									
+									public void elementSelectionne(int indice, Equipe element)
+									{
+										element.add(personne);
+									}
 
-							@Override
-							public void elementSelectionne(int indice, Equipe element) 
-							{
-								element.add(personne);
-							}
-
-							@Override
-							public Option getOption(Equipe element) 
-							{
-								return null;
-							}
+									public Option getOption(Equipe element)
+									{
+										return null;
+									}
 						};
 			}
-			
-			//Editer une personne 
+			// FAIS SUPPRIMER UN MEMBRE D'UNE EQUIPE
+			private static Option getOptionSupprPersonneEquipe(Personne personne, Inscriptions inscriptions)
+
+			{
+				Liste<Equipe> supprEquipe = new Liste<> ("Supprimer une Personne d'une Equipe","5",getActionListeSupprPersonneEquipe(personne, inscriptions));
+				return supprEquipe;
+			}
+			private static ActionListe<Equipe> getActionListeSupprPersonneEquipe (Personne personne, Inscriptions inscriptions)
+
+			{
+				return new ActionListe<Equipe> ()
+
+						{
+									public List<Equipe> getListe()
+									{
+											return new ArrayList<>(inscriptions.getEquipes());
+									}
+									
+									public void elementSelectionne(int indice, Equipe element)
+									{
+										element.remove(personne);
+									}
+									
+									public Option getOption(Equipe element)
+									{
+										return null;
+									}
+						};
+			}
+			//Editer une personne  fais 
 			
 			private static Option getOptionEditerUnePersonne(Personne personne)
 			{
-				return new Option("Editer "+personne.getPrenom(),"5",getActionEditerUnePersonne(personne));
+				return new Option("Editer "+personne.getPrenom(),"6",getActionEditerUnePersonne(personne));
 			}
 			
-			private static Action getActionEditerUnePersonne(Personne personne)
+			static Action getActionEditerUnePersonne (final Personne personne)
+
 			{
-				return new Action()
+				return new Action ()
 						{
 							@Override
 							public void optionSelectionnee()
 							{
-								String nom= InOut.getString("Nom : "),
-						                prenom = InOut.getString("Prénom : "),
-						                mail = InOut.getString("Mail : ");
-										personne.setNom(nom);
-										personne.setPrenom(prenom);
-										personne.setMail(mail);
+								String Nom = commandLine.util.InOut.getString("Nom: "),
+										Prenom = commandLine.util.InOut.getString("Prénom: "),
+										Mail = commandLine.util.InOut.getString("Mail : ");
+								personne.setNom(Nom);
+								personne.setPrenom(Prenom);
+								personne.setMail(Mail);
 							}
-					
 						};
 			}
-			//Ajouter personne
+			//Ajouter personne fais 
 			
 			static Option getOptionAjouterPersonne()
 			{
