@@ -1,21 +1,14 @@
 package junit;
 
 import static org.junit.Assert.*;
-
 import java.time.LocalDate;
-
 import org.junit.Test;
-
-import inscriptions.Competition;
-import inscriptions.Equipe;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
-
+import inscriptions.*;
 import static inscriptions.Inscriptions.*;
 
 public class CompetitionTest {
 
-	
+
 
 	@Test
 	public void testGetNom() {
@@ -34,7 +27,7 @@ public class CompetitionTest {
 
 	@Test
 	public void testInscriptionsOuvertes() {
-		
+
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now(), true);
 		assertTrue("Must be true", compet.inscriptionsOuvertes(null));
@@ -49,11 +42,11 @@ public class CompetitionTest {
 
 	@Test
 	public void testEstEnEquipe() {
-		
+
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("Thresh", LocalDate.now(), true);	
 		assertEquals(true,compet.getEnEquipe());
-		
+
 	}
 
 	@Test
@@ -65,7 +58,7 @@ public class CompetitionTest {
 		compet.setDateCloture(date1);
 		assertEquals(date1,compet.getDateCloture());
 	}
-	
+
 
 	@Test
 	public void testGetCandidats() {
@@ -77,11 +70,11 @@ public class CompetitionTest {
 		compet.add(Thresh);
 		assertTrue(compet.getCandidats().contains(Olivier));
 		assertTrue(compet.getCandidats().contains(Thresh));
-		}
+	}
 
 	@Test
 	public void testAddPersonne() {
-		
+
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("test", null, false);
 		Personne personne = inscriptions.createPersonne("test", "prenom", "mail");
@@ -91,11 +84,11 @@ public class CompetitionTest {
 
 	@Test
 	public void testAddEquipe() {
-		
+
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		LocalDate date = LocalDate.now().plusDays(20);
 		Competition compet = inscriptions.createCompetition("test", date, true);
-		
+
 		Personne p = inscriptions.createPersonne("test", "prenom", "mail");
 		Personne pp = inscriptions.createPersonne("test", "prenom", "mail");
 		Personne ppp = inscriptions.createPersonne("test", "prenom", "mail");
@@ -105,7 +98,7 @@ public class CompetitionTest {
 		equipe.add(p);
 		equipe.add(pp);
 		equipe2.add(ppp);
-		
+
 		compet.add(equipe);
 		compet.add(equipe2);
 		int sizeBefore = inscriptions.getCandidats().size();
@@ -154,11 +147,10 @@ public class CompetitionTest {
 
 	@Test
 	public void testToString() {
-		
+
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		Competition compet = inscriptions.createCompetition("compet", LocalDate.now().plusDays(20), false);
 		assertNotNull(compet.toString());
 	}
 
 }
-		

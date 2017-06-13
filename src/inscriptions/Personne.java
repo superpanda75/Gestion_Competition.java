@@ -22,15 +22,13 @@ public class Personne extends Candidat
 		equipes = new TreeSet<>();
 	}
 
-	
+
 	/**
 	 * Retourne l'id de la personne.
 	 * @return
 	 */	
 	public int getId()
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
 		return id;
 	}
 
@@ -45,18 +43,15 @@ public class Personne extends Candidat
 		if (this.id == -1)
 			this.id = id;
 	}
-	
-	
+
+
 	/**
 	 * Retourne le prénom de la personne.
 	 * @return
 	 */
-	
+
 	public String getPrenom()
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
-		System.out.println(prenom);
 		return prenom;
 	}
 
@@ -64,37 +59,32 @@ public class Personne extends Candidat
 	 * Modifie le prénom de la personne.
 	 * @param prenom
 	 */
-	
+
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
 		jdbc.BasePersonne.updatePers(this);
-		// TODO faire pareil sur les autres setters
 	}
 
 	/**
 	 * Retourne l'adresse électronique de la personne.
 	 * @return
 	 */
-	
+
 	public String getMail()
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
 		return mail;
-
 	}
 
 	/**
 	 * Modifie l'adresse électronique de la personne.
 	 * @param mail
 	 */
-	
+
 	public void setMail(String mail)
 	{
 		this.mail = mail;
-		if(Inscriptions.bd)
-			jdbc.BasePersonne.updatePers(this);
+		jdbc.BasePersonne.updatePers(this);
 
 	}
 
@@ -102,14 +92,14 @@ public class Personne extends Candidat
 	 * Retoure les équipes dont cette personne fait partie.
 	 * @return
 	 */
-	
+
 	public Set<Equipe> getEquipes()
 	{
 		if (!Inscriptions.bd)
 			throw new RuntimeException();
 		return Collections.unmodifiableSet(equipes);
 	}
-	
+
 	boolean add(Equipe equipe)
 	{
 		return equipes.add(equipe);
@@ -119,7 +109,7 @@ public class Personne extends Candidat
 	{
 		return equipes.remove(equipe);
 	}
-	
+
 	@Override
 	public void delete()
 	{			
@@ -129,13 +119,13 @@ public class Personne extends Candidat
 		if(Inscriptions.bd)
 			jdbc.BasePersonne.suppPersonne(this);
 	}
-	
+
 	@Override
 	public String toString()
 	{
-		
-			return super.toString() + ""+ getPrenom()+ "et ne fait partie d'aucune equipe";
-		
+
+		return super.toString() + ""+ getPrenom()+ "et ne fait partie d'aucune equipe";
+
 	}
-	
+
 }

@@ -1,15 +1,10 @@
 package junit;
 
 import static org.junit.Assert.*;
-
 import java.time.LocalDate;
-
 import org.junit.Test;
+import inscriptions.*;
 
-import inscriptions.Competition;
-import inscriptions.Equipe;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
 
 public class InscriptionsTest {
 
@@ -24,7 +19,7 @@ public class InscriptionsTest {
 
 	@Test
 	public void testGetCandidats() {
-		
+
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne = inscri.createPersonne("a", "b", "c");
 		Personne Personne1 = inscri.createPersonne("d", "e", "f");
@@ -32,10 +27,10 @@ public class InscriptionsTest {
 		Equipe Equipe = inscri.createEquipe("j");
 		Equipe.add(Personne1);
 		Equipe.add(Personne2);
-		
+
 		assertTrue(inscri.getCandidats().contains(Personne));
 		assertTrue(inscri.getCandidats().contains(Equipe));
-		
+
 	}
 
 	@Test
@@ -43,8 +38,8 @@ public class InscriptionsTest {
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Personne Personne1 = inscri.createPersonne("d", "e", "f");
 		assertTrue(inscri.getPersonnes().contains(Personne1));
-		
-			
+
+
 	}
 
 	@Test
@@ -61,7 +56,7 @@ public class InscriptionsTest {
 
 	@Test
 	public void testCreateCompetition() {
-		
+
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		int avant = inscri.getCompetitions().size();
 		Competition c = inscri.createCompetition("a", LocalDate.now().plusDays(10), true);
@@ -83,11 +78,11 @@ public class InscriptionsTest {
 
 	@Test
 	public void testCreateEquipe() {
-		
+
 		Inscriptions inscri = Inscriptions.getInscriptions();
 		Equipe Equipe = inscri.createEquipe("a");
 		assertTrue(inscri.getCandidats().contains(Equipe));
-		
+
 	}
 
 

@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
 
-import jdbc.BaseCandidat;
-
 /**
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
  *
@@ -19,8 +17,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	private int id;
 	private String nom;
 	private Set<Competition> competitions;
-//	BaseCandidat baseCandidat = new BaseCandidat();
-	
+
 	Candidat(Inscriptions inscriptions, String nom)
 	{
 		this.inscriptions = inscriptions;	
@@ -35,8 +32,8 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	public int getId()
 	{
 		// TODO faire pareil dans les autres classes. CLASS Candidat => fait
-				if (!Inscriptions.bd)
-					throw new RuntimeException();
+		if (!Inscriptions.bd)
+			throw new RuntimeException();
 		return id;
 	}
 
@@ -57,10 +54,9 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	 * Retourne le nom du candidat.
 	 * @return
 	 */
-	
+
 	public String getNom()
 	{
-		System.out.println(nom);
 		return nom;
 	}
 
@@ -68,7 +64,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	 * Modifie le nom du candidat.
 	 * @param nom
 	 */
-	
+
 	public void setNom(String nom)
 	{
 		this.nom = nom;
@@ -84,7 +80,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	{
 		return Collections.unmodifiableSet(competitions);	
 	}
-	
+
 	boolean add(Competition competition)
 	{
 		return competitions.add(competition);
@@ -98,20 +94,20 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	/**
 	 * Supprime un candidat de l'application.
 	 */
-	
+
 	public void delete()
 	{
 		for (Competition c : competitions)
 			c.remove(this);
 		inscriptions.remove(this);
 	}
-	
+
 	@Override
 	public int compareTo(Candidat o)
 	{
 		return getNom().compareTo(o.getNom());
 	}
-	
+
 	@Override
 	public String toString()
 	{

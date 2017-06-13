@@ -4,7 +4,6 @@ import java.io.IOException;
 import inscriptions.Inscriptions;
 import inscriptions.Competition.InscriptionEnRetardException;
 import commandLine.*;
-import commandLine.util.InOut;;
 
 public class MainMenu 
 {
@@ -13,7 +12,7 @@ public class MainMenu
 	private static TeamMenu teamMenu;
 	private static CompMenu compMenu;
 	private static Inscriptions inscriptions;
-	
+
 	public MainMenu()
 	{
 		inscriptions = Inscriptions.getInscriptions();
@@ -22,7 +21,7 @@ public class MainMenu
 		teamMenu = new TeamMenu();
 		compMenu = new CompMenu();
 	}
-	
+
 	public static void main(String[] args) throws InscriptionEnRetardException, RuntimeException, IOException
 	{
 		MainMenu menu = new MainMenu();
@@ -52,51 +51,51 @@ public class MainMenu
 	{
 		mainMenu.start();
 	}
-	
+
 	public Inscriptions getInscriptions()
 	{
 		return inscriptions;
 	}
-	
+
 	//Menu principal
 	static Menu getMainMenu()
 	{
-	        Menu mainMenu = new Menu("Menu Principal");
-	        mainMenu.ajoute(compMenu.getMenuCompetition());
-	        mainMenu.ajoute(teamMenu.getMenuEquipe());
-	        mainMenu.ajoute(persMenu.getMenuPersonne());
-	        mainMenu.ajoute(getOptionSauvegarde());
-	        mainMenu.ajouteQuitter("q");
-	        return mainMenu;
+		Menu mainMenu = new Menu("Menu Principal");
+		mainMenu.ajoute(compMenu.getMenuCompetition());
+		mainMenu.ajoute(teamMenu.getMenuEquipe());
+		mainMenu.ajoute(persMenu.getMenuPersonne(inscriptions));
+		mainMenu.ajoute(getOptionSauvegarde());
+		mainMenu.ajouteQuitter("q");
+		return mainMenu;
 	}
-	
+
 	//Sauvergarder
-	
+
 	static Option getOptionSauvegarde()
 	{
 		return new Option("Sauvegarder","s",getActionSauvegarde());
 	}
-	
+
 	static Action getActionSauvegarde()
 	{
 		return new Action()
+		{
+			@Override
+			public void optionSelectionnee() 
+			{
+				try 
 				{
-					@Override
-					public void optionSelectionnee() 
-					{
-						try 
-						{
-							inscriptions.sauvegarder();
-							System.out.println("Sauvegardé !");							
-						} 
-						catch (IOException e) 
-						{
-							System.out.println("Echec de la sauvegarde. " + e);
-							e.printStackTrace();
-						}
-					}
-				};
+					inscriptions.sauvegarder();
+					System.out.println("Sauvegardé !");							
+				} 
+				catch (IOException e) 
+				{
+					System.out.println("Echec de la sauvegarde. " + e);
+					e.printStackTrace();
+				}
+			}
+		};
 	}
-	
+
 
 }

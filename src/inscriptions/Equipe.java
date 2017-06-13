@@ -16,7 +16,7 @@ public class Equipe extends Candidat
 	private SortedSet<Personne> membres = new TreeSet<>();
 	private int id = -1;
 	private Inscriptions inscriptions;
-	
+
 	Equipe(Inscriptions inscriptions, String nom)
 	{
 		super(inscriptions, nom);
@@ -47,8 +47,8 @@ public class Equipe extends Candidat
 		if (this.id == -1)
 			this.id = id;
 	}
-	
-	
+
+
 	/**
 	 * Retourne l'ensemble des personnes formant l'équipe.
 	 */	
@@ -56,7 +56,7 @@ public class Equipe extends Candidat
 	{
 		return Collections.unmodifiableSortedSet(membres);
 	}
-	
+
 	/**
 	 * Ajoute une personne dans l'équipe.
 	 * @param membre
@@ -78,7 +78,7 @@ public class Equipe extends Candidat
 	 * @param membre
 	 * @return
 	 */
-	
+
 	public boolean remove(Personne membre)
 	{
 		membre.remove(this);
@@ -93,9 +93,9 @@ public class Equipe extends Candidat
 		super.delete();
 		for (Personne p : membres)
 			this.remove(p);
-			jdbc.BaseEquipe.suppEquipe(this);
+		jdbc.BaseEquipe.suppEquipe(this);
 	}
-	
+
 	@Override
 	public String toString()
 	{

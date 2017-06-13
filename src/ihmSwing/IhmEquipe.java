@@ -3,6 +3,7 @@ package ihmSwing;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,7 +29,7 @@ public class IhmEquipe// implements ItemListener
 	private final Inscriptions inscriptions ; 
 	private Map<Integer, Equipe> mapEquipe;
 	private Map<Integer, Personne> mapPersonnes;
-	
+
 
 	private JDialog fenetre = new JDialog();
 	private JButton btnValiderLaModification = new JButton("Valider");
@@ -113,11 +114,11 @@ public class IhmEquipe// implements ItemListener
 		btnValiderLaModification.setBounds(250, 351, 160, 23);
 		btnValiderLaModification.addActionListener(getValidationSelectionListener());
 		cardEquipes.add(btnValiderLaModification);
-//		btnSupprimerLaModification.addActionListener(getSupprimerEquipe());
-//		cardEquipes.add(btnSupprimerLaModification);
-//		btnModifier.setBounds(409, 150, 181, 14);
-//		btnModifier.addActionListener(getModifierEquipe());
-//		cardEquipes.add(btnModifier);
+		//		btnSupprimerLaModification.addActionListener(getSupprimerEquipe());
+		//		cardEquipes.add(btnSupprimerLaModification);
+		//		btnModifier.setBounds(409, 150, 181, 14);
+		//		btnModifier.addActionListener(getModifierEquipe());
+		//		cardEquipes.add(btnModifier);
 
 		cardEquipes.add(getListEquipe());
 
@@ -150,6 +151,26 @@ public class IhmEquipe// implements ItemListener
 				else
 					return "<Ajouter>";
 			}
+			//			public String getColumnName(int columnIndex) {
+			//				switch (columnIndex) {
+			//				case 0: return "Nom de l'équipe";
+			//				case 1: return "ID";
+			//				default:
+			//					break;
+			//				}
+			//				return "-1";
+			//			}
+			//
+			//			 public Object getValueAt(int row, int col) {
+			//			      Equipe equipe = mapEquipe.get(row);
+			//			      switch (col) {
+			//			      case 0:
+			//			        return equipe.getId();
+			//			      case 1:
+			//			        return equipe.getNom();
+			//			      }
+			//				return equipe;
+			//			    }
 
 			@Override
 			public void addListDataListener(ListDataListener l)
@@ -157,6 +178,7 @@ public class IhmEquipe// implements ItemListener
 				// TODO Auto-generated method stub
 
 			}
+
 		};
 	}
 	private ListModel<String> getListMembreEquipeModel()
@@ -185,6 +207,7 @@ public class IhmEquipe// implements ItemListener
 				else
 					return "<Ajouter>";
 			}
+
 
 			@Override
 			public void addListDataListener(ListDataListener l)
@@ -232,8 +255,9 @@ public class IhmEquipe// implements ItemListener
 					fenetre.setSize(400, 400);
 					fenetre.add(getListMembreEquipe());
 					fenetre.setVisible(true);
+					regexNomEquipe();
+					System.out.println("Selection de " + mapEquipe.get(index).getNom());
 
-					System.out.println("Selection de " + mapPersonnes.get(index).getNom());
 				}
 			}
 		};
@@ -264,28 +288,37 @@ public class IhmEquipe// implements ItemListener
 			}
 		};
 	}
-//	private ActionListener getModifierEquipe()
-//	{
-//		return new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e)
-//			{		
-//				Candidat.setNom(setChampNom(name));
-//				rafraichirMap();
-//			}
-//		};
-//	} 
-//	private ActionListener getSupprimerEquipe()
-//	{
-//		return new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e)
-//			{		
-//				Candidat.delete();
-//				rafraichirMap();
-//			}
-//		};
-//	} 
+	//	private ActionListener getModifierEquipe()
+	//	{
+	//		return new ActionListener() {
+	//			@Override
+	//			public void actionPerformed(ActionEvent e)
+	//			{		
+	//				String nom = getChampNom();
+	//				int ID = (int) equipeTable.getValueAt(getTableau().getSelectedRow(), 1);
+	//				Map<Integer, Equipe> mapEquipe;
+	//				Equipe idEquipe = mapEquipe.get(idEquipe);
+	//				
+	//				getId().compareTo(o.getNom());
+	//					if(idEquipe.getId() == idEquipe) {
+	//						((Candidat) mapEquipe).setNom(getChamp	Nom());
+	//					}
+	//				rafraichirMap();
+	//			}
+	//		};
+	//	} 
+	//	private ActionListener getSupprimerEquipe()
+	//	{
+	//		return new ActionListener() {
+	//			@Override
+	//			public void actionPerformed(ActionEvent e)
+	//			{		
+	//					
+	//				rafraichirMap();
+	//			}
+	//		};
+	//	} 
+	//Ajouter une Equipe
 	private ActionListener getValidationSelectionListener()
 	{
 		return new ActionListener() {
@@ -294,6 +327,7 @@ public class IhmEquipe// implements ItemListener
 			{		
 				inscriptions.createEquipe(getChampNom());
 				rafraichirMap();
+
 			}
 		};
 	} 
