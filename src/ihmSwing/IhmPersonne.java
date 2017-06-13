@@ -27,6 +27,7 @@ public class IhmPersonne// implements ItemListener
 	private JLabel lblEmail 	= mkLbEmailPers();
 	private JLabel lblPrenom 	= mkLbPrenomPers();
 	private JLabel lblNom		= mkLbNomPers();
+	private JButton btnValiderLaModification = new JButton("Valider");
 
 	private final Inscriptions inscriptions ; 
 	private Map<Integer, Personne> mapPersonnes;
@@ -122,7 +123,7 @@ public class IhmPersonne// implements ItemListener
 		cardPersonnes.add(modifNomPers);
 		cardPersonnes.add(lblNom);		
 
-		JButton btnValiderLaModification = new JButton("Valider");
+		
 		btnValiderLaModification.setBounds(250, 351, 160, 23);
 		btnValiderLaModification.addActionListener(getValidationSelectionListener());
 		cardPersonnes.add(btnValiderLaModification);
@@ -213,6 +214,9 @@ public class IhmPersonne// implements ItemListener
 						modifPrenomPers.getText(),
 						modifEmailPers.getText()
 						);	
+				JOptionPane.showMessageDialog(null,
+						getChampNom() + " " +getChampPrenom() + " à bien été ajouter !", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
 				rafraichirMap();
 			}
 		};
@@ -416,6 +420,37 @@ public class IhmPersonne// implements ItemListener
 	private void setLblNom(JLabel lblNom)
 	{
 		this.lblNom = lblNom;
+	}
+	private boolean mailValid() {
+		return getChampPrenom().matches("[a-zA-Z0-9._-]{1,20}@[a-zA-Z]{3,10}\\.[a-z]{2,6}");
+	}
+
+	private boolean prenomValid() {
+		return getChampPrenom().matches("[a-zA-Z ]{3,}");
+	}
+
+	private boolean nomValid() {
+		return getChampNom().matches("[a-zA-Z ]{3,}");
+	}
+
+	private void regexPersonne() {
+		// boutonEdit.setEnabled(verifyRegexField());
+		modifEmailPers.setBorder(BorderFactory.createLineBorder(mailValid() ? Color.GREEN : Color.RED));
+		modifNomPers.setBorder(BorderFactory.createLineBorder(nomValid() ? Color.GREEN : Color.RED));
+		modifPrenomPers.setBorder(BorderFactory.createLineBorder(prenomValid() ? Color.GREEN : Color.RED));
+		btnValiderLaModification.setEnabled((estValider("nom") && estValider("prenom") && estValider("mail")));
+	}
+
+	private boolean estValider(String s) {
+		switch (s) {
+		case "nom":
+			return nomValid();
+		case "prenom":
+			return prenomValid();
+		case "mail":
+			return mailValid();
+		}
+		return false;
 	}
 
 }

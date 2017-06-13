@@ -172,7 +172,7 @@ public class CompMenu
 
 	private static Option getOptionEditerUneCompetition(Competition competition)
 	{
-		Option option = new Option("Editer nom de la competition : "+competition.getNom(),"3",getActionModifCompetition(competition));
+		Option option = new Option("Editer la competition : "+competition.getNom(),"3",getActionModifCompetition(competition));
 
 		return option;
 	}

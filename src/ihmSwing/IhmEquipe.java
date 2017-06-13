@@ -255,7 +255,7 @@ public class IhmEquipe// implements ItemListener
 					fenetre.setSize(400, 400);
 					fenetre.add(getListMembreEquipe());
 					fenetre.setVisible(true);
-					regexNomEquipe();
+//					regexNomEquipe();
 					System.out.println("Selection de " + mapEquipe.get(index).getNom());
 
 				}
@@ -282,7 +282,7 @@ public class IhmEquipe// implements ItemListener
 					fenetre.setSize(400, 400);
 					fenetre.add(getListMembreEquipe());
 					fenetre.setVisible(true);
-					regexNomEquipe();
+//					regexNomEquipe();
 					System.out.println("Selection de " + mapPersonnes.get(index).getNom());
 				}
 			}
@@ -326,6 +326,9 @@ public class IhmEquipe// implements ItemListener
 			public void actionPerformed(ActionEvent arg0)
 			{		
 				inscriptions.createEquipe(getChampNom());
+				JOptionPane.showMessageDialog(null,
+						getChampNom() + "  à bien été ajouter !", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
 				rafraichirMap();
 
 			}
@@ -497,20 +500,20 @@ public class IhmEquipe// implements ItemListener
 	}
 
 	/** REGEX -- controle le nom de l'equipe **/
-	private boolean ValidationNom() {
-		return getChampNom().matches("[a-zA-Z0-9 ]{1,}");
-	}
-	private void regexNomEquipe()
-	{
-		modifNomEqui.setBorder(BorderFactory.createLineBorder(ValidationNom() ? Color.GREEN : Color.RED));
-		btnValiderLaModification.setEnabled(estValider());
-	}
-	private boolean estValider() 
-	{
-		if(ValidationNom() ? true : false);
-		return false;
-
-	}
+//	private boolean ValidationNom() {
+//		return getChampNom().matches("[a-zA-Z0-9 ]{1,}");
+//	}
+//	private void regexNomEquipe()
+//	{
+//		modifNomEqui.setBorder(BorderFactory.createLineBorder(ValidationNom() ? Color.GREEN : Color.RED));
+//		btnValiderLaModification.setEnabled(estValider());
+//	}
+//	private boolean estValider() 
+//	{
+//		if(ValidationNom() ? true : false);
+//		return false;
+//
+//	}
 
 }
 

@@ -209,6 +209,9 @@ public class IhmCompetition// implements ItemListener
 				LocalDate dateComp = LocalDate.parse(getChampDate());
 				boolean enEquipe = enEquipe();
 				inscriptions.createCompetition(getChampNom(), dateComp, enEquipe);
+				JOptionPane.showMessageDialog(null,
+						getChampNom() + "  à bien été ajouter !", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
 				rafraichirMap();
 			}
 			private boolean enEquipe() {
