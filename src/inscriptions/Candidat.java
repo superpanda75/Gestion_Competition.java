@@ -32,8 +32,6 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	public int getId()
 	{
 		// TODO faire pareil dans les autres classes. CLASS Candidat => fait
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
 		return id;
 	}
 
@@ -43,10 +41,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	 */	
 	public void setId(int id)
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
-		if (this.id == -1)
-			this.id = id;
+		this.id = id;
 	}
 
 

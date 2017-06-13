@@ -53,7 +53,7 @@ public class TeamMenu
 	static Option getOptionModifEquipe(Equipe equipe)
 
 	{
-		Option ModifEquipe = new Option("Modifier une Equipe","4",getActionModifEquipe(equipe));
+		Option ModifEquipe = new Option("Modifier une Equipe","3",getActionModifEquipe(equipe));
 		return ModifEquipe;
 	}
 	// Action qui permet de modifier une equipe
@@ -158,7 +158,7 @@ public class TeamMenu
 
 	static Liste<Competition> getListeAjouterUneEquipeCompetition(Equipe equipe)
 	{
-		Liste<Competition> liste = new Liste<>("Ajouter "+equipe.getNom()+" à une compétition","3",getActionListeAjouterUneEquipeCompetition(equipe));
+		Liste<Competition> liste = new Liste<>("Ajouter "+equipe.getNom()+" à une compétition","4",getActionListeAjouterUneEquipeCompetition(equipe));
 		liste.ajouteRevenir("r");
 		return liste;
 	}

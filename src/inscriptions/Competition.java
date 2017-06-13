@@ -35,8 +35,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	 */	
 	public int getId()
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
 		return id;
 	}
 
@@ -46,10 +44,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	 */	
 	public void setId(int id)
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
-		if (this.id == -1)
-			this.id = id;
+		this.id = id;
 	}
 
 	/**
@@ -147,7 +142,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Personne personne) throws InscriptionEnRetardException,RuntimeException
 	{
 		// TODO vérifier que la date de clôture n'est pas passée
-		if( !inscriptions.estEnChargement() && dateCloture.isAfter(LocalDate.now()))
+		if(!inscriptions.estEnChargement() && dateCloture.isAfter(LocalDate.now()))
 			throw new InscriptionEnRetardException(personne);
 		if (enEquipe)
 			throw new RuntimeException();
@@ -167,7 +162,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean add(Equipe equipe) throws InscriptionEnRetardException,RuntimeException
 	{
 		// TODO vérifier que la date de clôture n'est pas passée
-		if ( dateCloture.isAfter(LocalDate.now())) 
+		if (dateCloture.isAfter(LocalDate.now())) 
 			throw new InscriptionEnRetardException(equipe);
 		if (enEquipe)
 			throw new RuntimeException();

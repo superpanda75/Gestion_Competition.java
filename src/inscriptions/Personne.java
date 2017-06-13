@@ -38,10 +38,7 @@ public class Personne extends Candidat
 	 */	
 	public void setId(int id)
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
-		if (this.id == -1)
-			this.id = id;
+		this.id = id;
 	}
 
 
@@ -95,8 +92,6 @@ public class Personne extends Candidat
 
 	public Set<Equipe> getEquipes()
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
 		return Collections.unmodifiableSet(equipes);
 	}
 
@@ -116,8 +111,7 @@ public class Personne extends Candidat
 		super.delete();
 		for (Equipe e : equipes)
 			e.remove(this);
-		if(Inscriptions.bd)
-			jdbc.BasePersonne.suppPersonne(this);
+		jdbc.BasePersonne.suppPersonne(this);
 	}
 
 	@Override

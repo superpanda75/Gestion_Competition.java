@@ -78,7 +78,7 @@ public class CompMenu
 
 	static Liste<Candidat> getListeSupprimerUnCandidatCompetition(Competition competition)
 	{
-		Liste<Candidat> liste = new Liste<>("Supprimer un candidat de "+competition.getNom(),"5",getListeActionSupprimerUnCandidatCompetition(competition));
+		Liste<Candidat> liste = new Liste<>("Supprimer un candidat de "+competition.getNom(),"4",getListeActionSupprimerUnCandidatCompetition(competition));
 		liste.ajouteRevenir("r");
 		return liste;
 	}
@@ -209,7 +209,7 @@ public class CompMenu
 	//Supprimer une compétition
 	private static Option getOptionSupprimerUneCompetition(Competition competition)
 	{
-		Option option = new Option("Supprimer "+competition.getNom(),"4",getActionSupprCompetition(competition));
+		Option option = new Option("Supprimer "+competition.getNom(),"2",getActionSupprCompetition(competition));
 		return option;
 	}
 	static Action getActionSupprCompetition (final Competition competition)

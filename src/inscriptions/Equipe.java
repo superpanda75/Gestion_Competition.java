@@ -30,9 +30,6 @@ public class Equipe extends Candidat
 	 */	
 	public int getId()
 	{
-		// TODO faire pareil dans les autres classes. => fait !
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
 		return id;
 	}
 
@@ -42,10 +39,7 @@ public class Equipe extends Candidat
 	 */	
 	public void setId(int id)
 	{
-		if (!Inscriptions.bd)
-			throw new RuntimeException();
-		if (this.id == -1)
-			this.id = id;
+		this.id = id;
 	}
 
 
@@ -67,8 +61,6 @@ public class Equipe extends Candidat
 	{
 		// TODO if bd
 		membre.add(this);
-		if (Inscriptions.bd && !inscriptions.estEnChargement())
-			throw new RuntimeException();
 		jdbc.BaseEquipe.addMembreEquipe(this,membre);
 		return membres.add(membre);
 	}
@@ -81,9 +73,8 @@ public class Equipe extends Candidat
 
 	public boolean remove(Personne membre)
 	{
+		jdbc.BaseEquipe.suppMembreEquipe(this, membre);
 		membre.remove(this);
-		if (Inscriptions.bd)
-			jdbc.BaseEquipe.suppMembreEquipe(this, membre);
 		return membres.remove(membre);
 	}
 
