@@ -1,19 +1,11 @@
 package ihmSwing;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Map;
-import java.util.TreeMap;
-
-import javax.swing.event.ListDataListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.event.*;
 import javax.swing.*;
-
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
+import inscriptions.*;
 
 
 
@@ -35,6 +27,7 @@ public class IhmPersonne// implements ItemListener
 	public IhmPersonne(Inscriptions inscriptions)
 	{
 		this.inscriptions = inscriptions;
+		getCardModif();
 	}
 
 	private void associateLabels(){
@@ -122,8 +115,10 @@ public class IhmPersonne// implements ItemListener
 
 		cardPersonnes.add(modifNomPers);
 		cardPersonnes.add(lblNom);		
+		regexPersonne();
 
-		
+
+
 		btnValiderLaModification.setBounds(250, 351, 160, 23);
 		btnValiderLaModification.addActionListener(getValidationSelectionListener());
 		cardPersonnes.add(btnValiderLaModification);
@@ -181,6 +176,7 @@ public class IhmPersonne// implements ItemListener
 	private ListSelectionListener getListPersonneSelectionListener()
 	{
 		return new ListSelectionListener() {
+
 			public void valueChanged(ListSelectionEvent e)
 			{
 				JList<String> source = (JList<String>) e.getSource();
@@ -188,6 +184,7 @@ public class IhmPersonne// implements ItemListener
 				System.out.println(index);
 				System.out.println(source.getModel().getSize() -1);
 				if (index == source.getModel().getSize() - 1){
+
 					//gérer l'ajout ici
 					System.out.println("Ajout d'une personne");
 				}
@@ -196,15 +193,16 @@ public class IhmPersonne// implements ItemListener
 					activerChampNom(mapPersonnes.get(index).getNom());
 					activerChampPrenom(mapPersonnes.get(index).getPrenom());
 					activerChampEmail(mapPersonnes.get(index).getMail());
-
 					System.out.println("Selection de " + mapPersonnes.get(index).getNom());
 				}
 			}
 		};
+
 	}
 
 	private ActionListener getValidationSelectionListener()
 	{
+
 		return new ActionListener() {
 
 			@Override
@@ -214,10 +212,12 @@ public class IhmPersonne// implements ItemListener
 						modifPrenomPers.getText(),
 						modifEmailPers.getText()
 						);	
+
 				JOptionPane.showMessageDialog(null,
 						getChampNom() + " " +getChampPrenom() + " à bien été ajouter !", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
 				rafraichirMap();
+
 			}
 		};
 	} 
@@ -428,6 +428,7 @@ public class IhmPersonne// implements ItemListener
 	private boolean prenomValid() {
 		return getChampPrenom().matches("[a-zA-Z ]{3,}");
 	}
+
 
 	private boolean nomValid() {
 		return getChampNom().matches("[a-zA-Z ]{3,}");
