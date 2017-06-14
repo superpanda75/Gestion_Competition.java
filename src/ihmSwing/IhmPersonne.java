@@ -20,7 +20,7 @@ public class IhmPersonne// implements ItemListener
 	private JLabel lblPrenom 	= mkLbPrenomPers();
 	private JLabel lblNom		= mkLbNomPers();
 	private JButton btnValiderLaModification = new JButton("Valider");
-
+	private JButton supprimer = new JButton("supprimer");
 	private final Inscriptions inscriptions ; 
 	private Map<Integer, Personne> mapPersonnes;
 
@@ -115,13 +115,15 @@ public class IhmPersonne// implements ItemListener
 
 		cardPersonnes.add(modifNomPers);
 		cardPersonnes.add(lblNom);		
-		regexPersonne();
 
 
 
 		btnValiderLaModification.setBounds(250, 351, 160, 23);
 		btnValiderLaModification.addActionListener(getValidationSelectionListener());
 		cardPersonnes.add(btnValiderLaModification);
+		supprimer.setBounds(250, 400, 160, 23);
+        supprimer.addActionListener(boutonSupprimerListener());
+        cardPersonnes.add(supprimer);
 
 		cardPersonnes.add(getListPersonne());
 
@@ -182,8 +184,8 @@ public class IhmPersonne// implements ItemListener
 				JList<String> source = (JList<String>) e.getSource();
 				int index = source.getSelectedIndex();
 				System.out.println(index);
-				System.out.println(source.getModel().getSize() -1);
-				if (index == source.getModel().getSize() - 1){
+				System.out.println(source.getModel().getSize());
+				if (index == source.getModel().getSize()){
 
 					//gérer l'ajout ici
 					System.out.println("Ajout d'une personne");
@@ -199,7 +201,28 @@ public class IhmPersonne// implements ItemListener
 		};
 
 	}
-
+	private ActionListener boutonSupprimerListener()
+	{
+		
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{		
+				 	for(Personne pers : inscriptions.getPersonnes()){
+				 		 if(pers.getNom().compareTo(modifNomPers.getText()) == 0){
+				 			pers.delete();
+				 		 }
+				 		 
+				 	}
+					
+				JOptionPane.showMessageDialog(null,
+						getChampNom() + "  à bien été supprimé !", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		};
+	}
+	  
 	private ActionListener getValidationSelectionListener()
 	{
 
@@ -421,37 +444,37 @@ public class IhmPersonne// implements ItemListener
 	{
 		this.lblNom = lblNom;
 	}
-	private boolean mailValid() {
-		return getChampPrenom().matches("[a-zA-Z0-9._-]{1,20}@[a-zA-Z]{3,10}\\.[a-z]{2,6}");
-	}
-
-	private boolean prenomValid() {
-		return getChampPrenom().matches("[a-zA-Z ]{3,}");
-	}
-
-
-	private boolean nomValid() {
-		return getChampNom().matches("[a-zA-Z ]{3,}");
-	}
-
-	private void regexPersonne() {
-		// boutonEdit.setEnabled(verifyRegexField());
-		modifEmailPers.setBorder(BorderFactory.createLineBorder(mailValid() ? Color.GREEN : Color.RED));
-		modifNomPers.setBorder(BorderFactory.createLineBorder(nomValid() ? Color.GREEN : Color.RED));
-		modifPrenomPers.setBorder(BorderFactory.createLineBorder(prenomValid() ? Color.GREEN : Color.RED));
-		btnValiderLaModification.setEnabled((estValider("nom") && estValider("prenom") && estValider("mail")));
-	}
-
-	private boolean estValider(String s) {
-		switch (s) {
-		case "nom":
-			return nomValid();
-		case "prenom":
-			return prenomValid();
-		case "mail":
-			return mailValid();
-		}
-		return false;
-	}
+//	private boolean mailValid() {
+//		return getChampPrenom().matches("[a-zA-Z0-9._-]{1,20}@[a-zA-Z]{3,10}\\.[a-z]{2,6}");
+//	}
+//
+//	private boolean prenomValid() {
+//		return getChampPrenom().matches("[a-zA-Z ]{3,}");
+//	}
+//
+//
+//	private boolean nomValid() {
+//		return getChampNom().matches("[a-zA-Z ]{3,}");
+//	}
+//
+//	private void regexPersonne() {
+//		// boutonEdit.setEnabled(verifyRegexField());
+//		modifEmailPers.setBorder(BorderFactory.createLineBorder(mailValid() ? Color.GREEN : Color.RED));
+//		modifNomPers.setBorder(BorderFactory.createLineBorder(nomValid() ? Color.GREEN : Color.RED));
+//		modifPrenomPers.setBorder(BorderFactory.createLineBorder(prenomValid() ? Color.GREEN : Color.RED));
+//		btnValiderLaModification.setEnabled((estValider("nom") && estValider("prenom") && estValider("mail")));
+//	}
+//
+//	private boolean estValider(String s) {
+//		switch (s) {
+//		case "nom":
+//			return nomValid();
+//		case "prenom":
+//			return prenomValid();
+//		case "mail":
+//			return mailValid();
+//		}
+//		return false;
+//	}
 
 }

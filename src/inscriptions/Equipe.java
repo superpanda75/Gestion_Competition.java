@@ -59,7 +59,6 @@ public class Equipe extends Candidat
 
 	public boolean add(Personne membre)
 	{
-		// TODO if bd
 		membre.add(this);
 		jdbc.BaseEquipe.addMembreEquipe(this,membre);
 		return membres.add(membre);

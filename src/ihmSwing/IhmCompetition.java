@@ -14,6 +14,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.*;
 
 import inscriptions.Competition;
+import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
 
@@ -32,6 +33,8 @@ public class IhmCompetition// implements ItemListener
 
 	private final Inscriptions inscriptions ; 
 	private Map<Integer, Competition> mapCompetition;
+	private JButton supprimer = new JButton("supprimer");
+	private Competition competition; 
 
 	public IhmCompetition(Inscriptions inscriptions)
 	{
@@ -124,6 +127,9 @@ public class IhmCompetition// implements ItemListener
 		btnValiderLaModification.setBounds(250, 351, 160, 23);
 		btnValiderLaModification.addActionListener(getValidationSelectionListener());
 		cardPersonnes.add(btnValiderLaModification);
+		supprimer.setBounds(250, 400, 160, 23);
+        supprimer.addActionListener(boutonSupprimerListener());
+        cardPersonnes.add(supprimer);
 
 		cardPersonnes.add(getListPersonne());
 
@@ -220,7 +226,27 @@ public class IhmCompetition// implements ItemListener
 			}
 		};
 	} 
-
+	private ActionListener boutonSupprimerListener()
+	{
+		
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{		
+				 	for(Competition comp : inscriptions.getCompetitions()){
+				 		 if(comp.getNom().compareTo(modifNomComp.getText()) == 0){
+				 			comp.delete();
+				 		 }
+				 		 
+				 	}
+					
+				JOptionPane.showMessageDialog(null,
+						getChampNom() + "  à bien été supprimé !", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		};
+	}
 
 	private JList<String> getListPersonne(){
 		JList<String> listePersonnes = new JList<>(getListPersonneModel());

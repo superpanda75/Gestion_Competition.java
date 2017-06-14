@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Map;
+import java.util.SortedSet;
 import java.util.TreeMap;
 
 import javax.swing.event.ListDataListener;
@@ -31,10 +32,13 @@ public class IhmEquipe// implements ItemListener
 	private Map<Integer, Personne> mapPersonnes;
 
 
+
 	private JDialog fenetre = new JDialog();
 	private JButton btnValiderLaModification = new JButton("Valider");
-	private JButton btnSupprimerLaModification = new JButton("Supprimer");
 	private JButton btnModifier = new JButton("Modifier");
+	private JButton btnAddMembre = new JButton("Ajouter"); 
+	private JButton supprimer = new JButton("Supprimer");
+
 
 
 	public IhmEquipe(Inscriptions inscriptions)
@@ -114,6 +118,17 @@ public class IhmEquipe// implements ItemListener
 		btnValiderLaModification.setBounds(250, 351, 160, 23);
 		btnValiderLaModification.addActionListener(getValidationSelectionListener());
 		cardEquipes.add(btnValiderLaModification);
+		btnAddMembre.setBounds(100,300,160,23);
+		btnAddMembre.addActionListener(getAddMembreSelectionListener());
+		fenetre.add(btnAddMembre);
+		supprimer.setBounds(250, 400, 160, 23);
+        supprimer.addActionListener(boutonSupprimerListener());
+        cardEquipes.add(supprimer);
+
+		supprimer.setBounds(250, 400, 160, 23);
+         supprimer.addActionListener(boutonSupprimerListener());
+         cardEquipes.add(supprimer);
+		
 		//		btnSupprimerLaModification.addActionListener(getSupprimerEquipe());
 		//		cardEquipes.add(btnSupprimerLaModification);
 		//		btnModifier.setBounds(409, 150, 181, 14);
@@ -121,6 +136,7 @@ public class IhmEquipe// implements ItemListener
 		//		cardEquipes.add(btnModifier);
 
 		cardEquipes.add(getListEquipe());
+		cardEquipes.add(getListMembreEquipe());
 
 		return cardEquipes;
 	}
@@ -329,6 +345,45 @@ public class IhmEquipe// implements ItemListener
 				JOptionPane.showMessageDialog(null,
 						getChampNom() + "  à bien été ajouter !", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
+				regexNomEquipe();
+				rafraichirMap();
+
+			}
+		};
+	}
+	//Supprimer une equipe
+	private ActionListener boutonSupprimerListener()
+	{
+		
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{		
+				 	for(Equipe equipe : inscriptions.getEquipes()){
+				 		 if(equipe.getNom().compareTo(modifNomEqui.getText()) == 0){
+				 			equipe.delete();
+				 		 }
+				 		 
+				 	}
+					
+				JOptionPane.showMessageDialog(null,
+						getChampNom() + "  à bien été supprimé !", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		};
+	}
+
+	private ActionListener getAddMembreSelectionListener()
+	{
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{		
+				//ajouter des membres d'equipe Equipe.add(getChampNom());
+				JOptionPane.showMessageDialog(null,
+						getChampNom() + "  à bien été ajouter !", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
 				rafraichirMap();
 
 			}
@@ -500,20 +555,20 @@ public class IhmEquipe// implements ItemListener
 	}
 
 	/** REGEX -- controle le nom de l'equipe **/
-//	private boolean ValidationNom() {
-//		return getChampNom().matches("[a-zA-Z0-9 ]{1,}");
-//	}
-//	private void regexNomEquipe()
-//	{
-//		modifNomEqui.setBorder(BorderFactory.createLineBorder(ValidationNom() ? Color.GREEN : Color.RED));
-//		btnValiderLaModification.setEnabled(estValider());
-//	}
-//	private boolean estValider() 
-//	{
-//		if(ValidationNom() ? true : false);
-//		return false;
-//
-//	}
+	private boolean ValidationNom() {
+		return getChampNom().matches("[a-zA-Z0-9 ]{1,}");
+	}
+	private void regexNomEquipe()
+	{
+		modifNomEqui.setBorder(BorderFactory.createLineBorder(ValidationNom() ? Color.GREEN : Color.RED));
+		btnValiderLaModification.setEnabled(estValider());
+	}
+	private boolean estValider() 
+	{
+		if(ValidationNom() ? true : false);
+		return false;
+
+	}
 
 }
 
