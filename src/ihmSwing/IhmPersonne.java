@@ -19,8 +19,10 @@ public class IhmPersonne// implements ItemListener
 	private JLabel lblEmail 	= mkLbEmailPers();
 	private JLabel lblPrenom 	= mkLbPrenomPers();
 	private JLabel lblNom		= mkLbNomPers();
-	private JButton btnValiderLaModification = new JButton("Valider");
+	private JButton btnValiderLaModification = new JButton("ajouter");
 	private JButton supprimer = new JButton("supprimer");
+	private JButton btnModifier = new JButton("Modifier");
+
 	private final Inscriptions inscriptions ; 
 	private Map<Integer, Personne> mapPersonnes;
 
@@ -124,6 +126,10 @@ public class IhmPersonne// implements ItemListener
 		supprimer.setBounds(250, 400, 160, 23);
         supprimer.addActionListener(boutonSupprimerListener());
         cardPersonnes.add(supprimer);
+        btnModifier.setBounds(250, 380, 160, 23);
+        btnModifier.addActionListener(boutonModifierListener());
+        cardPersonnes.add(btnModifier);
+
 
 		cardPersonnes.add(getListPersonne());
 
@@ -202,6 +208,27 @@ public class IhmPersonne// implements ItemListener
 
 	}
 	private ActionListener boutonSupprimerListener()
+	{
+		
+		return new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{		
+				 	for(Personne pers : inscriptions.getPersonnes()){
+				 		 if(pers.getNom().compareTo(modifNomPers.getText()) == 0){
+				 			pers.delete();
+				 		 }
+				 		 
+				 	}
+					
+				JOptionPane.showMessageDialog(null,
+						getChampNom() + "  à bien été supprimé !", "Information",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+		};
+	}
+	private ActionListener boutonModifierListener()
 	{
 		
 		return new ActionListener() {

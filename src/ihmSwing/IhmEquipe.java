@@ -23,6 +23,7 @@ public class IhmEquipe// implements ItemListener
 
 	private JTextField	modifNomEqui	= mkTfNomEqui();
 	private JTextField	modifMembres	= mkTfMembres();
+	private JComboBox liste1;
 
 	private JLabel lblNomEqui 	= mkLbNomEqui();
 	private JLabel lblMembres 	= mkLbMembres();
@@ -31,8 +32,7 @@ public class IhmEquipe// implements ItemListener
 	private Map<Integer, Equipe> mapEquipe;
 	private Map<Integer, Personne> mapPersonnes;
 
-
-
+	private JPanel modifEquipe = new JPanel();
 	private JDialog fenetre = new JDialog();
 	private JButton btnValiderLaModification = new JButton("Valider");
 	private JButton btnModifier = new JButton("Modifier");
@@ -96,9 +96,6 @@ public class IhmEquipe// implements ItemListener
 		return modifMembres;
 	}
 
-
-
-
 	public JPanel getCardModif(){
 
 		JPanel cardEquipes = new JPanel();
@@ -118,22 +115,16 @@ public class IhmEquipe// implements ItemListener
 		btnValiderLaModification.setBounds(250, 351, 160, 23);
 		btnValiderLaModification.addActionListener(getValidationSelectionListener());
 		cardEquipes.add(btnValiderLaModification);
-		btnAddMembre.setBounds(100,300,160,23);
-		btnAddMembre.addActionListener(getAddMembreSelectionListener());
-		fenetre.add(btnAddMembre);
+		//		btnAddMembre.setBounds(100,300,160,23);
+		//		btnAddMembre.addActionListener(getAddMembreSelectionListener());
+		//		fenetre.add(btnAddMembre);
 		supprimer.setBounds(250, 400, 160, 23);
-        supprimer.addActionListener(boutonSupprimerListener());
-        cardEquipes.add(supprimer);
+		supprimer.addActionListener(boutonSupprimerListener());
+		cardEquipes.add(supprimer);
+		btnModifier.setBounds(250, 380, 160, 23);
+		btnModifier.addActionListener(boutonModifierListener());
+		cardEquipes.add(btnModifier);
 
-		supprimer.setBounds(250, 400, 160, 23);
-         supprimer.addActionListener(boutonSupprimerListener());
-         cardEquipes.add(supprimer);
-		
-		//		btnSupprimerLaModification.addActionListener(getSupprimerEquipe());
-		//		cardEquipes.add(btnSupprimerLaModification);
-		//		btnModifier.setBounds(409, 150, 181, 14);
-		//		btnModifier.addActionListener(getModifierEquipe());
-		//		cardEquipes.add(btnModifier);
 
 		cardEquipes.add(getListEquipe());
 		cardEquipes.add(getListMembreEquipe());
@@ -167,26 +158,6 @@ public class IhmEquipe// implements ItemListener
 				else
 					return "<Ajouter>";
 			}
-			//			public String getColumnName(int columnIndex) {
-			//				switch (columnIndex) {
-			//				case 0: return "Nom de l'équipe";
-			//				case 1: return "ID";
-			//				default:
-			//					break;
-			//				}
-			//				return "-1";
-			//			}
-			//
-			//			 public Object getValueAt(int row, int col) {
-			//			      Equipe equipe = mapEquipe.get(row);
-			//			      switch (col) {
-			//			      case 0:
-			//			        return equipe.getId();
-			//			      case 1:
-			//			        return equipe.getNom();
-			//			      }
-			//				return equipe;
-			//			    }
 
 			@Override
 			public void addListDataListener(ListDataListener l)
@@ -250,7 +221,16 @@ public class IhmEquipe// implements ItemListener
 
 	}
 
+	public JPanel getModifierEquipe(){
 
+		modifEquipe.add(lblNomEqui);
+		modifEquipe.add(modifNomEqui);
+		modifEquipe.add(btnModifier);
+
+
+		return modifEquipe;
+
+	}
 	private ListSelectionListener getListEquipeSelectionListener()
 	{
 		return new ListSelectionListener() {
@@ -260,7 +240,7 @@ public class IhmEquipe// implements ItemListener
 				int index = source.getSelectedIndex();
 				System.out.println(index);
 				System.out.println(source.getModel().getSize() -1);
-				if (index == source.getModel().getSize() - 1){
+				if (index == source.getModel().getSize() -1 ){
 					//gérer l'ajout ici
 					System.out.println("Ajout d'une personne");
 				}
@@ -268,10 +248,10 @@ public class IhmEquipe// implements ItemListener
 					//gérer la modif ici
 					activerChampNom(mapEquipe.get(index).getNom());
 
-					fenetre.setSize(400, 400);
-					fenetre.add(getListMembreEquipe());
-					fenetre.setVisible(true);
-//					regexNomEquipe();
+					//					fenetre.setSize(400, 400);
+					//					fenetre.add(getListMembreEquipe());
+					//					fenetre.setVisible(true);
+					//					regexNomEquipe();
 					System.out.println("Selection de " + mapEquipe.get(index).getNom());
 
 				}
@@ -298,42 +278,12 @@ public class IhmEquipe// implements ItemListener
 					fenetre.setSize(400, 400);
 					fenetre.add(getListMembreEquipe());
 					fenetre.setVisible(true);
-//					regexNomEquipe();
+					//					regexNomEquipe();
 					System.out.println("Selection de " + mapPersonnes.get(index).getNom());
 				}
 			}
 		};
 	}
-	//	private ActionListener getModifierEquipe()
-	//	{
-	//		return new ActionListener() {
-	//			@Override
-	//			public void actionPerformed(ActionEvent e)
-	//			{		
-	//				String nom = getChampNom();
-	//				int ID = (int) equipeTable.getValueAt(getTableau().getSelectedRow(), 1);
-	//				Map<Integer, Equipe> mapEquipe;
-	//				Equipe idEquipe = mapEquipe.get(idEquipe);
-	//				
-	//				getId().compareTo(o.getNom());
-	//					if(idEquipe.getId() == idEquipe) {
-	//						((Candidat) mapEquipe).setNom(getChamp	Nom());
-	//					}
-	//				rafraichirMap();
-	//			}
-	//		};
-	//	} 
-	//	private ActionListener getSupprimerEquipe()
-	//	{
-	//		return new ActionListener() {
-	//			@Override
-	//			public void actionPerformed(ActionEvent e)
-	//			{		
-	//					
-	//				rafraichirMap();
-	//			}
-	//		};
-	//	} 
 	//Ajouter une Equipe
 	private ActionListener getValidationSelectionListener()
 	{
@@ -354,23 +304,50 @@ public class IhmEquipe// implements ItemListener
 	//Supprimer une equipe
 	private ActionListener boutonSupprimerListener()
 	{
-		
+
 		return new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{		
-				 	for(Equipe equipe : inscriptions.getEquipes()){
-				 		 if(equipe.getNom().compareTo(modifNomEqui.getText()) == 0){
-				 			equipe.delete();
-				 		 }
-				 		 
-				 	}
-					
+				for(Equipe equipe : inscriptions.getEquipes()){
+					if(equipe.getNom().compareTo(modifNomEqui.getText()) == 0){
+						equipe.delete();
+					}
+
+				}
+
 				JOptionPane.showMessageDialog(null,
 						getChampNom() + "  à bien été supprimé !", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
+		};
+	}
+	private ActionListener boutonModifierListener()
+	{		
+		return new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{		
+				//				 	for(Equipe e : inscriptions.getEquipes()){
+				//
+				//				 		 if(e.getNom().compareTo(mapEquipe.get(e).getNom()) == 0){
+				//				 			e.setNom(getChampNom());	
+				//				 			System.out.println();
+				//				 		 }
+				//				 	}
+				fenetre.setSize(400, 150);
+				fenetre.add(getModifierEquipe());	
+				fenetre.setVisible(true);
+				for(Equipe e : inscriptions.getEquipes()){
+					if(e.getNom().compareTo(getChampNom())== 0){
+						e.setNom(getChampNom());
+					}
+				}
+
+			}
+
+
 		};
 	}
 

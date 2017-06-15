@@ -13,9 +13,9 @@ public class Base {
 	{
 		try{
 			//c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java?autoReconnect=true&useSSL=false", "root", "");	
-			//c = DriverManager.getConnection("jdbc:mysql://mysql.m2l.local/ahouri?autoReconnect=true&useSSL=false", "ahouri", "azerty");	
+			c = DriverManager.getConnection("jdbc:mysql://172.16.0.3/ahouri?autoReconnect=true&useSSL=false", "ahouri", "azerty");	
 			//c = DriverManager.getConnection("jdbc:mysql://mysql.m2l.local/hbenromdhane?autoReconnect=true&useSSL=false", "hbenromdhane", "azerty");	
-			  c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java?autoReconnect=true&useSSL=false", "root", "");	
+			//c = DriverManager.getConnection("jdbc:mysql://localhost:3306/java?autoReconnect=true&useSSL=false", "root", "");	
 		}
 		catch (SQLException e)
 		{
